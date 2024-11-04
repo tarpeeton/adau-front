@@ -32,8 +32,9 @@ const config: Config = {
         titleWhite: '#FFFFFF',
       },
       fontFamily: {
-        raleway: ['Raleway', 'sans-serif'], // Add Raleway to the fontFamily
+        raleway: ['Raleway', 'sans-serif'],
         manrope: ['Manrope', 'sans-serif'],
+        jost: ['Jost', 'sans-serif'], // Adding Jost to the font family
       },
     },
   },
