@@ -3,19 +3,39 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+
+
+.buttonBlue {
+  background-color: #222E51;
+  color: #FFFFFF; /* text-white */
+  padding-top: 12px;
+  padding-right: 15px;
+  padding-bottom: 12px;
+  padding-left: 15px;
+  gap: 5px;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 24.57px;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.borderedButton {
+  background-color: #FFFFFF;
+  color: #222E51; /* text-white */
+  padding-top: 12px;
+  padding-right: 15px;
+  padding-bottom: 12px;
+  padding-left: 15px;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 24.57px;
 }
+
+
