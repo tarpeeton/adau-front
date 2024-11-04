@@ -1,5 +1,5 @@
 "use client"
-import { FC  , useRef , useState , useEffect} from 'react'
+import { FC, useRef, useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 // import Swiper styles
 import 'swiper/css'
@@ -14,15 +14,15 @@ import useSwiperNavigation from '@/hooks/useSwiperNavigation'
 
 
 const Banner: FC = () => {
-    const { swiperRef, handlePrev, handleNext } = useSwiperNavigation();
+    const { swiperRef, handlePrev, handleNext } = useSwiperNavigation()
 
 
-    
+
 
     return (
         <div className="banner-container px-[20px] 4xl:px-[240px] 2xl:px-[50px] mt-[15px] 2xl:mt-[60px] relative">
             <Swiper
-                 onSwiper={(swiper) => (swiperRef.current = swiper)}
+                onSwiper={(swiper) => (swiperRef.current = swiper)}
                 spaceBetween={10}
                 slidesPerView={1}
                 speed={1000}
@@ -47,9 +47,6 @@ const Banner: FC = () => {
                                 </div>
                             </div>
                         </div>
-
-
-
                         <div className='mt-[25px] 2xl:mt-[40px] 4xl:mt-[60px]'>
                             <Image src={BannerImage} alt='' width={1440} height={444} quality={100} className=' 2xl:h-[444px] h-[370px] rounded-[10px]' />
                         </div>
