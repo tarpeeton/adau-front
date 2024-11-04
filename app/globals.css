@@ -22,6 +22,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
   padding-bottom: 12px;
   font-family: "Jost";
   padding-left: 15px;
