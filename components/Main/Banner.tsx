@@ -27,7 +27,7 @@ const Banner: FC = () => {
                 slidesPerView={1}
                 speed={1000}
                 autoplay={{ delay: 2000, disableOnInteraction: false }}
-                loop={true}
+                loop={false}
             >
                 <SwiperSlide>
                     <div className='flex flex-col '>
