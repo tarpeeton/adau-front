@@ -5,7 +5,7 @@ import Services from './Services'
 import Projects from './Projects'
 import Reviews from './Reviews';
 import Case from './Case'
-import Seminar from './Seminar'
+import SeminarAndTrenings from './TreningSeminar'
 
 const Main: FC = () => {
   return (
@@ -16,7 +16,7 @@ const Main: FC = () => {
         <Projects />
         <Reviews />
         <Case />
-        <Seminar />
+        <SeminarAndTrenings />
     </div>
   );
 };
