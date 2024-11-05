@@ -64,16 +64,15 @@ const SeminarAndTrenings: FC = () => {
                             </div>
                             <div className='mt-[15px]'>
                                 {/* adress info */}
-
                                 <div >
-                                    <div className='flex flex-row items-center text-[15px] leading-[18px] text-[#222E51] font-jost '>
-                                        <CiClock2  className='mr-[10px] w-[20px] h-[20px] 2xl:ml-[1px]'/>
+                                    <div className='flex flex-row items-center text-[15px] leading-[18px] text-[#222E51] font-jost  2xl:text-[20px]'>
+                                        <CiClock2  className='mr-[10px] w-[20px] h-[20px] 2xl:w-[25px] 2xl:h-[25px] 2xl:ml-[1px]'/>
                                         <div>
                                             <p>{item.date}; <span>{item.time}</span></p>
                                         </div>
                                     </div>
-                                    <div className='flex flex-row items-center text-[15px] mt-[5px] leading-[18px] text-[#222E51] font-jost '>
-                                        <CiLocationOn  className='mr-[10px] w-[25px] h-[25px]'/>
+                                    <div className='flex flex-row items-center text-[15px] mt-[5px] leading-[18px] text-[#222E51] font-jost  2xl:text-[20px]'>
+                                        <CiLocationOn  className='mr-[10px] w-[25px] h-[25px] 2xl:w-[28px] 2xl:h-[28px]'/>
                                         <div>
                                             <p>{item.addres}</p>
                                         </div>
