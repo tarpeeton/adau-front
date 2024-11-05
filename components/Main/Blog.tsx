@@ -2,7 +2,7 @@
 import { FC, useState, useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import Image from 'next/image'
-
+import Link from 'next/link'
 
 // ICONS
 import { FaChevronDown } from "react-icons/fa6"
@@ -13,7 +13,6 @@ import { GrTechnology } from "react-icons/gr"
 import { GiTurban } from "react-icons/gi"
 import { FaDrawPolygon } from "react-icons/fa6"
 import { GrLinkNext } from "react-icons/gr"
-import { FaBorderAll } from "react-icons/fa6";
 // IMAGES
 import One from '@/public/blog/blogone.jpg'
 import Two from '@/public/blog/two.jpg'
@@ -196,6 +195,12 @@ const Blog: FC = () => {
                 ))}
 
             </div>
+
+            <div className='w-full flex items-center justify-center mt-[40px] 2xl:mt-[60px]'>
+            <Link href='/blog' className='buttonBlue w-[60%] 2xl:w-[15%]'>
+            Все статьи
+            </Link>
+      </div>
         </div>
     )
 }

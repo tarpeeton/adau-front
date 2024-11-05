@@ -7,6 +7,7 @@ import Reviews from './Reviews';
 import Case from './Case'
 import SeminarAndTrenings from './TreningSeminar'
 import Blog from './Blog'
+import Form from './Form'
 
 const Main: FC = () => {
   return (
@@ -19,6 +20,7 @@ const Main: FC = () => {
         <Case />
         <SeminarAndTrenings />
         <Blog />
+        <Form />
     </div>
   );
 };

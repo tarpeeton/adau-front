@@ -31,6 +31,23 @@
   font-size: 17px;
   line-height: 24.57px;
 }
+.buttonWhite {
+  background-color: #FFFFFF;
+  color: #222E51; /* text-white */
+  padding-top: 12px;
+  padding-right: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 12px;
+  font-family: "Jost";
+  padding-left: 15px;
+  gap: 5px;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 24.57px;
+}
 
 .borderedButton {
   background-color: #FFFFFF;
@@ -50,11 +67,29 @@
   font-size: 17px;
   line-height: 24.57px;
 }
+.borderedButtonWhite {
+  background-color: inherit;
+  color: #FFFFFF; /* text-white */
+  padding-top: 12px;
+  font-family: "Jost";
+  border: 1px solid #FFFFFF;
+  padding-right: 15px;
+  padding-bottom: 12px;
+  padding-left: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 24.57px;
+}
 
 
 
 @media (min-width: 300px) and (max-width: 640px) {
-  .buttonBlue, .borderedButton {
+  .buttonBlue, .borderedButton , .buttonWhite,
+  .borderedButtonWhite  {
     font-size: 13.5px; /* Adjust font size for smaller screens */
     line-height: 21.68px;
   }
