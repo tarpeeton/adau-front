@@ -133,7 +133,7 @@ const Reviews: FC = () => {
                                     <div className='2xl:relative'>
                                         <div className='mt-[15px] 2xl:mt-[25px] 2xl:h-[174px] 4xl:h-[190px]'>
                                             <p className='text-[15px] leading-[18px] 2xl:text-[20px] 2xl:leading-[28.9px]'>
-                                            {item?.text.length > 242 ? item.text.slice(0, 242) + "..." : item.text}
+                                                {item?.text.length > 242 ? item.text.slice(0, 242) + "..." : item.text}
                                             </p>
                                         </div>
                                         {/* Link */}
@@ -148,10 +148,6 @@ const Reviews: FC = () => {
                                 </div>
                             </SwiperSlide>
                         ))}
-
-
-
-
                     </Swiper>
                 </div>
 
