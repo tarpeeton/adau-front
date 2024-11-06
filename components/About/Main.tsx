@@ -8,6 +8,7 @@ import Timeline from './TimeLine';
 import MobileTimeLine from './MobileTimeLine'
 import Invite from './Invite'
 import Result from './Result'
+import SomeForm from './Form'
 
 const About: FC = () => {
  
@@ -26,6 +27,7 @@ const About: FC = () => {
       </div>
       <Invite />
       <Result />
+      <SomeForm />
     </div>
   );
 };
