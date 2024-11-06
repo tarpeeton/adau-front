@@ -1,6 +1,8 @@
 'use client'
 
 import { FC, useState, useEffect } from 'react'
+import Link from 'next/link'
+
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/navigation'
@@ -8,8 +10,8 @@ import 'swiper/css/pagination'
 
 import { GrLinkNext } from "react-icons/gr"
 import { GrLinkPrevious } from "react-icons/gr"
+
 import useSwiperNavigation from '@/hooks/useSwiperNavigation'
-import Link from 'next/link'
 
 
 

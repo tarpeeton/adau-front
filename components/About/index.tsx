@@ -2,6 +2,8 @@
 import {FC } from 'react';
 import Video from './Video'
 import Misson from './Mission'
+import Team from './Team'
+import Partners from './Partners'
 
 
 const About: FC = () => {
@@ -12,6 +14,8 @@ const About: FC = () => {
     <div>
       <Video />
       <Misson />
+      <Team />
+      <Partners />
     </div>
   );
 };
