@@ -20,7 +20,7 @@ const About: FC = () => {
       <div className='hidden 2xl:block'>
       <Timeline />
       </div>
-      <div className='block 2xl:hidden'>
+      <div className=' 2xl:hidden'>
         <MobileTimeLine />
       </div>
       <Invite />

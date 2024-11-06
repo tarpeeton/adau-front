@@ -12,7 +12,6 @@ import { GrLinkPrevious } from "react-icons/gr"
 
 
 import useSwiperNavigation from '@/hooks/useSwiperNavigation'
-import Link from 'next/link'
 const Invite: FC = () => {
     const { swiperRef, handlePrev, handleNext } = useSwiperNavigation()
 
@@ -21,9 +20,9 @@ const Invite: FC = () => {
             <div className='block 2xl:hidden'>
                 <p className='text-[26px] font-jost text-titleDark uppercase'>Почему стоит стать членом ADAU?</p>
             </div>
-            <div className='mt-[30px] '>
-                <div className='relative'>
-                    <div className='flex flex-col 2xl:flex-row relative'>
+            <div className='mt-[30px]'>
+                <div className='flex flex-col'>
+                    <div className='relative'>
                         <Swiper
                             onSwiper={(swiper) => (swiperRef.current = swiper)}
                             spaceBetween={10}
@@ -33,61 +32,31 @@ const Invite: FC = () => {
                             loop={false}
                         >
                             <SwiperSlide>
-                                <div className='relative  2xl:flex 2xl:flex-row 2xl:justify-between'>
+                                <div className='relative 2xl:flex 2xl:flex-row 2xl:justify-between'>
                                     <div className='h-[230px] 2xl:h-[703px] 2xl:w-[48%]'>
                                         <Image src={ScrollImage} alt='seminar photo' width={800} height={703} className='object-cover w-full h-full' quality={100} />
                                     </div>
-                                    <div className='mt-[30px] flex flex-col gap-[20px] 2xl:w-[48%] 2xl:gap-[40px] 2xl:mt-0'>
-                                        <p className='hidden 2xl:block text-[45px] uppercase font-jost'>
+                                    <div className='mt-[30px] flex flex-col gap-[20px] 2xl:w-[48%] 2xl:gap-[40px]'>
+                                    <p className='hidden 2xl:block text-[45px] uppercase font-jost'>
                                         Почему стоит стать <br /> членом ADAU?
                                         </p>
-                                        <p className='pb-[20px] 2xl:pb-[40px] border-b border-b-[#E4E4E4] text-[18px] font-bold text-[#414141] leading-[22px] 2xl:mt-[20px] 2xl:text-[25px] 2xl:text-titleDark 2xl:leading-[30px]'>
+                                        <p className='pb-[20px] 2xl:mt-[20px] border-b border-b-[#E4E4E4] text-[18px] font-bold text-[#414141] leading-[22px] 2xl:pb-[40px] 2xl:text-[25px] 2xl:text-titleDark'>
                                             Участие в эксклюзивных семинарах и тренингах
                                         </p>
-                                        <p className='pb-[20px] 2xl:pb-[40px] border-b border-b-[#E4E4E4] text-[18px] font-bold text-[#414141] leading-[22px] 2xl:text-[25px] 2xl:text-titleDark 2xl:leading-[30px]'>
+                                        <p className='pb-[20px] border-b border-b-[#E4E4E4] text-[18px] font-bold text-[#414141] leading-[22px] 2xl:pb-[40px] 2xl:text-[25px] 2xl:text-titleDark'>
                                             Участие в эксклюзивных семинарах и тренингах
                                         </p>
-                                        <p className='pb-[20px] 2xl:pb-[40px] border-b border-b-[#E4E4E4] text-[18px] font-bold text-[#414141] leading-[22px] 2xl:text-[25px] 2xl:text-titleDark 2xl:leading-[30px]'>
+                                        <p className='pb-[20px] border-b border-b-[#E4E4E4] text-[18px] font-bold text-[#414141] leading-[22px] 2xl:pb-[40px] 2xl:text-[25px] 2xl:text-titleDark'>
                                             Участие в эксклюзивных семинарах и тренингах
                                         </p>
-                                        <p className='pb-[20px] 2xl:pb-[40px] border-b border-b-[#E4E4E4] text-[18px] font-bold text-[#414141] leading-[22px] 2xl:text-[25px] 2xl:text-titleDark 2xl:leading-[30px]'>
+                                        <p className='pb-[20px] border-b border-b-[#E4E4E4] text-[18px] font-bold text-[#414141] leading-[22px] 2xl:pb-[40px] 2xl:text-[25px] 2xl:text-titleDark'>
                                             Участие в эксклюзивных семинарах и тренингах
                                         </p>
-                                        <div className='mt-[10px] w-[60%] 2xl:w-[40%]'>
-                                            <Link href='href' className='buttonBlue'>
+                                        <div className='mt-[10px] w-[70%]  flex items-center 2xl:w-[40%] '>
+                                            <p className='buttonBlue'>
                                             Вступить в ассоциацию
 
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className='relative  2xl:flex 2xl:flex-row 2xl:justify-between'>
-                                    <div className='h-[230px] 2xl:h-[703px] 2xl:w-[48%]'>
-                                        <Image src={ScrollImage} alt='seminar photo' width={800} height={703} className='object-cover w-full h-full' quality={100} />
-                                    </div>
-                                    <div className='mt-[30px] flex flex-col gap-[20px] 2xl:w-[48%] 2xl:gap-[40px] 2xl:mt-0'>
-                                        <p className='hidden 2xl:block text-[45px] uppercase font-jost'>
-                                        Почему стоит стать <br /> членом ADAU?
-                                        </p>
-                                        <p className='pb-[20px] 2xl:pb-[40px] border-b border-b-[#E4E4E4] text-[18px] font-bold text-[#414141] leading-[22px] 2xl:mt-[20px] 2xl:text-[25px] 2xl:text-titleDark 2xl:leading-[30px]'>
-                                            Участие в эксклюзивных семинарах и тренингах
-                                        </p>
-                                        <p className='pb-[20px] 2xl:pb-[40px] border-b border-b-[#E4E4E4] text-[18px] font-bold text-[#414141] leading-[22px] 2xl:text-[25px] 2xl:text-titleDark 2xl:leading-[30px]'>
-                                            Участие в эксклюзивных семинарах и тренингах
-                                        </p>
-                                        <p className='pb-[20px] 2xl:pb-[40px] border-b border-b-[#E4E4E4] text-[18px] font-bold text-[#414141] leading-[22px] 2xl:text-[25px] 2xl:text-titleDark 2xl:leading-[30px]'>
-                                            Участие в эксклюзивных семинарах и тренингах
-                                        </p>
-                                        <p className='pb-[20px] 2xl:pb-[40px] border-b border-b-[#E4E4E4] text-[18px] font-bold text-[#414141] leading-[22px] 2xl:text-[25px] 2xl:text-titleDark 2xl:leading-[30px]'>
-                                            Участие в эксклюзивных семинарах и тренингах
-                                        </p>
-                                        <div className='mt-[10px] w-[60%] 2xl:w-[40%]'>
-                                            <Link href='href' className='buttonBlue'>
-                                            Вступить в ассоциацию
-
-                                            </Link>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -101,6 +70,7 @@ const Invite: FC = () => {
                                 <GrLinkNext className='w-[25px] h-[25px] 2xl:w-[30px] 2xl:h-[30px] text-titleWhite' />
                             </button>
                         </div>
+
                     </div>
                 </div>
             </div>

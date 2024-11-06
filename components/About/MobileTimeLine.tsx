@@ -32,7 +32,7 @@ const MobileTimeLine: React.FC = () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: 'top top',
+          start: 'top',
           end: `+=${MobileTimeLineData.length * window.innerHeight}`, // Total scroll distance
           scrub: true,
           pin: true,
