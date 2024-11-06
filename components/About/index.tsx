@@ -4,6 +4,7 @@ import Video from './Video'
 import Misson from './Mission'
 import Team from './Team'
 import Partners from './Partners'
+import Timeline from './TimeLine'
 
 
 const About: FC = () => {
@@ -16,6 +17,7 @@ const About: FC = () => {
       <Misson />
       <Team />
       <Partners />
+      <Timeline />
     </div>
   );
 };
