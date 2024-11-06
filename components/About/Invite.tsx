@@ -37,8 +37,8 @@ const Invite: FC = () => {
                                         <Image src={ScrollImage} alt='seminar photo' width={800} height={703} className='object-cover w-full h-full' quality={100} />
                                     </div>
                                     <div className='mt-[30px] flex flex-col gap-[20px] 2xl:w-[48%] 2xl:gap-[40px]'>
-                                    <p className='hidden 2xl:block text-[45px] uppercase font-jost'>
-                                        Почему стоит стать <br /> членом ADAU?
+                                        <p className='hidden 2xl:block text-[45px] uppercase font-jost'>
+                                            Почему стоит стать <br /> членом ADAU?
                                         </p>
                                         <p className='pb-[20px] 2xl:mt-[20px] border-b border-b-[#E4E4E4] text-[18px] font-bold text-[#414141] leading-[22px] 2xl:pb-[40px] 2xl:text-[25px] 2xl:text-titleDark'>
                                             Участие в эксклюзивных семинарах и тренингах
@@ -54,7 +54,7 @@ const Invite: FC = () => {
                                         </p>
                                         <div className='mt-[10px] w-[70%]  flex items-center 2xl:w-[40%] '>
                                             <p className='buttonBlue'>
-                                            Вступить в ассоциацию
+                                                Вступить в ассоциацию
 
                                             </p>
                                         </div>

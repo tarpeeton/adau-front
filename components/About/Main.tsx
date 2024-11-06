@@ -7,6 +7,7 @@ import Partners from './Partners';
 import Timeline from './TimeLine';
 import MobileTimeLine from './MobileTimeLine'
 import Invite from './Invite'
+import Result from './Result'
 
 const About: FC = () => {
  
@@ -24,6 +25,7 @@ const About: FC = () => {
         <MobileTimeLine />
       </div>
       <Invite />
+      <Result />
     </div>
   );
 };
