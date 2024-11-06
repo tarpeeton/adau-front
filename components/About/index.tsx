@@ -1,12 +1,17 @@
-import {FC} from 'react';
+
+import {FC } from 'react';
+import Video from './Video'
+import Misson from './Mission'
 
 
 const About: FC = () => {
+
+
+
   return (
     <div>
-        <button className='buttonBlue'>
-           CDDDD
-        </button>
+      <Video />
+      <Misson />
     </div>
   );
 };
