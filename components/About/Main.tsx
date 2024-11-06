@@ -1,11 +1,12 @@
-"use client"; // Only if necessary
-import { FC, useEffect, useState } from 'react';
+
+import { FC } from 'react';
 import Video from './Video';
 import Mission from './Mission'; // Note the corrected spelling
 import Team from './Team';
 import Partners from './Partners';
 import Timeline from './TimeLine';
 import MobileTimeLine from './MobileTimeLine'
+import Invite from './Invite'
 
 const About: FC = () => {
  
@@ -22,6 +23,7 @@ const About: FC = () => {
       <div className='block 2xl:hidden'>
         <MobileTimeLine />
       </div>
+      <Invite />
     </div>
   );
 };

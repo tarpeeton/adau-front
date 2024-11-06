@@ -12,6 +12,7 @@ const Timeline: React.FC = () => {
     const progressBarRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
+      
         const allCards = [...topCardsRef.current, ...bottomCardsRef.current]
 
         if (containerRef.current && allCards.length > 0) {
@@ -133,7 +134,7 @@ const Timeline: React.FC = () => {
                 </div>
 
                 <div className="progress w-full h-[3px] bg-[#3E4A6A] mt-[40px]">
-                    <div ref={progressBarRef} className="h-full bg-white" style={{ width: '200px' }} />
+                    <div ref={progressBarRef} className="h-full bg-white w-[200px]" />
                 </div>
 
                 <div className="bottomCARDS w-full flex flex-row gap-[120px] mt-[20px] ml-[200px] flex-nowrap">

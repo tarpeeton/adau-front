@@ -11,6 +11,16 @@ const MobileTimeLine: React.FC = () => {
   const cardsRef = useRef<HTMLDivElement[]>([]);
   const progressBarRef = useRef<HTMLDivElement>(null);
 
+
+
+
+
+
+
+
+
+
+
   useEffect(() => {
     const cards = cardsRef.current;
 
@@ -76,16 +86,16 @@ const MobileTimeLine: React.FC = () => {
   }, [MobileTimeLineData]);
 
   return (
-    <div ref={containerRef} className='mt-[80px] bg-[#222E51] pt-[40px] px-[16px] overflow-hidden h-[500px]'>
+    <div ref={containerRef} className='mt-[80px] w-full bg-[#222E51] pt-[40px] px-[16px] overflow-hidden h-[500px]'>
       <p className='text-[26px] text-white uppercase font-jost'>Наш путь и планы на будущее</p>
       <div className='flex flex-row justify-between mt-[40px] overflow-hidden relative h-full'>
         {/* Progress bar */}
-        <div className='w-[4px] bg-titleWhite text-[#222E51] relative'>
-          <div ref={progressBarRef} className='absolute bottom-0 left-0 w-full bg-[#3E4A6A]' style={{ height: '0%' }} />
+        <div className='w-[1%] bg-titleWhite text-[#222E51] relative'>
+          <div ref={progressBarRef} className='absolute bottom-0 left-0 w-full bg-[#3E4A6A]'  />
         </div>
 
-        <div className='flex flex-col gap-0 w-full ml-[16px]'>
-          <div className='relative h-[190px]'>
+        <div className='flex flex-col gap-0 w-[98%] '>
+          <div className='relative h-[190px] w-full'>
             {MobileTimeLineData.map((item, index) => (
               <div
                 key={index}
