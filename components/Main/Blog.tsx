@@ -20,7 +20,7 @@ import Three from '@/public/blog/three.jpg'
 
 
 
-const BlogData = [
+export const BlogData = [
     {
         url: One,
         date: '03.11.2024',
