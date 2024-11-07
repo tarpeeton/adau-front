@@ -1,17 +1,18 @@
 "use client"
 import { FC, useRef, useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import useSwiperNavigation from '@/hooks/useSwiperNavigation'
+
 // import Swiper styles
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import Image from 'next/image'
 import BannerImage from '@/public/ccc.jpg'
+
+
 import { GrLinkNext } from "react-icons/gr"
 import { GrLinkPrevious } from "react-icons/gr"
-import useSwiperNavigation from '@/hooks/useSwiperNavigation'
-
-
 
 const Banner: FC = () => {
     const { swiperRef, handlePrev, handleNext } = useSwiperNavigation()

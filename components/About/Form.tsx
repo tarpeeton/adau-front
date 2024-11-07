@@ -95,13 +95,13 @@ const SomeForm: FC = () => {
         <div className='mt-[80px] 2xl:mt-[200px] py-[40px] 2xl:py-[100px] px-[16px] bg-[#222E51] 2xl:px-[50px] 4xl:px-[240px]'>
             <div className='flex flex-col 2xl:flex-row 2xl:justify-between 2xl:items-center'>
                 <div className='2xl:flex 2xl:flex-col  2xl:w-[40%]'>
-                <p className='text-[26px] 2xl:text-[50px] uppercase leading-[32px] 2xl:leading-[62px] font-jost text-titleWhite'>
-                    Отправить нам <b/> сообщение
-                </p>
-                <p className='mt-[10px] hidden text-[20px] text-white font-jost 2xl:block'>
-                    Напишите нам, и мы ответим в кратчайшие сроки!
-                </p>
-                <div className=' hidden 2xl:block mt-[30px] relative border-t border-t-[#636F93]'>
+                    <p className='text-[26px] 2xl:text-[50px] uppercase leading-[32px] 2xl:leading-[62px] font-jost text-titleWhite'>
+                        Отправить нам <b /> сообщение
+                    </p>
+                    <p className='mt-[10px] hidden text-[20px] text-white font-jost 2xl:block'>
+                        Напишите нам, и мы ответим в кратчайшие сроки!
+                    </p>
+                    <div className=' hidden 2xl:block mt-[30px] relative border-t border-t-[#636F93]'>
                         <div className='absolute top-[40px]  z-50'>
                             <p className='text-[25px] text-white font-jost'>+998 90 999 99 99</p>
                             <p className='text-[25px] text-white font-jost mt-[4px]'>adauassatsion@gmai.com</p>
@@ -116,7 +116,7 @@ const SomeForm: FC = () => {
                         </div>
                     </div>
                 </div>
-                
+
                 <p className='mt-[10px] text-[15px] text-white font-jost 2xl:hidden'>
                     Напишите нам, и мы ответим в кратчайшие <b className='mdl:hidden' /> сроки!
                 </p>
@@ -146,7 +146,7 @@ const SomeForm: FC = () => {
                     <div className='relative mt-[20px] cursor-pointer 2xl:w-[60%] 2xl:mt-[30px]'>
                         <div onClick={handleOpenSelect} id="floating_outlined_select" className="border border-white px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent border-1 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer flex flex-row justify-between items-center">
                             {selectedMessageType}
-                            <IoIosArrowDown 
+                            <IoIosArrowDown
                                 className={`transform transition-transform ease-in-out duration-500 ${openSelect ? 'rotate-180' : 'rotate-0'}`}
                             />
                         </div>
