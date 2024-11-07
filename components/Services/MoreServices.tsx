@@ -52,7 +52,7 @@ const MoreService: FC = () => {
                     </SwiperSlide>
                 </Swiper>
             </div>
-            <div className='mt-[40px]'>
+            <div className='mt-[40px] hidden 2xl:block'>
                 <div className='border-t border-t-[#E4E4E4] py-[40px] flex flex-row flex-nowrap justify-between items-center'>
                     <div className='w-[25%]'>
                         <p className='w-[80%] uppercase text-[30px] leading-[40px] font-jost'>Разработка архитектурных концепций</p>
