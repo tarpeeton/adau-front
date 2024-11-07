@@ -11,8 +11,6 @@ import { GrLinkPrevious } from "react-icons/gr"
 import useSwiperNavigation from '@/hooks/useSwiperNavigation'
 import Link from 'next/link'
 import { SeminarAndTreningsData } from '@/constants/SamenarAndTrening'
-import { FiClock } from "react-icons/fi";
-import { MdOutlineLocationOn } from "react-icons/md";
 import { CiClock2 } from "react-icons/ci";
 import { CiLocationOn } from "react-icons/ci";
 

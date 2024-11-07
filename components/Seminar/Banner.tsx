@@ -20,7 +20,7 @@ const BannerSeminar: FC = () => {
         <div className='mt-[20px] 2xl:mt-[40px] px-[16px] 2xl:px-[50px] 4xl:px-[240px]'>
             <div className='flex flex-col 2xl:flex-row 2xl:flex-wrap'>
                 <div className='2xl:w-[30%]'>
-                    <p className='text-[26px] 2xl:text-[50px] text-titleDark'>Семинары и <br className='2xl:hidden' /> тренинги ADAU</p>
+                    <p className='uppercase text-[26px] 2xl:text-[50px] text-titleDark'>Семинары и <br className='2xl:hidden' /> тренинги ADAU</p>
                     <div className='hidden 2xl:block'> 
                     <button className=' buttonBlue w-[60%] mt-[25px] '>
                     Записаться на семинар
