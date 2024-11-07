@@ -29,7 +29,7 @@ const BannerProjects: FC = () => {
                         <p className='text-[26px] font-jost uppercase 2xl:text-[40px] 3xl:text-[50px]'>
                             Наши проекты
                         </p>
-                        <p className='mt-[16px] text-[15px] leading-[18px] 2xl:w-full font-normal 2xl:text-[18px] 3xl:text-[20px] 2xl:leading-[20px] 2xl:mt-[20px]'>
+                        <p className='mt-[16px] text-[15px] leading-[18px] 2xl:w-full font-normal 2xl:text-[18px] 3xl:text-[20px] 2xl:leading-[28.9px] 2xl:mt-[20px]'>
                             Коллекция лучших работ, созданных членами ассоциации. Здесь представлены успешные примеры реализованных проектов в области архитектуры и дизайна, отражающие профессионализм, креативность
                         </p>
                         <button className='mt-[20px] buttonBlue w-[60%] 2xl:mt-[30px]'>
