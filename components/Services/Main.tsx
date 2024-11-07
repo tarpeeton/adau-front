@@ -1,6 +1,7 @@
 import {FC} from 'react';
 import BannerService from './Banner'
 import Service from './Service'
+import MoreService from './MoreServices'
 
 
 const MainService: FC = () => {
@@ -8,6 +9,7 @@ const MainService: FC = () => {
     <div>
       <BannerService />
       <Service />
+      <MoreService />
     </div>
   );
 };

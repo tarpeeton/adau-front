@@ -14,9 +14,7 @@ const Service: FC = () => {
                 <p className='text-[26px] uppercase font-jost leading-[32px] 2xl:text-[45px] 2xl:leading-[59px] mb-[20px] 2xl:mb-[30px]'>
                 Основные <b className='2xl:hidden' /> направления услуг
                 </p>
-
                 <div className='flex flex-col gap-[40px] 2xl:flex-row 2xl:flex-wrap 2xl:gap-[2%]'>
-                  
                             <div className='2xl:w-[32%]'>
                                 <Image src={One} alt='service image' width={467} height={450} quality={100} className='object-cover h-[220px] 2xl:h-[400px] ' />
                                 <div className='2xl:h-[210px] mt-[20px] 2xl:mt-[25px] 2xl:relative 2xl:pb-[80px]'>
