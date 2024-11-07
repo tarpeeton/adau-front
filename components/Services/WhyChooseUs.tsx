@@ -9,7 +9,11 @@ const WhyChooseData = [
     { number: '04', title: 'Партнеры', description: 'Широкая сеть партнёров и доступ к эксклюзивным ресурсам' },
 ];
 
-const WhyChooseUs: FC = () => {
+interface IWhyChooseUs {
+    title: string
+}
+
+const WhyChooseUs: FC<IWhyChooseUs> = ({title}) => {
     const cardRefs = useRef<HTMLDivElement[]>([]);
 
     useEffect(() => {
@@ -75,7 +79,7 @@ const WhyChooseUs: FC = () => {
                 {/* button */}
                 <div className='mt-[20px] 2xl:mt-[40px]'>
                     <button className='buttonBlue'>
-                        Вступить в ассоциацию
+                        {title}
                     </button>
                 </div>
             </div>

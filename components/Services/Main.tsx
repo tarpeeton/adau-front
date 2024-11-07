@@ -16,7 +16,7 @@ const MainService: FC = () => {
       <Service />
       <MoreService />
       <ServiceCase />
-      <WhyChooseUs />
+      <WhyChooseUs  title='Вступить в ассоциацию'/>
       <HowWeWork />
       <FaqComponent />
       <Form  text='Поддержка на всех этапах проекта, гарантия высокого качества услуг' title='Готовы начать работать    с нами?'/>

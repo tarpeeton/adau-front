@@ -54,8 +54,11 @@ const chunkArray = <T,>(array: T[], size: number): T[][] => {
     return result
 }
 
+interface IPartners {
+    active: boolean
+}
 
-const Partners: FC = () => {
+const Partners: FC<IPartners> = ({active}) => {
     const { swiperRef, handlePrev, handleNext } = useSwiperNavigation()
 
     const slidesData = chunkArray(PartnersData, 8)
@@ -90,6 +93,15 @@ const Partners: FC = () => {
 
             </Swiper>
             </div>
+            <div className='flex flex-row justify-between items-center 2xl:mt-[50px] '>
+            {active ? (
+                <div className='hidden 2xl:block w-[20%] '>
+                    <button className='buttonBlue  '>
+                    Стать партнером
+                </button>
+                    </div>
+                
+            ) : (null)}
             <div className='flex flex-row gap-[10px] mt-[20px] 2xl:mt-[50px] w-full justify-end'>
                 <button onClick={handlePrev} className='flex items-center justify-center rounded-full w-[60px] 2xl:w-[70px] 2xl:h-[70px] h-[60px]  4xl:w-[90px] 4xl:h-[90px] border border-[#222E51] backdrop-blur-[15px] bg-inherit'>
                     <GrLinkPrevious className='w-[30px] h-[30px] text-[#222E51]' />
@@ -98,6 +110,8 @@ const Partners: FC = () => {
                     <GrLinkNext className='w-[30px] h-[30px] text-[#222E51]' />
                 </button>
             </div>
+                </div>
+            
         </div>
     )
 }

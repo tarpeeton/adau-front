@@ -16,7 +16,7 @@ import Three from '@/public/case/three.jpg'
 import Link from 'next/link'
 
 
-const data = [
+export const data = [
   {
     title: "Green Horizon",
     description: "Многофункциональный эко-комплекс, построенный в пригороде крупного города",

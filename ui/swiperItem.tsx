@@ -3,8 +3,11 @@ import { FC, useState, useEffect, useRef } from 'react'
 import { GrLinkNext } from "react-icons/gr"
 import Link from 'next/link'
 import Image, { StaticImageData } from 'next/image'
+
+
+
 export interface ImageItem {
-    img: StaticImageData
+    url: StaticImageData
 }
 import { DataItem } from '@/components/Projects/Work'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -14,12 +17,13 @@ import { Swiper as SwiperCore } from 'swiper/types' // импортируем т
 
 
 interface SwiperItemProps {
-    item: DataItem
+    item: DataItem,
+    width: string
 }
 
 
 
-export const SwiperItem: FC<SwiperItemProps> = ({ item }) => {
+export const SwiperItem: FC<SwiperItemProps> = ({ item , width }) => {
     // Локальные состояния и ссылки для каждого Swiper
     const [activeIndex, setActiveIndex] = useState(0)
     const swiperRef = useRef<SwiperCore | null>(null)
@@ -32,7 +36,7 @@ export const SwiperItem: FC<SwiperItemProps> = ({ item }) => {
     const handleNext = () => swiperRef.current?.slideNext()
 
     return (
-        <div className='2xl:w-[32%] 2xl:mt-[40px]'>
+        <div className={`2xl:w-[${width}] 2xl:mt-[40px] `}>
             <div className='relative '>
                 <Swiper
                     spaceBetween={10}
@@ -43,10 +47,10 @@ export const SwiperItem: FC<SwiperItemProps> = ({ item }) => {
                     autoplay={{ delay: 2000, disableOnInteraction: false }}
                     loop={false}
                 >
-                    {item?.url?.map((image: ImageItem, index: number) => (
+                    {item?.images?.map((image: ImageItem, index: number) => (
                         <SwiperSlide key={index}>
                             <Image
-                                src={image.img}
+                                src={image.url}
                                 alt='One'
                                 width={710}
                                 height={500}
@@ -57,7 +61,7 @@ export const SwiperItem: FC<SwiperItemProps> = ({ item }) => {
                     ))}
                 </Swiper>
                 <div className='absolute bottom-[20px] left-1/2 transform -translate-x-1/2 z-[99] flex items-center gap-[15px] justify-center'>
-                    {item.url.map((_: ImageItem, i: number) => (
+                    {item.images.map((_: ImageItem, i: number) => (
                         <div
                             key={i}
                             className={`w-[25px] h-[3px] ${i === activeIndex ? 'bg-white' : 'bg-inherit backdrop-blur-[15px]'}`}

@@ -20,10 +20,10 @@ import ImageDataMap from '@/public/project/projectCARD.jpg'
 
 
 export interface DataItem {
-    category: string
+    category?: string
     title: string
     description: string
-    url: ImageItem[]
+    images: ImageItem[]
 }
 
 interface CategoryItem {
@@ -35,158 +35,28 @@ const Data: DataItem[] = [
         category: 'Интерьерные работы',
         title: 'Innova Space',
         description: 'Пространство с современным дизайном, способствующим командной работе и креативности',
-        url: [{ img: ImageDataMap }, { img: ImageDataMap }]
+        images: [{ url: ImageDataMap }, { url: ImageDataMap }]
     },
     {
         category: 'Интерьерные работы',
         title: 'Innova Space',
         description: 'Пространство с современным дизайном, способствующим командной работе и креативности',
-        url: [{ img: ImageDataMap }, { img: ImageDataMap }]
+        images: [{ url: ImageDataMap }, { url: ImageDataMap }]
     },
     {
         category: 'Интерьерные работы',
         title: 'Innova Space',
         description: 'Пространство с современным дизайном, способствующим командной работе и креативности',
-        url: [{ img: ImageDataMap }, { img: ImageDataMap }]
+        images: [{ url: ImageDataMap }, { url: ImageDataMap }]
     },
     {
         category: 'Интерьерные работы',
         title: 'Innova Space',
         description: 'Пространство с современным дизайном, способствующим командной работе и креативности',
-        url: [{ img: ImageDataMap }, { img: ImageDataMap }]
+        images: [{ url: ImageDataMap }, { url: ImageDataMap }]
     },
-    {
-        category: 'Интерьерные работы',
-        title: 'Innova Space',
-        description: 'Пространство с современным дизайном, способствующим командной работе и креативности',
-        url: [{ img: ImageDataMap }, { img: ImageDataMap }]
-    },
-    {
-        category: 'Интерьерные работы',
-        title: 'Innova Space',
-        description: 'Пространство с современным дизайном, способствующим командной работе и креативности',
-        url: [{ img: ImageDataMap }, { img: ImageDataMap }]
-    },
-    {
-        category: 'Интерьерные работы',
-        title: 'Innova Space',
-        description: 'Пространство с современным дизайном, способствующим командной работе и креативности',
-        url: [{ img: ImageDataMap }, { img: ImageDataMap }]
-    },
-    {
-        category: 'Интерьерные работы',
-        title: 'Innova Space',
-        description: 'Пространство с современным дизайном, способствующим командной работе и креативности',
-        url: [{ img: ImageDataMap }, { img: ImageDataMap }]
-    },
-    {
-        category: 'Интерьерные работы',
-        title: 'Innova Space',
-        description: 'Пространство с современным дизайном, способствующим командной работе и креативности',
-        url: [{ img: ImageDataMap }, { img: ImageDataMap }]
-    },
-    {
-        category: 'Интерьерные работы',
-        title: 'Innova Space',
-        description: 'Пространство с современным дизайном, способствующим командной работе и креативности',
-        url: [{ img: ImageDataMap }, { img: ImageDataMap }]
-    },
-    {
-        category: 'Интерьерные работы',
-        title: 'Innova Space',
-        description: 'Пространство с современным дизайном, способствующим командной работе и креативности',
-        url: [{ img: ImageDataMap }, { img: ImageDataMap }]
-    },
-    {
-        category: 'Интерьерные работы',
-        title: 'Innova Space',
-        description: 'Пространство с современным дизайном, способствующим командной работе и креативности',
-        url: [{ img: ImageDataMap }, { img: ImageDataMap }]
-    },
-    {
-        category: 'Архитектурные проекты',
-        title: 'Innova Space',
-        description: 'Пространство с современным дизайном, способствующим командной работе и креативности',
-        url: [{ img: ImageDataMap }, { img: ImageDataMap }]
-    },
-    {
-        category: 'Градостроительные проекты',
-        title: 'Innova Space',
-        description: 'Пространство с современным дизайном, способствующим командной работе и креативности',
-        url: [{ img: ImageDataMap }, { img: ImageDataMap }]
-    },
-    {
-        category: 'Градостроительные проекты',
-        title: 'Innova Space',
-        description: 'Пространство с современным дизайном, способствующим командной работе и креативности',
-        url: [{ img: ImageDataMap }, { img: ImageDataMap }]
-    },
-    {
-        category: 'Градостроительные проекты',
-        title: 'Innova Space',
-        description: 'Пространство с современным дизайном, способствующим командной работе и креативности',
-        url: [{ img: ImageDataMap }, { img: ImageDataMap }]
-    },
-    {
-        category: 'Градостроительные проекты',
-        title: 'Innova Space',
-        description: 'Пространство с современным дизайном, способствующим командной работе и креативности',
-        url: [{ img: ImageDataMap }, { img: ImageDataMap }]
-    },
-    {
-        category: 'Градостроительные проекты',
-        title: 'Innova Space',
-        description: 'Пространство с современным дизайном, способствующим командной работе и креативности',
-        url: [{ img: ImageDataMap }, { img: ImageDataMap }]
-    },
-    {
-        category: 'Градостроительные проекты',
-        title: 'Innova Space',
-        description: 'Пространство с современным дизайном, способствующим командной работе и креативности',
-        url: [{ img: ImageDataMap }, { img: ImageDataMap }]
-    },
-    {
-        category: 'Градостроительные проекты',
-        title: 'Innova Space',
-        description: 'Пространство с современным дизайном, способствующим командной работе и креативности',
-        url: [{ img: ImageDataMap }, { img: ImageDataMap }]
-    },
-    {
-        category: 'Градостроительные проекты',
-        title: 'Innova Space',
-        description: 'Пространство с современным дизайном, способствующим командной работе и креативности',
-        url: [{ img: ImageDataMap }, { img: ImageDataMap }]
-    },
-    {
-        category: 'Градостроительные проекты',
-        title: 'Innova Space',
-        description: 'Пространство с современным дизайном, способствующим командной работе и креативности',
-        url: [{ img: ImageDataMap }, { img: ImageDataMap }]
-    },
-    {
-        category: 'Градостроительные проекты',
-        title: 'Innova Space',
-        description: 'Пространство с современным дизайном, способствующим командной работе и креативности',
-        url: [{ img: ImageDataMap }, { img: ImageDataMap }]
-    },
-    {
-        category: 'Градостроительные проекты',
-        title: 'Innova Space',
-        description: 'Пространство с современным дизайном, способствующим командной работе и креативности',
-        url: [{ img: ImageDataMap }, { img: ImageDataMap }]
-    },
-    {
-        category: 'Градостроительные проекты',
-        title: 'Innova Space',
-        description: 'Пространство с современным дизайном, способствующим командной работе и креативности',
-        url: [{ img: ImageDataMap }, { img: ImageDataMap }]
-    },
-    {
-        category: 'Градостроительные проекты',
-        title: 'Innova Space',
-        description: 'Пространство с современным дизайном, способствующим командной работе и креативности',
-        url: [{ img: ImageDataMap }, { img: ImageDataMap }]
-    },
+  
+
 ]
 
 const Cotegory: CategoryItem[] = [
@@ -316,7 +186,7 @@ const Work: FC = () => {
             </div>
             <div className='mt-[15px] flex flex-col gap-[30px] 2xl:flex-row 2xl:flex-wrap 2xl:gap-[1%]' ref={blogContainerRef}>
                 {filteredBlogData.slice(0, sliceNumber).map((item: DataItem, index: number) => (
-                    <SwiperItem key={index} item={item} />
+                    <SwiperItem key={index} item={item} width='32%' />
                 ))}
             </div>
             {filteredBlogData.length > 9 && (

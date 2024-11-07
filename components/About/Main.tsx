@@ -19,7 +19,7 @@ const About: FC = () => {
       <Video />
       <Mission />
       <Team />
-      <Partners />
+      <Partners  active={false}/>
       <div className='hidden 2xl:block'>
       <Timeline />
       </div>
