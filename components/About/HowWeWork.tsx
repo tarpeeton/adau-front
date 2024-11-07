@@ -1,0 +1,61 @@
+'use client'
+import { FC, useState } from 'react'
+import Image from 'next/image'
+import { IoIosArrowDown } from "react-icons/io"
+// image
+import HowWorkImage from '@/public/HowWorkImage.jpg'
+
+const AccardionData = [
+    { id: '01', title: 'Консультация и обсуждение задачи клиента', answer: 'Мы начинаем с детальной консультации, чтобы понять ваши цели и задачи. На этом этапе мы обсуждаем ключевые детали проекта, формируем общее видение и определяем путь реализации' },
+    { id: '02', title: 'Разработка индивидуального плана', answer: 'Мы начинаем с детальной консультации, чтобы понять ваши цели и задачи. На этом этапе мы обсуждаем ключевые детали проекта, формируем общее видение и определяем путь реализации' },
+    { id: '03', title: 'Согласование проекта и его реализация', answer: 'Мы начинаем с детальной консультации, чтобы понять ваши цели и задачи. На этом этапе мы обсуждаем ключевые детали проекта, формируем общее видение и определяем путь реализации' },
+    { id: '04', title: 'Итоговая проверка и передача результата', answer: 'Мы начинаем с детальной консультации, чтобы понять ваши цели и задачи. На этом этапе мы обсуждаем ключевые детали проекта, формируем общее видение и определяем путь реализации' },
+]
+
+const HowWeWork: FC = () => {
+    const [activeId, setActiveId] = useState<string | null>(null);
+
+    const toggleAccordion = (id: string) => {
+        setActiveId(activeId === id ? null : id);
+    };
+
+    return (
+        <div className='mt-[80px] 2xl:mt-[200px] px-[16px] 2xl:px-[240px]'>
+            <div className='flex flex-col'>
+                <p className='text-[26px] uppercase leading-[32px] 2xl:text-[45px] 2xl:leading-[59px] text-[#000000] font-jost'>Как мы работаем</p>
+                {/* Image */}
+                <div className='h-[250px] mt-[20px]'>
+                    <Image src={HowWorkImage} quality={100} width={607} height={701} alt='HowWork Image' className='w-full h-full object-cover' />
+                </div>
+                {/* Accordion */}
+                <div className='mt-[30px] flex flex-col gap-[25px]'>
+                    {AccardionData.map((item) => (
+                        <div key={item.id} className='border-b border-b-[#E4E4E4] pb-[20px]'>
+                            <button
+                                onClick={() => toggleAccordion(item.id)}
+                                className='flex flex-row justify-between w-full'
+                            >
+                                <div className='text-title80 2xl:text-[#222E51] text-[18px] font-medium'>{item.id}</div>
+                                <div className='w-[82%] text-left'>
+                                    <p className='text-[18px] leading-[22px] font-medium text-title80 2xl:text-[#222E51] 2xl:text-[25px] 2xl:leading-[30px]'>{item.title}</p>
+                                </div>
+                                <div>
+                                    <IoIosArrowDown
+                                        className={`text-[#222E51] transform transition-transform ease-in-out duration-500 ${activeId === item.id ? 'rotate-180' : 'rotate-0'}`}
+                                    />
+                                </div>
+                            </button>
+                            {activeId === item.id && (
+                                <div className='mt-[10px] w-[82%] mx-auto text-[15px] text-[#414141] leading-[20px]'>
+                                    {item.answer}
+                                </div>
+                            )}
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default HowWeWork;

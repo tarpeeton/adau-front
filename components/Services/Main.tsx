@@ -4,6 +4,7 @@ import Service from './Service'
 import MoreService from './MoreServices'
 import ServiceCase from './Case'
 import WhyChooseUs from './WhyChooseUs'
+import HowWeWork from '../About/HowWeWork'
 
 
 const MainService: FC = () => {
@@ -14,6 +15,7 @@ const MainService: FC = () => {
       <MoreService />
       <ServiceCase />
       <WhyChooseUs />
+      <HowWeWork />
     </div>
   );
 };
