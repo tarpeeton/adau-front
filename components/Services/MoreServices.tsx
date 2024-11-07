@@ -69,7 +69,9 @@ const MoreService: FC = () => {
                 </div>
                 <div className='border-t border-t-[#E4E4E4] py-[40px] flex flex-row flex-nowrap justify-between items-center'>
                     <div className='w-[25%]'>
-                        <p className='w-[80%] uppercase text-[30px] leading-[40px] font-jost'>Разработка архитектурных концепций</p>
+                        <p className='w-[80%] uppercase text-[30px] leading-[40px] font-jost'>
+                        Консалтинг по законодательным нормам в сфере строительства
+                        </p>
                     </div>
                     <div className='w-[33%]'>
                         <p className=' text-[20px] leading-[24px] text-title80 font-jost'>
@@ -81,9 +83,11 @@ const MoreService: FC = () => {
                             </Link>
                     </div>
                 </div>
-                <div className='border-t border-t-[#E4E4E4] py-[40px] flex flex-row flex-nowrap justify-between items-center'>
+                <div className='border-t border-t-[#E4E4E4] border-b border-b-[#E4E4E4] py-[40px] flex flex-row flex-nowrap justify-between items-center'>
                     <div className='w-[25%]'>
-                        <p className='w-[80%] uppercase text-[30px] leading-[40px] font-jost'>Разработка архитектурных концепций</p>
+                        <p className='w-[80%] uppercase text-[30px] leading-[40px] font-jost'>
+                        Управление проектами
+                        </p>
                     </div>
                     <div className='w-[33%]'>
                         <p className=' text-[20px] leading-[24px] text-title80 font-jost'>
