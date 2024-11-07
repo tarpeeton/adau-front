@@ -18,7 +18,7 @@ const BannerSeminar: FC = () => {
   
     return (
         <div className='mt-[20px] 2xl:mt-[40px] px-[16px] 2xl:px-[50px] 4xl:px-[240px]'>
-            <div className='flex flex-col 2xl:flex-row 2xl:flex-wrap'>
+            <div className='flex flex-col 2xl:flex-row 2xl:flex-wrap 2xl:justify-between'>
                 <div className='2xl:w-[30%]'>
                     <p className='uppercase text-[26px] 2xl:text-[50px] text-titleDark'>Семинары и <br className='2xl:hidden' /> тренинги ADAU</p>
                     <div className='hidden 2xl:block'> 
@@ -52,7 +52,7 @@ const BannerSeminar: FC = () => {
                   />
                     )}
                 </div>
-                <div className='mt-[25px] 2xl:w-[70%]'>
+                <div className='mt-[25px] 2xl:w-[60%]'>
                     <p className='text-[15px] leading-[18px] font-jost 2xl:text-[20px] 2xl:leading-[28.9px] '>
                     ADAU регулярно проводит обучающие мероприятия, семинары и воркшопы, чтобы поддержать профессиональный рост дизайнеров и архитекторов. Участники получают возможность изучать новейшие тенденции, улучшать навыки и обмениваться опытом с коллегами. Наши мероприятия — это ценный ресурс для тех, кто стремится оставаться на передовой архитектуры и дизайна
                     </p>

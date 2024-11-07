@@ -6,6 +6,7 @@ import AddSeminarForm from './AddSeminarForm'
 import FaqComponent from '../Services/Faq'
 import Partners from '../About/Partners'
 import SomeForm from '../About/Form'
+import Speakers from './Speakers'
 
 
 const MainSeminar: FC = () => {
@@ -15,6 +16,7 @@ const MainSeminar: FC = () => {
         <NewSeminar />
         <WhyInvite />
         <AddSeminarForm />
+        <Speakers />
         <FaqComponent />
         <Partners active={true} />
         <SomeForm />
