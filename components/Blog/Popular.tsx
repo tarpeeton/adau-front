@@ -2,8 +2,6 @@
 import { FC, useState, useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import Image from 'next/image'
-import Link from 'next/link'
-
 // ICONS
 import { FaChevronDown } from "react-icons/fa6"
 import { MdArchitecture } from "react-icons/md"
@@ -76,7 +74,7 @@ const Cotegory = [
 ]
 
 
-const NewBlogs: FC = () => {
+const PopularBlogs: FC = () => {
     const [mobileActiveFilter, setMobileActiveFilter] = useState(false)
     const [activeFilter, setActiveFilter] = useState('Все статьи')
     const blogContainerRef = useRef<HTMLDivElement | null>(null)
@@ -123,16 +121,26 @@ const NewBlogs: FC = () => {
             setMobileActiveFilter(false)
         }
 
+        const [sliceNumber, setSliceNumber] = useState(3);
 
+        const handleAddMore = () => {
+            if (sliceNumber < filteredBlogData.length) {
+                setSliceNumber(sliceNumber + 3);
+            }
+        };
+    
+        const handleShowLess = () => {
+            setSliceNumber(6);
+        };
 
 
     return (
         <div className='mt-[80px] 2xl:mt-[200px]  px-[20px] 4xl:px-[240px] 2xl:px-[50px]'>
             <p className="text-[26px]  uppercase font-jost leading-[32px] 2xl:text-[45px] 2xl:leading-[59px]  ">
-            Последние статьи
+            Популярные статьи
             </p>
 
-            <div className='hidden 2xl:flex flex-row  mt-[40px]'>
+            <div className='hidden 2xl:flex flex-row   mt-[40px]'>
                 {Cotegory.map((item, index) => (
                     <button
                         onClick={() => setActiveFilter(item.cotegory)}
@@ -176,10 +184,10 @@ const NewBlogs: FC = () => {
                 </div>
             )}
 
-            <div ref={blogContainerRef} className='mt-[20px] 2xl:mt-[41px] flex flex-col gap-[30px] 2xl:flex-row 2xl:gap-[20px]'>
-                {filteredBlogData.slice(0, 4).map((item, index) => (
-                    <div  key={index} className='2xl:w-[345px]'>
-                        <Image src={item.url} width={345} height={345} quality={100} alt='blogIMage' className=' w-full object-cover h-[220px] 2xl:w-full md:h-[280px]' />
+            <div ref={blogContainerRef} className='mt-[20px] 2xl:mt-[41px] flex flex-col gap-[30px] 2xl:flex-row 2xl:flex-wrap 2xl:gap-[20px]'>
+                {filteredBlogData.slice(0, sliceNumber).map((item, index) => (
+                    <div  key={index} className='2xl:w-[349px]'>
+                         <Image src={item.url} width={345} height={345} quality={100} alt='blogIMage' className=' w-full object-cover h-[220px] 2xl:w-full md:h-[280px]' />
                         <div className='mt-[20px] 2xl:mt-[25px]'>
                             <p className='text-[14px] text-[#A0A0A0] 2xl:text-[17px]'>{item.date}</p>
                             <div className='2xl:h-[120px]'>
@@ -195,9 +203,21 @@ const NewBlogs: FC = () => {
                 ))}
 
             </div>
-
+            <div className='w-full items-center flex justify-center mt-[30px]'>
+                {filteredBlogData.length > 3 && sliceNumber < filteredBlogData.length ? (
+                    <button onClick={handleAddMore} className='buttonBlue w-[60%] 2xl:w-[15%]'>
+                        Загрузить еще
+                    </button>
+                ) : (
+                    sliceNumber > 3 && (
+                        <button onClick={handleShowLess} className='buttonBlue w-[60%] 2xl:w-[15%]'>
+                            Скрыть
+                        </button>
+                    )
+                )}
+            </div>
         </div>
     )
 }
 
-export default NewBlogs
+export default PopularBlogs

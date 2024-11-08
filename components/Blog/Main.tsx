@@ -5,6 +5,8 @@ import CotegoryBlog from './Cotegory'
 import SavedBlogs from './Save'
 import BlogAcrions from './BlogActions'
 import ExpertOpinions from './ExpertOpinions'
+import VideoAndMedia from './VideoMedia'
+import PopularBlogs from './Popular'
 
 
 const MainBlog: FC = () => {
@@ -16,6 +18,8 @@ const MainBlog: FC = () => {
       <SavedBlogs />
       <BlogAcrions />
       <ExpertOpinions />
+      <VideoAndMedia />
+      <PopularBlogs />
     </div>
   );
 };
