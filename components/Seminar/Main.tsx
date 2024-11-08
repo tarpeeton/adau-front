@@ -7,6 +7,9 @@ import FaqComponent from '../Services/Faq'
 import Partners from '../About/Partners'
 import SomeForm from '../About/Form'
 import Speakers from './Speakers'
+import UserTestimonials from './UserTestimonials'
+import SeminarForm from './SeminarForm'
+import OldSeminar from './OldSeminar'
 
 
 const MainSeminar: FC = () => {
@@ -14,10 +17,13 @@ const MainSeminar: FC = () => {
     <div>
         <BannerSeminar />
         <NewSeminar />
+        <OldSeminar />
         <WhyInvite />
         <AddSeminarForm />
         <Speakers />
+        <UserTestimonials />
         <FaqComponent />
+        <SeminarForm />
         <Partners active={true} />
         <SomeForm />
     </div>

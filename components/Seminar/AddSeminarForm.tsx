@@ -22,7 +22,7 @@ const AddSeminarForm: FC = () => {
                     </p>
 
 
-                    <p className='mt-[10px] 2xl:mt-[20px] 2xl:w-[50%] text-[15px] leading-[18px] text-[#A0A0A0]'>
+                    <p className='mt-[10px] 2xl:mt-[20px] 2xl:w-[50%] text-[15px] 2xl:text-[20px] 2xl:leading-[24px] leading-[18px] text-titleWhite opacity-[80%]'>
                         Запишитесь на семинар, чтобы узнать новейшие тренды и получить практические знания от ведущих экспертов
                     </p>
                     <div className='flex flex-row flex-nowrap justify-between mt-[25px] 2xl:w-[60%] 2xl:mt-[50px] 2xl:justify-normal 2xl:gap-[20px]'>

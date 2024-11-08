@@ -31,7 +31,7 @@ const FaqComponent: FC = () => {
                             >
                                 
                                 <div className='w-[82%] text-left'>
-                                    <p className='text-[18px] font-jost leading-[22px] font-medium text-title80 2xl:text-titleDark 2xl:text-[25px] 2xl:leading-[30px] '>{item.title}</p>
+                                    <p className='text-[18px] font-jost leading-[22px] font-medium 2xl:text-titleDark 2xl:text-[25px] 2xl:leading-[30px] '>{item.title}</p>
                                 </div>
                                 <div>
                                     <IoIosArrowDown
