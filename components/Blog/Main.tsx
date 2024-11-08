@@ -1,6 +1,7 @@
 import {FC} from 'react';
 import BannerBlog from './Banner'
 import NewBlogs from './NewBlogs'
+import CotegoryBlog from './Cotegory'
 
 
 const MainBlog: FC = () => {
@@ -8,6 +9,7 @@ const MainBlog: FC = () => {
     <div>
       <BannerBlog />
       <NewBlogs />
+      <CotegoryBlog/>
     </div>
   );
 };
