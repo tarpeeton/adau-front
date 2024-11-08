@@ -3,6 +3,7 @@ import BannerBlog from './Banner'
 import NewBlogs from './NewBlogs'
 import CotegoryBlog from './Cotegory'
 import SavedBlogs from './Save'
+import BlogAcrions from './BlogActions'
 
 
 const MainBlog: FC = () => {
@@ -12,6 +13,7 @@ const MainBlog: FC = () => {
       <NewBlogs />
       <CotegoryBlog/>
       <SavedBlogs />
+      <BlogAcrions />
     </div>
   );
 };
