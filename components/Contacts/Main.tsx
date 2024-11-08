@@ -1,6 +1,8 @@
 import {FC} from 'react';
 import Banner from './Banner'
 import ContactInfo from './ContactInfo'
+import Map from './Map'
+import Socials from './Social'
 
 
 const MainContacts: FC = () => {
@@ -8,6 +10,8 @@ const MainContacts: FC = () => {
     <div>
         <Banner />
         <ContactInfo />
+        <Map />
+        <Socials />
     </div>
   );
 };
