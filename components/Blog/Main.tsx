@@ -4,6 +4,7 @@ import NewBlogs from './NewBlogs'
 import CotegoryBlog from './Cotegory'
 import SavedBlogs from './Save'
 import BlogAcrions from './BlogActions'
+import ExpertOpinions from './ExpertOpinions'
 
 
 const MainBlog: FC = () => {
@@ -14,6 +15,7 @@ const MainBlog: FC = () => {
       <CotegoryBlog/>
       <SavedBlogs />
       <BlogAcrions />
+      <ExpertOpinions />
     </div>
   );
 };

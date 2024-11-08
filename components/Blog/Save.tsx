@@ -40,7 +40,7 @@ const SavedBlogs: FC = () => {
 
 
     return (
-        <div className="mt-[80px] 2xl:mt-[200px] py-[40px] 2xl:py-[100px] px-[20px] 4xl:pl-[240px] 2xl:px-[50px] bg-[#F7F8FA]">
+        <div className="mt-[80px] 2xl:mt-[200px] py-[40px] 2xl:py-[100px] px-[20px] 4xl:pl-[240px] 2xl:px-[50px]">
             <p className="text-[26px] uppercase text-[#222E51] flex flex-row items-center gap-[10px] font-jost leading-[32px] 2xl:text-[45px] 2xl:leading-[59px] mb-[20px] 2xl:mb-[30px]">
              <FaHeart /> Избранные статьи
             </p>
