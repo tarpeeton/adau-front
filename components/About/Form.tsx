@@ -190,7 +190,7 @@ const SomeForm: FC = () => {
                     </div>
                     <button
                         onClick={sendDataForm}
-                        className='bg-white py-[15px] px-[20px] text-[15px] font-medium font-jost mt-[30px] text-[#222E51] flex justify-center items-center 2xl:w-[60%]'
+                        className='bg-white py-[15px] px-[20px] text-[15px] font-medium font-jost mt-[30px] text-[#222E51] flex justify-center items-center 2xl:w-[40%] 2xl:ml-[-140px] '
                         disabled={loadingDataPost} // Disable button while loading
                     >
                         {loadingDataPost ? (
