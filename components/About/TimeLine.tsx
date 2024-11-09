@@ -25,6 +25,8 @@ const Timeline: React.FC = () => {
                 }
                 const textElements = card.querySelectorAll('p')
                 textElements.forEach((text) => gsap.set(text, { color: '#FFFFFF', opacity: '50%' }))
+                gsap.set(progressBarRef.current, { width: `400px`, duration: 0.2 })
+
             })
 
             // Calculate the scroll width needed for the animation
@@ -115,8 +117,8 @@ const Timeline: React.FC = () => {
                         })
 
                         // Update the progress bar width based on the active card
-                        const progressWidth = ((closestCardIndex) / topCardsRef.current.length) * 45
-                        gsap.to(progressBarRef.current, { width: `${progressWidth}%`, duration: 0.3 })
+                        const progressWidth = ((closestCardIndex) / topCardsRef.current.length) * 90
+                        gsap.to(progressBarRef.current, { width: `800px`, duration: 0.2 })
                     },
                 },
             })
@@ -130,12 +132,12 @@ const Timeline: React.FC = () => {
 
 
     return (
-        <div ref={containerRef} className="overflow-hidden bg-[#222E51] py-[40px] px-[16px] 2xl:py-[100px] 2xl:pl-[50px] 4xl:px-[200px]">
+        <div ref={containerRef} className="overflow-hidden  bg-[#222E51] py-[40px] px-[16px] 2xl:py-[100px] 2xl:pl-[50px] 4xl:px-[200px]">
             <p className="text-[26px] leading-[32px] 2xl:text-[45px] 2xl:leading-[59px] text-white font-jost">
                 НАШ ПУТЬ И ПЛАНЫ НА БУДУЩЕЕ
             </p>
             <div >
-                <div className="topCARD Sw-full flex flex-row flex-nowrap gap-[300px] mt-[40px] ">
+                <div className="topCARD Sw-full flex flex-row flex-nowrap gap-[400px] mt-[40px] ">
                     {[...Array(8)].map((_, index) => (
                         <div
                             key={`top-${index}`}
@@ -169,7 +171,7 @@ const Timeline: React.FC = () => {
                     <div ref={progressBarRef} className="h-full bg-white w-[200px]" />
                 </div>
 
-                <div className="bottomCARDS w-full flex flex-row gap-[320px] mt-[20px] ml-[200px] flex-nowrap">
+                <div className="bottomCARDS w-full flex flex-row gap-[400px] mt-[20px] ml-[400px] flex-nowrap">
                     {[...Array(8)].map((_, index) => (
                         <div
                             key={`bottom-${index}`}
