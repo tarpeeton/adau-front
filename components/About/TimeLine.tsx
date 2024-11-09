@@ -25,7 +25,7 @@ const Timeline: React.FC = () => {
                 }
                 const textElements = card.querySelectorAll('p')
                 textElements.forEach((text) => gsap.set(text, { color: '#FFFFFF', opacity: '50%' }))
-                gsap.set(progressBarRef.current, { width: `400px`, duration: 0.2 })
+                gsap.set(progressBarRef.current, { width: `400px` })
 
             })
 
@@ -44,7 +44,7 @@ const Timeline: React.FC = () => {
                     pin: true,
                     onUpdate: (self) => {
                         // Calculate the center of the viewport
-                        const viewportCenter = window.innerWidth / 6
+                        const viewportCenter = window.innerWidth / 4
                         let closestCardIndex = 0
                         let minDistance = Infinity
 
@@ -117,7 +117,6 @@ const Timeline: React.FC = () => {
                         })
 
                         // Update the progress bar width based on the active card
-                        const progressWidth = ((closestCardIndex) / topCardsRef.current.length) * 90
                         gsap.to(progressBarRef.current, { width: `800px`, duration: 0.2 })
                     },
                 },
