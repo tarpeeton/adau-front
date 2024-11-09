@@ -2,6 +2,8 @@
 import { FC, useState, useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import Image from 'next/image'
+import Link from 'next/link'
+
 // ICONS
 import { FaChevronDown } from "react-icons/fa6"
 import { MdArchitecture } from "react-icons/md"
@@ -115,32 +117,35 @@ const PopularBlogs: FC = () => {
         : BlogData.filter(item => item.category === activeFilter)
 
 
-        // Tanlangandan Keyin OChirsh
-        const handleMobileFilterSelect = (cotegory: string) => {
-            setActiveFilter(cotegory)
-            setMobileActiveFilter(false)
+    // Tanlangandan Keyin OChirsh
+    const handleMobileFilterSelect = (cotegory: string) => {
+        setActiveFilter(cotegory)
+        setMobileActiveFilter(false)
+    }
+
+
+
+    const [sliceNumber, setSliceNumber] = useState(6);
+
+    const handleAddMore = () => {
+        if (sliceNumber < filteredBlogData.length) {
+            setSliceNumber(sliceNumber + 6);
         }
+    };
 
-        const [sliceNumber, setSliceNumber] = useState(3);
+    const handleShowLess = () => {
+        setSliceNumber(6);
+    };
 
-        const handleAddMore = () => {
-            if (sliceNumber < filteredBlogData.length) {
-                setSliceNumber(sliceNumber + 3);
-            }
-        };
-    
-        const handleShowLess = () => {
-            setSliceNumber(6);
-        };
 
 
     return (
         <div className='mt-[80px] 2xl:mt-[200px]  px-[20px] 4xl:px-[240px] 2xl:px-[50px]'>
             <p className="text-[26px]  uppercase font-jost leading-[32px] 2xl:text-[45px] 2xl:leading-[59px]  ">
-            Популярные статьи
+                Популярные статьи
             </p>
 
-            <div className='hidden 2xl:flex flex-row   mt-[40px]'>
+            <div className='hidden 2xl:flex flex-row  mt-[40px]'>
                 {Cotegory.map((item, index) => (
                     <button
                         onClick={() => setActiveFilter(item.cotegory)}
@@ -186,12 +191,12 @@ const PopularBlogs: FC = () => {
 
             <div ref={blogContainerRef} className='mt-[20px] 2xl:mt-[41px] flex flex-col gap-[30px] 2xl:flex-row 2xl:flex-wrap 2xl:gap-[20px]'>
                 {filteredBlogData.slice(0, sliceNumber).map((item, index) => (
-                    <div  key={index} className='2xl:w-[349px]'>
-                         <Image src={item.url} width={345} height={345} quality={100} alt='blogIMage' className=' w-full object-cover h-[220px] 2xl:w-full md:h-[280px]' />
+                    <div key={index} className='2xl:w-[335px]'>
+                        <Image src={item.url} width={345} height={345} quality={100} alt='blogIMage' className=' w-full object-cover h-[220px] 2xl:w-full md:h-[280px]' />
                         <div className='mt-[20px] 2xl:mt-[25px]'>
                             <p className='text-[14px] text-[#A0A0A0] 2xl:text-[17px]'>{item.date}</p>
                             <div className='2xl:h-[120px]'>
-                                <p className='text-[20px] mt-[5px] font-medium font-jost text-titleDark 2xl:text-[25px] leading-[25px] 2xl:leading-[30px]'>{item.title.length > 72 ? item.title.slice(0, 72) + "..." : item.title}</p>
+                                <p className='text-[20px] mt-[5px] font-medium font-jost text-titleDark 2xl:text-[23px] 4xl:text-[25px] leading-[25px] 2xl:leading-[30px]'>{item.title.length > 72 ? item.title.slice(0, 72) + "..." : item.title}</p>
                             </div>
 
                             <p className='text-[16px] mt-[8px] font-medium text-[#222E51] font-jost 2xl:text-[20px] flex flex-row items-center'>
@@ -204,12 +209,12 @@ const PopularBlogs: FC = () => {
 
             </div>
             <div className='w-full items-center flex justify-center mt-[30px]'>
-                {filteredBlogData.length > 3 && sliceNumber < filteredBlogData.length ? (
+                {filteredBlogData.length > 6 && sliceNumber < filteredBlogData.length ? (
                     <button onClick={handleAddMore} className='buttonBlue w-[60%] 2xl:w-[15%]'>
                         Загрузить еще
                     </button>
                 ) : (
-                    sliceNumber > 3 && (
+                    sliceNumber > 6 && (
                         <button onClick={handleShowLess} className='buttonBlue w-[60%] 2xl:w-[15%]'>
                             Скрыть
                         </button>
@@ -221,3 +226,5 @@ const PopularBlogs: FC = () => {
 }
 
 export default PopularBlogs
+
+
