@@ -135,7 +135,7 @@ const Timeline: React.FC = () => {
                 НАШ ПУТЬ И ПЛАНЫ НА БУДУЩЕЕ
             </p>
             <div >
-                <div className="topCARD Sw-full flex flex-row flex-nowrap gap-[120px] mt-[40px] ">
+                <div className="topCARD Sw-full flex flex-row flex-nowrap gap-[300px] mt-[40px] ">
                     {[...Array(8)].map((_, index) => (
                         <div
                             key={`top-${index}`}
@@ -169,7 +169,7 @@ const Timeline: React.FC = () => {
                     <div ref={progressBarRef} className="h-full bg-white w-[200px]" />
                 </div>
 
-                <div className="bottomCARDS w-full flex flex-row gap-[120px] mt-[20px] ml-[200px] flex-nowrap">
+                <div className="bottomCARDS w-full flex flex-row gap-[320px] mt-[20px] ml-[200px] flex-nowrap">
                     {[...Array(8)].map((_, index) => (
                         <div
                             key={`bottom-${index}`}
