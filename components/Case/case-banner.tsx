@@ -14,8 +14,6 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
-import { GrLinkNext } from "react-icons/gr"
-import { GrLinkPrevious } from "react-icons/gr"
 
 
 // image
