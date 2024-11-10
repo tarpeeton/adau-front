@@ -92,6 +92,18 @@
 
 
 
+li.custom-marker {
+  position: relative;
+  padding-left: 25px; /* отступ для маркера */
+}
+
+li.custom-marker::before {
+  content: '✔'; /* символ галочки */
+  position: absolute;
+  left: 0;
+  color: #222E51; /* цвет галочки */
+  font-size: 16px; /* размер символа */
+}
 
 
 
