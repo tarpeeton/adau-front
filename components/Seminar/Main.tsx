@@ -21,7 +21,7 @@ const MainSeminar: FC = () => {
         <WhyInvite />
         <AddSeminarForm />
         <Speakers />
-        <UserTestimonials />
+        <UserTestimonials  isShow={true}/>
         <FaqComponent />
         <SeminarForm />
         <Partners active={true} />

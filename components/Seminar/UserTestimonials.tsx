@@ -21,17 +21,20 @@ const Data = [
     { id: '2', name: "Rustam Rinatovich", date: '29.10.2024', comment: 'Lorem ipsum dolor sit amet consectetur. Ullamcorper suspendisse mi id pretium suspendisse lorem facilisi libero. Amet sed ultrices ornare dignissim. Tincidunt amet sit semper luctus turpis lobortis molestie metus. Id in et senectus sodales.' },
 ]
 
+interface IUserTestimonials {
+    isShow: boolean
+}
 
 
 
-const UserTestimonials: FC = () => {
+const UserTestimonials: FC<IUserTestimonials> = ({ isShow }) => {
     const { swiperRef, handlePrev, handleNext } = useSwiperNavigation()
 
     return (
         <div>
             <div className="mt-[80px] 2xl:mt-[200px] py-[40px] 2xl:py-[100px] px-[20px] 4xl:pl-[240px] 2xl:px-[50px] bg-[#F7F8FA]">
                 <p className="text-[26px] uppercase font-jost leading-[32px] 2xl:text-[45px] 2xl:leading-[59px] mb-[20px] 2xl:mb-[30px]">
-                Отзывы участников
+                    Отзывы участников
                 </p>
                 <div className="mt-[20px] mdl:mt-[30px] 2xl:mt-[40px]">
 
@@ -40,13 +43,13 @@ const UserTestimonials: FC = () => {
                             onSwiper={(swiper) => (swiperRef.current = swiper)}
                             spaceBetween={10}
                             slidesPerView={1.1}
-                            speed={920}
-                            autoplay={{ delay: 2000, disableOnInteraction: false }}
+                            speed={750}
+                            autoplay={{ delay: 1000, disableOnInteraction: false }}
                             loop={false}
                             breakpoints={{
                                 1000: {
                                     slidesPerView: 3.2,
-                                    spaceBetween: 30, // Adjust spacing between slides as needed for larger screens
+                                    spaceBetween: 20, // Adjust spacing between slides as needed for larger screens
                                 },
                             }}
                         >
@@ -82,21 +85,23 @@ const UserTestimonials: FC = () => {
                         </Swiper>
                     </div>
 
-                    <div className='flex flex-row gap-[10px] mt-[20px] 2xl:mt-[50px] w-full justify-between'>
-                        <div className='hidden 2xl:block'>
+                    <div className={`flex flex-row gap-[10px] mt-[20px] 2xl:mt-[50px] w-full ${isShow ? 'justify-between' : 'justify-end'}`}>
+                        {isShow && (<div className='hidden 2xl:block'>
                             <button className='buttonBlue'>
                                 Больше отзывов
                             </button>
-                        </div>
+                        </div>)}
+
+
                         <div className='flex flex-row gap-[10px]'>
-                        <button onClick={handlePrev} className='flex items-center justify-center rounded-full w-[60px] 2xl:w-[70px] 2xl:h-[70px] h-[60px]  4xl:w-[90px] 4xl:h-[90px] border border-[#222E51] backdrop-blur-[15px] bg-inherit'>
-                            <GrLinkPrevious className='w-[30px] h-[30px] text-[#222E51]' />
-                        </button>
-                        <button onClick={handleNext} className='flex items-center justify-center rounded-full w-[60px] 2xl:w-[70px] 2xl:h-[70px] h-[60px]  4xl:w-[90px] 4xl:h-[90px]  border border-[#222E51] backdrop-blur-[15px] bg-inherit'>
-                            <GrLinkNext className='w-[30px] h-[30px]  text-[#222E51]' />
-                        </button>
+                            <button onClick={handlePrev} className='flex items-center justify-center rounded-full w-[60px] 2xl:w-[70px] 2xl:h-[70px] h-[60px]  4xl:w-[90px] 4xl:h-[90px] border border-[#222E51] backdrop-blur-[15px] bg-inherit'>
+                                <GrLinkPrevious className='w-[30px] h-[30px] text-[#222E51]' />
+                            </button>
+                            <button onClick={handleNext} className='flex items-center justify-center rounded-full w-[60px] 2xl:w-[70px] 2xl:h-[70px] h-[60px]  4xl:w-[90px] 4xl:h-[90px]  border border-[#222E51] backdrop-blur-[15px] bg-inherit'>
+                                <GrLinkNext className='w-[30px] h-[30px]  text-[#222E51]' />
+                            </button>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
