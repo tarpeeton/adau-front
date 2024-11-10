@@ -12,14 +12,14 @@ export const MobileTimeLineData = [
       description: 'Consectetur ultrices volutpat posuere pharetra tempor massa habе.',
     },
     {
-      id: '24',
+      id: '3',
       year: '3',
       title: 'Проведение семинара',
       description: 'Consectetur ultrices volutpat posuere pharetra tempor massa habе.',
     },
     {
       id: '4',
-      year: '3',
+      year: '4',
       title: 'Проведение семинара',
       description: 'Consectetur ultrices volutpat posuere pharetra tempor massa habе.',
     },

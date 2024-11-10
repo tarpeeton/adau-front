@@ -3,10 +3,11 @@ import BannerBlog from './Banner'
 import NewBlogs from './NewBlogs'
 import CotegoryBlog from './Cotegory'
 import SavedBlogs from './Save'
-import BlogAcrions from './BlogActions'
+import BlogActions from './BlogActions'
 import ExpertOpinions from './ExpertOpinions'
 import VideoAndMedia from './VideoMedia'
 import PopularBlogs from './Popular'
+import FollowToBlog from './Follow'
 
 
 const MainBlog: FC = () => {
@@ -16,10 +17,11 @@ const MainBlog: FC = () => {
       <NewBlogs />
       <CotegoryBlog/>
       <SavedBlogs />
-      <BlogAcrions />
+      <BlogActions />
       <ExpertOpinions />
       <VideoAndMedia />
       <PopularBlogs />
+      <FollowToBlog />
     </div>
   );
 };

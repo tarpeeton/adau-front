@@ -12,7 +12,7 @@ import Link from 'next/link'
 
 
 
-const BlogAcrions: FC = () => {
+const BlogActions: FC = () => {
   return (
     <div className='mt-[80px] 2xl:mt-[200px]'>
         <div className=' bg-[#222E51] py-[40px] px-[16px] 2xl:py-[100px] 2xl:px-[50px]  4xl:px-[240px] flex flex-col 2xl:flex-row'>
@@ -42,4 +42,4 @@ const BlogAcrions: FC = () => {
   );
 };
 
-export default BlogAcrions;
+export default BlogActions;
