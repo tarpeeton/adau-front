@@ -1,8 +1,8 @@
-import About from '@/components/About/Main';
+import CaseMain from '@/components/Case/Main';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Case', 
+  title: 'Case item', 
   description: '',
   keywords: '', 
 };
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function Index() {
   return (
     <div>
-      <About />
+      <CaseMain />
     </div>
   );
 }

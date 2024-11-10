@@ -8,7 +8,6 @@ import Image from 'next/image'
 import A from '@/public/form/a.png'
 import D from '@/public/form/d.png'
 import U from '@/public/form/u.png'
-import Link from 'next/link'
 
 
 
@@ -16,7 +15,24 @@ import Link from 'next/link'
 const FollowToBlog: FC = () => {
     const [email, setEmail] = useState('')
 
+    const handleSubscribe = () => {
+        if (email) {
+            localStorage.setItem('subscribedEmail', email);
+            alert('Вы успешно подписались! Теперь вы будете получать уведомления о новых блогах.');
+            setEmail('');
+        } else {
+            alert('Пожалуйста, введите ваш e-mail.');
+        }
+    }
 
+    // Function to check for new blog posts (this should be replaced with actual blog detection logic)
+    const checkForNewBlogs = () => {
+        const storedEmail = localStorage.getItem('subscribedEmail');
+        if (storedEmail) {
+            // Simulate a new blog notification
+            console.log(`Уведомление: На вашем устройстве обнаружена новая статья.`);
+        }
+    }
 
 
     return (
@@ -48,7 +64,7 @@ const FollowToBlog: FC = () => {
 
                     </div>
                     <div className='2xl:mt-[20px] mt-[15px] 2xl:w-[60%] w-full'>
-                        <button className='buttonWhite w-[50%]'>
+                        <button onClick={handleSubscribe} className='buttonWhite w-[50%]'>
                             Подписаться
                         </button>
                     </div>
