@@ -1,6 +1,7 @@
 import {FC} from 'react';
 import SomeBlog from './some-blog'
 import BlogShare from './blog-share'
+import BlogComments from './blog-comments'
 
 
 const BlogItemMain: FC = () => {
@@ -8,6 +9,7 @@ const BlogItemMain: FC = () => {
     <div>
         <SomeBlog />
         <BlogShare />
+        <BlogComments />
     </div>
   );
 };
