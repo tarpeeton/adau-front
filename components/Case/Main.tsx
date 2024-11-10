@@ -2,6 +2,7 @@
 import {FC} from 'react';
 import CaseBaner from './Banner'
 import AboutCase from './CaseAbout'
+import CaseResult from './case-result'
 
 
 const CaseMain: FC = () => {
@@ -9,6 +10,7 @@ const CaseMain: FC = () => {
     <div>
         <CaseBaner />
         <AboutCase />
+        <CaseResult />
     </div>
   );
 };

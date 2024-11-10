@@ -12,7 +12,13 @@
   box-sizing: border-box;
 }
 
+* {
+  font-family: 'Jost';
+}
 
+body {
+  font-family: 'Jost';
+}
 
 
 
