@@ -68,22 +68,29 @@ const Map: FC = () => {
     }, [mapLoaded, mapInstance])
     return (
         <div className='px-[16px] 2xl:px-[50px] 4xl:px-[240px] mt-[80px] 2xl:mt-[200px]'>
-            <div className='flex flex-col 2xl:flex-row justify-between items-center'>
+            <div className='flex flex-col 2xl:flex-row justify-between 2xl:items-center'>
                 <p className='text-[24px] 2xl:text-[45px] text-titleDark font-jost uppercase'>
                     Найдите нас на карте
                 </p>
-                <Link href='https://www.google.com/maps?q=41.351469,69.289004' className='buttonBlue' target='_blank' rel='noopener noreferrer'>
-                    Открыть в Google Maps
-                </Link>
-
+                <div className='hidden mdl:block' >
+                    <Link href='https://www.google.com/maps?q=41.351469,69.289004' className='buttonBlue ' target='_blank' rel='noopener noreferrer'>
+                        Открыть в Google Maps
+                    </Link>
+                </div>
             </div>
-            <div className='mt-[30px]'>
+            <div className='mt-[30px] w-full'>
                 <div className=" mt-[20px] overflow-hidden w-full mdl:mt-[40px]">
-                    <div className='h-[300px] mdl:h-[400px] 2xl:h-[500px]'>
+                    <div className='h-[250px] mdl:h-[400px] 2xl:h-[500px] w-full'>
                         <div id="map" className="w-full h-full" />
                     </div>
                 </div>
             </div>
+            <div className='block mdl:hidden w-[60%]'>
+                <Link href='https://www.google.com/maps?q=41.351469,69.289004' className='buttonBlue mt-[20px] ' target='_blank' rel='noopener noreferrer'>
+                    Открыть в Google Maps
+                </Link>
+            </div>
+
         </div>
     )
 }
