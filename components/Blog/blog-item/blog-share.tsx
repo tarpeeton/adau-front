@@ -36,16 +36,16 @@ const BlogShare: FC = () => {
                         Будьте в курсе трендов архитектуры и делитесь новостью с коллегами
                     </p>
                     <div className='flex flex-row flex-nowrap justify-between mt-[25px] 2xl:w-[60%] 2xl:mt-[50px]'>
-                        <button onClick={handleCopyLink} className='buttonWhite w-[45%]'>Копировать ссылку</button>
-                        <div className='w-[50%] flex flex-row gap-[8px] items-center'>
-                            <Link href={`https://www.instagram.com/share?url=${encodeURIComponent(window.location.href)}`} target="_blank" className='2xl:h-[55px] 2xl:w-[55px] flex items-center justify-center border border-white border-opacity-[50%]'>
-                                <FaInstagram className='2xl:w-[35px] 2xl:h-[35px] text-white' />
+                        <button onClick={handleCopyLink} className='buttonWhite w-[50%] 2xl:w-[45%]'>Копировать ссылку</button>
+                        <div className='w-[48%] 2xl:w-[52%] flex flex-row gap-[4px] items-center'>
+                            <Link href={`https://www.instagram.com/share?url=${encodeURIComponent(window.location.href)}`} target="_blank" className='w-[50px] h-[50px] 2xl:h-[55px] 2xl:w-[55px] flex items-center justify-center border border-white border-opacity-[50%]'>
+                                <FaInstagram className='w-[30px] h-[30px] 2xl:w-[35px] 2xl:h-[35px] text-white' />
                             </Link>
-                            <Link href={`https://t.me/share/url?url=${encodeURIComponent(window.location.href)}`} target="_blank" className='2xl:h-[55px] 2xl:w-[55px] flex items-center justify-center border border-white border-opacity-[50%]'>
-                                <FaTelegramPlane className='2xl:w-[35px] 2xl:h-[35px] text-white' />
+                            <Link href={`https://t.me/share/url?url=${encodeURIComponent(window.location.href)}`} target="_blank" className='w-[50px] h-[50px] 2xl:h-[55px] 2xl:w-[55px] flex items-center justify-center border border-white border-opacity-[50%]'>
+                                <FaTelegramPlane className='w-[30px] h-[30px] 2xl:w-[35px] 2xl:h-[35px] text-white' />
                             </Link>
-                            <Link href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`} target="_blank" className='2xl:h-[55px] 2xl:w-[55px] flex items-center justify-center border border-white border-opacity-[50%]'>
-                                <FaFacebookF className='2xl:w-[35px] 2xl:h-[35px] text-white' />
+                            <Link href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`} target="_blank" className='w-[50px] h-[50px] 2xl:h-[55px] 2xl:w-[55px] flex items-center justify-center border border-white border-opacity-[50%]'>
+                                <FaFacebookF className='w-[30px] h-[30px] 2xl:w-[35px] 2xl:h-[35px] text-white' />
                             </Link>
                         </div>
                     </div>
