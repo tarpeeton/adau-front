@@ -7,16 +7,18 @@ import Link from 'next/link'
 import handleshake from '@/public/handeshake.png'
 import { FiPlus } from "react-icons/fi"
 import { IoIosArrowDown } from "react-icons/io"
-
-
+import ContactUs from '../Modal/contacts-modal'
+import QuestionModal from '../Modal/question-modal'
 
 const Header: FC = () => {
     const [openMenu, setIsOpen] = useState(false)
+    const [visible , setVisible] = useState(false)
+    const [question , setQuestion] = useState(false)
+
 
     const handleClickMenu = () => setIsOpen(!openMenu)
-
-
-
+    const handleContacsSwitcher = () => setVisible(!visible)
+    const handleQuestionSwitcher = () => setQuestion(!question)
 
 
     return (
@@ -41,20 +43,23 @@ const Header: FC = () => {
                 </Link>
 
             </div>
+            
+            <ContactUs visible={visible} close={handleContacsSwitcher} />
+            <QuestionModal visible={question} close={handleQuestionSwitcher} />
 
             {/* Hamberger */}
             <button onClick={handleClickMenu} className='flex items-center text-blue100 mdl:hidden'>
                 <RxHamburgerMenu size={35} />
             </button>
             <div className='hidden mdl:flex buttons  items-center gap-[15px] ml-[100px] '>
-                <Link href='nn' className='borderedButton'>
+                <div onClick={handleContacsSwitcher} className='borderedButton cursor-pointer'>
                     Стать партнером
                     <Image src={handleshake} width={21} height={15} quality={100} alt='Handle SHake' className=' object-contain w-[21px] h-[15px] mt-[3px]' />
-                </Link>
-                <Link href='ggg' className='buttonBlue'>
+                </div>
+                <button onClick={handleQuestionSwitcher}  className='buttonBlue'>
                     Вступить в ассоциацию
                     <FiPlus size={19} className='mt-[3px]' />
-                </Link>
+                </button>
             </div>
         </div>
     )
