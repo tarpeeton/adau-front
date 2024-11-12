@@ -27,7 +27,7 @@ const SomeBlog: FC = () => {
 
     return (
         <div className='2xl:px-[200px] px-[16px] 2xl:mt-[25px]'>
-            <div className='flex felx-row items-center mt-[15px] text-[16px] 2xl:text-[20px] text-[#222E51] font-medium font-jost'>
+            <div className='flex flex-row items-center mt-[15px] text-[16px] 2xl:text-[20px] text-[#222E51] font-medium font-jost'>
                 <GrFormPreviousLink className='2xl:w-[30px] w-[25px]  h-[25px] 2xl:h-[30px]' />
                 <Link href='cases'>
                     Назад

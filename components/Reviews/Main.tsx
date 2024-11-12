@@ -194,7 +194,7 @@ const MainReviews: FC = () => {
                             <div className='mt-[10px]'>
                                 <button onClick={() => handleOpenModal(item.name, item.date, item.text)} className='text-[16px] group all ease-in-out flex flex-row flex-nowrap items-center 2xl:text-[20px]  font-medium font-jost text-[#222E51]'>
                                     Читать полностью
-                                    <GrLinkNext className='ml-[4px] ease-in-out duration-300 group-hover:ml-[10px] 2ml-[8px] w-[20px] h-[20px]  2xl:w-[20px] 2xl:h-[20px]' />
+                                    <GrLinkNext className='ml-[4px] ease-in-out duration-300 group-hover:ml-[10px] 2ml-[8px] w-[17px] h-[17px]  2xl:w-[20px] 2xl:h-[20px]' />
                                 </button>
                             </div>
                         </div>
