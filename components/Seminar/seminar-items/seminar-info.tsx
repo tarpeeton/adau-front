@@ -71,19 +71,19 @@ const InfoPrice: FC = () => {
         >
           {dataPrice.map((item, index) => (
             <SwiperSlide key={index}>
-              <div className='p-[20px] 2xl:px-[25px] border border-[#E4E4E4] min-h-[440px] flex flex-col justify-between'>
+              <div className='p-[20px] 2xl:px-[25px] border border-[#E4E4E4] min-h-[440px] 2xl:min-h-[500px] flex flex-col justify-between cursor-pointer'>
                 <div>
                   <div className='pb-[20px] border-b border-b-[#E4E4E4]'>
-                    <p className='text-[22px] 2xl:text-[]'>{item.status}</p>
+                    <p className='text-[22px] 2xl:text-[30px]'>{item.status}</p>
                   </div>
-                  <div className='mt-[20px] 2xl:mt-[] flex flex-col gap-[12px]'>
+                  <div className='mt-[20px] 2xl:mt-[30px] flex flex-col gap-[12px] 2xl:gap-[20px]'>
                     {item.options.map((option) => (
-                      <div key={option.id} className='flex flex-row items-center gap-[8px]'>
-                        <div className='w-[20px] h-[20px]'>
-                        <MdCheck className='text-[#222E51] w-full h-full' />
+                      <div key={option.id} className='flex flex-row  gap-[8px]  '>
+                        <div className='w-[20px] h-[20px] 2xl:w-[25px] 2xl:h-[25px]'>
+                        <MdCheck className='text-[#222E51] w-full h-full font-medium' />
 
                           </div>
-                        <p className='w-[95%] text-[15px] leading-[18px]'>
+                        <p className='w-[95%] text-[15px] leading-[18px] 2xl:text-[20px]'>
                           {option.item}
 
                         </p>
@@ -93,8 +93,8 @@ const InfoPrice: FC = () => {
                   </div>
                 </div>
                 <div>
-                  <p className='text-[22px] 2xl:text-[] text-[#222E51]'>{item.price} сум</p>
-                  <div className='mt-[10px] 2xl:mt-[] w-full'>
+                  <p className='text-[22px] 2xl:text-[30px] text-[#222E51]'>{item.price} сум</p>
+                  <div className='mt-[10px] 2xl:mt-[20px] w-full'>
                       <button className='buttonBlue w-full'>
                       Записаться
                       </button>
