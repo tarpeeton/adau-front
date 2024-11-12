@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { GrFormPreviousLink } from "react-icons/gr"
@@ -8,7 +8,16 @@ import { CiLocationOn } from "react-icons/ci"
 // image
 import ImageSeminar from '@/public/oldSeminar/seimnarOLD.jpg'
 
-const SeminarBanner: FC = () => {
+
+interface ISeminarBanner {
+  status: boolean;
+  onButtonClick: () => void; // Prop type for button click handler
+}
+
+
+const SeminarBanner: FC<ISeminarBanner> = ({status , onButtonClick}) => {
+
+
   return (
     <div className='2xl:px-[50px] px-[16px] 2xl:mt-[25px] 4xl:px-[240px]'>
       <div className='flex flex-row items-center mt-[15px] text-[16px] 2xl:text-[20px] text-[#222E51] font-medium font-jost'>
@@ -26,7 +35,11 @@ const SeminarBanner: FC = () => {
             <p className='text-[26px] leading-[32px] uppercase  2xl:leading-[59px] 2xl:text-[45px] text-titleDark'>Архитектура будущего: инновации, устойчивость</p>
             <p className='text-[14px] 2xl:w-[80%] mt-[10px] left-[18px] 2xl:leading-[24px] 2xl:text-[20px] text-[#414141]'>Новые тенденции в архитектуре сосредоточены на использовании экологичных материалов, внедрении энергосберегающих технологий и создании пространств, способных адаптироваться к изменениям окружающей среды. Эти подходы формируют устойчивые и инновационные решения, которые определяют будущее городов и зданий</p>
             <div className='mt-[25px] 2xl:mt-[30px] w-full 2xl:w-[15%]'>
-              <button className='buttonBlue w-full'>Записаться</button>
+              {status ? (
+                <button className='buttonBlue w-full'>Записаться</button>
+              ) : (
+                <button onClick={onButtonClick} className='buttonBlue w-full'>Посмотреть запись</button>
+              )}
             </div>
           </div>
           <div className='order-[3] 2xl:order-1 border-t border-t-[#E4E4E4] mt-[25px] 2xl:mt-[30px] pt-[25px] 2xl:pt-[30px]'>
