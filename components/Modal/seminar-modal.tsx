@@ -8,7 +8,6 @@ import axios from 'axios'
 
 // icons
 import { IoIosArrowDown } from "react-icons/io"
-import { FiPlus } from "react-icons/fi"
 import { Triangle } from 'react-loader-spinner'
 
 
@@ -21,11 +20,9 @@ interface IReviewFull {
 
 
 const SeminarModal: FC<IReviewFull> = ({ visible, close }) => {
-    const fileInputRef = useRef<HTMLInputElement | null>(null)
     const [openSelect, setOpenSelect] = useState(false)
     const [selectedMessageType, setSelectMessageType] = useState('Мероприятие')
     const [fileName, setFileName] = useState<string | null>(null)
-    const [isLoading, setIsLoading] = useState(false)
     const [loadingDataPost, setLoadingDataPost] = useState(false)
 
     const [formData, setFormData] = useState({
@@ -55,14 +52,8 @@ const SeminarModal: FC<IReviewFull> = ({ visible, close }) => {
         input.onchange = (e: Event) => {
             const target = e.target as HTMLInputElement
             if (target.files && target.files.length > 0) {
-                setIsLoading(true)
                 setFileName(target.files[0].name)
                 console.log(target.files[0])
-
-                // Simulate an upload process for demonstration
-                setTimeout(() => {
-                    setIsLoading(false)
-                }, 2000)
             }
         }
         document.body.appendChild(input)

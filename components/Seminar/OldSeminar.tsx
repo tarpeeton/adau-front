@@ -184,7 +184,7 @@ const OldSeminar: FC = () => {
                             </div>
                             {/* button for info */}
                             <div className='mt-[25px] flex flex-row gap-[11px] w-full 2xl:mt-[30px]'>
-                                <Link className=' buttonBlue w-[48%] flex items-center justify-center' href={`/seminar/${item.slug}`}>Посмотреть запись</Link>
+                                <Link className=' buttonBlue 2xl:w-[48%] flex items-center justify-center' href={`/seminar/${item.slug}`}>Посмотреть запись</Link>
                             </div>
                         </div>
                             </div>
