@@ -21,8 +21,15 @@ body {
 }
 
 
+.ant-modal-content {
+  border-radius: 0 !important;
+  box-shadow: none !important; 
 
+}
+.ant-modal-root .ant-modal-mask {
+  opacity: 40% !important;
 
+}
 
 
 .buttonBlue {
