@@ -24,9 +24,9 @@ const Header: FC = () => {
     return (
         <div className='px-[16px] py-[12px] 2xl:px-[50px] 4xl:px-[240px] flex justify-between border border-b-[#E4E4E4]'>
             {/* LOGO */}
-            <div>
+            <Link href='/'>
                 <Image src={Logo} width={132} height={63} quality={100} alt='Logo' className='' />
-            </div>
+            </Link>
             {/* LINKS */}
             <div className='hidden 2xl:flex  items-center gap-[55px] ml-[100px]'>
                 <Link href='/about' className='text-[20px] leading-[28.9px] text-titleDark flex items-center gap-[5px] hover:text-[#222E51] transition ease-in-out duration-300'>

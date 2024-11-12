@@ -25,9 +25,9 @@ const BlogActions: FC = () => {
                     <p className='mt-[10px] 2xl:mt-[20px] 2xl:w-[50%] text-[15px] leading-[18px] text-white opacity-[80%]'>
                     Подписывайтесь на наш блог, чтобы не пропустить новые статьи и тренды в дизайне и архитектуре
                     </p>
-                    <div className='flex flex-row flex-nowrap justify-between mt-[25px] 2xl:w-[55%] 2xl:mt-[50px]'>
-                        <button  className='buttonWhite w-[50%]'>Подписаться на блог</button>
-                        <Link href='tel:+998339394070' className='borderedButtonWhite w-[46%] flex items-center justify-center'>Связаться с редакцией</Link>
+                    <div className='flex flex-col 2xl:flex-row flex-nowrap justify-between mt-[25px] 2xl:w-[55%] 2xl:mt-[50px]'>
+                        <button  className='buttonWhite 2xl:w-[50%]'>Подписаться на блог</button>
+                        <Link href='tel:+998339394070' className='borderedButtonWhite 2xl:w-[46%] mt-[12px] 2xl:mt-0 flex items-center justify-center'>Связаться с редакцией</Link>
                     </div>
             </div>
             <div className='mt-[30px] flex items-center gap-[8px] justify-center 2xl:w-[40%] 2xl:items-end 2xl:mt-[220px] 2xl:ml-[-80px]'>

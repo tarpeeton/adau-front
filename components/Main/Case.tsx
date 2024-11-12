@@ -89,7 +89,7 @@ const Case: FC = () => {
                   {item.images.map((_, i) => (
                     <div
                       key={i}
-                      className={`w-[25px] h-[3px] ${i === activeIndex ? 'bg-white' : 'bg-inherit backdrop-blur-[15px]'}`}
+                      className={`w-[25px] h-[3px] ${i === activeIndex ? 'bg-white' : 'bg-white opacity-[50%]'}`}
                     ></div>
                   ))}
                 </div>
