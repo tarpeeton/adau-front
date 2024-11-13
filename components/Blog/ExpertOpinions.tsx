@@ -20,6 +20,8 @@ const ExpertOpinions: FC = () => {
     const handleShowLess = () => {
         setSliceNumber(9);
     };
+
+    
     return (
         <div className='mt-[80px] 2xl:mt-[200px] px-[16px] 2xl:px-[50px] 4xl:px-[240px]'>
             <p className='text-[24px] 2xl:text-[40px] text-titleDark uppercase font-jost'>
@@ -39,7 +41,6 @@ const ExpertOpinions: FC = () => {
                                     <GrLinkNext className='2xl:mt-[4px] w-[15px] h-[15px]' />
                                 </Link>
                             </div>
-
                             <div className='mt-[25px] border-t border-r-[#E4E4E4]'>
                                 <div className='flex flex-row gap-[10px] pt-[25px] items-center'>
                                     <div className='w-[40px] h-[40px] 2xl:w-[45px] 2xl:h-[45px] rounded-full  overflow-hidden '>
