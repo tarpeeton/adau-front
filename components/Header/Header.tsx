@@ -66,12 +66,12 @@ const Header: FC = () => {
 
 
             {openMenu && (
-        <div>
+        <div className='fixed top-0 right-0 w-[300px] z-[999]'>
           {/* Overlay */}
           <div className='fixed inset-0 bg-black opacity-50 z-[999998]' onClick={handleClickMenu} />
 
           <div ref={menuRef} className='bg-white absolute top-0 h-screen right-0 w-[80%] slg:w-[50%] 2xl:w-[40%] z-[99999999] '>
-            <div className='px-[20px] border-b border-[#E8E8E8]  '>
+            <div className='px-[20px] h-[87px] flex items-center justify-end border-b border-[#E8E8E8]  '>
               <div className='flex flex-row justify-end items-center h-[65px]'>
                 <button onClick={handleClickMenu}>
                   <IoMdClose size={30} className='text-black slg:w-[40px] slg:h-[40px]' />
@@ -80,8 +80,9 @@ const Header: FC = () => {
               </div>
             </div>
 
-            <div className='flex flex-col  mt-[20px] bg-white pb-[20px]'>
-            <Link href='/about' className='text-[20px] leading-[28.9px] text-titleDark flex items-center gap-[5px] hover:text-[#222E51] transition ease-in-out duration-300 p-[20px]'>
+            <div className='flex flex-col  mt-[20px] bg-white pb-[20px] '>
+              <div className='flex flex-col relative '>
+              <Link href='/about' className='text-[20px] leading-[28.9px] text-titleDark flex items-center gap-[5px] hover:text-[#222E51] transition ease-in-out duration-300 p-[20px]'>
                     О нас <IoIosArrowDown size={20} className='text-[#222E51] mt-[3px]' />
                 </Link>
                 <Link href='/about' className='text-[20px] leading-[28.9px] text-titleDark hover:text-[#222E51] transition ease-in-out duration-300 p-[20px]'>
@@ -93,8 +94,10 @@ const Header: FC = () => {
                 <Link href='/about' className='text-[20px] leading-[28.9px] text-titleDark hover:text-[#222E51] transition ease-in-out duration-300 p-[20px]'>
                     Семинары и тренинги
                 </Link>
+              </div>
+           
             
-            <div className='flex flex-col gap-[10px] px-[20px]'>
+            <div className='flex flex-col gap-[10px] px-[20px] absolute bottom-[20px]'>
             <div onClick={handleContacsSwitcher} className='borderedButton cursor-pointer text-center flex items-center justify-center'>
                     Стать партнером
                     <Image src={handleshake} width={21} height={15} quality={100} alt='Handle SHake' className=' object-contain w-[21px] h-[15px] mt-[3px]' />
