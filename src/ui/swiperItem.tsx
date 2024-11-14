@@ -1,29 +1,32 @@
 "use client"
-import { FC, useState, useEffect, useRef } from 'react'
+import { FC, useState, useRef } from 'react'
 import { GrLinkNext } from "react-icons/gr"
 import Link from 'next/link'
 import Image, { StaticImageData } from 'next/image'
+import { urlFor } from '@/sanity/lib/image'
 
 
 
 export interface ImageItem {
     url: StaticImageData
 }
-import { DataItem } from '@/components/Projects/Work'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 import { GrLinkPrevious } from "react-icons/gr"
 import { Swiper as SwiperCore } from 'swiper/types' // импортируем тип SwiperCore
+import { ICase } from '@/interface/ICase/case'
+import useLocale from '@/hooks/useLocale'
 
 
 interface SwiperItemProps {
-    item: DataItem,
+    item: ICase,
     width: string
 }
 
 
 
 export const SwiperItem: FC<SwiperItemProps> = ({ item , width }) => {
+    const locale = useLocale()
     // Локальные состояния и ссылки для каждого Swiper
     const [activeIndex, setActiveIndex] = useState(0)
     const swiperRef = useRef<SwiperCore | null>(null)
@@ -47,10 +50,10 @@ export const SwiperItem: FC<SwiperItemProps> = ({ item , width }) => {
                     autoplay={{ delay: 2000, disableOnInteraction: false }}
                     loop={false}
                 >
-                    {item?.images?.map((image: ImageItem, index: number) => (
+                    {item?.slider?.map((image, index) => (
                         <SwiperSlide key={index}>
                             <Image
-                                src={image.url}
+                                src={urlFor(image.asset._ref).url()}
                                 alt='One'
                                 width={710}
                                 height={500}
@@ -61,7 +64,7 @@ export const SwiperItem: FC<SwiperItemProps> = ({ item , width }) => {
                     ))}
                 </Swiper>
                 <div className='absolute bottom-[20px] left-1/2 transform -translate-x-1/2 z-[99] flex items-center gap-[15px] justify-center'>
-                    {item.images.map((_: ImageItem, i: number) => (
+                    {item.slider.map((_, i) => (
                         <div
                             key={i}
                             className={`w-[25px] h-[3px] ${i === activeIndex ? 'bg-white' : 'bg-inherit backdrop-blur-[15px]'}`}
@@ -78,8 +81,13 @@ export const SwiperItem: FC<SwiperItemProps> = ({ item , width }) => {
                 </div>
             </div>
             <div className='mt-[20px] 2xl:mt-[25px]'>
-                <p className='text-[20px] leading-[28.9px] font-jost font-medium 2xl:text-[35px] 2xl:leading-[]'>{item.title}</p>
-                <p className='text-[15px] text-[#414141] font-jost leading-[18px] 2xl:text-[20px] 2xl:leading-[24px] 2xl:w-[70%] 2xl:mt-[8px]'>{item.description}</p>
+                <p className='text-[20px] leading-[28.9px] font-jost font-medium 2xl:text-[35px]'>{item.title[locale]}</p>
+                <p className='text-[15px] text-[#414141] font-jost leading-[18px] 2xl:text-[20px] 2xl:leading-[24px] 2xl:w-[90%] 2xl:mt-[8px]'>
+                {item.description[locale].length > 73 ? item.description[locale].slice(0, 73) + '...' : item.description[locale]}
+
+
+
+                </p>
                 <Link href='/cases/slug' className='mt-[10px] 2xl:mt-[20px] flex items-center gap-[5px] text-[16px] leading-6 font-medium font-jost text-[#222E51] 2xl:text-[20px] 2xl:leading-6'>
                     Подробнее
                     <GrLinkNext />

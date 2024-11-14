@@ -5,6 +5,9 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
+import { client } from "@/sanity/lib/client"
+import { urlFor } from '@/sanity/lib/image'
+
 
 import { GrLinkNext } from "react-icons/gr"
 import { GrLinkPrevious } from "react-icons/gr"
@@ -16,12 +19,40 @@ import { MdOutlineLocationOn } from "react-icons/md";
 import { CiClock2 } from "react-icons/ci";
 import { CiLocationOn } from "react-icons/ci";
 import { SwiperItem } from '@/ui/swiperItem'
-import { data } from '../Main/Case'
+// import { data } from '../Main/Case'
 
 import { DataItem } from './Work'
+import {ICase} from '@/interface/ICase/case'
+
+
 
 const TopCases: FC = () => {
+  const [caseData, setCaseData] = useState<ICase[] | []>([])
+    
     const { swiperRef, handlePrev, handleNext } = useSwiperNavigation()
+
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const CaseDataAll = await client.fetch(`*[_type == "case" && isFeatured == true]`)
+            setCaseData(CaseDataAll)
+          } catch (error) {
+            console.debug(error)
+          }
+        }
+        fetchData()
+    }, [])
+    
+
+
+
+
+
+
+
+
+
+
 
     return (
         <div className='mt-[80px] 2xl:mt-[200px]  px-[20px] 4xl:pl-[240px] 2xl:pl-[50px]'>
@@ -56,7 +87,7 @@ const TopCases: FC = () => {
                     },
                 }}
             >
-                 {data.map((item: DataItem, index: number) => (
+                 {caseData.map((item, index: number) => (
                         <SwiperSlide key={index} className='w-full'>
                             <SwiperItem item={item} width='100%' />
                         </SwiperSlide>

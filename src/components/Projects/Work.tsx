@@ -7,16 +7,16 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
+import { client } from "@/sanity/lib/client"
 
 // ICON
 import { FaChevronDown } from "react-icons/fa6"
-import { MdArchitecture } from "react-icons/md"
 
 
 // images
-import ImageDataMap from '@/public/project/projectCARD.jpg'
+import { ICase , ICaseCategory } from '@/interface/ICase/case'
+import useLocale from '@/hooks/useLocale'
 
-// Define interfaces for your data structures
 
 
 export interface DataItem {
@@ -30,34 +30,7 @@ interface CategoryItem {
     cotegory: string
 }
 
-const Data: DataItem[] = [
-    {
-        category: 'Интерьерные работы',
-        title: 'Innova Space',
-        description: 'Пространство с современным дизайном, способствующим командной работе и креативности',
-        images: [{ url: ImageDataMap }, { url: ImageDataMap }]
-    },
-    {
-        category: 'Интерьерные работы',
-        title: 'Innova Space',
-        description: 'Пространство с современным дизайном, способствующим командной работе и креативности',
-        images: [{ url: ImageDataMap }, { url: ImageDataMap }]
-    },
-    {
-        category: 'Интерьерные работы',
-        title: 'Innova Space',
-        description: 'Пространство с современным дизайном, способствующим командной работе и креативности',
-        images: [{ url: ImageDataMap }, { url: ImageDataMap }]
-    },
-    {
-        category: 'Интерьерные работы',
-        title: 'Innova Space',
-        description: 'Пространство с современным дизайном, способствующим командной работе и креативности',
-        images: [{ url: ImageDataMap }, { url: ImageDataMap }]
-    },
-  
 
-]
 
 const Cotegory: CategoryItem[] = [
     { cotegory: "Интерьерные работы" },
@@ -70,67 +43,80 @@ const Cotegory: CategoryItem[] = [
 
 
 
-
+interface FilterState {
+    name: string;
+    id: string;
+  }
 
 
 
 const Work: FC = () => {
-
+    const locale = useLocale()
     const [sliceNumber, setSliceNumber] = useState(9)
-
-    const [mobileActiveFilter, setMobileActiveFilter] = useState(false)
-    const [activeFilter, setActiveFilter] = useState('Все проекты')
+    const [caseData, setCaseData] = useState<ICase[]>([])
+    const [caseCategory, setCaseCategory] = useState<ICaseCategory[]>([])
+    const [activeFilter, setActiveFilter] = useState<FilterState>({ name: 'Все проекты', id: 'all-project' })
     const blogContainerRef = useRef<HTMLDivElement | null>(null)
-    const filterRef = useRef<HTMLDivElement | null>(null) // Ref для анимации элементов
-
+    const filterRef = useRef<HTMLDivElement | null>(null)
+    const [mobileActiveFilter, setMobileActiveFilter] = useState(false)
+  
     const handleActiveFilter = () => setMobileActiveFilter(!mobileActiveFilter)
-
+  
     useEffect(() => {
-        if (mobileActiveFilter && filterRef.current) {
-            // Анимация появления элементов
-            gsap.fromTo(
-                filterRef.current.children,
-                { opacity: 0, y: -20 },
-                { opacity: 1, y: 0, duration: 0.3, stagger: 0.1, ease: "power2.out" }
-            )
-        } else if (filterRef.current) {
-            // Анимация исчезновения
-            gsap.to(filterRef.current.children, { opacity: 0, y: -20, duration: 0.2, stagger: 0.1 })
-        }
+      if (mobileActiveFilter && filterRef.current) {
+        gsap.fromTo(
+          filterRef.current.children,
+          { opacity: 0, y: -20 },
+          { opacity: 1, y: 0, duration: 0.3, stagger: 0.1, ease: "power2.out" }
+        )
+      } else if (filterRef.current) {
+        gsap.to(filterRef.current.children, { opacity: 0, y: -20, duration: 0.2, stagger: 0.1 })
+      }
     }, [mobileActiveFilter])
-
+  
     useEffect(() => {
-        if (blogContainerRef.current) {
-            gsap.fromTo(
-                blogContainerRef.current.children,
-                { opacity: 0, y: 20 },
-                { opacity: 1, y: 0, duration: 0.4, stagger: 0.2, ease: "power.out" }
-            )
+      const fetchData = async () => {
+        try {
+          const CaseDataAll: ICase[] = await client.fetch(`*[_type == "case"]`)
+          setCaseData(CaseDataAll)
+        } catch (error) {
+          console.debug(error)
         }
-    }, [activeFilter])
-
-    const filteredBlogData = activeFilter === 'Все проекты'
-        ? Data
-        : Data.filter(item => item.category === activeFilter)
-
-    // Tanlangandan Keyin OChirsh
-    const handleMobileFilterSelect = (cotegory: string) => {
-        setActiveFilter(cotegory)
-        setMobileActiveFilter(false)
+      }
+      fetchData()
+    }, [locale])
+  
+    useEffect(() => {
+      const fetchCaseCategory = async () => {
+        try {
+          const CaseCategoryData: ICaseCategory[] = await client.fetch(`*[_type == "caseCategory"]`)
+          setCaseCategory(CaseCategoryData)
+        } catch (error) {
+          console.debug(error)
+        }
+      }
+      fetchCaseCategory()
+    }, [locale])
+  
+    const filteredBlogData = activeFilter.id === 'all-project'
+      ? caseData
+      : caseData.filter(item => item.caseCategory?._ref === activeFilter.id)
+  
+    const handleMobileFilterSelect = (category: ICaseCategory) => {
+      setActiveFilter({ name: category.name[locale], id: category._id })
+      setMobileActiveFilter(false)
     }
-
-
+  
     const isAllDataLoaded = sliceNumber >= filteredBlogData.length
-
+  
     const handleToggle = () => {
-        if (!isAllDataLoaded) {
-            // Загрузить еще
-            setSliceNumber(prev => Math.min(prev + 9, filteredBlogData.length))
-        } else {
-            // Скрыть часть элементов, но не меньше 9
-            setSliceNumber(prev => Math.max(prev - 9, 9))
-        }
+      if (!isAllDataLoaded) {
+        setSliceNumber(prev => Math.min(prev + 9, filteredBlogData.length))
+      } else {
+        setSliceNumber(prev => Math.max(prev - 9, 9))
+      }
     }
+  
 
     return (
         <div className='mt-[80px] 2xl:mt-[200px] px-[16px] 2xl:px-[50px] 4xl:px-[240px]'>
@@ -141,53 +127,48 @@ const Work: FC = () => {
             </div>
             <div className='hidden slg:flex  slg:flex-row gap-[10px]'>
             <button
-                        className={`px-[15px] py-[13px] text-center text-[#121212] border ${
-                            activeFilter ===  'Все проекты' ? 'bg-[#222E51] text-white' : ''
-                        }`}
-                        onClick={() => setActiveFilter('Все проекты')}
-                    >
-                        Все проекты
-                    </button>
-            {Cotegory.map((item: CategoryItem, index: number) => (
-                    <button
-                        key={index}
-                        className={`px-[15px] py-[13px] text-center text-[#121212] border ${
-                            activeFilter === item.cotegory ? 'bg-[#222E51] text-white' : ''
-                        }`}
-                        onClick={() => setActiveFilter(item.cotegory)}
-                    >
-                        {item.cotegory}
-                    </button>
-                ))}
+          className={`px-[15px] py-[13px] text-center text-[#121212] border ${activeFilter.id === 'all-project' ? 'bg-[#222E51] text-white' : ''}`}
+          onClick={() => setActiveFilter({ name: 'Все проекты', id: 'all-project' })}
+        >
+          Все проекты
+        </button>
+        {caseCategory.map((item) => (
+          <button
+            key={item._id}
+            className={`px-[15px] py-[13px] text-center text-[#121212] border ${activeFilter.id === item._id ? 'bg-[#222E51] text-white' : ''}`}
+            onClick={() => setActiveFilter({ name: item.name[locale], id: item._id })}
+          >
+            {item.name[locale]}
+          </button>
+        ))}
             </div>
             <div className='2xl:hidden'>
                 <button onClick={handleActiveFilter} className='w-full mt-[20px] 2xl:hidden flex flex-row justify-between pb-[13px] border-b border-b-[#222E51]'>
                     <p className='text-[15px] font-medium font-jost text-[#222E51]'>
-                        {activeFilter}
+                        {activeFilter.name}
                     </p>
                     <div>
                         <FaChevronDown className='text-[#222E51]' />
                     </div>
                 </button>
                 {mobileActiveFilter && (
-                    <div ref={filterRef}>
-                        {Cotegory.map((item: CategoryItem, index: number) => (
-                            <p
-                                key={index}
-                                onClick={() => handleMobileFilterSelect(item.cotegory)}
-                                className='text-[15px] font-semibold font-jost text-[#222E51] w-full mt-[20px] flex flex-row justify-between pb-[13px] border-b border-b-[#222E51]'
-                            >
-                                {item.cotegory}
-                                <MdArchitecture />
-                            </p>
-                        ))}
-                    </div>
-                )}
+          <div ref={filterRef}>
+            {caseCategory.map((item) => (
+              <p
+                key={item._id}
+                onClick={() => handleMobileFilterSelect(item)}
+                className='text-[15px] font-semibold font-jost text-[#222E51] w-full mt-[20px] flex flex-row justify-between pb-[13px] border-b border-b-[#222E51]'
+              >
+                {item.name[locale]}
+              </p>
+            ))}
+          </div>
+        )}
             </div>
             <div className='mt-[15px] flex flex-col gap-[30px] 2xl:flex-row 2xl:flex-wrap 2xl:gap-[1%]' ref={blogContainerRef}>
-                {filteredBlogData.slice(0, sliceNumber).map((item: DataItem, index: number) => (
-                    <SwiperItem key={index} item={item} width='32%' />
-                ))}
+            {filteredBlogData.slice(0, sliceNumber).map((item) => (
+          <SwiperItem key={item._id} item={item} width='32%' />
+        ))}
             </div>
             {filteredBlogData.length > 9 && (
                 <div className='w-full flex items-center justify-center mt-[40px] 2xl:mt-[60px]'>

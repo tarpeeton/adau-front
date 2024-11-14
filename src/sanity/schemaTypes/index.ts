@@ -13,11 +13,11 @@ import banner from './banner'
 import aboutBanner from './about-banner'
 import videomediaCotegory from './videomedia-cotegory'
 import videomedia from './videomedia'
-
-
+import caseCategory from './case-category'
+import Case from './create-case'
 
 
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [timeline , partners , blogCotegory , blog , team , cotegoryReview ,  reviews , spikers , blogComment , contacts , banner , aboutBanner , videomediaCotegory , videomedia],
+  types: [timeline , partners , blogCotegory , blog , team , cotegoryReview ,  reviews , spikers , blogComment , contacts , banner , aboutBanner , videomediaCotegory , videomedia , caseCategory , Case],
 }

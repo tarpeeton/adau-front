@@ -8,7 +8,6 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import Image from 'next/image'
-import BannerImage from '@/public/ccc.jpg'
 
 import { client } from "@/sanity/lib/client"
 import { urlFor } from '@/sanity/lib/image'
