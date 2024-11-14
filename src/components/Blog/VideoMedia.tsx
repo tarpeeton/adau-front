@@ -9,8 +9,7 @@ import { client } from "@/sanity/lib/client"
 import { IMediaVideo, IVideoCategory } from '@/interface/IVideo/video'
 
 
-import { urlFor } from '@/sanity/lib/image'
-// import { Link } from '@/i18n/routing'
+
 
 
 
@@ -111,10 +110,11 @@ const NewBlogs: FC = () => {
                 Видео и медиа
             </p>
 
-            <div className='hidden 2xl:flex flex-row items-center mt-[40px] w-[50%] 2xl:gap-[40px] border-b border-[#E4E4E4]'>
+            <div className='hidden 2xl:inline-block  items-center mt-[40px] 2xl:gap-[40px] border-b border-[#E4E4E4]'>
+                <div className='flex flex-row gap-[40px]'>
                 <button
                     onClick={() => handleFilterSelect('all-videos', 'Все видео')}
-                    className={`pb-[12px] mr-[10px] border-b ${activeFilter.id === 'all-videos' ? 'border-b-2 border-[#222E51] text-[#222E51]' : 'text-[#000000]'}`}
+                    className={`pb-[12px] mr-[10px] ${activeFilter.id === 'all-videos' ? 'border-b-2 border-[#222E51] text-[#222E51]' : 'text-[#000000]'}`}
                 >
                     <p className='text-[22px] font-medium'>Все видео</p>
                 </button>
@@ -130,6 +130,8 @@ const NewBlogs: FC = () => {
                         )}
                     </button>
                 ))}
+                </div>
+               
             </div>
             <button onClick={handleActiveFilter} className='w-full mt-[20px] 2xl:hidden flex flex-row justify-between pb-[13px] border-b border-b-[#222E51]'>
                 <p className='text-[15px] font-medium font-jost text-[#222E51]'>{activeFilter.name}</p>
