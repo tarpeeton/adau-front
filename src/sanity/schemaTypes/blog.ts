@@ -21,7 +21,6 @@ export default defineType({
       options: {
         hotspot: true,
       },
-      validation: (Rule) => Rule.required(),
     },
     {
       name: 'userName',
@@ -32,13 +31,6 @@ export default defineType({
         { name: 'ru', type: 'string', title: 'Имя (Русский)' },
         { name: 'en', type: 'string', title: 'Name (English)' },
       ],
-      validation: (Rule) =>
-        Rule.custom((fields: { uz?: string; ru?: string; en?: string }) => {
-          if (!fields || !fields.uz || !fields.ru || !fields.en) {
-            return 'Все поля имени должны быть заполнены';
-          }
-          return true;
-        }),
     },
     {
       name: 'userOccupation',
@@ -49,13 +41,6 @@ export default defineType({
         { name: 'ru', type: 'string', title: 'Профессия (Русский)' },
         { name: 'en', type: 'string', title: 'Occupation (English)' },
       ],
-      validation: (Rule) =>
-        Rule.custom((fields: { uz?: string; ru?: string; en?: string }) => {
-          if (!fields || !fields.uz || !fields.ru || !fields.en) {
-            return 'Все поля профессии должны быть заполнены';
-          }
-          return true;
-        }),
     },
     {
       name: 'title',
@@ -187,7 +172,14 @@ export default defineType({
       type: 'boolean',
       title: 'Избранные статьи',
       description: 'Отметьте, если эта статья избранная',
-      initialValue: false, // Default value is false
+      initialValue: false,
+    },
+    {
+      name: 'expert',
+      type: 'boolean',
+      title: 'Экспертная статья',
+      description: 'Отметьте, если эта статья написана экспертом',
+      initialValue: false,
     },
   ],
 });

@@ -19,6 +19,7 @@ export interface IBlogCategory {
 export interface IBlog {
     _id: string;
     featured:boolean;
+    expert:boolean;
     _createdAt: string;
     title: {
       ru: string;

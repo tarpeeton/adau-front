@@ -3,11 +3,11 @@ import BannerBlog from './Banner'
 import NewBlogs from './NewBlogs'
 import CotegoryBlog from './Cotegory'
 import SavedBlogs from './Save'
-// import BlogActions from './BlogActions'
-// import ExpertOpinions from './ExpertOpinions'
-// import VideoAndMedia from './VideoMedia'
-// import PopularBlogs from './Popular'
-// import FollowToBlog from './Follow'
+import BlogActions from './BlogActions'
+import ExpertOpinions from './ExpertOpinions'
+import VideoAndMedia from './VideoMedia'
+import PopularBlogs from './Popular'
+import FollowToBlog from './Follow'
 
 
 const MainBlog: FC = () => {
@@ -17,11 +17,11 @@ const MainBlog: FC = () => {
       <NewBlogs />
       <CotegoryBlog/>
       <SavedBlogs />
-      {/* <BlogActions />
+      <BlogActions />
       <ExpertOpinions />
       <VideoAndMedia />
       <PopularBlogs />
-      <FollowToBlog /> */}
+      <FollowToBlog />
     </div>
   );
 };
