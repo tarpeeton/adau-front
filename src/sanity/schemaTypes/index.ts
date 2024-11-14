@@ -11,11 +11,13 @@ import blogComment from './blogComment'
 import contacts from './contacts'
 import banner from './banner'
 import aboutBanner from './about-banner'
+import videomediaCotegory from './videomedia-cotegory'
+import videomedia from './videomedia'
 
 
 
 
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [timeline , partners , blogCotegory , blog , team , cotegoryReview ,  reviews , spikers , blogComment , contacts , banner , aboutBanner],
+  types: [timeline , partners , blogCotegory , blog , team , cotegoryReview ,  reviews , spikers , blogComment , contacts , banner , aboutBanner , videomediaCotegory , videomedia],
 }
