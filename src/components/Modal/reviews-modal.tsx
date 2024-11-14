@@ -9,10 +9,9 @@ import { IoClose } from "react-icons/io5"
 interface IReviewFull {
     visible: boolean
     close: () => void
-    name?: string,
-    date?: string,
-    text?: string,
-   
+    name?: string
+    date?: string
+    text?: string
 }
 
 
@@ -20,14 +19,6 @@ const FullReviewsModal: FC<IReviewFull> = ({ visible, close , name , date , text
 
 
 
-    const formatDate = (dateString: string) => {
-        const date = new Date(dateString)
-        return date.toLocaleDateString('ru-RU', {
-          day: '2-digit',
-          month: '2-digit',
-          year: 'numeric',
-        })
-      }
 
 
 

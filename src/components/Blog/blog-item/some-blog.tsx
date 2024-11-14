@@ -9,9 +9,6 @@ import { GrFormPreviousLink } from "react-icons/gr"
 
 // ICON
 import { BsYoutube } from "react-icons/bs"
-const video = 'https://youtu.be/QDRXGmNnrzc?si=ptMXtFjO-S76_XED'
-import Anastasiya from '@/public/Anastasiya.jpg'
-import BlogImage from '@/public/blog/blogone.jpg'
 import { IBlog } from '@/interface/IBlogs/blog'
 import { urlFor } from '@/sanity/lib/image'
 import useLocale from '@/hooks/useLocale'
