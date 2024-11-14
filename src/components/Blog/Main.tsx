@@ -2,7 +2,7 @@ import {FC} from 'react';
 import BannerBlog from './Banner'
 import NewBlogs from './NewBlogs'
 import CotegoryBlog from './Cotegory'
-// import SavedBlogs from './Save'
+import SavedBlogs from './Save'
 // import BlogActions from './BlogActions'
 // import ExpertOpinions from './ExpertOpinions'
 // import VideoAndMedia from './VideoMedia'
@@ -16,8 +16,8 @@ const MainBlog: FC = () => {
       <BannerBlog />
       <NewBlogs />
       <CotegoryBlog/>
-      {/* <SavedBlogs />
-      <BlogActions />
+      <SavedBlogs />
+      {/* <BlogActions />
       <ExpertOpinions />
       <VideoAndMedia />
       <PopularBlogs />

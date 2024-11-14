@@ -80,15 +80,15 @@ export default defineType({
       title: 'Slug',
       description: 'Автоматически сгенерированный slug',
       options: {
-        source: 'title.en', // Using the English title as the source for slug generation
+        source: 'title.en',
         maxLength: 96,
         slugify: (input) =>
           input
             .toLowerCase()
-            .replace(/\s+/g, '-') // Replace spaces with dashes
-            .replace(/[^a-z0-9-]/g, '') // Remove special characters
-            .replace(/--+/g, '-') // Replace multiple dashes with a single dash
-            .trim(), // Trim leading/trailing spaces
+            .replace(/\s+/g, '-')
+            .replace(/[^a-z0-9-]/g, '')
+            .replace(/--+/g, '-')
+            .trim(),
       },
       validation: (Rule) => Rule.required(),
     },
@@ -180,6 +180,13 @@ export default defineType({
       type: 'boolean',
       title: 'Популярный',
       description: 'Отметьте, если этот блог популярный',
+      initialValue: false,
+    },
+    {
+      name: 'featured',
+      type: 'boolean',
+      title: 'Избранные статьи',
+      description: 'Отметьте, если эта статья избранная',
       initialValue: false, // Default value is false
     },
   ],
