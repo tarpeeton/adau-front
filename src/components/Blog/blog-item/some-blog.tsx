@@ -12,17 +12,31 @@ import { BsYoutube } from "react-icons/bs"
 const video = 'https://youtu.be/QDRXGmNnrzc?si=ptMXtFjO-S76_XED'
 import Anastasiya from '@/public/Anastasiya.jpg'
 import BlogImage from '@/public/blog/blogone.jpg'
+import { IBlog } from '@/interface/IBlogs/blog'
+import { urlFor } from '@/sanity/lib/image'
+import useLocale from '@/hooks/useLocale'
+import formatDate from '@/hooks/useFormatDate'
 
-const SomeBlog: FC = () => {
+
+
+interface IBlogItemProps {
+    blog: IBlog
+}
+
+
+const SomeBlog: FC<IBlogItemProps> = ({ blog }) => {
+
     const [isClient, setIsClient] = useState(false)
     const [isPlaying, setIsPlaying] = useState(false)
-
+    const locale = useLocale()
     // Ensure this code runs only on the client side
     useEffect(() => {
         setIsClient(true)
     }, [])
 
 
+
+    
 
 
     return (
@@ -36,63 +50,78 @@ const SomeBlog: FC = () => {
             <div className='2xl:mt-[50px]'>
                 <div className='flex flex-row gap-[10px] pt-[25px] items-center'>
                     <div className='w-[30px] h-[30px] 2xl:w-[45px] 2xl:h-[45px] rounded-full '>
-                        <Image src={Anastasiya} alt='image-user' width={500} height={450} quality={100} className='w-full h-full rounded-full' />
+                        {blog?.userImage?.asset?._ref && (
+                            <Image src={urlFor(blog.userImage.asset._ref).url()} alt='image-user' width={500} height={450} quality={100} className='w-full h-full rounded-full' />
+                        )}
+
                     </div>
                     <div>
-                        <p className='text-[14px] 2xl:text-[20px] font-medium text-titleDark font-jost'>Анастасия</p>
-                        <p className=' text-[12px] 2xl:text-[17px] 2xl:mt-[-8px] font-medium 2xl:leading-[24.57px] text-[#A0A0A0] font-jost mt-[-5px]'>архитектор</p>
+                        <p className='text-[14px] 2xl:text-[20px] font-medium text-titleDark font-jost'>
+                            {blog?.userName[locale] && (
+                                blog.userName[locale])}
+                        </p>
+                        <p className=' text-[12px] 2xl:text-[17px] 2xl:mt-[-8px] font-medium 2xl:leading-[24.57px] text-[#A0A0A0] font-jost mt-[-5px]'>
+                            {blog?.userOccupation && (
+                                blog.userOccupation[locale])}
+                        </p>
                     </div>
                 </div>
                 <div className='2xl:mt-[20px] mt-[10px]'>
                     <p className='text-titleDark text-[22px] leading-[29px] 2xl:text-[40px] uppercase 2xl:leading-[57.8px]'>
-                        10 ключевых архитектурных трендов: что будет популярно в ближайшие годы?
+                        {blog.title[locale]}
                     </p>
-                    <p className='text-title80 mt-[10px] 2xl:mt-[8px] text-[14px] 2xl:text-[20px] 2xl:leading-[24px] '>26 cентября 2024</p>
+                    <p className='text-title80 mt-[10px] 2xl:mt-[8px] text-[14px] 2xl:text-[20px] 2xl:leading-[24px] '>
+                        {formatDate(blog._createdAt)}
+                    </p>
                 </div>
                 <div className='mt-[25px] 2xl:mt-[40px] h-[220px] 2xl:h-[500px]'>
-                    <Image src={BlogImage} alt='image-blog' width={700} height={600} quality={100} className='w-full h-full object-cover' />
+                    {blog?.mainImage.asset._ref && (
+                        <Image src={urlFor(blog?.mainImage.asset._ref).url()} alt='image-blog' width={700} height={600} quality={100} className='w-full h-full object-cover' />
+                    )}
+
                 </div>
                 <div className='2xl:mt-[40px] mt-[25px]'>
                     <p className='2xl:text-[20px] text-[14px] leading-[18px] 2xl:leading-[24px] text-[#333333]'>
-                        В мире архитектуры наступает новый этап, когда экология, технологии и потребности общества становятся основой проектирования. Вот десять архитектурных трендов, которые будут определять облик наших городов и пространств в ближайшие годы
+                        {blog.description[locale]}
                     </p>
                 </div>
                 <div className='mt-[20px] 2xl:mt-[60px] flex flex-col gap-[40px] 2xl:gap-[60px] '>
-                    <div className='flex flex-col 2xl:gap-[15px]'>
-                        <p className='text-[18px] 2xl:text-[25px] 2xl:leading-[30px] font-[454] text-[#333333] '>Устойчивое строительство</p>
-                        <p className='mt-[5px] text-[15px] leading-[18px] 2xl:text-[20px] 2xl:leading-[25px] font-medium text-[#333333]'>Экологические проекты выходят на первый план. Использование возобновляемых ресурсов, переработанных материалов, энергосберегающих технологий и зелёных крыш помогает снизить углеродный след зданий, минимизируя их воздействие на окружающую среду</p>
-                    </div>
-                    <div className='flex flex-col 2xl:gap-[15px]'>
-                        <p className='text-[18px] 2xl:text-[25px] 2xl:leading-[30px] font-[454] text-[#333333] '>Устойчивое строительство</p>
-                        <p className='mt-[5px] text-[15px] leading-[18px] 2xl:text-[20px] 2xl:leading-[25px] font-medium text-[#333333]'>Экологические проекты выходят на первый план. Использование возобновляемых ресурсов, переработанных материалов, энергосберегающих технологий и зелёных крыш помогает снизить углеродный след зданий, минимизируя их воздействие на окружающую среду</p>
-                    </div>
-                    <div className='flex flex-col 2xl:gap-[15px]'>
-                        <p className='text-[18px] 2xl:text-[25px] 2xl:leading-[30px] font-[454] text-[#333333] '>Устойчивое строительство</p>
-                        <p className='mt-[5px] text-[15px] leading-[18px] 2xl:text-[20px] 2xl:leading-[25px] font-medium text-[#333333]'>Экологические проекты выходят на первый план. Использование возобновляемых ресурсов, переработанных материалов, энергосберегающих технологий и зелёных крыш помогает снизить углеродный след зданий, минимизируя их воздействие на окружающую среду</p>
-                    </div>
+                    {blog.additionalContent.map((item, index) => (
+                        <div key={index}>
+                            <div className='flex flex-col 2xl:gap-[15px]'>
+                                <p className='text-[18px] 2xl:text-[25px] 2xl:leading-[30px] font-[454] text-[#333333] '>{item.title[locale]}</p>
+                                <p className='mt-[5px] text-[15px] leading-[18px] 2xl:text-[20px] 2xl:leading-[25px] font-medium text-[#333333]'>{item.description[locale]}</p>
+                            </div>
+                            {item.youtubeLink && (
+                                <div className='2xl:h-[550px] h-[200px] mt-[25px] 2xl:mt-[60px]'>
+                                    {isClient && (
+                                        <ReactPlayer
+                                            url={item.youtubeLink}
+                                            playing={isPlaying}
+                                            controls={true}
+                                            width="100%"
+                                            height="100%"
+                                            light={true}
+                                            playIcon={
+                                                <div className="inset-0 flex items-center justify-center bg-opacity-50 cursor-pointer">
+                                                    <BsYoutube className='text-white w-[60px] h-[50px] 2xl:w-[60px] 2xl:h-[60px]' />
+                                                </div>
+                                            }
+                                            onClickPreview={() => setIsPlaying(true)}
+                                            pip={true}
+                                        />
+                                    )}
+                                </div>
+                            )}
+                        </div>
+                    ))}
 
 
 
 
-                    <div className='2xl:h-[550px] h-[200px]'>
-                        {isClient && (
-                            <ReactPlayer
-                                url={video}
-                                playing={isPlaying}
-                                controls={true}
-                                width="100%"
-                                height="100%"
-                                light={true} // Show thumbnail before playing
-                                playIcon={
-                                    <div className=" inset-0 flex items-center justify-center  bg-opacity-50  cursor-pointer">
-                                        <BsYoutube className='text-white w-[60px] h-[50px]  2xl:w-[60px] 2xl:h-[60px]' />
-                                    </div>
-                                }
-                                onClickPreview={() => setIsPlaying(true)} // Start playing after clicking on the thumbnail
-                                pip={true}
-                            />
-                        )}
-                    </div>
+
+
+
 
                 </div>
             </div>

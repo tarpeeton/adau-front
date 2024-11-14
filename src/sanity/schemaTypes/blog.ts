@@ -148,15 +148,27 @@ export default defineType({
                 }),
             },
             {
-              name: 'media',
-              type: 'file',
-              title: 'Медиафайл',
-              description: 'Загрузите изображение или видео',
-              options: {
-                accept: 'image/*,video/*',
-              },
+              name: 'youtubeLink',
+              type: 'url',
+              title: 'Ссылка на YouTube',
+              description: 'Введите ссылку на видео с YouTube',
+              validation: (Rule) =>
+                Rule.uri({
+                  scheme: ['http', 'https'],
+                }).error('Введите корректный URL-адрес'),
             },
           ],
+        },
+      ],
+    },
+    {
+      name: 'comments',
+      type: 'array',
+      title: 'Комментарии',
+      of: [
+        {
+          type: 'reference',
+          to: [{ type: 'comment' }],
         },
       ],
     },

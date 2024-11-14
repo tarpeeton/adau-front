@@ -5,12 +5,6 @@ import Image from 'next/image'
 
 // ICONS
 import { FaChevronDown } from "react-icons/fa6"
-import { MdArchitecture } from "react-icons/md"
-import { SiAffinitydesigner } from "react-icons/si"
-import { AiOutlineGlobal } from "react-icons/ai"
-import { GrTechnology } from "react-icons/gr"
-import { GiTurban } from "react-icons/gi"
-import { FaDrawPolygon } from "react-icons/fa6"
 import { GrLinkNext } from "react-icons/gr"
 
 import useLocale from '@/hooks/useLocale'
