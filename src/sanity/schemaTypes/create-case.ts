@@ -1,4 +1,4 @@
-import { defineType } from 'sanity'
+import { defineType } from 'sanity';
 
 export default defineType({
   name: 'case',
@@ -136,5 +136,14 @@ export default defineType({
       type: 'boolean',
       description: 'Показать этот кейс в разделе "Лучшие кейсы".',
     },
+    {
+      name: 'resultImage',
+      title: 'Изображение результата',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+      description: 'Изображение, связанное с результатами кейса.',
+    },
   ],
-})
+});

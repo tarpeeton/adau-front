@@ -1,10 +1,9 @@
 "use client"
 import { FC, useState, useRef } from 'react'
 import { GrLinkNext } from "react-icons/gr"
-import Link from 'next/link'
 import Image, { StaticImageData } from 'next/image'
 import { urlFor } from '@/sanity/lib/image'
-
+import { Link } from '@/i18n/routing'
 
 
 export interface ImageItem {
@@ -88,7 +87,7 @@ export const SwiperItem: FC<SwiperItemProps> = ({ item , width }) => {
 
 
                 </p>
-                <Link href='/cases/slug' className='mt-[10px] 2xl:mt-[20px] flex items-center gap-[5px] text-[16px] leading-6 font-medium font-jost text-[#222E51] 2xl:text-[20px] 2xl:leading-6'>
+                <Link href={`/cases/${item.slug.current}`} className='mt-[10px] 2xl:mt-[20px] flex items-center gap-[5px] text-[16px] leading-6 font-medium font-jost text-[#222E51] 2xl:text-[20px] 2xl:leading-6'>
                     Подробнее
                     <GrLinkNext />
                 </Link>

@@ -2,11 +2,12 @@
 import { FC } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-
+import { urlFor } from '@/sanity/lib/image'
 
 import { GrFormPreviousLink } from "react-icons/gr"
 import { Swiper, SwiperSlide } from 'swiper/react'
 import useSwiperNavigation from '@/hooks/useSwiperNavigation'
+import useLocale from '@/hooks/useLocale'
 
 
 
@@ -15,13 +16,26 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
 
+interface IBannerProps {
+    title: { ru: string, uz: string, en: string }
+    description: { ru: string, uz: string, en: string }
+    youtubeVideo: string,
+    slider: Array<{
+        _key: string
+        _type: string
+        asset: {
+            _ref: string
+            _type: string
+        }
+    }>
+}
 
-// image
-import ImagaCase from '@/public/case/one.jpg'
 
-const CaseBaner: FC = () => {
+
+
+const CaseBaner: FC<IBannerProps> = ({ title, description, youtubeVideo, slider }) => {
     const { swiperRef, handlePrev, handleNext } = useSwiperNavigation()
-
+    const locale = useLocale()
     return (
         <div className='2xl:mt-[25px] px-[16px] 2xl:px-[50px] 4xl:px-[240px]'>
             <div className='flex felx-row items-center  2xl:text-[20px] text-[#222E51] font-medium font-jost'>
@@ -33,8 +47,12 @@ const CaseBaner: FC = () => {
 
             <div className='2xl:mt-[35px] flex flex-col'>
                 <div className='2xl:w-[60%]'>
-                    <p className='2xl:text-[45px] uppercase text-titleDark font-jost'>Green Horizon</p>
-                    <p className='2xl:text-[20px] font-jost text-[#414141] 2xl:leading-[24px] 2xl:mt-[10px]'>Многофункциональный эко-комплекс, построенный в пригороде крупного города. Он включает жилые и коммерческие помещения, а также парковые зоны и общественные пространства</p>
+                    <p className='2xl:text-[45px] uppercase text-titleDark font-jost'>
+                        {title[locale]}
+                    </p>
+                    <p className='2xl:text-[20px] font-jost text-[#414141] 2xl:leading-[24px] 2xl:mt-[10px]'>
+                        {description[locale]}
+                    </p>
                 </div>
 
                 <div className='2xl:mt-[40px]'>
@@ -52,31 +70,17 @@ const CaseBaner: FC = () => {
                             },
                         }}
                     >
-                        <SwiperSlide>
-                            <div className='h-[200px] 2xl:h-[500px] cursor-pointer'>
-                                <Image src={ImagaCase} width={600} height={500} quality={100} alt='case-image'  className='object-cover w-full h-full'/>
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <div className='h-[200px] 2xl:h-[500px] cursor-pointer'>
-                                <Image src={ImagaCase} width={600} height={500} quality={100} alt='case-image'  className='object-cover w-full h-full'/>
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <div className='h-[200px] 2xl:h-[500px] cursor-pointer'>
-                                <Image src={ImagaCase} width={600} height={500} quality={100} alt='case-image'  className='object-cover w-full h-full'/>
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <div className='h-[200px] 2xl:h-[500px] cursor-pointer'>
-                                <Image src={ImagaCase} width={600} height={500} quality={100} alt='case-image'  className='object-cover w-full h-full'/>
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <div className='h-[200px] 2xl:h-[500px] cursor-pointer'>
-                                <Image src={ImagaCase} width={600} height={500} quality={100} alt='case-image'  className='object-cover w-full h-full'/>
-                            </div>
-                        </SwiperSlide>
+                        {slider.map((item, index) => (
+                            <SwiperSlide key={index}>
+                                <div className='h-[200px] 2xl:h-[500px] cursor-pointer'>
+                                    <Image src={urlFor(item.asset._ref).url()} width={600} height={500} quality={100} alt='case-image' className='object-cover w-full h-full' />
+                                </div>
+                            </SwiperSlide>
+                        ))}
+
+
+
+
                     </Swiper>
                 </div>
             </div>

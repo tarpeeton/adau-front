@@ -62,6 +62,12 @@ export interface ICase {
       _type: string;
       _ref: string;
     };
+    resultImage?: {
+      asset: {
+        _ref: string;
+        _type: string;
+      };
+    };
   }
   
 
