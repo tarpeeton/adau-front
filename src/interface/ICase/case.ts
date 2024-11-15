@@ -68,6 +68,7 @@ export interface ICase {
         _type: string;
       };
     };
+    isSuccessfulProject: boolean
   }
   
 

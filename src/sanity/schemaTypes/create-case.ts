@@ -145,5 +145,11 @@ export default defineType({
       },
       description: 'Изображение, связанное с результатами кейса.',
     },
+    {
+      name: 'isSuccessfulProject',
+      title: 'Успешный проект',
+      type: 'boolean',
+      description: 'Отображать этот кейс как успешный проект.',
+    },
   ],
 });
