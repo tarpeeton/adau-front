@@ -3,7 +3,7 @@ import { defineType } from 'sanity';
 export default defineType({
   name: 'aboutBanner',
   type: 'document',
-  title: 'О баннере',
+  title: 'О нас баннере',
   fields: [
     {
       name: 'title',
@@ -43,13 +43,15 @@ export default defineType({
     },
     {
       name: 'video',
-      type: 'file',
-      title: 'Видео',
-      description: 'Загрузите видео для баннера',
-      options: {
-        accept: 'video/*',
-      },
-      validation: (Rule) => Rule.required().error('Видео должно быть загружено'),
+      type: 'url',
+      title: 'Ссылка на YouTube видео',
+      description: 'Введите ссылку на YouTube видео для баннера',
+      validation: (Rule) =>
+        Rule.uri({
+          scheme: ['http', 'https'],
+        })
+        .required()
+        .error('Введите действительную ссылку на видео YouTube'),
     },
   ],
 });
