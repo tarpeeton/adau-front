@@ -5,52 +5,30 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import { MdCheck } from 'react-icons/md'
+import useLocale from '@/hooks/useLocale'
+import SeminarModal from '@/components/Modal/seminar-modal'
 
+interface IInfoPriceProps {
 
-
-const dataPrice = [
-  {
-    id: 1,
-    status: 'Стандарт',
-    options: [
-      { id: 1, item: 'Доступ ко всем лекциям и сессиям семинара' },
-      { id: 2, item: 'Пакет раздаточных материалов' },
-      { id: 3, item: 'Сертификат об участии' }
-    ],
-    price: '50 000'
-  },
-  {
-    id: 2,
-    status: 'Премиум',
-    options: [
-      { id: 1, item: 'Все преимущества билета Стандарт' },
-      { id: 2, item: 'Доступ к записям всех выступлений' },
-      { id: 3, item: 'Эксклюзивные материалы и презентации от спикеров' },
-      { id: 4, item: 'Приглашение на сессию вопросов и ответов с экспертами' }
-    ],
-    price: '100 000'
-  },
-  {
-    id: 3,
-    status: 'VIP',
-    options: [
-      { id: 1, item: 'Все преимущества билета Премиум' },
-      { id: 2, item: 'Место в первых рядах для максимального комфорта' },
-      { id: 3, item: 'Возможность личного общения и нетворкинг с ключевыми спикерами' },
-      { id: 4, item: 'Участие в закрытых мастер-классах и воркшопах' },
-      { id: 5, item: 'Памятный подарок от организаторов' }
-    ],
-    price: '250 000'
-  }
-]
+  priceData: Array<{
+    _key: string
+    title: {
+      ru: string
+      uz: string
+      en: string
+    }
+    price: number
+    options: string[]
+  }>
+}
 
 
 
 
-const InfoPrice: FC = () => {
-
-
-
+const InfoPrice: FC<IInfoPriceProps> = (priceData) => {
+  const [open, setOpen] = useState(false)
+  const locale = useLocale()
+  const handleChangeStatus = () => setOpen(!open)
 
   return (
     <div className='mt-[80px] 2xl:mt-[200px] px-[16px] 2xl:px-[50px] 4xl:px-[240px]'>
@@ -69,35 +47,35 @@ const InfoPrice: FC = () => {
             },
           }}
         >
-          {dataPrice.map((item, index) => (
+          {priceData.priceData.map((item, index) => (
             <SwiperSlide key={index}>
               <div className='p-[20px] 2xl:px-[25px] border border-[#E4E4E4] min-h-[440px] 2xl:min-h-[500px] flex flex-col justify-between cursor-pointer'>
                 <div>
                   <div className='pb-[20px] border-b border-b-[#E4E4E4]'>
-                    <p className='text-[22px] 2xl:text-[30px]'>{item.status}</p>
+                    <p className='text-[22px] 2xl:text-[30px]'>{item.title[locale]}</p>
                   </div>
                   <div className='mt-[20px] 2xl:mt-[30px] flex flex-col gap-[12px] 2xl:gap-[20px]'>
-                    {item.options.map((option) => (
-                      <div key={option.id} className='flex flex-row  gap-[8px]  '>
+                    {item.options.map((option, index) => (
+                      <div key={index} className='flex flex-row  gap-[8px]  '>
                         <div className='w-[20px] h-[20px] 2xl:w-[25px] 2xl:h-[25px]'>
-                        <MdCheck className='text-[#222E51] w-full h-full font-medium' />
+                          <MdCheck className='text-[#222E51] w-full h-full font-medium' />
 
-                          </div>
+                        </div>
                         <p className='w-[95%] text-[15px] leading-[18px] 2xl:text-[20px]'>
-                          {option.item}
-
+                          {option}
                         </p>
                       </div>
                     ))}
 
                   </div>
                 </div>
+                <SeminarModal visible={open} close={handleChangeStatus}/>
                 <div>
                   <p className='text-[22px] 2xl:text-[30px] text-[#222E51]'>{item.price} сум</p>
                   <div className='mt-[10px] 2xl:mt-[20px] w-full'>
-                      <button className='buttonBlue w-full'>
+                    <button onClick={handleChangeStatus} className='buttonBlue w-full'>
                       Записаться
-                      </button>
+                    </button>
                   </div>
                 </div>
 

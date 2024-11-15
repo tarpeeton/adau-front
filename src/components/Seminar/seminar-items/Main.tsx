@@ -90,7 +90,7 @@ const MainSeminarItems: FC = () => {
 
       <SeminarProggram program={seminarData?.seminarProgram} locale={locale} />
       <SeminarSpeakers locale={locale} speakers={seminarData?.speakers ?? []} />
-      {status ? (<InfoPrice />) : (<div ref={videoRef}><SeminarOldVideo  videoUrl={seminarData?.video?.url}
+      {status ? (<InfoPrice priceData={seminarData?.priceData ?? []} />) : (<div ref={videoRef}><SeminarOldVideo  videoUrl={seminarData?.video?.url}
 isFree={seminarData?.video?.isFree}
 price={seminarData?.video?.price} /> </div>)}
 

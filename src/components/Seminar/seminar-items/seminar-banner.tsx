@@ -6,70 +6,75 @@ import { CiLocationOn } from "react-icons/ci"
 import { Link } from '@/i18n/routing'
 // image
 import { urlFor } from '@/sanity/lib/image'
-import Item from 'antd/es/list/Item'
+import SeminarModal from '@/components/Modal/seminar-modal'
 
 const formatDate = (date: string, time: string): string => {
   // Create a Date object for the current date and time
-  const currentDate = new Date();
+  const currentDate = new Date()
 
   // Parse the seminar date into a Date object
-  const seminarDate = new Date(date);
+  const seminarDate = new Date(date)
 
   // Split the time string to extract hours and minutes
-  const [hours, minutes] = time.split('.').map(Number);
+  const [hours, minutes] = time.split('.').map(Number)
 
   // Set the seminar date to the provided time (by adjusting the hours and minutes)
-  seminarDate.setHours(hours, minutes, 0, 0);
+  seminarDate.setHours(hours, minutes, 0, 0)
 
   // Normalize the current date to ignore the time (set to midnight)
-  const normalizedCurrentDate = new Date(currentDate);
-  normalizedCurrentDate.setHours(0, 0, 0, 0);
+  const normalizedCurrentDate = new Date(currentDate)
+  normalizedCurrentDate.setHours(0, 0, 0, 0)
 
   // If the seminar date has passed (before today or if today and the time is in the past)
   if (seminarDate < currentDate && seminarDate < normalizedCurrentDate) {
-    return `Завершено: ${seminarDate.toLocaleDateString('ru-RU')}; ${time}`;
+    return `Завершено: ${seminarDate.toLocaleDateString('ru-RU')}; ${time}`
   }
 
   // If the seminar is upcoming or today, show the seminar date and time
-  return `${seminarDate.toLocaleDateString('ru-RU')}; ${time}`;
-};
+  return `${seminarDate.toLocaleDateString('ru-RU')}; ${time}`
+}
 
 interface ISeminarBanner {
-  status: boolean;
-  locale: "ru" | "uz" | "en";
-  onButtonClick: () => void; // Prop type for button click handler
-  title: {ru: string , uz:string , en: string},
+  status: boolean
+  locale: "ru" | "uz" | "en"
+  onButtonClick: () => void // Prop type for button click handler
+  title: { ru: string, uz: string, en: string },
   description: {
-    ru: string;
-    uz: string;
-    en: string;
-  };
-  date: string; // Date in ISO format (YYYY-MM-DD)
-      time: string; // Time as a string (e.g., "12.00")
+    ru: string
+    uz: string
+    en: string
+  }
+  date: string // Date in ISO format (YYYY-MM-DD)
+  time: string // Time as a string (e.g., "12.00")
   image: {
-    _type: 'image';
+    _type: 'image'
     asset: {
-      _ref: string;
-      _type: 'reference';
-    };
-  };
+      _ref: string
+      _type: 'reference'
+    }
+  }
   address: {
-    ru: string;
-    uz: string;
-    en: string;
-  };
+    ru: string
+    uz: string
+    en: string
+  }
 }
 
 
-const SeminarBanner: FC<ISeminarBanner> = ({status , onButtonClick , title,
+const SeminarBanner: FC<ISeminarBanner> = ({ status, onButtonClick, title,
   description,
   date,
   time,
   image,
-  address , locale}) => {
+  address, locale }) => {
+  const [open, setOpen] = useState(false)
+  const handleChangeStatus = () => setOpen(!open)
 
-    const imageUrl = image && image.asset._ref ? urlFor(image.asset._ref).url() : '';
-    console.log(time , date , 'DDDDDDD')
+
+
+
+  const imageUrl = image && image.asset._ref ? urlFor(image.asset._ref).url() : ''
+
 
   return (
     <div className='2xl:px-[50px] px-[16px] 2xl:mt-[25px] 4xl:px-[240px]'>
@@ -91,18 +96,24 @@ const SeminarBanner: FC<ISeminarBanner> = ({status , onButtonClick , title,
             <p className='text-[14px] 2xl:w-[80%] mt-[10px] left-[18px] 2xl:leading-[24px] 2xl:text-[20px] text-[#414141]'>{description[locale]}</p>
             <div className='mt-[25px] 2xl:mt-[30px] w-full 2xl:w-[15%]'>
               {status ? (
-                <button className='buttonBlue w-full'>Записаться</button>
+                <button onClick={handleChangeStatus} className='buttonBlue w-full'>Записаться</button>
               ) : (
                 <button onClick={onButtonClick} className='buttonBlue w-full'>Посмотреть запись</button>
               )}
             </div>
           </div>
+
+          {/* MODAL */}
+          <SeminarModal visible={open} close={handleChangeStatus} />
+
+
+
           <div className='order-[3] 2xl:order-1 border-t border-t-[#E4E4E4] mt-[25px] 2xl:mt-[30px] pt-[25px] 2xl:pt-[30px]'>
             <div className='flex flex-row items-center text-[15px] leading-[18px] text-[#222E51] font-jost  2xl:text-[20px]'>
               <CiClock2 className='mr-[10px] w-[20px] h-[20px] 2xl:w-[25px] 2xl:h-[25px] 2xl:ml-[1px]' />
               <div>
                 <p>
-                {formatDate(date , time)}
+                  {formatDate(date, time)}
                 </p>
               </div>
             </div>
