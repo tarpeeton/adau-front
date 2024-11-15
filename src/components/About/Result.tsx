@@ -1,18 +1,20 @@
 
-
-import { FC } from 'react'
-
+"use cleint"
+import { FC , useState } from 'react'
+import ContactUs from '../Modal/contacts-modal'
 
 const Result: FC = () => {
+    const [open ,setOpen] = useState(false)
+const handleChangeOpen = () => setOpen(!open)
     return (
         <div className='mt-[80px] 2xl:mt-[200px] px-[16px] 2xl:px-[50px] 4xl:px-[240px]'>
             <div className='flex flex-col 2xl:flex-row'>
                 <div className='pb-[30px] border-b border-b-[#E4E4E4] 2xl:w-[55%] 2xl:border-b-0 '>
                     <p className='text-[26px] 2xl:text-[50px] leading-[32px] 2xl:leading-[62px] font-jost text-titleDark'>Цифры говорят <br /> сами за себя</p>
                     <div className='mt-[30px] hidden 2xl:flex w-[70%]  items-center 2xl:w-[40%] '>
-                    <p className='buttonBlue'>
+                    <button onClick={handleChangeOpen} className='buttonBlue'>
                         Вступить в ассоциацию
-                    </p>
+                    </button>
                 </div>
                 </div>
                 {/* RESULT */}
@@ -31,11 +33,13 @@ const Result: FC = () => {
                     </div>
                 </div>
                 <div className='mt-[30px] w-[70%]  flex items-center 2xl:w-[40%] 2xl:hidden '>
-                    <p className='buttonBlue'>
+                    <button onClick={handleChangeOpen} className='buttonBlue'>
                         Вступить в ассоциацию
 
-                    </p>
+                    </button>
                 </div>
+   <ContactUs  visible={open} close={handleChangeOpen}/>
+
             </div>
         </div>
     )

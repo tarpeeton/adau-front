@@ -2,13 +2,10 @@
 import { FC, useState, useEffect } from 'react'
 import ReactPlayer from 'react-player'
 import { client } from "@/sanity/lib/client"
-import { urlFor } from '@/sanity/lib/image'
-// ICON
-import { IoIosPlay } from "react-icons/io"
-// DEFAULT VIDEO
-const video = 'https://youtu.be/TlMUknHQYLU?si=iJivAS3Vd9ygABzt'
 import { IAboutBanner } from '@/interface/IAbout/about'
 import useLocale from '@/hooks/useLocale'
+
+import { IoIosPlay } from "react-icons/io"
 
 
 const Video: FC = () => {

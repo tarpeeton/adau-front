@@ -1,50 +1,25 @@
 "use client"
 
-import { FC  } from 'react'
+import { FC   , useState , useEffect} from 'react'
 import { StaticImageData } from 'next/image'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
-
-
+// ADMIN
+import { client } from "@/sanity/lib/client"
+import { urlFor } from '@/sanity/lib/image'
 
 import { GrLinkNext } from "react-icons/gr"
 import { GrLinkPrevious } from "react-icons/gr"
 
 
-// hook
 import useSwiperNavigation from '@/hooks/useSwiperNavigation'
 
-// images 
+import { IPartnersData } from '@/interface/partner'
 
-import One from '@/public/partners/one.png'
-import Two from '@/public/partners/two.png'
-import Three from '@/public/partners/three.png'
 
-type PartnerItem = {
-    url: StaticImageData; // Since the images are imported, they are of type StaticImageData
-}
-
-const PartnersData: PartnerItem[] = [
-    { url: One },
-    { url: Two },
-    { url: Three },
-    { url: Two },
-    { url: One },
-    { url: Three },
-    { url: Two },
-    { url: One },
-    { url: Three },
-    { url: One },
-    { url: Two },
-    { url: Three },
-    { url: Two },
-    { url: One },
-    { url: Three },
-    { url: One },
-]
 
 const chunkArray = <T,>(array: T[], size: number): T[][] => {
     const result: T[][] = []
@@ -60,9 +35,23 @@ interface IPartners {
 
 const Partners: FC<IPartners> = ({active}) => {
     const { swiperRef, handlePrev, handleNext } = useSwiperNavigation()
-
-    const slidesData = chunkArray(PartnersData, 8)
-
+    const [partnerData , setPartnerData] = useState<IPartnersData[] | []>([])
+    const slidesData = chunkArray(partnerData, 8)
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const partners =  await client.fetch(
+              `*[_type == "partner"]{_id,
+name,
+image}`
+            )
+            setPartnerData(partners)
+          } catch (error) {
+            console.debug(error)
+          }
+        }
+        fetchData()
+      } , [])
 
     return (
         <div className="mt-[80px] 2xl:mt-[200px] py-[40px] 2xl:py-[100px] px-[20px] 4xl:px-[240px] 2xl:px-[50px] ">
@@ -84,7 +73,7 @@ const Partners: FC<IPartners> = ({active}) => {
                             <div className="flex flex-row flex-wrap">
                                 {group.map((partner, index) => (
                                     <div key={index} className="w-[50%] 2xl:w-[25%] flex justify-center items-center border border-[#E4E4E4] h-[115px] 2xl:h-[230] 4xl:h-[250px]">
-                                        <Image src={partner.url} alt={`Partner ${index}`} width={100} height={100} quality={100} />
+                                        <Image src={urlFor(partner.image.asset._ref).url()} alt={`Partner ${index}`} width={100} height={100} quality={100} />
                                     </div>
                                 ))}
                             </div>

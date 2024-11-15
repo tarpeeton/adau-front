@@ -24,6 +24,24 @@ export default defineType({
         }),
     },
     {
+      name: 'position',
+      type: 'object',
+      title: 'Должность',
+      fields: [
+        { name: 'uz', type: 'string', title: 'Lavozim (Uzbek)' },
+        { name: 'ru', type: 'string', title: 'Должность (Русский)' },
+        { name: 'en', type: 'string', title: 'Position (English)' },
+      ],
+      description: 'Введите должность спикера на трёх языках',
+      validation: (Rule) =>
+        Rule.custom((fields: { uz?: string; ru?: string; en?: string }) => {
+          if (!fields || !fields.uz || !fields.ru || !fields.en) {
+            return 'Все поля должности должны быть заполнены';
+          }
+          return true;
+        }),
+    },
+    {
       name: 'image',
       type: 'image',
       title: 'Изображение',

@@ -15,9 +15,12 @@ import videomediaCotegory from './videomedia-cotegory'
 import videomedia from './videomedia'
 import caseCategory from './case-category'
 import Case from './create-case'
+import whyAddAdau from './whyAddAdau'
+import seminar from './seminar'
+import seminarCotegory from './seminar-cotegory'
 
 
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [timeline , partners , blogCotegory , blog , team , cotegoryReview ,  reviews , spikers , blogComment , contacts , banner , aboutBanner , videomediaCotegory , videomedia , caseCategory , Case],
+  types: [timeline , partners , blogCotegory , blog , team , cotegoryReview ,  reviews , spikers , blogComment , contacts , banner , aboutBanner , videomediaCotegory , videomedia , caseCategory , Case , whyAddAdau , seminar , seminarCotegory],
 }

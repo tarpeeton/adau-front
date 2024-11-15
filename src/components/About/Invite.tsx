@@ -10,13 +10,48 @@ import ScrollImage from '@/public/invite.jpg'
 import { GrLinkNext } from "react-icons/gr"
 import { GrLinkPrevious } from "react-icons/gr"
 
+// ADMIN
+import { client } from "@/sanity/lib/client"
+import { urlFor } from '@/sanity/lib/image'
+
 
 import useSwiperNavigation from '@/hooks/useSwiperNavigation'
+import { IWhyJoinAdau } from '@/interface/whyJoinAdau'
+import useLocale from '@/hooks/useLocale'
+import ContactUs from '../Modal/contacts-modal'
+
+
+
+
 const Invite: FC = () => {
     const { swiperRef, handlePrev, handleNext } = useSwiperNavigation()
+    const [WhyData, setWhyData] = useState<IWhyJoinAdau[] | []>([])
+    const [open ,setOpen] = useState(false)
+
+    const handleChangeOpen = () => setOpen(!open)
+
+
+    const locale = useLocale()
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const whyJoinAdau = await client.fetch(
+                    `*[_type == "whyJoinAdau"]{_id,
+title,
+options}`
+                )
+                setWhyData(whyJoinAdau)
+            } catch (error) {
+                console.debug(error)
+            }
+        }
+        fetchData()
+    }, [])
 
     return (
         <div className='mt-[80px] 2xl:mt-[100px] px-[16px] 2xl:px-[50px] 4xl:px-[240px]'>
+
             <div className='block 2xl:hidden'>
                 <p className='text-[26px] font-jost text-titleDark uppercase'>Почему стоит стать членом ADAU?</p>
             </div>
@@ -31,36 +66,36 @@ const Invite: FC = () => {
                             autoplay={{ delay: 2000, disableOnInteraction: false }}
                             loop={false}
                         >
-                            <SwiperSlide>
-                                <div className='relative 2xl:flex 2xl:flex-row 2xl:justify-between'>
-                                    <div className='h-[230px] 2xl:h-[703px] 2xl:w-[48%]'>
-                                        <Image src={ScrollImage} alt='seminar photo' width={800} height={703} className='object-cover w-full h-full' quality={100} />
-                                    </div>
-                                    <div className='mt-[30px] flex flex-col gap-[20px] 2xl:w-[48%] 2xl:gap-[40px]'>
-                                        <p className='hidden 2xl:block text-[45px] uppercase font-jost'>
-                                            Почему стоит стать <br /> членом ADAU?
-                                        </p>
-                                        <p className='pb-[20px] 2xl:mt-[20px] border-b border-b-[#E4E4E4] text-[18px] font-bold text-[#414141] leading-[22px] 2xl:pb-[40px] 2xl:text-[25px] 2xl:text-titleDark'>
-                                            Участие в эксклюзивных семинарах и тренингах
-                                        </p>
-                                        <p className='pb-[20px] border-b border-b-[#E4E4E4] text-[18px] font-bold text-[#414141] leading-[22px] 2xl:pb-[40px] 2xl:text-[25px] 2xl:text-titleDark'>
-                                            Участие в эксклюзивных семинарах и тренингах
-                                        </p>
-                                        <p className='pb-[20px] border-b border-b-[#E4E4E4] text-[18px] font-bold text-[#414141] leading-[22px] 2xl:pb-[40px] 2xl:text-[25px] 2xl:text-titleDark'>
-                                            Участие в эксклюзивных семинарах и тренингах
-                                        </p>
-                                        <p className='pb-[20px] border-b border-b-[#E4E4E4] text-[18px] font-bold text-[#414141] leading-[22px] 2xl:pb-[40px] 2xl:text-[25px] 2xl:text-titleDark'>
-                                            Участие в эксклюзивных семинарах и тренингах
-                                        </p>
-                                        <div className='mt-[10px] w-[70%]  flex items-center 2xl:w-[40%] '>
-                                            <p className='buttonBlue'>
-                                                Вступить в ассоциацию
-
+                            {WhyData.map((item, index) => (
+                                <SwiperSlide key={index}>
+                                    <div className='relative 2xl:flex 2xl:flex-row 2xl:justify-between'>
+                                        <div className='h-[230px] 2xl:h-[703px] 2xl:w-[48%]'>
+                                            <Image src={ScrollImage} alt='seminar photo' width={800} height={703} className='object-cover w-full h-full' quality={100} />
+                                        </div>
+                                        <div className='mt-[30px] flex flex-col gap-[20px] 2xl:w-[48%] 2xl:gap-[40px]'>
+                                            <p className='hidden 2xl:block text-[45px] uppercase font-jost'>
+                                                Почему стоит стать <br /> членом ADAU?
                                             </p>
+                                            {item.options.map((item, index) => (
+                                                <p key={index} className='pb-[20px] 2xl:mt-[20px] border-b border-b-[#E4E4E4] text-[18px] font-bold text-[#414141] leading-[22px] 2xl:pb-[20px] 2xl:text-[25px] 2xl:text-titleDark'>
+                                                   {item.name[locale]}
+                                                </p>
+                                            ))}
+
+
+                                            <div className='mt-[10px] w-[70%]  flex items-center 2xl:w-[40%] '>
+                                                <button onClick={handleChangeOpen} className='buttonBlue'>
+                                                    Вступить в ассоциацию
+
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </SwiperSlide>
+                                </SwiperSlide>
+                            ))}
+
+    <ContactUs  visible={open} close={handleChangeOpen}/>
+
                         </Swiper>
                         <div className='absolute top-[150px] 4xl:right-[260px] right-[20px] ] z-[99] flex items-center gap-[15px] 2xl:right-auto 2xl:left-[450px] 2xl:top-auto 2xl:bottom-[20px]'>
                             <button onClick={handlePrev} className='flex items-center justify-center rounded-full w-[60px] h-[60px] border border-[#FFFFFF] backdrop-blur-[15px] bg-inherit 2xl:w-[90px] 2xl:h-[90px]'>
