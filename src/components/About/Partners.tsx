@@ -18,7 +18,7 @@ import { GrLinkPrevious } from "react-icons/gr"
 import useSwiperNavigation from '@/hooks/useSwiperNavigation'
 
 import { IPartnersData } from '@/interface/partner'
-
+import ContactUs from '../Modal/contacts-modal'
 
 
 const chunkArray = <T,>(array: T[], size: number): T[][] => {
@@ -35,8 +35,23 @@ interface IPartners {
 
 const Partners: FC<IPartners> = ({active}) => {
     const { swiperRef, handlePrev, handleNext } = useSwiperNavigation()
+    const [open, setOpen] = useState(false)
+    const handleChangeStatus = () => setOpen(!open)
     const [partnerData , setPartnerData] = useState<IPartnersData[] | []>([])
     const slidesData = chunkArray(partnerData, 8)
+
+
+
+
+
+
+
+
+
+
+
+
+
     useEffect(() => {
         const fetchData = async () => {
           try {
@@ -83,9 +98,11 @@ image}`
             </Swiper>
             </div>
             <div className='flex flex-row justify-between items-center 2xl:mt-[50px] '>
+            <ContactUs visible={open} close={handleChangeStatus} />
+
             {active ? (
                 <div className='hidden 2xl:block w-[20%] '>
-                    <button className='buttonBlue  '>
+                    <button onClick={handleChangeStatus} className='buttonBlue'>
                     Стать партнером
                 </button>
                     </div>

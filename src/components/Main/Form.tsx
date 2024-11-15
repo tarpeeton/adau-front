@@ -1,7 +1,8 @@
-import React, {FC} from 'react';
+"use client"
+import React, {FC  , useState} from 'react';
 import Image from 'next/image';
-
-
+import ContactUs from '../Modal/contacts-modal';
+import QuestionModal from '../Modal/question-modal';
 
 // images
 import A from '@/public/form/a.png'
@@ -15,6 +16,15 @@ interface IFormPropsText {
 
 
 const Form: FC<IFormPropsText> = ({title,text}) => {
+  const [questionModal , setQuestionModal] = useState(false)
+  const [invite , setInvite] = useState(false) 
+
+
+  const hanldeOpenQuestion = () => setQuestionModal(!questionModal)
+
+  const handleOpenAdd = () => setInvite(!invite)
+
+
   return (
     <div className='mt-[80px] 2xl:mt-[200px]'>
         <div className=' bg-[#222E51] py-[40px] px-[16px] 2xl:py-[100px] 2xl:px-[50px]  4xl:px-[240px] flex flex-col 2xl:flex-row'>
@@ -27,8 +37,10 @@ const Form: FC<IFormPropsText> = ({title,text}) => {
 
                     <p className='mt-[10px] 2xl:mt-[20px] 2xl:w-[50%] text-[15px] leading-[18px] text-[#A0A0A0]'>{text}</p>
                     <div className='flex flex-row flex-nowrap justify-between mt-[25px] 2xl:w-[45%] 2xl:mt-[50px]'>
-                        <button className='buttonWhite w-[55%]'>Вступить в ассоциацию</button>
-                        <button className='borderedButtonWhite w-[43%] flex items-center justify-center'>Стать партнером</button>
+                        <button onClick={handleOpenAdd} className='buttonWhite w-[55%]'>Вступить в ассоциацию</button>
+                        <button onClick={hanldeOpenQuestion} className='borderedButtonWhite w-[43%] flex items-center justify-center'>Стать партнером</button>
+                        <ContactUs visible={invite} close={handleOpenAdd} />
+                        <QuestionModal visible={questionModal} close={hanldeOpenQuestion} />
                     </div>
             </div>
             <div className='mt-[30px] flex items-center gap-[8px] justify-center 2xl:w-[40%] 2xl:items-end 2xl:mt-[220px] 2xl:ml-[-80px]'>
