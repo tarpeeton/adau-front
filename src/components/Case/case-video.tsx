@@ -4,9 +4,15 @@ import ReactPlayer from 'react-player'
 
 // ICON
 import { BsYoutube } from "react-icons/bs"
-const video = 'https://youtu.be/QDRXGmNnrzc?si=ptMXtFjO-S76_XED'
 
-const CaseVideo: FC = () => {
+
+interface ICaseVideoProps {
+    youtubeVideo: string,
+
+}
+
+
+const CaseVideo: FC<ICaseVideoProps> = ({youtubeVideo}) => {
     const [isClient, setIsClient] = useState(false)
     const [isPlaying, setIsPlaying] = useState(false)
 
@@ -20,10 +26,10 @@ const CaseVideo: FC = () => {
             <p className='text-[26px]  uppercase leading-[32px] 2xl:text-[45px] 2xl:leading-[59px] text-[#000000] font-jost'>
                 Видео
             </p>
-            <div className='mt-[30px] 2xl:h-[600px] cursor-pointer'>
+            <div className='mt-[30px] 2xl:h-[600px] h-[250px] cursor-pointer'>
                 {isClient && (
                     <ReactPlayer
-                        url={video}
+                        url={youtubeVideo}
                         playing={isPlaying}
                         controls={true}
                         width="100%"
@@ -31,7 +37,7 @@ const CaseVideo: FC = () => {
                         light={true} // Show thumbnail before playing
                         playIcon={
                             <div className=" inset-0 flex items-center justify-center  bg-opacity-50  cursor-pointer">
-                                <BsYoutube className='text-white 2xl:w-[60px] 2xl:h-[60px]' />
+                                <BsYoutube className='text-white w-[50px] h-[50px] 2xl:w-[60px] 2xl:h-[60px]' />
                             </div>
                         }
                         onClickPreview={() => setIsPlaying(true)} // Start playing after clicking on the thumbnail

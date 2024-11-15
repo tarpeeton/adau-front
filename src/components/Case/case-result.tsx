@@ -47,7 +47,6 @@ const CaseResult: FC<ICaseResultProps> = ({ results, resultImage }) => {
         setActiveId(activeId === id ? null : id)
     }
 
-    console.log(results, "RESULT")
 
     return (
         <div className='mt-[80px] 2xl:mt-[200px] px-[16px] 2xl:px-[50px] 4xl:px-[240px]'>

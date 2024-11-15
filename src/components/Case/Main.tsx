@@ -57,13 +57,13 @@ const CaseMain: FC = () => {
 
   return (
     <div>
-      <CaseBaner title={caseData.title} description={caseData.description} slider={caseData.slider} youtubeVideo={caseData.youtubeVideo} />
+      <CaseBaner title={caseData.title} description={caseData.description} slider={caseData.slider}   />
       <AboutCase locale={locale} onResultsClick={scrollToResults} aboutText={caseData.aboutText} tasks={caseData.tasks} solutions={caseData.solutions} />
       <div ref={caseResultRef}>
         <CaseResult results={caseData.results}
           resultImage={caseData.resultImage} />
       </div>
-      <CaseVideo />
+      <CaseVideo youtubeVideo={caseData.youtubeVideo} />
       <UserTestimonials isShow={false} />
       <CaseAction />
     </div>

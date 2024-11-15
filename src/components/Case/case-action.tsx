@@ -24,8 +24,8 @@ const CaseAction: FC = () => {
                         Свяжитесь с нами для консультации и начните работу над своим проектом уже сегодня
                     </p>
                     <div className='flex flex-row flex-nowrap justify-between mt-[25px] 2xl:w-[60%] 2xl:mt-[50px]'>
-                        <button className='buttonWhite w-[50%]'>Связаться с нами</button>
-                        <Link href='/project' className='borderedButtonWhite w-[46%] flex items-center justify-center'>Посмотреть все проекты</Link>
+                        <button className='buttonWhite w-[49%]'>Связаться с нами</button>
+                        <Link href='/project' className='borderedButtonWhite w-[49%] flex items-center justify-center'>Посмотреть проекты</Link>
                     </div>
                 </div>
                 <div className='mt-[30px] flex items-center gap-[8px] justify-center 2xl:w-[40%] 2xl:items-end 2xl:mt-[220px] 2xl:ml-[-80px]'>
