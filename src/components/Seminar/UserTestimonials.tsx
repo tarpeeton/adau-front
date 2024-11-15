@@ -1,7 +1,7 @@
 'use client'
 
 import { FC, useState, useEffect } from 'react'
-import Link from 'next/link'
+import { Link } from '@/i18n/routing'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
@@ -12,14 +12,14 @@ import { GrLinkNext } from "react-icons/gr"
 import { GrLinkPrevious } from "react-icons/gr"
 
 import useSwiperNavigation from '@/hooks/useSwiperNavigation'
+import useLocale from '@/hooks/useLocale'
 
+import { client } from "@/sanity/lib/client";
+import { IReviewData } from '@/interface/IReviews/review'
+import formatDate from '@/hooks/useFormatDate'
 
+import FullReviewsModal from '../Modal/reviews-modal'
 
-
-const Data = [
-    { id: '1', name: "Иван Иванов", date: '29.10.2024', comment: 'Lorem ipsum dolor sit amet consectetur. Ullamcorper suspendisse mi id pretium suspendisse lorem facilisi libero. Amet sed ultrices ornare dignissim. Tincidunt amet sit semper luctus turpis lobortis molestie metus. Id in et senectus sodales.' },
-    { id: '2', name: "Rustam Rinatovich", date: '29.10.2024', comment: 'Lorem ipsum dolor sit amet consectetur. Ullamcorper suspendisse mi id pretium suspendisse lorem facilisi libero. Amet sed ultrices ornare dignissim. Tincidunt amet sit semper luctus turpis lobortis molestie metus. Id in et senectus sodales.' },
-]
 
 interface IUserTestimonials {
     isShow: boolean
@@ -27,8 +27,41 @@ interface IUserTestimonials {
 
 
 
+
+
+
+
+
 const UserTestimonials: FC<IUserTestimonials> = ({ isShow }) => {
     const { swiperRef, handlePrev, handleNext } = useSwiperNavigation()
+    const locale = useLocale()
+    const [reviewsData, setReviewsData] = useState<IReviewData[] | []>([])
+    const [selectedReview, setSelectedReview] = useState<IReviewData | null>(null) // State to store selected review for modal
+    const [isModalVisible, setModalVisible] = useState(false) // Modal visibility state
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const reviewsDataAll = await client.fetch(
+                    `*[_type == "review" && references(*[_type == "reviewCategory" && name.ru == "Клиентов"]._id)]`
+                );
+                setReviewsData(reviewsDataAll)
+            } catch (error) {
+                console.debug(error)
+            }
+        }
+        fetchData()
+    }, [])
+
+    // Function to open the modal with the selected review data
+    const openModal = (review: IReviewData) => {
+        setSelectedReview(review)
+        setModalVisible(true)
+    }
+
+    const closeModal = () => {
+        setModalVisible(false)
+    }
 
     return (
         <div>
@@ -53,43 +86,55 @@ const UserTestimonials: FC<IUserTestimonials> = ({ isShow }) => {
                                 },
                             }}
                         >
-
-
-                            {Data.map((item, index) => (
+  {reviewsData.map((item, index) => (
                                 <SwiperSlide key={index} className='cursor-pointer '>
                                     <div className='bg-white p-[20px] 2xl:p-[25px]'>
                                         {/* name */}
                                         <div className='flex flex-col'>
-                                            <p className='text-[18px] leading-[26.01px] font-jost font-medium 2xl:text-[24px] 2xl:leading-[34.68px]'>{item.name}</p>
-                                            <p className='text-[14px] leading-[18px] text-[#222E51] font-jost 2xl:text-[17px] 2xl:leading-[24.57px]'>{item.date}</p>
+                                            <p className='text-[18px] leading-[26.01px] font-jost font-medium 2xl:text-[24px] 2xl:leading-[34.68px]'>{item.name[locale]}</p>
+                                            <p className='text-[14px] leading-[18px] text-[#222E51] font-jost 2xl:text-[17px] 2xl:leading-[24.57px]'>{formatDate(item._createdAt)}</p>
                                         </div>
                                         {/* text */}
                                         <div className='2xl:relative'>
                                             <div className='mt-[15px] 2xl:mt-[25px] 2xl:h-[174px] 4xl:h-[190px]'>
                                                 <p className='text-[15px] leading-[18px] 2xl:text-[20px] 2xl:leading-[28.9px]'>
-                                                    {item?.comment.length > 242 ? item.comment.slice(0, 242) + "..." : item.comment}
+                                                    {item?.commentary[locale].length > 242 ? item.commentary[locale].slice(0, 242) + "..." : item.commentary[locale]}
                                                 </p>
                                             </div>
                                             {/* Link */}
                                             <div className='mt-[10px]'>
-                                                <Link href='/reviews' className='text-[16px] group all ease-in-out flex flex-row flex-nowrap items-center 2xl:text-[20px]  font-medium font-jost text-[#222E51]'>
+                                                <button onClick={() => openModal(item)}  className='text-[16px] group all ease-in-out flex flex-row flex-nowrap items-center 2xl:text-[20px]  font-medium font-jost text-[#222E51]'>
                                                     Читать полностью
                                                     <GrLinkNext className='ml-[4px] ease-in-out duration-300 group-hover:ml-[10px] 2ml-[8px] w-[20px] h-[20px]  2xl:w-[18px] 2xl:h-[18px] 2xl:mt-[3px]' />
-                                                </Link>
+                                                </button>
                                             </div>
                                         </div>
 
                                     </div>
                                 </SwiperSlide>
                             ))}
+
+
+                           
                         </Swiper>
                     </div>
 
+
+                    <FullReviewsModal
+                        visible={isModalVisible}
+                        close={closeModal}
+                        name={selectedReview?.name[locale] || ''}
+                        date={selectedReview ? formatDate(selectedReview._createdAt) : ''}
+                        text={selectedReview?.commentary[locale] || ''}
+                    />
+
+
+
                     <div className={`flex flex-row gap-[10px] mt-[20px] 2xl:mt-[50px] w-full ${isShow ? 'justify-between' : 'justify-end'}`}>
                         {isShow && (<div className='hidden 2xl:block'>
-                            <button className='buttonBlue'>
+                            <Link href='/reviews' className='buttonBlue'>
                                 Больше отзывов
-                            </button>
+                            </Link>
                         </div>)}
 
 

@@ -4,6 +4,11 @@ import Image from 'next/image'
 import { IoIosArrowDown } from "react-icons/io"
 // image
 import HowWorkImage from '@/public/HowWorkImage.jpg'
+import ContactUs from '../Modal/contacts-modal'
+
+
+
+
 
 const AccardionData = [
     { id: '01', title: 'Консультация и обсуждение задачи клиента', answer: 'Мы начинаем с детальной консультации, чтобы понять ваши цели и задачи. На этом этапе мы обсуждаем ключевые детали проекта, формируем общее видение и определяем путь реализации' },
@@ -14,10 +19,12 @@ const AccardionData = [
 
 const HowWeWork: FC = () => {
     const [activeId, setActiveId] = useState<string | null>(null);
-
+    const [open ,setOpen] = useState(false)
+    
     const toggleAccordion = (id: string) => {
         setActiveId(activeId === id ? null : id);
     };
+    const handleChangeStatus = () => setOpen(!open)
 
     return (
         <div className='mt-[80px] 2xl:mt-[200px] px-[16px] 2xl:px-[50px] 4xl:px-[240px]'>
@@ -53,9 +60,10 @@ const HowWeWork: FC = () => {
                             )}
                         </div>
                     ))}
-                    <button className='buttonBlue w-[60%] 2xl:w-[30%] '>
+                    <button onClick={handleChangeStatus} className='buttonBlue w-[60%] 2xl:w-[30%] '>
                     Заказать консульатцию
                     </button>
+        <ContactUs visible={open} close={handleChangeStatus}/>
                 </div>
             </div>
         </div>

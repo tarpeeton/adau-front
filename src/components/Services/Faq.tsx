@@ -1,8 +1,7 @@
 'use client'
 import { FC, useState } from 'react'
 import { IoIosArrowDown } from "react-icons/io"
-// image
-import HowWorkImage from '@/public/HowWorkImage.jpg'
+import ContactUs from '../Modal/contacts-modal'
 
 const AccardionData = [
     { id: '01', title: 'Консультация и обсуждение задачи клиента', answer: 'Мы начинаем с детальной консультации, чтобы понять ваши цели и задачи. На этом этапе мы обсуждаем ключевые детали проекта, формируем общее видение и определяем путь реализации' },
@@ -14,9 +13,18 @@ const AccardionData = [
 const FaqComponent: FC = () => {
   const [activeId, setActiveId] = useState<string | null>(null);
 
+  
+    const [open ,setOpen] = useState(false)
   const toggleAccordion = (id: string) => {
       setActiveId(activeId === id ? null : id);
   };
+
+
+
+
+
+
+  const handleChangeStatus = () => setOpen(!open)
   return (
     <div className='mt-[80px] 2xl:mt-[200px] px-[16px] 2xl:px-[50px] 4xl:px-[240px]'>
           <p className='text-[26px]  uppercase leading-[32px] 2xl:text-[45px] 2xl:leading-[59px] text-[#000000] font-jost'>
@@ -48,9 +56,10 @@ const FaqComponent: FC = () => {
                     ))}
           </div>
           <div className='w-full flex items-center justify-center mt-[30px]'>
-        <button className='buttonBlue w-[60%] mdx:w-[50%] 2xl:w-[20%]'>
+        <button onClick={handleChangeStatus} className='buttonBlue w-[60%] mdx:w-[50%] 2xl:w-[20%]'>
         Задать вопрос
         </button>
+        <ContactUs visible={open} close={handleChangeStatus}/>
           </div>
     </div>
   );
