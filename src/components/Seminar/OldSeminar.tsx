@@ -107,7 +107,7 @@ const OldSeminar: FC<IOldSeminarProps> = ({cotegory , data}) => {
                 </div>
                 <div className='2xl:hidden'>
                     <button onClick={handleActiveFilter} className='w-full mt-[20px] 2xl:hidden flex flex-row justify-between pb-[13px] border-b border-b-[#222E51]'>
-                        <p className='text-[15px] font-medium font-jost text-[#222E51]'>
+                        <p className='text-[15px]  font-medium font-jost text-[#222E51]'>
                             {activeFilter?.title[locale]}
                         </p>
                         <div>
@@ -137,7 +137,7 @@ const OldSeminar: FC<IOldSeminarProps> = ({cotegory , data}) => {
                         className='object-cover h-[210px] 2xl:h-[300px]'/>
                         <div className='p-[20px] 2xl:p-[30px]'>
                         <div className='pb-[15px]'>
-                            <p className='text-[20px] text-titleDark font-medium font-jost mb-[8px] 2xl:text-[30px]'>
+                            <p className='text-[20px] 2xl:min-h-[90px] text-titleDark font-medium font-jost mb-[8px] 2xl:text-[30px]'>
                                 {item.title[locale]}</p>
                             <p className='text-[15px] leading-[18px]  2xl:text-[18px] 2xl:leading-[22px] text-title80 font-jost'>
                             {item.description[locale].length > 143 ? item.description[locale].slice( 0 , 143) + '....' : item.description[locale]}

@@ -49,28 +49,28 @@ const MainSeminarItems: FC = () => {
             }
           }`,
           { slug }
-        );
-  
+        )
+
         if (data) {
-          setSeminarData(data);
-          setStatus(data.status === 'new');
+          setSeminarData(data)
+          setStatus(data.status === 'new')
         } else {
-          console.warn('No data found for the provided slug');
+          console.warn('No data found for the provided slug')
         }
       } catch (error) {
-        console.debug('Error fetching seminar data:', error);
+        console.debug('Error fetching seminar data:', error)
       }
-    };
-  
-    if (slug) {
-      fetchData();
     }
-  }, [locale, slug]);
-  
+
+    if (slug) {
+      fetchData()
+    }
+  }, [locale, slug])
 
 
 
-  
+
+
 
 
   return (
@@ -89,9 +89,9 @@ const MainSeminarItems: FC = () => {
 
       <SeminarProggram program={seminarData?.seminarProgram} locale={locale} />
       <SeminarSpeakers locale={locale} speakers={seminarData?.speakers ?? []} />
-      {status ? (<InfoPrice priceData={seminarData?.priceData ?? []} />) : (<div ref={videoRef}><SeminarOldVideo  videoUrl={seminarData?.video?.url}
-isFree={seminarData?.video?.isFree}
-price={seminarData?.video?.price} /> </div>)}
+      {status ? (<InfoPrice priceData={seminarData?.priceData ?? []} />) : (<div ref={videoRef}><SeminarOldVideo videoUrl={seminarData?.video?.url}
+        isFree={seminarData?.video?.isFree}
+        price={seminarData?.video?.price} /> </div>)}
 
       <UserTestimonials isShow={false} />
       <SeminarActions />

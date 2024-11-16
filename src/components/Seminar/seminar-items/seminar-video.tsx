@@ -1,8 +1,7 @@
 'use client'
 import { FC, useState, useEffect } from 'react'
 import ReactPlayer from 'react-player'
-
-
+import { FaYoutube } from "react-icons/fa";
 
 interface SeminarOldVideoProps {
   videoUrl: string | undefined;
@@ -14,6 +13,7 @@ const SeminarOldVideo: FC<SeminarOldVideoProps> = ({videoUrl,
   isFree,
   price}) => {
 
+    console.log(price)
 
   const [isClient, setIsClient] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
@@ -28,7 +28,7 @@ const SeminarOldVideo: FC<SeminarOldVideoProps> = ({videoUrl,
       <p className='text-[26px] 2xl:text-[45px] uppercase text-titleDark'>Видео</p>
 
       <div className='mt-[25px] 2xl:mt-[60px] h-[210px]  2xl:h-[600px] relative'>
-        {isFree ? null : (
+        {isFree && price === undefined ? null : (
            <div className='absolute w-full h-full p-[20px]  backdrop-blur-[5px] z-[99]  flex flex-col 2xl:justify-center 2xl:items-center bg-[#00000080]'>
 
            <p className='text-[20px] 2xl:text-[40px] font-medium text-titleWhite'>Платный контент</p>
@@ -44,19 +44,28 @@ const SeminarOldVideo: FC<SeminarOldVideoProps> = ({videoUrl,
 
        
 
-
-        {isClient && (
-          <ReactPlayer
-            url={videoUrl}
-            playing={isPlaying}
-            controls={true}
-            width="100%"
-            height="100%"
-            light={true} // Show thumbnail before playing
-            onClickPreview={() => setIsPlaying(true)} // Start playing after clicking on the thumbnail
-            pip={true}
-            className='relative'
-          />
+{isClient && (
+          <div className='relative w-full h-full'>
+            <ReactPlayer
+              url={videoUrl}
+              playing={isPlaying}
+              controls={true}
+              width="100%"
+              height="100%"
+              light={!isPlaying} // Show thumbnail before playing
+              onClickPreview={() => setIsPlaying(true)} // Ensure this starts playing on thumbnail click
+              pip={true}
+              className='relative'
+            />
+            {!isPlaying && (
+              <button
+                className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'
+                onClick={() => setIsPlaying(true)}
+              >
+                <FaYoutube className='w-[50px] h-[50px] 2xl:w-[70px] 2xl:h-[70px] text-[#222E51]' />
+              </button>
+            )}
+          </div>
         )}
       </div>
     </div>

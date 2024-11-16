@@ -1,4 +1,5 @@
-import React, { FC } from 'react'
+"use client"
+import React, { FC, useState } from 'react'
 import Image from 'next/image'
 
 
@@ -8,11 +9,14 @@ import A from '@/public/form/a.png'
 import D from '@/public/form/d.png'
 import U from '@/public/form/u.png'
 
-
-
+import ScheduleModal from '@/components/Modal/schedule-modal'
+import SeminarModal from '@/components/Modal/seminar-modal'
 
 const SeminarActions: FC = () => {
-
+    const [open, setOpen] = useState(false)
+    const [openSeminarModal, setSeminarModal] = useState(false)
+    const handleSwitchStatus = () => setOpen(!open)
+    const handleSwitchModalStatus = () => setSeminarModal(!openSeminarModal)
 
     return (
         <div className='mt-[80px] 2xl:mt-[200px]'>
@@ -22,12 +26,14 @@ const SeminarActions: FC = () => {
                         Не упустите возможность присоединиться!
                     </p>
                     <p className='mt-[10px] 2xl:mt-[20px] 2xl:w-[50%] text-[15px] leading-[18px] text-white opacity-[80%]'>
-                    Запишитесь на семинар, чтобы узнать новейшие тренды и получить практические знания от ведущих экспертов
+                        Запишитесь на семинар, чтобы узнать новейшие тренды и получить практические знания от ведущих экспертов
                     </p>
                     <div className='flex flex-col gap-[12px] 2xl:gap-0 2xl:flex-row flex-nowrap justify-between mt-[25px] 2xl:w-[60%] 2xl:mt-[50px]'>
-                        <button className='buttonWhite 2xl:w-[49%]'>Записаться на семинар
+                        <button onClick={handleSwitchModalStatus} className='buttonWhite 2xl:w-[49%]'>Записаться на семинар
                         </button>
-                        <button  className='borderedButtonWhite 2xl:w-[49%] flex items-center justify-center'>Посмотреть расписание</button>
+                        <SeminarModal visible={openSeminarModal} close={handleSwitchModalStatus} />
+                        <button className='borderedButtonWhite 2xl:w-[49%] flex items-center justify-center'>Посмотреть расписание</button>
+                        <ScheduleModal visible={open} close={handleSwitchStatus} />
                     </div>
                 </div>
                 <div className='mt-[30px] flex items-center gap-[8px] justify-center 2xl:w-[40%] 2xl:items-end 2xl:mt-[220px] 2xl:ml-[-80px]'>

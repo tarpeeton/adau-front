@@ -1,4 +1,10 @@
-import { defineType } from 'sanity';
+import { defineType, SanityDocument } from 'sanity';
+
+interface LocaleString {
+  ru: string;
+  uz: string;
+  en: string;
+}
 
 export default defineType({
   name: 'seminar',
@@ -32,17 +38,18 @@ export default defineType({
       title: 'Дата',
       type: 'date',
       options: {
-        dateFormat: 'YYYY-MM-DD' // Форматирование даты
+        dateFormat: 'YYYY-MM-DD'
       },
-      validation: Rule => Rule.required()
-        .custom((date) => {
-          if (typeof date === 'string') {
+      validation: Rule =>
+        Rule.required()
+          .custom((date: string) => {
             const today = new Date().toISOString().split('T')[0];
-            return date <= today || 'Дата должна быть сегодняшней или предыдущей.';
-          }
-          return 'Неверный формат даты.';
-        })
-        .error('Дата обязательна для заполнения.')
+            if (date && date <= today) {
+              return true;
+            }
+            return 'Дата должна быть сегодняшней или предыдущей.';
+          })
+          .error('Дата обязательна для заполнения.')
     },
     {
       name: 'time',
@@ -72,7 +79,13 @@ export default defineType({
         ],
         layout: 'radio'
       },
-      initialValue: 'new',
+      initialValue: (document: SanityDocument | undefined) => {
+        const currentDate = new Date().toISOString().split('T')[0];
+        if (document?.date && document.date < currentDate) {
+          return 'old';
+        }
+        return 'new';
+      },
       validation: Rule => Rule.required().error('Статус обязателен для выбора.')
     },
     {
@@ -89,28 +102,29 @@ export default defineType({
       title: 'Видео',
       type: 'object',
       description: 'Доступно только при статусе "Старый".',
-      hidden: ({ document }) => document?.status !== 'old',
+      hidden: ({ document }: { document: SanityDocument | undefined }) => {
+        return document?.status !== 'old';
+      },
       fields: [
         {
           name: 'url',
           title: 'Ссылка на видео',
           type: 'url',
-          validation: Rule => Rule.uri({
-            scheme: ['http', 'https', 'youtube']
-          }).error('Неверный формат ссылки на видео.')
+          validation: Rule =>
+            Rule.uri({ scheme: ['http', 'https', 'youtube'] }).error('Неверный формат ссылки на видео.')
         },
         {
           name: 'isFree',
           title: 'Бесплатное видео',
           type: 'boolean',
           initialValue: true,
-          description: 'Укажите, является ли видео бесплатным.',
+          description: 'Укажите, является ли видео бесплатным.'
         },
         {
           name: 'price',
           title: 'Цена за видео',
           type: 'number',
-          hidden: ({ parent }) => parent?.isFree,
+          hidden: ({ parent }: { parent: { isFree: boolean } }) => parent.isFree,
           validation: Rule => Rule.min(0).error('Цена должна быть неотрицательной.')
         }
       ]
@@ -126,6 +140,9 @@ export default defineType({
       name: 'priceData',
       title: 'Данные о стоимости',
       type: 'array',
+      hidden: ({ document }: { document: SanityDocument | undefined }) => {
+        return document?.status === 'old';
+      },
       of: [
         {
           type: 'object',
@@ -196,9 +213,9 @@ export default defineType({
       title: 'Слаг',
       type: 'slug',
       options: {
-        source: 'title.ru',
+        source: 'title.en',
         maxLength: 200,
-        slugify: input => input.toLowerCase().replace(/\s+/g, '-').slice(0, 200)
+        slugify: (input: string) => input.toLowerCase().replace(/\s+/g, '-').slice(0, 200)
       },
       validation: Rule => Rule.required().error('Слаг обязателен для заполнения.')
     }

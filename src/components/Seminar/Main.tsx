@@ -50,8 +50,6 @@ useEffect(() => {
       setData(NewSeminar);
       setOldData(oldSeminars);
 
-      console.log('All Data:', Data);
-      console.log('Old Data:', oldSeminars);
     } catch (error) {
       console.debug(error);
     }

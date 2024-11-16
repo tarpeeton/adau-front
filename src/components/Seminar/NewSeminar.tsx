@@ -143,33 +143,35 @@ const NewSeminar: FC<INewSeminarProps> = ({cotegory , data}) => {
             </div>
             <div className='mt-[20px] flex flex-col 2xl:flex-row 2xl:flex-wrap gap-[20px]'>
                 {filteredBlogData.slice(0 , sliceNumber).map((item, index) => (
-                    <div key={index} className='p-[20px] 2xl:p-[30px] border border-[#E4E4E4] 2xl:w-[32%] 2xl:mt-[20px] '>
+                    <div key={index} className='p-[20px] relative 2xl:p-[30px] border border-[#E4E4E4] 2xl:w-[32%] 2xl:mt-[20px] '>
                         <div className='pb-[15px]  border-b border-b-[#E4E4E4]'>
                             <p className='text-[20px] text-titleDark font-medium font-jost mb-[8px] 2xl:text-[30px]'>{item.title[locale]}</p>
-                            <p className='text-[15px] leading-[18px]  2xl:text-[18px] 2xl:leading-[22px] text-title80 font-jost'>
+                            <p className='text-[15px] leading-[18px]  2xl:text-[18px] 2xl:leading-[22px] text-title80 font-jost 2xl:min-h-[88px]'>
 
                             {item.description[locale].length > 143 ? item.description[locale].slice( 0 , 143) + '....' : item.description[locale]}
 
 
                             </p>
                         </div>
-                        <div className='mt-[15px]'>
-                            <div >
+                        <div className='mt-[15px] flex flex-col justify-between '>
+                            <div  >
                                 <div className='flex flex-row items-center text-[15px] leading-[18px] text-[#222E51] font-jost  2xl:text-[20px]'>
                                     <CiClock2 className='mr-[10px] w-[20px] h-[20px] 2xl:w-[25px] 2xl:h-[25px] 2xl:ml-[1px]' />
-                                    <div>
+                                    <div >
                                         <p>{formatDate(item.date)}; <span>{item.time}</span></p>
                                     </div>
                                 </div>
-                                <div className='flex flex-row items-center text-[15px] mt-[5px] leading-[18px] text-[#222E51] font-jost  2xl:text-[20px]'>
-                                    <CiLocationOn className='mr-[10px] w-[25px] h-[25px] 2xl:w-[28px] 2xl:h-[28px]' />
+                                <div className='flex flex-row items-center text-[15px] mt-[5px] leading-[18px] text-[#222E51] font-jost  2xl:text-[20px] break-words 2xl:min-h-[36px]'>
+                                    <div className='w-[25px] flex items-center justify-center h-[25px] 2xl:w-[28px] 2xl:h-[28px]'>
+                                    <CiLocationOn className='h-[25px] 2xl:w-[28px] 2xl:h-[28px] '/>
+                                        </div>
                                     <div>
                                         <p>{item.address[locale]}</p>
                                     </div>
                                 </div>
                             </div>
                             {/* button for info */}
-                            <div className='mt-[25px] flex flex-row gap-[11px] w-full'>
+                            <div className='mt-[25px]  flex flex-row gap-[11px] w-full'>
                                 <Link className='borderedButton w-[48%] flex items-center justify-center' href={`/seminar/${item.slug.current}`}>Подробнее</Link>
                                 <button className='buttonBlue w-[48%] flex items-center justify-center'>Записаться</button>
                             </div>
