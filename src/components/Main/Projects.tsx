@@ -7,8 +7,7 @@ import four from '@/public/project/four.jpg'
 import six from '@/public/project/six.jpg'
 import three from '@/public/project/three.jpg'
 import two from '@/public/project/two.jpg'
-import Link from 'next/link'
-
+import { Link } from '@/i18n/routing'
 
 
 
@@ -75,7 +74,7 @@ const Projects: FC = () => {
                  </div>
 
                  <div className='w-[50%] 2xl:w-[18%] mx-auto flex items-center justify-center mt-[40px] 2xl:mt-[60px]'>
-                    <Link href='/projects' className='buttonBlue w-full'>
+                    <Link href='/project' className='buttonBlue w-full'>
                     Смотреть все
                     </Link>
                  </div>

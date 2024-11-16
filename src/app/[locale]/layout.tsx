@@ -5,6 +5,9 @@ import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import ClientQueryProvider from '@/providers/useReactQuery';
+
+
+
 export const metadata: Metadata = {
   title: 'ADAU | HOME',
   description: '',

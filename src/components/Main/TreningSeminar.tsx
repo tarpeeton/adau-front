@@ -9,13 +9,44 @@ import 'swiper/css/pagination'
 import { GrLinkNext } from "react-icons/gr"
 import { GrLinkPrevious } from "react-icons/gr"
 import useSwiperNavigation from '@/hooks/useSwiperNavigation'
-import Link from 'next/link'
 import { SeminarAndTreningsData } from '@/constants/SamenarAndTrening'
 import { CiClock2 } from "react-icons/ci";
 import { CiLocationOn } from "react-icons/ci";
+import { client } from "@/sanity/lib/client";
+import { ISeminarData} from '@/interface/ISeminar/seminar';
+import { Link } from '@/i18n/routing'
+import useLocale from '@/hooks/useLocale'
+import SeminarModal from '../Modal/seminar-modal'
+import formatDate from '@/hooks/useFormatDate'
+
 
 const SeminarAndTrenings: FC = () => {
     const { swiperRef, handlePrev, handleNext } = useSwiperNavigation()
+    const [data , setData] = useState<ISeminarData[] | []>([])
+    const [seminarModal , setSeminarModal] = useState(false)
+    const locale = useLocale()
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const Data = await client.fetch(
+              `*[_type == "seminar"]`
+            );
+            setData(Data)
+      
+          } catch (error) {
+            console.debug(error);
+          }
+        };
+        fetchData();
+      }, [locale]);
+
+
+
+
+
+const  handleOpenSeminarModal = () => setSeminarModal(!seminarModal)
 
     return (
         <div className='mt-[80px] 2xl:mt-[200px]  px-[20px] 4xl:pl-[240px] 2xl:pl-[50px]'>
@@ -23,7 +54,7 @@ const SeminarAndTrenings: FC = () => {
                 <p className="text-[26px] font-jost leading-[32px] 2xl:text-[45px] 2xl:leading-[59px]  ">
                     Семинары и <br className='block 2xl:hidden' /> треннинги
                 </p>
-                <Link href='/seminar/slug' className='mt-[8px]   flex flex-row flex-nowrap 2xl:hidden items-center text-[16px] leading-[24px] font-medium text-[#222E51] font-jost '>
+                <Link href='/seminar' className='mt-[8px]   flex flex-row flex-nowrap 2xl:hidden items-center text-[16px] leading-[24px] font-medium text-[#222E51] font-jost '>
                     Смотреть все
                     <GrLinkNext className='ml-[8px] mt-[2px]' />
                 </Link>
@@ -53,12 +84,14 @@ const SeminarAndTrenings: FC = () => {
                     },
                 }}
             >
-                {SeminarAndTreningsData.map((item , index) => (
+                {data.map((item , index) => (
                     <SwiperSlide key={index}>
                         <div className='p-[20px] 2xl:p-[30px] border border-[#E4E4E4] '>
                             <div className='pb-[15px]  border-b border-b-[#E4E4E4]'>
-                                <p className='text-[20px] text-titleDark font-medium font-jost mb-[8px] 2xl:text-[30px]'>{item.title}</p>
-                                <p className='text-[15px] leading-[18px]  2xl:text-[18px] 2xl:leading-[22px] text-title80 font-jost'>{item.description}</p>
+                                <p className='text-[20px] text-titleDark font-medium font-jost mb-[8px] 2xl:text-[30px]'>{item.title[locale]}</p>
+                                <p className='text-[15px] leading-[18px]  2xl:text-[18px] 2xl:leading-[22px] text-title80 font-jost'>
+                                {item.description[locale].length > 143 ? item.description[locale].slice( 0 , 143) + '....' : item.description[locale]}
+                                </p>
                             </div>
                             <div className='mt-[15px]'>
                                 {/* adress info */}
@@ -66,21 +99,22 @@ const SeminarAndTrenings: FC = () => {
                                     <div className='flex flex-row items-center text-[15px] leading-[18px] text-[#222E51] font-jost  2xl:text-[20px]'>
                                         <CiClock2  className='mr-[10px] w-[20px] h-[20px] 2xl:w-[25px] 2xl:h-[25px] 2xl:ml-[1px]'/>
                                         <div>
-                                            <p>{item.date}; <span>{item.time}</span></p>
+                                            <p>{formatDate(item.date)}; <span>{item.time}</span></p>
                                         </div>
                                     </div>
                                     <div className='flex flex-row items-center text-[15px] mt-[5px] leading-[18px] text-[#222E51] font-jost  2xl:text-[20px]'>
                                         <CiLocationOn  className='mr-[10px] w-[25px] h-[25px] 2xl:w-[28px] 2xl:h-[28px]'/>
                                         <div>
-                                            <p>{item.addres}</p>
+                                            <p>{item.address[locale]}</p>
                                         </div>
                                     </div>
                                 </div>
                                 {/* button for info */}
                                 <div className='mt-[25px] flex flex-row gap-[11px] w-full'>
-                                    <Link className='borderedButton w-[48%] flex items-center justify-center' href={`/seminar/${item.slug}`}>Подробнее</Link>
-                                    <button  className='buttonBlue w-[48%] flex items-center justify-center'>Записаться</button>
+                                    <Link className='borderedButton w-[48%] flex items-center justify-center' href={`/seminar/${item.slug.current} `}>Подробнее</Link>
+                                    <button onClick={handleOpenSeminarModal}  className='buttonBlue w-[48%] flex items-center justify-center'>Записаться</button>
                                 </div>
+                                <SeminarModal  visible={seminarModal} close={handleOpenSeminarModal}/>
                             </div>
                         </div>
                  </SwiperSlide>

@@ -1,7 +1,7 @@
 'use client'
 import { FC, useState } from 'react'
 import { IoIosArrowDown } from "react-icons/io"
-import ContactUs from '../Modal/contacts-modal'
+import QuestionModal from '../Modal/question-modal'
 
 const AccardionData = [
     { id: '01', title: 'Консультация и обсуждение задачи клиента', answer: 'Мы начинаем с детальной консультации, чтобы понять ваши цели и задачи. На этом этапе мы обсуждаем ключевые детали проекта, формируем общее видение и определяем путь реализации' },
@@ -59,7 +59,7 @@ const FaqComponent: FC = () => {
         <button onClick={handleChangeStatus} className='buttonBlue w-[60%] mdx:w-[50%] 2xl:w-[20%]'>
         Задать вопрос
         </button>
-        <ContactUs visible={open} close={handleChangeStatus}/>
+        <QuestionModal visible={open} close={handleChangeStatus}/>
           </div>
     </div>
   );

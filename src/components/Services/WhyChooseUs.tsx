@@ -3,10 +3,6 @@ import { FC, useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import ContactUs from '../Modal/contacts-modal'
 
-
-
-
-
 const WhyChooseData = [
     { number: '01', title: 'Команда профессионалов', description: 'Профессиональная команда с многолетним опытом' },
     { number: '02', title: 'Индивидуальный подход', description: 'Индивидуальный подход к каждому проекту' },
@@ -19,33 +15,8 @@ interface IWhyChooseUs {
 }
 
 const WhyChooseUs: FC<IWhyChooseUs> = ({ title }) => {
-    const cardRefs = useRef<HTMLDivElement[]>([])
     const [open, setOpen] = useState(false)
     const handleChangeStatus = () => setOpen(!open)
-
-    useEffect(() => {
-        cardRefs.current.forEach((card, index) => {
-            gsap.set(card, { backgroundColor: '#F7F8FA', color: '#414141' })
-
-            card.addEventListener('mouseenter', () => {
-                gsap.to(card, {
-                    backgroundColor: '#222E51',
-                    color: '#ffffff',
-                    duration: 0.7,
-                    ease: 'power2.out',
-                })
-            })
-
-            card.addEventListener('mouseleave', () => {
-                gsap.to(card, {
-                    backgroundColor: '#F7F8FA',
-                    color: '#414141',
-                    duration: 0.6,
-                    ease: 'power2.out',
-                })
-            })
-        })
-    }, [])
 
     return (
         <div className='mt-[80px] 2xl:mt-[200px] px-[16px] 2xl:px-[50px] 4xl:px-[200px]'>
@@ -62,10 +33,23 @@ const WhyChooseUs: FC<IWhyChooseUs> = ({ title }) => {
                     {WhyChooseData.map((item, index) => (
                         <div
                             key={index}
-                            ref={(el) => {
-                                if (el) cardRefs.current[index] = el
-                            }}
                             className=' py-[25px] px-[20px] p-[30px] flex flex-col justify-between bg-[#F7F8FA] 2xl:h-[380px] transition-transform duration-800 ease-in-out 2xl:w-[345px] cursor-pointer'
+                            onMouseEnter={(e) => {
+                                gsap.to(e.currentTarget, {
+                                    backgroundColor: '#222E51',
+                                    color: '#ffffff',
+                                    duration: 0.7,
+                                    ease: 'power2.out',
+                                })
+                            }}
+                            onMouseLeave={(e) => {
+                                gsap.to(e.currentTarget, {
+                                    backgroundColor: '#F7F8FA',
+                                    color: '#414141',
+                                    duration: 0.6,
+                                    ease: 'power2.out',
+                                })
+                            }}
                         >
                             {/* NUMBER */}
                             <div>
@@ -89,7 +73,6 @@ const WhyChooseUs: FC<IWhyChooseUs> = ({ title }) => {
                         {title}
                     </button>
                     <ContactUs visible={open} close={handleChangeStatus} />
-
                 </div>
             </div>
         </div>

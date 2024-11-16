@@ -6,7 +6,6 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
 
-
 import useSwiperNavigation from '@/hooks/useSwiperNavigation'
 import Image from 'next/image'
 
@@ -17,7 +16,15 @@ import { GrLinkPrevious } from "react-icons/gr"
 // Image
 import BannerProjectsImage from '@/public/project/BannerProject.jpg'
 
-const BannerProjects: FC = () => {
+
+
+
+interface IBannerProjects {
+    scrollToTopCases: () => void
+}
+
+
+const BannerProjects: FC<IBannerProjects> = ({scrollToTopCases}) => {
     const { swiperRef, handlePrev, handleNext } = useSwiperNavigation()
 
     return (
@@ -32,7 +39,7 @@ const BannerProjects: FC = () => {
                         <p className='mt-[16px] text-[15px] leading-[18px] 2xl:w-full font-normal 2xl:text-[18px] 3xl:text-[20px] 2xl:leading-[28.9px] 2xl:mt-[20px]'>
                             Коллекция лучших работ, созданных членами ассоциации. Здесь представлены успешные примеры реализованных проектов в области архитектуры и дизайна, отражающие профессионализм, креативность
                         </p>
-                        <button className='mt-[20px] buttonBlue w-[60%] 2xl:mt-[30px]'>
+                        <button onClick={scrollToTopCases} className='mt-[20px] buttonBlue w-[60%] 2xl:mt-[30px]'>
                             Посмотреть проекты
                         </button>
                     </div>

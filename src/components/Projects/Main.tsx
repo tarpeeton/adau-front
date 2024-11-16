@@ -1,4 +1,5 @@
-import {FC} from 'react';
+'use client'
+import { FC, useRef } from 'react'
 import BannerProjects from './Banner'
 import Work from './Work'
 import TopCases from './Сase'
@@ -11,19 +12,32 @@ import Form from '../Main/Form'
 
 
 const MainProjects: FC = () => {
+  const topCasesRef = useRef<HTMLDivElement | null>(null)
+
+  const scrollToTopCases = () => {
+    if (topCasesRef.current) {
+      topCasesRef.current.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
+
   return (
     <div>
-        <BannerProjects />
+      <BannerProjects scrollToTopCases={scrollToTopCases} />
+      <div ref={topCasesRef}>
         <Work />
-        <TopCases />
-        <HowWeWork />
-        <WhyChooseUs title='Заказать проект' />
-        <SomeForm />
-        <FaqComponent />
-        <Partners  active={true}/>
-        <Form title='Готовы начать свой проект?' text='Свяжитесь с нами для консультации и начните работу над своим проектом уже сегодня' />
-    </div>
-  );
-};
 
-export default MainProjects;
+      </div>
+      <TopCases />
+
+      <HowWeWork />
+      <WhyChooseUs title='Заказать проект' />
+      <SomeForm />
+      <FaqComponent />
+      <Partners active={true} />
+      <Form title='Готовы начать свой проект?' text='Свяжитесь с нами для консультации и начните работу над своим проектом уже сегодня' />
+    </div>
+  )
+}
+
+export default MainProjects
