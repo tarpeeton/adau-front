@@ -59,7 +59,6 @@ const QuestionModal: FC<IReviewFull> = ({ visible, close }) => {
 
 
     return (
-        <div className='bg-white'>
             <Modal
                 open={visible}
                 footer={null}
@@ -145,7 +144,6 @@ const QuestionModal: FC<IReviewFull> = ({ visible, close }) => {
                 </div>
             </Modal>
 
-        </div>
     )
 }
 

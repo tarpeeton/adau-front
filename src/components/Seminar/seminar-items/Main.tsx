@@ -69,7 +69,6 @@ const MainSeminarItems: FC = () => {
   
 
 
-  console.log(seminarData)
 
   
 

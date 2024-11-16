@@ -3,10 +3,10 @@ import Image from 'next/image'
 import { GrFormPreviousLink } from "react-icons/gr"
 import { CiClock2 } from "react-icons/ci"
 import { CiLocationOn } from "react-icons/ci"
-import { Link } from '@/i18n/routing'
 // image
 import { urlFor } from '@/sanity/lib/image'
 import SeminarModal from '@/components/Modal/seminar-modal'
+
 
 const formatDate = (date: string, time: string): string => {
   // Create a Date object for the current date and time
@@ -61,7 +61,15 @@ interface ISeminarBanner {
 }
 
 
-const SeminarBanner: FC<ISeminarBanner> = ({ status, onButtonClick, title,
+
+
+
+
+
+const SeminarBanner: FC<ISeminarBanner> = ({ 
+  status,
+  onButtonClick,
+  title,
   description,
   date,
   time,
@@ -71,6 +79,7 @@ const SeminarBanner: FC<ISeminarBanner> = ({ status, onButtonClick, title,
   const handleChangeStatus = () => setOpen(!open)
 
 
+ 
 
 
   const imageUrl = image && image.asset._ref ? urlFor(image.asset._ref).url() : ''
@@ -80,9 +89,9 @@ const SeminarBanner: FC<ISeminarBanner> = ({ status, onButtonClick, title,
     <div className='2xl:px-[50px] px-[16px] 2xl:mt-[25px] 4xl:px-[240px]'>
       <div className='flex flex-row items-center mt-[15px] text-[16px] 2xl:text-[20px] text-[#222E51] font-medium font-jost'>
         <GrFormPreviousLink className='2xl:w-[30px] w-[25px]  h-[25px] 2xl:h-[30px]' />
-        <Link href='cases'>
+        <button >
           Назад
-        </Link>
+        </button>
       </div>
       <div className='mt-[25px] 2xl:mt-[35px]'>
         <div className='flex flex-col'>

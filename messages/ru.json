@@ -1,6 +1,14 @@
 {
-	"HomePage": {
-	  "title": "Hello world!",
-	  "about": "Go to the about page"
+	"Links": {
+	  "about": "О нас",
+	  "service": "Услуги",
+	  "project": "Проекты",
+	  "seminar": "Семинары и тренинги",
+	  "blog": "Блог",
+	  "contact": "Контакты"
+	},
+	"Buttons": {
+		"assatsionADD": "Вступить в ассоциацию",
+		"partnerADD": "Стать партнером"
 	}
   }

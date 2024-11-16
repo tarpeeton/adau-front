@@ -93,7 +93,6 @@ const ContactUs: FC<IReviewFull> = ({ visible, close }) => {
 
 
     return (
-        <div className='bg-white'>
             <Modal
                 open={visible}
                 footer={null}
@@ -219,7 +218,6 @@ const ContactUs: FC<IReviewFull> = ({ visible, close }) => {
                 </div>
             </Modal>
 
-        </div>
     )
 }
 
