@@ -6,7 +6,6 @@ import WhyInvite from './WhyInvite'
 import AddSeminarForm from './AddSeminarForm'
 import FaqComponent from '../Services/Faq'
 import Partners from '../About/Partners'
-import SomeForm from '../About/Form'
 import Speakers from './Speakers'
 import UserTestimonials from './UserTestimonials'
 import SeminarForm from './SeminarForm'
@@ -14,6 +13,7 @@ import OldSeminar from './OldSeminar'
 import { client } from "@/sanity/lib/client";
 import useLocale from '@/hooks/useLocale'
 import { ISeminarCategory  , ISeminarData} from '@/interface/ISeminar/seminar';
+import QuestionForm from './QuestionForm'
 
 
 const MainSeminar: FC = () => {
@@ -74,7 +74,7 @@ useEffect(() => {
         <FaqComponent />
         <SeminarForm />
         <Partners active={true} />
-        <SomeForm />
+        <QuestionForm/>
     </div>
   );
 };

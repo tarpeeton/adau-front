@@ -70,22 +70,45 @@ const ContactUs: FC<IReviewFull> = ({ visible, close }) => {
     }
 
     const sendDataForm = async () => {
-        setLoadingDataPost(true)
+        setLoadingDataPost(true);
         try {
-            // Replace with your API endpoint and payload structure
-            const response = await axios.post('/api/your-endpoint', {
-                name: formData.name,
-                email: formData.email,
-                messageType: selectedMessageType,
-                fileName: fileName
-            })
-            console.log('Form submitted successfully:', response.data)
+            // Создаем объект FormData и добавляем поля формы
+            const formPayload = new FormData();
+            formPayload.append('name', formData.name);
+            formPayload.append('email', formData.email);
+            formPayload.append('theme', selectedMessageType);
+            formPayload.append('text', formData.text);
+    
+            // Проверяем и добавляем файл в formData, если он существует
+            if (fileInputRef.current?.files && fileInputRef.current.files[0]) {
+                formPayload.append('file', fileInputRef.current.files[0]);
+            }
+    
+            // Отправляем данные с использованием axios и добавлением API-Key в заголовок
+            const response = await axios.post('https://adau.result-me.uz/api/form/message', formPayload, {
+                headers: {
+                    'API-Key': 'VJs4krbxFMj78Q5IsUIkdZdi8A1MSItugxlHJiwRALyE7c8lCiGcLY6OsugGPzRmjSJ3nzdFh6iUZD9lmYeSzPpm7FTwcGttS0js',
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+    
+            console.log('Form submitted successfully:', response.data);
+    
+            // Очищаем форму после успешной отправки
+            setFormData({
+                name: '',
+                email: '',
+                text: ''
+            });
+            setFileName(null);
+            setSelectMessageType('Тема сообщения');
         } catch (error) {
-            console.error('Error submitting form:', error)
+            console.error('Error submitting form:', error);
         } finally {
-            setLoadingDataPost(false)
+            setLoadingDataPost(false);
         }
-    }
+    };
+    
 
 
   

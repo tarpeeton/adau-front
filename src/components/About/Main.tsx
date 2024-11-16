@@ -49,7 +49,7 @@ const About: FC = () => {
       </div>
       <Invite />
       <Result />
-      <SomeForm />
+      <SomeForm isTextOpen={true} />
     </div>
   );
 };

@@ -32,29 +32,39 @@ const QuestionModal: FC<IReviewFull> = ({ visible, close }) => {
         setFormData({ ...formData, [id]: value })
     }
 
-   
-   
+    const resetForm = () => {
+        setFormData({
+            namemodal: '',
+            phonemodal: '',
+            emailmodal: '',
+            textmodal: ''
+        })
+    }
 
     const sendDataForm = async () => {
         setLoadingDataPost(true)
         try {
-            // Replace with your API endpoint and payload structure
-            const response = await axios.post('/api/your-endpoint', {
-                name: formData.namemodal,
-                email: formData.emailmodal,
-                phone: formData.phonemodal,
-                question:formData.textmodal
+            const formPayload = new FormData()
+            formPayload.append('name', formData.namemodal)
+            formPayload.append('email', formData.emailmodal)
+            formPayload.append('phone', formData.phonemodal)
+            formPayload.append('question', formData.textmodal)
+
+            await axios.post('https://adau.result-me.uz/api/form/question', formPayload, {
+                headers: {
+                    'API-Key': 'VJs4krbxFMj78Q5IsUIkdZdi8A1MSItugxlHJiwRALyE7c8lCiGcLY6OsugGPzRmjSJ3nzdFh6iUZD9lmYeSzPpm7FTwcGttS0js',
+                    'Content-Type': 'multipart/form-data'
+                }
             })
-            console.log('Form submitted successfully:', response.data)
+
+            console.log('Form submitted successfully')
+            resetForm() // Reset the form after successful submission
         } catch (error) {
             console.error('Error submitting form:', error)
         } finally {
             setLoadingDataPost(false)
         }
     }
-
-
-
 
 
 

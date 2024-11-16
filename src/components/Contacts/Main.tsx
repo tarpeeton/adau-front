@@ -14,7 +14,7 @@ const MainContacts: FC = () => {
     <div>
         <Banner />
         <ContactInfo />
-        <SomeForm />
+        <SomeForm isTextOpen={false} />
         <Map />
         <Socials />
         <FaqComponent />

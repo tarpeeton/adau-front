@@ -5,8 +5,6 @@ import axios from 'axios'
 
 
 
-// icons
-import { IoIosArrowDown } from "react-icons/io"
 import { FiPlus } from "react-icons/fi"
 import { Triangle } from 'react-loader-spinner'
 
@@ -23,22 +21,18 @@ import U from '@/public/form/u.png'
 
 
 
-interface ISomeFormProps {
-    isTextOpen: boolean
-}
 
-const SomeForm: FC<ISomeFormProps> = ({ isTextOpen }) => {
+const QuestionForm: FC = () => {
     const fileInputRef = useRef<HTMLInputElement | null>(null)
-    const [openSelect, setOpenSelect] = useState(false)
-    const [selectedMessageType, setSelectMessageType] = useState('Тема сообщения')
     const [fileName, setFileName] = useState<string | null>(null)
     const [isLoading, setIsLoading] = useState(false)
     const [loadingDataPost, setLoadingDataPost] = useState(false)
 
     const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        text: ''
+        namequestionform: '',
+        emailquestion: '',
+        textquestion: '',
+        phone: ''
     })
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,13 +40,9 @@ const SomeForm: FC<ISomeFormProps> = ({ isTextOpen }) => {
         setFormData({ ...formData, [id]: value })
     }
 
-    const handleOpenSelect = () => setOpenSelect(!openSelect)
+  
 
-    // Select Tipini Olish
-    const handleMessageType = (msg: string) => {
-        setSelectMessageType(msg)
-        setOpenSelect(false)
-    }
+  
 
     const handleFileUploadClick = () => {
         const input = document.createElement('input')
@@ -68,7 +58,7 @@ const SomeForm: FC<ISomeFormProps> = ({ isTextOpen }) => {
                 // Simulate an upload process for demonstration
                 setTimeout(() => {
                     setIsLoading(false)
-                }, 2000)
+                }, 300)
             }
         }
         document.body.appendChild(input)
@@ -77,46 +67,49 @@ const SomeForm: FC<ISomeFormProps> = ({ isTextOpen }) => {
     }
 
     const sendDataForm = async () => {
-        setLoadingDataPost(true) // Устанавливаем состояние загрузки в true перед началом отправки данных
-
+        setLoadingDataPost(true); // Устанавливаем состояние загрузки в true перед отправкой данных
+    
         try {
             // Создаем объект FormData и добавляем данные из полей формы
-            const formPayload = new FormData()
-            formPayload.append('name', formData.name) // Добавляем имя
-            formPayload.append('email', formData.email) // Добавляем email
-            formPayload.append('text', formData.text) // Добавляем email
-            formPayload.append('theme', selectedMessageType) // Добавляем тему сообщения
-
+            const formPayload = new FormData();
+            formPayload.append('name', formData.namequestionform); // Добавляем имя
+            formPayload.append('email', formData.emailquestion); // Добавляем email
+            formPayload.append('phone', formData.phone); // Добавляем телефон
+            formPayload.append('question', formData.textquestion); // Добавляем вопрос
+    
             // Проверяем наличие файла в поле ввода и добавляем его в formData
             if (fileInputRef.current?.files && fileInputRef.current.files.length > 0) {
-                formPayload.append('file', fileInputRef.current.files[0]) // Добавляем файл
+                formPayload.append('file', fileInputRef.current.files[0]); // Добавляем файл
             }
-
-            // Отправляем запрос с использованием axios, включая заголовок с API-Key
-            const response = await axios.post('https://adau.result-me.uz/api/form/message', formPayload, {
+    
+            // Отправляем запрос с использованием axios с заголовками для API-ключа и типа контента
+            const response = await axios.post('https://adau.result-me.uz/api/form/question', formPayload, {
                 headers: {
                     'API-Key': 'VJs4krbxFMj78Q5IsUIkdZdi8A1MSItugxlHJiwRALyE7c8lCiGcLY6OsugGPzRmjSJ3nzdFh6iUZD9lmYeSzPpm7FTwcGttS0js', // API-ключ для аутентификации
                     'Content-Type': 'multipart/form-data' // Указываем тип контента как form-data
                 }
-            })
-
-            console.log('Form submitted successfully:', response.data) // Логируем успешную отправку
-
+            });
+    
+            console.log('Form submitted successfully:', response.data); // Логируем успешную отправку
+    
             // Сбрасываем поля формы и состояние после успешной отправки
             setFormData({
-                name: '',
-                email: '',
-                text: ''
-            })
-            setFileName(null) // Очищаем имя файла
-            setSelectMessageType('Тема сообщения') // Сбрасываем выбранную тему
+                namequestionform: '',
+                emailquestion: '',
+                phone: '',
+                textquestion: ''
+            });
+            setFileName(null); // Очищаем имя файла
+            if (fileInputRef.current) {
+                fileInputRef.current.value = ''; // Сбрасываем поле ввода файла
+            }
         } catch (error) {
-            console.error('Error submitting form:', error) // Логируем ошибку при отправке
+            console.error('Error submitting form:', error); // Логируем ошибку при отправке
         } finally {
-            setLoadingDataPost(false) // Сбрасываем состояние загрузки
+            setLoadingDataPost(false); // Сбрасываем состояние загрузки
         }
-    }
-
+    };
+    
 
 
     return (
@@ -124,7 +117,7 @@ const SomeForm: FC<ISomeFormProps> = ({ isTextOpen }) => {
             <div className='flex flex-col 2xl:flex-row 2xl:justify-between 2xl:items-center'>
                 <div className='2xl:flex 2xl:flex-col  2xl:w-[40%]'>
                     <p className='text-[26px] 2xl:text-[50px] uppercase leading-[32px] 2xl:leading-[62px] font-jost text-titleWhite'>
-                        Отправить нам <b /> сообщение
+                    Остались вопросы? <br  /> Напишите нам!
                     </p>
                     <p className='mt-[10px] hidden text-[20px] text-white font-jost 2xl:block opacity-[80%]'>
                         Напишите нам, и мы ответим в кратчайшие сроки!
@@ -152,73 +145,39 @@ const SomeForm: FC<ISomeFormProps> = ({ isTextOpen }) => {
                     <div className='relative 2xl:w-[60%] '>
                         <input
                             type="text"
-                            id="name"
-                            value={formData.name}
+                            id="namequestionform"
+                            value={formData.namequestionform}
                             onChange={handleInputChange}
                             className="border border-white block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent border-1 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer"
                             placeholder=" "
                         />
-                        <label htmlFor="name" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-[#222E51] px-2 peer-focus:px-2 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">Имя *</label>
+                        <label htmlFor="namequestionform" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-[#222E51] px-2 peer-focus:px-2 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">Имя *</label>
                     </div>
                     <div className='relative mt-[20px] 2xl:w-[60%] 2xl:mt-[30px]'>
                         <input
                             type="text"
-                            id="email"
-                            value={formData.email}
+                            id="emailquestion"
+                            value={formData.emailquestion}
                             onChange={handleInputChange}
                             className="border border-white block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent border-1 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer"
                             placeholder=" "
                         />
-                        <label htmlFor="email" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-[#222E51] px-2 peer-focus:px-2 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">E-mail *</label>
+                        <label htmlFor="emailquestion" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-[#222E51] px-2 peer-focus:px-2 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">E-mail *</label>
                     </div>
-                    <div className='relative mt-[20px] cursor-pointer 2xl:w-[60%] 2xl:mt-[30px]'>
-                        <div onClick={handleOpenSelect} id="floating_outlined_select" className="border border-white px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent border-1 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer flex flex-row justify-between items-center">
-                            {selectedMessageType}
-                            <IoIosArrowDown
-                                className={`transform transition-transform ease-in-out duration-500 ${openSelect ? 'rotate-180' : 'rotate-0'}`}
-                            />
-                        </div>
-                        <p className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-[#222E51] px-2 peer-focus:px-2 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">Тема сообщения</p>
-                    </div>
-                    {openSelect && (
-                        <div className='mt-[5px] flex flex-col gap-[5px] 2xl:w-[60%]'>
-                            <button onClick={() => handleMessageType('Тема 1')} className='p-[5px] border border-gray-600 flex items-center justify-center text-white font-jost text-[14px]'>
-                                Тема 1
-                            </button>
-                            <button onClick={() => handleMessageType('Тема 2')} className='p-[5px] border border-gray-600 flex items-center justify-center text-white font-jost text-[14px]'>
-                                Тема 2
-                            </button>
-                            <button onClick={() => handleMessageType('Тема 3')} className='p-[5px] border border-gray-600 flex items-center justify-center text-white font-jost text-[14px]'>
-                                Тема 3
-                            </button>
-                        </div>
-                    )}
+                   
 
-
-
-                    {isTextOpen && (
                         <div className='relative mt-[20px] 2xl:w-[60%] 2xl:mt-[30px]'>
                             <input
                                 type="text"
-                                id="text"
-                                value={formData.text}
+                                id="textquestion"
+                                value={formData.textquestion}
                                 onChange={handleInputChange}
                                 className="border border-white block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent border-1 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer"
                                 placeholder=" "
                             />
-                            <label htmlFor="text" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-[#222E51] px-2 peer-focus:px-2 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">Текст сообщения *</label>
+                            <label htmlFor="textquestion" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-[#222E51] px-2 peer-focus:px-2 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
+                            Ваш вопрос</label>
                         </div>
-                    )}
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -286,4 +245,4 @@ const SomeForm: FC<ISomeFormProps> = ({ isTextOpen }) => {
     )
 }
 
-export default SomeForm
+export default QuestionForm
