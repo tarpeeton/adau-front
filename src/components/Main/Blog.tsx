@@ -124,9 +124,7 @@ const Blog: FC = () => {
                     <p className='text-[22px] font-medium'>{item.name[locale]}</p>
                 </button>
                 ))}
-
                 </div>
-           
             </div>
 
             {/* MOBILE ACTIVE FILTERS */}

@@ -9,6 +9,8 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
+import { Autoplay } from 'swiper/modules'
+
 
 import { GrLinkNext } from "react-icons/gr"
 import { GrLinkPrevious } from "react-icons/gr"
@@ -94,15 +96,17 @@ const Reviews: FC = () => {
             <p className="text-[26px] font-jost leading-[32px] 2xl:text-[45px] 2xl:leading-[59px] mb-[20px] 2xl:mb-[30px]">
                 Отзывы
             </p>
-            <div className="mt-[20px] mdl:mt-[30px] 2xl:mt-[40px]">
-                <div>
+            <div className="mt-[20px] mdl:mt-[30px] 2xl:mt-[40px] ">
+                <div className=' inline-block'>
+                <div className='border-b border-b-[#E4E4E4] flex flex-row gap-[40px]'>
+                    
                     {categories?.map((item) => (
                         <button
                             key={item._rev}
                             onClick={() => handleButtonClick(item._id)}
-                            className={`pb-[12px] px-[10px] 2xl:px-[40px] font-medium border-b-[2px] ${activeIndex === item._id
-                                ? 'text-[#222E51] border-b-[#222E51] '
-                                : 'text-[#000000] border-b'
+                            className={`pb-[12px]  font-medium  ${activeIndex === item._id
+                                ? 'text-[#222E51] border-b-[2px] border-b-[#222E51] '
+                                : 'text-[#000000]'
                                 }`}
                         >
                             <p className="text-[16px] leading-[23.12px] 2xl:text-[24px] 2xl:leading-[34.68px]">
@@ -111,6 +115,8 @@ const Reviews: FC = () => {
                         </button>
                     ))}
                 </div>
+                </div>
+                
 
                 <div className='mt-[20px] 2xl:mt-[40px]'>
                     <Swiper
@@ -118,7 +124,8 @@ const Reviews: FC = () => {
                         spaceBetween={10}
                         slidesPerView={1.1}
                         speed={920}
-                        autoplay={{ delay: 2000, disableOnInteraction: false }}
+                        autoplay={{ delay: 1600, disableOnInteraction: false }}
+                        modules={[Autoplay]}
                         loop={false}
                         breakpoints={{
                             1000: {

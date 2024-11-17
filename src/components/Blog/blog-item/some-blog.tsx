@@ -2,7 +2,6 @@
 
 import { FC, useState, useEffect } from 'react'
 
-import Link from 'next/link'
 import Image from 'next/image'
 import ReactPlayer from 'react-player'
 import { GrFormPreviousLink } from "react-icons/gr"

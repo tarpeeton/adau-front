@@ -2,6 +2,7 @@
 
 import { FC, useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { Autoplay } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
@@ -9,44 +10,38 @@ import 'swiper/css/pagination'
 import { GrLinkNext } from "react-icons/gr"
 import { GrLinkPrevious } from "react-icons/gr"
 import useSwiperNavigation from '@/hooks/useSwiperNavigation'
-import { SeminarAndTreningsData } from '@/constants/SamenarAndTrening'
-import { CiClock2 } from "react-icons/ci";
-import { CiLocationOn } from "react-icons/ci";
-import { client } from "@/sanity/lib/client";
-import { ISeminarData} from '@/interface/ISeminar/seminar';
+import { client } from "@/sanity/lib/client"
+import { ISeminarData } from '@/interface/ISeminar/seminar'
 import { Link } from '@/i18n/routing'
 import useLocale from '@/hooks/useLocale'
-import SeminarModal from '../Modal/seminar-modal'
-import formatDate from '@/hooks/useFormatDate'
+import SeminarCard from '@/ui/seminar-card'
 
 
 const SeminarAndTrenings: FC = () => {
     const { swiperRef, handlePrev, handleNext } = useSwiperNavigation()
-    const [data , setData] = useState<ISeminarData[] | []>([])
-    const [seminarModal , setSeminarModal] = useState(false)
+    const [data, setData] = useState<ISeminarData[] | []>([])
     const locale = useLocale()
 
 
     useEffect(() => {
         const fetchData = async () => {
-          try {
-            const Data = await client.fetch(
-              `*[_type == "seminar"]`
-            );
-            setData(Data)
-      
-          } catch (error) {
-            console.debug(error);
-          }
-        };
-        fetchData();
-      }, [locale]);
+            try {
+                const Data = await client.fetch(
+                    `*[_type == "seminar"]`
+                )
+                setData(Data)
+
+            } catch (error) {
+                console.debug(error)
+            }
+        }
+        fetchData()
+    }, [locale])
 
 
 
 
 
-const  handleOpenSeminarModal = () => setSeminarModal(!seminarModal)
 
     return (
         <div className='mt-[80px] 2xl:mt-[200px]  px-[20px] 4xl:pl-[240px] 2xl:pl-[50px]'>
@@ -69,60 +64,31 @@ const  handleOpenSeminarModal = () => setSeminarModal(!seminarModal)
 
             </div>
             {/* DATA MAP */}
-            <div className='mt-[20px] 2xl:mt-[26px] 4xl:mt-[30px]'>
-            <Swiper
-                onSwiper={(swiper) => (swiperRef.current = swiper)}
-                spaceBetween={10}
-                slidesPerView={1}
-                speed={1000}
-                autoplay={{ delay: 2000, disableOnInteraction: false }}
-                loop={false}
-                breakpoints={{
-                    1000: {
-                        slidesPerView: 3,
-                        spaceBetween: 20, // Adjust spacing between slides as needed for larger screens
-                    },
-                }}
-            >
-                {data.map((item , index) => (
-                    <SwiperSlide key={index}>
-                        <div className='p-[20px] 2xl:p-[30px] border border-[#E4E4E4] '>
-                            <div className='pb-[15px]  border-b border-b-[#E4E4E4]'>
-                                <p className='text-[20px] text-titleDark font-medium font-jost mb-[8px] 2xl:text-[30px]'>{item.title[locale]}</p>
-                                <p className='text-[15px] leading-[18px]  2xl:text-[18px] 2xl:leading-[22px] text-title80 font-jost'>
-                                {item.description[locale].length > 143 ? item.description[locale].slice( 0 , 143) + '....' : item.description[locale]}
-                                </p>
-                            </div>
-                            <div className='mt-[15px]'>
-                                {/* adress info */}
-                                <div >
-                                    <div className='flex flex-row items-center text-[15px] leading-[18px] text-[#222E51] font-jost  2xl:text-[20px]'>
-                                        <CiClock2  className='mr-[10px] w-[20px] h-[20px] 2xl:w-[25px] 2xl:h-[25px] 2xl:ml-[1px]'/>
-                                        <div>
-                                            <p>{formatDate(item.date)}; <span>{item.time}</span></p>
-                                        </div>
-                                    </div>
-                                    <div className='flex flex-row items-center text-[15px] mt-[5px] leading-[18px] text-[#222E51] font-jost  2xl:text-[20px]'>
-                                        <CiLocationOn  className='mr-[10px] w-[25px] h-[25px] 2xl:w-[28px] 2xl:h-[28px]'/>
-                                        <div>
-                                            <p>{item.address[locale]}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                {/* button for info */}
-                                <div className='mt-[25px] flex flex-row gap-[11px] w-full'>
-                                    <Link className='borderedButton w-[48%] flex items-center justify-center' href={`/seminar/${item.slug.current} `}>Подробнее</Link>
-                                    <button onClick={handleOpenSeminarModal}  className='buttonBlue w-[48%] flex items-center justify-center'>Записаться</button>
-                                </div>
-                                <SeminarModal  visible={seminarModal} close={handleOpenSeminarModal}/>
-                            </div>
-                        </div>
-                 </SwiperSlide>
-                ))}
-               
+            <div className='mt-[20px] 2xl:mt-[26px] 4xl:mt-[30px] cursor-pointer'>
+                <Swiper
+                    onSwiper={(swiper) => (swiperRef.current = swiper)}
+                    spaceBetween={10}
+                    slidesPerView={1}
+                    speed={1000}
+                    autoplay={{ delay: 1500, disableOnInteraction: false }}
+                    modules={[Autoplay]} 
+                    loop={false}
+                    breakpoints={{
+                        1000: {
+                            slidesPerView: 3,
+                            spaceBetween: 20, // Adjust spacing between slides as needed for larger screens
+                        },
+                    }}
+                >
+                    {data.map((item, index) => (
+                        <SwiperSlide key={index}>
+                            <SeminarCard inSwiper={true} item={item} />
+                        </SwiperSlide>
+                    ))}
 
 
-            </Swiper>
+
+                </Swiper>
             </div>
 
             {/* PREVV BUTTON */}
@@ -136,10 +102,10 @@ const  handleOpenSeminarModal = () => setSeminarModal(!seminarModal)
             </div>
             {/* DESKTOP ALL */}
             <div className=' hidden w-full 2xl:flex items-center justify-center  2xl:mt-[60px]'>
-            <Link href='/seminar' className='buttonBlue w-[15%] 4xl:w-[12%]'>
-                Смотреть все
-            </Link>
-      </div>
+                <Link href='/seminar' className='buttonBlue w-[15%] 4xl:w-[12%]'>
+                    Смотреть все
+                </Link>
+            </div>
         </div>
     )
 }

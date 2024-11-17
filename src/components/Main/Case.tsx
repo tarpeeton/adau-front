@@ -1,10 +1,16 @@
 'use client'
 import { FC, useState, useRef, useEffect } from 'react'
+
+
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { Autoplay } from 'swiper/modules'
+
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import Image from 'next/image'
+
+
 import { GrLinkNext } from "react-icons/gr"
 import { GrLinkPrevious } from "react-icons/gr"
 import { Swiper as SwiperCore } from 'swiper/types' // импортируем тип SwiperCore
@@ -73,8 +79,9 @@ const Case: FC = () => {
                   slidesPerView={1}
                   onSwiper={(swiper) => (swiperRefs.current[index] = swiper)}
                   onSlideChange={(swiper) => handleSlideChange(swiper, index)}
+                  modules={[Autoplay]}
                   speed={800}
-                  autoplay={{ delay: 2000, disableOnInteraction: false }}
+                  autoplay={{ delay: 1500, disableOnInteraction: false }}
                   loop={false}
                 >
                   {item?.slider?.map((image, index) => (

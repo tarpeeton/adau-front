@@ -26,10 +26,8 @@ const MainProjects: FC = () => {
       <BannerProjects scrollToTopCases={scrollToTopCases} />
       <div ref={topCasesRef}>
         <Work />
-
       </div>
       <TopCases />
-
       <HowWeWork />
       <WhyChooseUs title='Заказать проект' />
       <ProjectQuestion />
