@@ -1,13 +1,17 @@
 import { FC, useState } from 'react'
 import Image from 'next/image'
+
+
+// ICON
 import { GrFormPreviousLink } from "react-icons/gr"
 import { CiClock2 } from "react-icons/ci"
 import { CiLocationOn } from "react-icons/ci"
 // image
 import { urlFor } from '@/sanity/lib/image'
 import SeminarModal from '@/components/Modal/seminar-modal'
+// HOOK
 import { SeminarFormatDate } from '@/hooks/useFormatDate'
-
+import { handleBack } from '@/hooks/useBack'
 // SEMINAR BANNER UCHUN INTERFACE
 import { ISeminarBanner } from '@/interface/ISeminar/seminar'
 
@@ -40,7 +44,6 @@ const SeminarBanner: FC<ISeminarBanner> = ({
   const handleChangeStatus = () => setOpen(!open)
 
 
-      console.log(time , 'time')
 
 
   const imageUrl = image && image.asset._ref ? urlFor(image.asset._ref).url() : ''
@@ -50,7 +53,7 @@ const SeminarBanner: FC<ISeminarBanner> = ({
     <div className='2xl:px-[50px] px-[16px] 2xl:mt-[25px] 4xl:px-[240px]'>
       <div className='flex flex-row items-center mt-[15px] text-[16px] 2xl:text-[20px] text-[#222E51] font-medium font-jost'>
         <GrFormPreviousLink className='2xl:w-[30px] w-[25px]  h-[25px] 2xl:h-[30px]' />
-        <button >
+        <button onClick={handleBack} >
           Назад
         </button>
       </div>
@@ -72,12 +75,8 @@ const SeminarBanner: FC<ISeminarBanner> = ({
               )}
             </div>
           </div>
-
           {/* MODAL */}
           <SeminarModal visible={open} close={handleChangeStatus} />
-
-
-
           <div className='order-[3] 2xl:order-1 border-t border-t-[#E4E4E4] mt-[25px] 2xl:mt-[30px] pt-[25px] 2xl:pt-[30px]'>
             <div className='flex flex-row items-center text-[15px] leading-[18px] text-[#222E51] font-jost  2xl:text-[20px]'>
               <CiClock2 className='mr-[10px] w-[20px] h-[20px] 2xl:w-[25px] 2xl:h-[25px] 2xl:ml-[1px]' />
