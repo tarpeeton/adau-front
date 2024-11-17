@@ -13,7 +13,7 @@ export interface ISeminarCategory {
  
   
 
-  export interface ISeminarData {
+export interface ISeminarData {
     _type: 'seminar';
     _id: string;
     _createdAt: string;
@@ -120,5 +120,77 @@ export interface ISeminarCategory {
       _type: 'slug';
       current: string;
     };
+  }
+  
+
+
+
+export interface ISeminarProgramItem {
+    _key: string;
+    timeSlot: string;
+    topic: string;
+    speaker: {
+      name: {
+        ru: string;
+        uz: string;
+        en: string;
+      };
+      position: {
+        ru: string;
+        uz: string;
+        en: string;
+      };
+      image: {
+        _type: 'image';
+        asset: {
+          _ref: string;
+          _type: 'reference';
+        };
+      };
+      description: {
+        ru: string;
+        uz: string;
+        en: string;
+      };
+    };
+  }
+
+
+export interface IInfoPriceItem {
+    _key: string;
+    title: {
+      ru: string;
+      uz: string;
+      en: string;
+    };
+    price: number;
+    options: string[];
+  }  
+
+
+export interface ISeminarBanner {
+    status: boolean
+    locale: "ru" | "uz" | "en"
+    onButtonClick: () => void // Prop type for button click handler
+    title: { ru: string, uz: string, en: string },
+    description: {
+      ru: string
+      uz: string
+      en: string
+    }
+    date: string // Date in ISO format (YYYY-MM-DD)
+    time: string // Time as a string (e.g., "12.00")
+    image: {
+      _type: 'image'
+      asset: {
+        _ref: string
+        _type: 'reference'
+      }
+    }
+    address: {
+      ru: string
+      uz: string
+      en: string
+    }
   }
   

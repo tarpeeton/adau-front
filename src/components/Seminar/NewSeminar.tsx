@@ -46,6 +46,7 @@ const NewSeminar: FC<INewSeminarProps> = ({cotegory , data}) => {
     const filterRef = useRef<HTMLDivElement | null>(null)
     const locale = useLocale()
 
+    console.log(data , 'data')
 
     const handleActiveFilter = () => setMobileActiveFilter(!mobileActiveFilter)
 

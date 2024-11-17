@@ -14,6 +14,7 @@ import { ISeminarCategory, ISeminarData } from '@/interface/ISeminar/seminar'
 import useLocale from '@/hooks/useLocale'
 
 import { urlFor } from '@/sanity/lib/image'
+import formatDate from '@/hooks/useFormatDate'
 
 
 
@@ -149,7 +150,7 @@ const OldSeminar: FC<IOldSeminarProps> = ({cotegory , data}) => {
                             <div >
                                 <div className='flex flex-row items-center text-[15px] leading-[18px] text-[#222E51] font-jost  2xl:text-[20px]'>
                                     <div>
-                                        <p>{item.date}</p>
+                                        <p>{formatDate(item.date)}</p>
                                     </div>
                                 </div>
                               

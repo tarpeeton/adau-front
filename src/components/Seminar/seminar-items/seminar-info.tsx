@@ -7,28 +7,27 @@ import 'swiper/css/pagination'
 import { MdCheck } from 'react-icons/md'
 import useLocale from '@/hooks/useLocale'
 import SeminarModal from '@/components/Modal/seminar-modal'
+import { IInfoPriceItem } from '@/interface/ISeminar/seminar'
+
 
 interface IInfoPriceProps {
-
-  priceData: Array<{
-    _key: string
-    title: {
-      ru: string
-      uz: string
-      en: string
-    }
-    price: number
-    options: string[]
-  }>
+  priceData: IInfoPriceItem[]; // Define priceData as an array of items
 }
 
 
 
 
-const InfoPrice: FC<IInfoPriceProps> = (priceData) => {
+const InfoPrice: FC<IInfoPriceProps> = ({priceData}) => {
   const [open, setOpen] = useState(false)
   const locale = useLocale()
   const handleChangeStatus = () => setOpen(!open)
+
+
+  if (!priceData || priceData.length === 0) {
+    return null;
+  }
+
+
 
   return (
     <div className='mt-[80px] 2xl:mt-[200px] px-[16px] 2xl:px-[50px] 4xl:px-[240px]'>
@@ -47,7 +46,7 @@ const InfoPrice: FC<IInfoPriceProps> = (priceData) => {
             },
           }}
         >
-          {priceData.priceData.map((item, index) => (
+          {priceData?.map((item, index) => (
             <SwiperSlide key={index}>
               <div className='p-[20px] 2xl:px-[25px] border border-[#E4E4E4] min-h-[440px] 2xl:min-h-[500px] flex flex-col justify-between cursor-pointer'>
                 <div>

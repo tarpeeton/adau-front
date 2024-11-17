@@ -41,6 +41,9 @@ interface ISeminarSpeakersProps {
 
 const SeminarSpeakers: FC<ISeminarSpeakersProps> = ({speakers , locale}) => {
 
+  if (!speakers || speakers.length === 0) {
+    return null;
+  }
 
 
     return (

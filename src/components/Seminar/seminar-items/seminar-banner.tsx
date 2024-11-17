@@ -6,59 +6,10 @@ import { CiLocationOn } from "react-icons/ci"
 // image
 import { urlFor } from '@/sanity/lib/image'
 import SeminarModal from '@/components/Modal/seminar-modal'
+import { SeminarFormatDate } from '@/hooks/useFormatDate'
 
-
-const formatDate = (date: string, time: string): string => {
-  // Create a Date object for the current date and time
-  const currentDate = new Date()
-
-  // Parse the seminar date into a Date object
-  const seminarDate = new Date(date)
-
-  // Split the time string to extract hours and minutes
-  const [hours, minutes] = time.split('.').map(Number)
-
-  // Set the seminar date to the provided time (by adjusting the hours and minutes)
-  seminarDate.setHours(hours, minutes, 0, 0)
-
-  // Normalize the current date to ignore the time (set to midnight)
-  const normalizedCurrentDate = new Date(currentDate)
-  normalizedCurrentDate.setHours(0, 0, 0, 0)
-
-  // If the seminar date has passed (before today or if today and the time is in the past)
-  if (seminarDate < currentDate && seminarDate < normalizedCurrentDate) {
-    return `Завершено: ${seminarDate.toLocaleDateString('ru-RU')}; ${time}`
-  }
-
-  // If the seminar is upcoming or today, show the seminar date and time
-  return `${seminarDate.toLocaleDateString('ru-RU')}; ${time}`
-}
-
-interface ISeminarBanner {
-  status: boolean
-  locale: "ru" | "uz" | "en"
-  onButtonClick: () => void // Prop type for button click handler
-  title: { ru: string, uz: string, en: string },
-  description: {
-    ru: string
-    uz: string
-    en: string
-  }
-  date: string // Date in ISO format (YYYY-MM-DD)
-  time: string // Time as a string (e.g., "12.00")
-  image: {
-    _type: 'image'
-    asset: {
-      _ref: string
-      _type: 'reference'
-    }
-  }
-  address: {
-    ru: string
-    uz: string
-    en: string
-  }
-}
+// SEMINAR BANNER UCHUN INTERFACE
+import { ISeminarBanner } from '@/interface/ISeminar/seminar'
 
 
 
@@ -66,7 +17,15 @@ interface ISeminarBanner {
 
 
 
-const SeminarBanner: FC<ISeminarBanner> = ({ 
+
+
+
+
+
+
+
+
+const SeminarBanner: FC<ISeminarBanner> = ({
   status,
   onButtonClick,
   title,
@@ -75,11 +34,13 @@ const SeminarBanner: FC<ISeminarBanner> = ({
   time,
   image,
   address, locale }) => {
+
+
   const [open, setOpen] = useState(false)
   const handleChangeStatus = () => setOpen(!open)
 
 
- 
+      console.log(time , 'time')
 
 
   const imageUrl = image && image.asset._ref ? urlFor(image.asset._ref).url() : ''
@@ -122,7 +83,7 @@ const SeminarBanner: FC<ISeminarBanner> = ({
               <CiClock2 className='mr-[10px] w-[20px] h-[20px] 2xl:w-[25px] 2xl:h-[25px] 2xl:ml-[1px]' />
               <div>
                 <p>
-                  {formatDate(date, time)}
+                  {SeminarFormatDate(date, time)}
                 </p>
               </div>
             </div>
