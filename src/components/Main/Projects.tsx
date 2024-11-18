@@ -97,16 +97,13 @@ const Projects: FC = () => {
                         loop={false}
                     >
                         <div className='inline-block border-b-[10px]'>
-                            
                             <SwiperSlide>
-
                                 <button
                                     onClick={() => setActiveFilter({ name: 'Все проекты', id: 'all-project' })}
                                     className={`pb-[12px]  ${activeFilter.id === 'all-project' ? 'text-[#222E51] border-b-[2px] border-b-[#222E51] ' : 'text-[#000000]'}`}
                                 >
                                     <p className='text-[14px] font-medium leading-[23.12px]'>Все проекты</p>
                                 </button>
-
                             </SwiperSlide>
                             {caseCategory.map((item) => (
                                 <SwiperSlide key={item._id}>
@@ -120,7 +117,6 @@ const Projects: FC = () => {
                                 </SwiperSlide>
 
                             ))}
-
                         </div>
                     </Swiper>
                 </div>
@@ -147,16 +143,11 @@ const Projects: FC = () => {
                 </div>
             </div>
 
-
-
-
-
             <div className='mt-[20px] 2xl:mt-[30px] flex flex-col gap-[12px] 2xl:flex-row 2xl:flex-wrap'>
                 {filteredCaseData.map((item, index) => (
                     <Image key={index} src={urlFor(item.slider[0].asset._ref).url()} alt='' width={467} height={350} quality={100} className='object-cover 2xl:w-[32%] 2xl:h-[350px]' />
                 ))}
             </div>
-
             <div className='w-[50%] 2xl:w-[18%] mx-auto flex items-center justify-center mt-[40px] 2xl:mt-[60px]'>
                 <Link href='/project' className='buttonBlue w-full'>
                     Смотреть все

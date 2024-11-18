@@ -9,7 +9,10 @@ import Image from 'next/image';
 import One from "@/public/service/one.jpg";
 import Two from "@/public/service/two.jpg";
 import Three from "@/public/service/threee.jpg";
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
+import { Autoplay } from 'swiper/modules'
+
+
 
 const Services: FC = () => {
     return (
@@ -24,7 +27,8 @@ const Services: FC = () => {
                         spaceBetween={10}
                         slidesPerView={1.1}
                         speed={1000}
-                        autoplay={{ delay: 2000, disableOnInteraction: false }}
+                        autoplay={{ delay: 1500, disableOnInteraction: false }}
+                        modules={[Autoplay]}
                         loop={false}
                         breakpoints={{
                             1000: {
@@ -44,7 +48,7 @@ const Services: FC = () => {
                                         Lorem ipsum dolor sit amet consectetur. Ut vitae sapien vitae
                                     </p>
                                     <div className='w-[60%] 2xl:absolute  bottom-0 mt-[20px] 2xl:mt-[25px]'>
-                                        <Link href='/services/slug' className='buttonBlue'>
+                                        <Link href='/services' className='buttonBlue'>
                                             Узнать подробнее
                                         </Link>
                                     </div>
@@ -63,7 +67,7 @@ const Services: FC = () => {
                                         Lorem ipsum dolor sit amet consectetur. Ut vitae sapien vitae
                                     </p>
                                     <div className='w-[60%] 2xl:absolute  bottom-0 mt-[20px] 2xl:mt-[25px]'>
-                                        <Link href='/services/slug' className='buttonBlue'>
+                                        <Link href='/services' className='buttonBlue'>
                                             Узнать подробнее
                                         </Link>
                                     </div>
@@ -82,7 +86,7 @@ const Services: FC = () => {
                                         Lorem ipsum dolor sit amet consectetur. Ut vitae sapien vitae
                                     </p>
                                     <div className='w-[60%] 2xl:absolute  bottom-0 mt-[20px] 2xl:mt-[25px]'>
-                                        <Link href='/services/slug' className='buttonBlue'>
+                                        <Link href='/services' className='buttonBlue'>
                                             Узнать подробнее
                                         </Link>
                                     </div>

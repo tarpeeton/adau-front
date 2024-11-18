@@ -1,8 +1,16 @@
+"use client"
 import Link from 'next/link'
 import { FC } from 'react'
-
+import { sendButtonCount } from '@/lib/api'
 
 const ContactInfo: FC = () => {
+
+
+    const handleButton = async  (button: string) => {
+        await sendButtonCount(button)
+    }
+
+
     return (
         <div className='mt-[60px] 2xl:mt-[100px] px-[16px] 2xl:px-[50px] 4xl:px-[240px]'>
             <p className='text-[26px] 2xl:text-[45px] text-titleDark font-jost uppercase'>
@@ -16,9 +24,17 @@ const ContactInfo: FC = () => {
                             <p className='text-titleDark 2xl:text-[30px] text-[20px]'>+998 33 939 40 70</p>
                             <Link
                                 href='tel:+998339394070'
+                            >
+                                <button
+                                onClick={(e) => {
+                                    e.stopPropagation(); // Prevents interfering with the link navigation
+                                    handleButton('phone');
+                                }}
                                 className='text-[#222E51] underline decoration-solid decoration-skip-ink decoration-0 text-[14px] 2xl:text-[20px]'
                             >
                                 Позвонить
+                            </button>
+                                
                             </Link>
 
                         </div>

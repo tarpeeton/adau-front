@@ -1,6 +1,6 @@
 "use client"
 import { FC } from 'react'
-
+import { sendButtonCount } from '@/lib/api'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
@@ -17,10 +17,10 @@ import Link from 'next/link'
 
 
 const DataSocialsLinks = [
-    { id: 1, title: 'Instagram', name: 'adau_uz', link: 'https://www.instagram.com/adau_uz', img: Instagram },
-    { id: 2, title: 'Facebook', name: 'adau_uz', link: 'https://www.facebook.com/adau_uz', img: Facebook },
-    { id: 3, title: 'LinkedIn', name: 'adau_uz', link: 'https://www.linkedin.com/in/adau_uz', img: LinkedIn },
-    { id: 4, title: 'Telegram', name: 'adau_uz', link: 'https://t.me/adau_uz', img: Telegram },
+    { id: 1, title: 'Instagram', forCounter: 'instagram',  name: 'adau_uz', link: 'https://www.instagram.com/adau_uz', img: Instagram },
+    { id: 2, title: 'Facebook',  forCounter: '', name: 'adau_uz', link: 'https://www.facebook.com/adau_uz', img: Facebook },
+    { id: 3, title: 'LinkedIn',  forCounter: '', name: 'adau_uz', link: 'https://www.linkedin.com/in/adau_uz', img: LinkedIn },
+    { id: 4, title: 'Telegram',  forCounter: 'telegram', name: 'adau_uz', link: 'https://t.me/adau_uz', img: Telegram },
 ]
 
 
@@ -32,6 +32,10 @@ const DataSocialsLinks = [
 
 
 const Socials: FC = () => {
+    const handleButton = async (button: string) => {
+        await sendButtonCount(button)
+    }
+
     return (
         <div className='px-[16px] 2xl:px-[50px] 4xl:px-[240px] mt-[80px] 2xl:mt-[200px]'>
             <p className='text-[24px] 2xl:text-[45px] text-titleDark font-jost uppercase'>
@@ -81,8 +85,17 @@ const Socials: FC = () => {
                             <Image src={item?.img} quality={100} width={71} height={71} alt='instagram' className='object-cover 2xl:w-[90px]' />
 
                         </div>
-                        <Link href={item.link} className='buttonBlue'>
-                            Подписаться
+                        <Link href={item.link} className='w-full'>
+                        <button
+                            onClick={(e) => {
+                                e.stopPropagation() // Prevents interfering with the link navigation
+                                handleButton(item.forCounter)
+                            }}
+                            className='buttonBlue w-full'
+                        >
+                        Подписаться
+                        </button>
+                            
                         </Link>
                     </div>
                 ))}

@@ -1,6 +1,7 @@
+"use client"
 import React, {FC} from 'react';
 import Image from 'next/image';
-
+import { sendButtonCount } from '@/lib/api';
 
 
 // images
@@ -13,6 +14,9 @@ import Link from 'next/link'
 
 
 const ContactAction: FC = () => {
+  const handleButton = async (button: string) => {
+    await sendButtonCount(button)
+}
   return (
     <div className='mt-[80px] 2xl:mt-[200px]'>
         <div className=' bg-[#222E51] py-[40px] px-[16px] 2xl:py-[100px] 2xl:px-[50px]  4xl:px-[240px] flex flex-col 2xl:flex-row'>
@@ -28,7 +32,17 @@ const ContactAction: FC = () => {
                     </p>
                     <div className='flex flex-row flex-nowrap justify-between mt-[25px] 2xl:w-[45%] 2xl:mt-[50px]'>
                         <Link href='/telegram' className='buttonWhite w-[55%]'>Написать нам</Link>
-                        <Link href='tel:+998339394070' className='borderedButtonWhite w-[43%] flex items-center justify-center'>Позвонить</Link>
+                        <Link href='tel:+998339394070' className='w-[43%]'>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation() // Prevents interfering with the link navigation
+                  handleButton('phone')
+                }}
+                className='borderedButtonWhite flex items-center justify-center'
+              >
+                Позвонить
+              </button>
+            </Link>
                     </div>
             </div>
             <div className='mt-[30px] flex items-center gap-[8px] justify-center 2xl:w-[40%] 2xl:items-end 2xl:mt-[220px] 2xl:ml-[-80px]'>
