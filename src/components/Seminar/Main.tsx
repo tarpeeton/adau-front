@@ -20,6 +20,7 @@ const MainSeminar: FC = () => {
   const [cotegory , setCotegory] = useState<ISeminarCategory[] | []>([])
   const [data , setData] = useState<ISeminarData[] | []>([])
   const [oldData , setOldData]= useState<ISeminarData[] | []>([])
+  
   const locale = useLocale()
 
 useEffect(() => {

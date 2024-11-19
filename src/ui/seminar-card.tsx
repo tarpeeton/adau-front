@@ -1,10 +1,10 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import formatDate from '@/hooks/useFormatDate'
 import { Link } from '@/i18n/routing'
 import useLocale from '@/hooks/useLocale'
 import { CiClock2 } from "react-icons/ci"
 import { CiLocationOn } from "react-icons/ci"
-
+import SeminarModal from '@/components/Modal/seminar-modal'
 
 
 interface ISeminarCardProps {
@@ -25,6 +25,9 @@ interface ISeminarCardProps {
 const SeminarCard: FC<ISeminarCardProps> = ({item , inSwiper}) => {
   const locale = useLocale()
 
+  const [modal , setModal] = useState(false)
+
+  const handleChangeModal = () => setModal(!modal)
 
   return (
     <div  className={`p-[20px] relative 2xl:p-[30px] border border-[#E4E4E4] 2xl:mt-[20px] ${inSwiper ? '2xl:w-full' : '2xl:w-[32%]'} `} >
@@ -60,7 +63,8 @@ const SeminarCard: FC<ISeminarCardProps> = ({item , inSwiper}) => {
         {/* button for info */}
         <div className='mt-[25px]  flex flex-row gap-[11px] w-full'>
           <Link className='borderedButton w-[48%] flex items-center justify-center' href={`/seminar/${item.slug.current}`}>Подробнее</Link>
-          <button className='buttonBlue w-[48%] flex items-center justify-center'>Записаться</button>
+          <button onClick={handleChangeModal} className='buttonBlue w-[48%] flex items-center justify-center'>Записаться</button>
+          <SeminarModal  visible={modal} close={handleChangeModal}/>
         </div>
       </div>
     </div>

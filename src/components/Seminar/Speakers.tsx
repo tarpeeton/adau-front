@@ -1,52 +1,43 @@
 "use client"
 
-import { FC } from 'react'
+import { FC  , useState , useEffect } from 'react'
+import { client } from "@/sanity/lib/client";
+
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
+import { urlFor } from '@/sanity/lib/image';
+import { ISpeakersData } from '@/interface/spiker';
 
-
-// images
-import One from '@/public/team/one.png'
-import Two from '@/public/team/two.jpg'
-import Three from '@/public/team/three.png'
 import { GrFormNextLink } from "react-icons/gr"
+import useLocale from '@/hooks/useLocale'
+import { Autoplay } from 'swiper/modules'
 
-const TeamData = [
-    {
-        id: 1,
-        url: One,
-        occupation: 'Учредитель ассоциации',
-        name: 'Алишер Авазов',
-        desciption: 'Lorem ipsum dolor sit amet consectetur. Nunc nam ut non adipiscing id. Scelerisque elementum faucibus',
-    },
-    {
-        id: 2,
-        url: Two,
-        occupation: 'Учредитель ассоциации',
-        name: 'Алишер Авазов',
-        desciption: 'Lorem ipsum dolor sit amet consectetur. Nunc nam ut non adipiscing id. Scelerisque elementum faucibus',
-    },
-    {
-        id: 3,
-        url: Two,
-        occupation: 'Учредитель ассоциации',
-        name: 'Алишер Авазов',
-        desciption: 'Lorem ipsum dolor sit amet consectetur. Nunc nam ut non adipiscing id. Scelerisque elementum faucibus',
-    },
-    {
-        id: 4,
-        url: Three,
-        occupation: 'Учредитель ассоциации',
-        name: 'Алишер Авазов',
-        desciption: 'Lorem ipsum dolor sit amet consectetur. Nunc nam ut non adipiscing id. Scelerisque elementum faucibus',
-    }
-]
+
 
 
 const Speakers: FC = () => {
+    const locale = useLocale()
+    const [data , setData] = useState<ISpeakersData[] | []>([])
+
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const Data = await client.fetch(
+              `*[_type == "speaker"]`
+            );
+            setData(Data)
+          } catch (error) {
+            console.debug(error);
+          }
+        };
+        fetchData();
+      }, []);
+      
     return (
         <div className='mt-[80px] 2xl:mt-[200px] px-[16px] 2xl:px-[50px] 4xl:px-[240px]'>
             <p className='text-[26px] 2xl:text-[45px]  uppercase text-titleDark font-jost'>
@@ -56,8 +47,9 @@ const Speakers: FC = () => {
                 <Swiper
                     spaceBetween={10}
                     slidesPerView={1}
-                    speed={1000}
-                    autoplay={{ delay: 2000, disableOnInteraction: false }}
+                    speed={800}
+                    autoplay={{ delay:900, disableOnInteraction: false }}
+                    modules={[Autoplay]}
                     loop={false}
                     breakpoints={{
                         1000: {
@@ -66,15 +58,15 @@ const Speakers: FC = () => {
                         },
                     }}
                 >
-                    {TeamData.map((item) => (
-                        <SwiperSlide key={item.id} className='cursor-pointer'>
+                    {data.map((item) => (
+                        <SwiperSlide key={item._id} className='cursor-pointer'>
                             <div>
-                                <Image src={item.url} alt={item.name} width={467} height={520} quality={100} className='object-cover h-[380px] 2xl:h-[450px] 4xl:h-[520px]' />
+                                <Image src={urlFor(item.image.asset._ref).url()} alt={item.name[locale]} width={467} height={520} quality={100} className='object-cover h-[380px] 2xl:h-[450px] 4xl:h-[520px]' />
                                 <div className='mt-[30px]'>
 
-                                    <p className='text-[22px] 2xl:text-[30px] font-jost text-titleDark font-medium'>{item.name}</p>
+                                    <p className='text-[22px] 2xl:text-[30px] font-jost text-titleDark font-medium'>{item.name[locale]}</p>
                                     <p className='text-[15px] 2xl:text-[20px] font-jost leading-[18px] text-[#414141] mt-[8px] 2xl:mt-[10px]'>
-                                        {item.desciption}
+                                        {item.description[locale]}
                                     </p>
                                     <div className='mt-[20px] text-[20px] font-medium text-[#222E51] flex flex-row items-center gap-[5px]'>
                                         Мероприятия спикера

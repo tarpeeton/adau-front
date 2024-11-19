@@ -5,7 +5,9 @@ import Image from 'next/image';
 import One from "@/public/service/one.jpg";
 import Two from "@/public/service/two.jpg";
 import Three from "@/public/service/threee.jpg";
-import Link from 'next/link';
+
+import { Link } from '@/i18n/routing';
+
 
 const Service: FC = () => {
     return (
@@ -25,7 +27,7 @@ const Service: FC = () => {
                                         Lorem ipsum dolor sit amet consectetur. Ut vitae sapien vitae
                                     </p>
                                     <div className='w-[60%] 2xl:absolute  bottom-0 mt-[20px] 2xl:mt-[25px]'>
-                                        <Link href='/services/slug' className='buttonBlue'>
+                                        <Link href='/project' className='buttonBlue'>
                                             Узнать подробнее
                                         </Link>
                                     </div>
@@ -42,7 +44,7 @@ const Service: FC = () => {
                                         Lorem ipsum dolor sit amet consectetur. Ut vitae sapien vitae
                                     </p>
                                     <div className='w-[60%] 2xl:absolute  bottom-0 mt-[20px] 2xl:mt-[25px]'>
-                                        <Link href='/services/slug' className='buttonBlue'>
+                                        <Link href='/project' className='buttonBlue'>
                                             Узнать подробнее
                                         </Link>
                                     </div>
@@ -59,7 +61,7 @@ const Service: FC = () => {
                                         Lorem ipsum dolor sit amet consectetur. Ut vitae sapien vitae
                                     </p>
                                     <div className='w-[60%] 2xl:absolute  bottom-0 mt-[20px] 2xl:mt-[25px]'>
-                                        <Link href='/services/slug' className='buttonBlue'>
+                                        <Link href='/project' className='buttonBlue'>
                                             Узнать подробнее
                                         </Link>
                                     </div>
