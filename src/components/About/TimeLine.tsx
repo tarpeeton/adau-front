@@ -13,39 +13,140 @@ export interface ITimeLineProps {
 }
 
 const Timeline: React.FC<ITimeLineProps> = ({data}) => {
-    const containerRef = useRef<HTMLDivElement>(null)
-    const topCardsRef = useRef<HTMLDivElement[]>([])
-    const bottomCardsRef = useRef<HTMLDivElement[]>([])
-    const progressBarRef = useRef<HTMLDivElement>(null)
-    const locale = useLocale()
-    const topCardsData = data.filter(item => item.position === true)
-    const bottomCardsData = data.filter(item => item.position === false)
+    const containerRef = useRef<HTMLDivElement | null>(null);
 
+    // Store elements by `data-id`
+    const topCardsRef = useRef<Record<string, HTMLDivElement>>({});
+    const bottomCardsRef = useRef<Record<string, HTMLDivElement>>({});
 
+    const progressBarRef = useRef<HTMLDivElement | null>(null);
+    const locale = useLocale();
+
+    const topCardsData = data.filter((item) => item.position === true);
+    const bottomCardsData = data.filter((item) => item.position === false);
 
     useEffect(() => {
+        const allCards = [
+            ...Object.values(topCardsRef.current),
+            ...Object.values(bottomCardsRef.current),
+        ];
 
-        const allCards = [...topCardsRef.current, ...bottomCardsRef.current]
+        // Default Active States: First card in both topCardsRef and bottomCardsRef
+        const setDefaultActiveCards = () => {
+            const firstTopCard = Object.values(topCardsRef.current)[0];
+            const firstBottomCard = Object.values(bottomCardsRef.current)[0];
+
+            const activateCard = (card: HTMLDivElement | undefined) => {
+                if (!card) return;
+                const innerDiv = card.querySelector<HTMLDivElement>('.inner-border');
+                const innerSpan = card.querySelector<HTMLSpanElement>('.inner-border-span');
+                const dateText = card.querySelector<HTMLParagraphElement>('#date');
+                const titleText = card.querySelector<HTMLParagraphElement>('#title');
+                const descriptionText = card.querySelector<HTMLParagraphElement>('#description');
+
+                // Active card styles
+                gsap.to(card, { backgroundColor: '#FFFFFF', color: '#3A476D', duration: 0 });
+                if (innerDiv) gsap.to(innerDiv, { borderColor: '#FFFFFF', duration: 0 });
+                if (innerSpan) gsap.to(innerSpan, { background: '#FFFFFF', duration: 0 });
+                if (dateText) gsap.to(dateText, { color: '#222E51', opacity: 1, duration: 0 });
+                if (titleText) gsap.to(titleText, { color: '#121212', opacity: 1, duration: 0 });
+                if (descriptionText)
+                    gsap.to(descriptionText, { color: '#414141', opacity: 1, duration: 0 });
+            };
+
+            activateCard(firstTopCard);
+            activateCard(firstBottomCard);
+        };
 
         if (containerRef.current && allCards.length > 0) {
-            // Initial setup of all cards and borders
+            // Set default active cards
+            setDefaultActiveCards();
+
+            // Set initial styles for all cards
             allCards.forEach((card) => {
-                gsap.set(card, { backgroundColor: '#222E51', color: '#fff' })
-                const innerDiv = card.querySelector(`.inner-border`)
+                gsap.set(card, { backgroundColor: '#222E51', color: '#fff' });
+                const innerDiv = card.querySelector<HTMLDivElement>('.inner-border');
                 if (innerDiv) {
-                    gsap.set(innerDiv, { borderColor: '#FFFFFF' })
+                    gsap.set(innerDiv, { borderColor: '#FFFFFF' });
                 }
-                const textElements = card.querySelectorAll('p')
-                textElements.forEach((text) => gsap.set(text, { color: '#FFFFFF', opacity: '50%' }))
-                gsap.set(progressBarRef.current, { width: `400px` })
+                const textElements = card.querySelectorAll<HTMLParagraphElement>('p');
+                textElements.forEach((text) =>
+                    gsap.set(text, { color: '#FFFFFF', opacity: 0.5 })
+                );
+            });
 
-            })
+            gsap.set(progressBarRef.current, { width: `400px` });
 
-            // Calculate the scroll width needed for the animation
-            const totalScrollWidth = containerRef.current.scrollWidth
+            // Calculate total scroll width
+            const totalScrollWidth = containerRef.current.scrollWidth;
+            const updateActiveCard = () => {
+                const viewportCenter = window.innerWidth / 4; // Adjust for viewport center
 
-            // ScrollTrigger for horizontal scrolling
-            gsap.to(allCards, {
+                let closestTopCardId: string | null = null;
+                let closestBottomCardId: string | null = null;
+
+                let topMinDistance = Infinity;
+                let bottomMinDistance = Infinity;
+
+                // Find closest card for `topCardsRef`
+                Object.values(topCardsRef.current).forEach((card) => {
+                    const cardCenter = card.getBoundingClientRect().left + card.offsetWidth / 2;
+                    const distance = Math.abs(viewportCenter - cardCenter);
+
+                    if (distance < topMinDistance) {
+                        topMinDistance = distance;
+                        closestTopCardId = card.dataset.id || null;
+                    }
+                });
+
+                // Find closest card for `bottomCardsRef`
+                Object.values(bottomCardsRef.current).forEach((card) => {
+                    const cardCenter = card.getBoundingClientRect().left + card.offsetWidth / 2;
+                    const distance = Math.abs(viewportCenter - cardCenter);
+
+                    if (distance < bottomMinDistance) {
+                        bottomMinDistance = distance;
+                        closestBottomCardId = card.dataset.id || null;
+                    }
+                });
+
+                // Apply styles to all cards
+                allCards.forEach((card) => {
+                    const isActive =
+                        card.dataset.id === closestTopCardId || card.dataset.id === closestBottomCardId;
+
+                    const innerDiv = card.querySelector<HTMLDivElement>('.inner-border');
+                    const innerSpan = card.querySelector<HTMLSpanElement>('.inner-border-span');
+                    const dateText = card.querySelector<HTMLParagraphElement>('#date');
+                    const titleText = card.querySelector<HTMLParagraphElement>('#title');
+                    const descriptionText = card.querySelector<HTMLParagraphElement>('#description');
+
+                    if (isActive) {
+                        // Active card styles
+                        gsap.to(card, { backgroundColor: '#FFFFFF', color: '#3A476D', duration: 0.2 });
+                        if (innerDiv) gsap.to(innerDiv, { borderColor: '#FFFFFF', duration: 0.2 });
+                        if (innerSpan) gsap.to(innerSpan, { background: '#FFFFFF', duration: 0.2 });
+                        if (dateText) gsap.to(dateText, { color: '#222E51', opacity: 1, duration: 0.2 });
+                        if (titleText) gsap.to(titleText, { color: '#121212', opacity: 1, duration: 0.2 });
+                        if (descriptionText)
+                            gsap.to(descriptionText, { color: '#414141', opacity: 1, duration: 0.2 });
+                    } else {
+                        // Non-active card styles
+                        gsap.to(card, { backgroundColor: '#3A476D', color: '#FFFFFF', duration: 0.2 });
+                        if (innerDiv) gsap.to(innerDiv, { borderColor: '#3A476D', duration: 0.2 });
+                        if (innerSpan) gsap.to(innerSpan, { background: '#3A476D', duration: 0.2 });
+                        if (dateText) gsap.to(dateText, { color: '#FFFFFF', opacity: 0.5, duration: 0.2 });
+                        if (titleText) gsap.to(titleText, { color: '#FFFFFF', opacity: 0.5, duration: 0.2 });
+                        if (descriptionText)
+                            gsap.to(descriptionText, { color: '#FFFFFF', opacity: 0.5, duration: 0.2 });
+                    }
+                });
+
+                // Update progress bar
+                gsap.to(progressBarRef.current, { width: `800px`, duration: 0.2 });
+            };
+            // Horizontal scroll logic with ScrollTrigger
+            const scrollAnimation = gsap.to(allCards, {
                 x: () => -totalScrollWidth,
                 ease: 'none',
                 scrollTrigger: {
@@ -54,91 +155,19 @@ const Timeline: React.FC<ITimeLineProps> = ({data}) => {
                     end: () => `+=${totalScrollWidth}`,
                     scrub: true,
                     pin: true,
-                    onUpdate: (self) => {
-                        // Calculate the center of the viewport
-                        const viewportCenter = window.innerWidth / 4
-                        let closestCardIndex = 0
-                        let minDistance = Infinity
-
-                        // Determine which card is closest to the center
-                        topCardsRef.current.forEach((card, index) => {
-                            const cardCenter = card.getBoundingClientRect().left + card.offsetWidth / 2
-                            const distance = Math.abs(viewportCenter - cardCenter)
-
-                            if (distance < minDistance) {
-                                minDistance = distance
-                                closestCardIndex = index
-                            }
-                        })
-
-                        // Update the active card background and border for both top and bottom cards
-                        const activeId = topCardsRef.current[closestCardIndex]?.dataset.id
-
-                        allCards.forEach((card) => {
-                            const innerDiv = card.querySelector(`.inner-border`)
-                            const innerSpan = card.querySelector(`.inner-border-span`)
-                            const dateText = card.querySelector(`#date`)
-                            const titleText = card.querySelector(`#title`)
-                            const descriptionText = card.querySelector(`#description`)
-
-                            if (card.dataset.id === activeId) {
-                                // Active card styles
-                                gsap.to(card, {
-                                    backgroundColor: '#FFFFFF',
-                                    color: '#3A476D',
-                                    duration: 0.2,
-                                })
-                                if (innerDiv) {
-                                    gsap.to(innerDiv, {
-                                        borderColor: '#FFFFFF',
-                                        duration: 0.2,
-                                    })
-                                }
-                                if (innerSpan) {
-                                    gsap.to(innerSpan, {
-                                        background: '#FFFFFF',
-                                        duration: 0.2,
-                                    })
-                                }
-                                if (dateText) gsap.to(dateText, { color: '#222E51', opacity: 1, duration: 0.2 })
-                                if (titleText) gsap.to(titleText, { color: '#121212', opacity: 1, duration: 0.2 })
-                                if (descriptionText) gsap.to(descriptionText, { color: '#414141', opacity: 1, duration: 0.2 })
-                            } else {
-                                // Non-active card styles
-                                gsap.to(card, {
-                                    backgroundColor: '#3A476D',
-                                    color: '#FFFFFF',
-                                    duration: 0.2,
-                                })
-                                if (innerDiv) {
-                                    gsap.to(innerDiv, {
-                                        borderColor: '#3A476D',
-                                        duration: 0.2,
-                                    })
-                                }
-                                if (innerSpan) {
-                                    gsap.to(innerSpan, {
-                                        background: '#3A476D',
-                                        duration: 0.2,
-                                    })
-                                }
-                                if (dateText) gsap.to(dateText, { color: '#FFFFFF', opacity: 0.5, duration: 0.2 })
-                                if (titleText) gsap.to(titleText, { color: '#FFFFFF', opacity: 0.5, duration: 0.2 })
-                                if (descriptionText) gsap.to(descriptionText, { color: '#FFFFFF', opacity: 0.5, duration: 0.2 })
-                            }
-                        })
-
-                        // Update the progress bar width based on the active card
-                        gsap.to(progressBarRef.current, { width: `800px`, duration: 0.2 })
-                    },
+                    onUpdate: () => updateActiveCard(),
                 },
-            })
+            });
 
+            // Function to determine and update the active card for both top and bottom sets
+         
+
+            // Cleanup ScrollTrigger on unmount
             return () => {
-                ScrollTrigger.killAll()
-            }
+                scrollAnimation.scrollTrigger?.kill();
+            };
         }
-    }, [])
+    }, [data]); // Add data as a dependency
 
 
 
@@ -148,14 +177,14 @@ const Timeline: React.FC<ITimeLineProps> = ({data}) => {
                 НАШ ПУТЬ И ПЛАНЫ НА БУДУЩЕЕ
             </p>
             <div >
-                <div className="topCARD Sw-full flex flex-row flex-nowrap gap-[400px] mt-[40px] ">
-                    {topCardsData.map((item, index) => (
+                <div className="topCARD w-full flex flex-row flex-nowrap gap-[400px] mt-[40px] ">
+                    {topCardsData.map((item) => (
                         <div
-                            key={`top-${index}`}
-                            ref={(el) => {
-                                if (el) topCardsRef.current[index] = el
-                            }}
-                            data-id={`card-${index}`}
+                        key={item._rev}
+                        ref={(el) => {
+                            if (el) topCardsRef.current[`card-${item._rev}`] = el; // Use data-id as the key
+                        }}
+                            data-id={`card-${item._rev}`} 
                             className="card flex flex-col justify-between bg-[#3A476D] min-w-[400px] transition-colors duration-500 ease-in-out h-[250px]"
                         >
                             <div className="p-[25px]">
@@ -183,13 +212,14 @@ const Timeline: React.FC<ITimeLineProps> = ({data}) => {
                 </div>
 
                 <div className="bottomCARDS w-full flex flex-row gap-[400px] mt-[20px] ml-[400px] flex-nowrap">
-                    {bottomCardsData.map((item, index) => (
+                    {bottomCardsData.map((item) => (
                         <div
-                            key={`bottom-${index}`}
-                            ref={(el) => {
-                                if (el) bottomCardsRef.current[index] = el
-                            }}
-                            data-id={`card-${index}`}
+                        key={item._rev}
+                        ref={(el) => {
+                            if (el) bottomCardsRef.current[`card-${item._rev}`] = el; // Use data-id as the key
+                        }}
+                          
+                            data-id={`card-${item._rev}`}
                             className="card flex flex-col justify-between  min-w-[400px] transition-colors duration-300 ease-in-out h-[250px]"
                         >
                             <div className="inner-border relative w-full h-[30px] mt-[-20px] border-l-2 border-dashed border-whitete text-[#222E51]">

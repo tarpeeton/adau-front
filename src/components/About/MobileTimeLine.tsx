@@ -18,78 +18,82 @@ const MobileTimeLine: React.FC<ITimeLineProps> = ({data}) => {
 
 
 
-
-
   useEffect(() => {
     const cards = cardsRef.current;
-
+  
     if (cards.length > 0 && containerRef.current) {
       // Set initial styles for cards
       gsap.set(cards, { yPercent: 200, backgroundColor: '#3A476D', color: '#FFFFFF' });
-
-      // Create a timeline
+  
+      // Create a ScrollTrigger timeline
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: 'top',
-          end: `+=${data.length * window.innerHeight}`, // Total scroll distance
+          start: 'top top',
+          end: `+=${data.length * 100}vh`, // Adjust to the total scroll length
           scrub: true,
           pin: true,
           anticipatePin: 1,
         },
       });
-
-      // For each card, animate in and out
+  
       data.forEach((item, index) => {
         const card = cards[index];
-
-        // Animate the progress bar to align with the active card
-        tl.to(progressBarRef.current, {
-          height: ((index + 1) / data.length) * 100 + '%',
-          backgroundColor: '#FFFFFF',
-          duration: 0.5,
-        });
-
-        // Animate card in
+  
+        // Animate the progress bar for each card
+        tl.to(
+          progressBarRef.current,
+          {
+            height: ((index + 1) / data.length) * 100 + '%',
+            duration: 0.5,
+            backgroundColor: '#FFFFFF',
+          },
+          index * 1.5 // Stagger progress bar updates
+        );
+  
+        // Animate the card into view
         tl.to(
           card,
           {
             yPercent: 0,
-            duration: 0.5,
+            duration: 0.6,
             backgroundColor: '#FFFFFF',
             color: '#222E51',
+            ease: 'power1.out',
           },
-          '-=0.5' // Overlap with progress bar animation
+          `-=${0.5}` // Overlap with progress bar animation
         );
-
-        // Hold the card on screen
-        tl.to({}, { duration: 0.5 });
-
-        // Animate card out
+  
+        // Hold the card briefly
+        tl.to({}, { duration: 0.6 });
+  
+        // Animate the card out of view
         tl.to(card, {
           yPercent: -80,
-          duration: 0.4,
+          duration: 0.6,
           backgroundColor: '#3A476D',
           color: '#FFFFFF',
+          ease: 'power1.in',
         });
-
-        // Reset progress bar color if not the last card
-        if (index < data.length) {
+  
+        // Reset the progress bar color if it's not the last card
+        if (index < data.length - 1) {
           tl.to(progressBarRef.current, {
             backgroundColor: '#3E4A6A',
-            duration: 0.03,
+            duration: 0.2,
           });
         }
       });
     }
   }, [data]);
+  
 
   return (
     <div ref={containerRef} className='mt-[80px] w-full bg-[#222E51] pt-[40px] px-[16px] overflow-hidden h-[500px]'>
       <p className='text-[26px] text-white uppercase font-jost'>Наш путь и планы на будущее</p>
       <div className='flex flex-row justify-between mt-[40px] overflow-hidden relative h-full'>
         {/* Progress bar */}
-        <div className='w-[1%] bg-titleWhite text-[#222E51] relative'>
+        <div className='w-[0.5%] bg-titleWhite text-[#222E51] relative'>
           <div ref={progressBarRef} className='absolute bottom-0 left-0 w-full bg-[#3E4A6A]'  />
         </div>
 
