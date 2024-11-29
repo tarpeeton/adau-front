@@ -8,7 +8,7 @@ import axios from 'axios'
 
 // icons
 import { IoIosArrowDown } from "react-icons/io"
-import { FiPlus } from "react-icons/fi"
+
 import { Triangle } from 'react-loader-spinner'
 
 
@@ -31,7 +31,7 @@ const ContactUs: FC<IReviewFull> = ({ visible, close }) => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
-        text: ''
+        textModal: ''
     })
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,76 +41,68 @@ const ContactUs: FC<IReviewFull> = ({ visible, close }) => {
 
     const handleOpenSelect = () => setOpenSelect(!openSelect)
 
-    // Select Tipini Olish
     const handleMessageType = (msg: string) => {
         setSelectMessageType(msg)
         setOpenSelect(false)
     }
 
     const handleFileUploadClick = () => {
-        const input = document.createElement('input')
-        input.type = 'file'
-        input.style.display = 'none'
-        input.onchange = (e: Event) => {
-            const target = e.target as HTMLInputElement
-            if (target.files && target.files.length > 0) {
-                setIsLoading(true)
-                setFileName(target.files[0].name)
-                console.log(target.files[0])
+        // Trigger the hidden file input click
+        fileInputRef.current?.click()
+    }
 
-                // Simulate an upload process for demonstration
-                setTimeout(() => {
-                    setIsLoading(false)
-                }, 2000)
-            }
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0]
+        if (file) {
+            setIsLoading(true)
+            setFileName(file.name)
+
+            // Simulate upload process (remove after actual API implementation)
+            setTimeout(() => {
+                setIsLoading(false)
+            }, 1000)
         }
-        document.body.appendChild(input)
-        input.click()
-        document.body.removeChild(input)
     }
 
     const sendDataForm = async () => {
-        setLoadingDataPost(true);
+        setLoadingDataPost(true)
         try {
-            // Создаем объект FormData и добавляем поля формы
-            const formPayload = new FormData();
-            formPayload.append('name', formData.name);
-            formPayload.append('email', formData.email);
-            formPayload.append('theme', selectedMessageType);
-            formPayload.append('text', formData.text);
-    
-            // Проверяем и добавляем файл в formData, если он существует
+            // Create FormData and append fields
+            const formPayload = new FormData()
+            formPayload.append('name', formData.name)
+            formPayload.append('email', formData.email)
+            formPayload.append('theme', selectedMessageType)
+            formPayload.append('text', formData.textModal)
+
+            // Append file if exists
             if (fileInputRef.current?.files && fileInputRef.current.files[0]) {
-                formPayload.append('file', fileInputRef.current.files[0]);
+                formPayload.append('file', fileInputRef.current.files[0])
             }
-    
-            // Отправляем данные с использованием axios и добавлением API-Key в заголовок
+
+            // Send data using axios
             const response = await axios.post('https://adau.result-me.uz/api/form/message', formPayload, {
                 headers: {
                     'API-Key': 'VJs4krbxFMj78Q5IsUIkdZdi8A1MSItugxlHJiwRALyE7c8lCiGcLY6OsugGPzRmjSJ3nzdFh6iUZD9lmYeSzPpm7FTwcGttS0js',
-                    'Content-Type': 'multipart/form-data'
+                    'Content-Type': 'multipart/form-data' // Important for file upload
                 }
-            });
-    
-            console.log('Form submitted successfully:', response.data);
-    
-            // Очищаем форму после успешной отправки
+            })
+
+            console.log('Form submitted successfully:', response.data)
+
+            // Clear form after successful submission
             setFormData({
                 name: '',
                 email: '',
-                text: ''
-            });
-            setFileName(null);
-            setSelectMessageType('Тема сообщения');
+                textModal: ''
+            })
+            setFileName(null)
+            setSelectMessageType('Тема сообщения')
         } catch (error) {
-            console.error('Error submitting form:', error);
+            console.error('Error submitting form:', error)
         } finally {
-            setLoadingDataPost(false);
+            setLoadingDataPost(false)
         }
-    };
-    
-
-
+    }
   
 
 
@@ -180,42 +172,40 @@ const ContactUs: FC<IReviewFull> = ({ visible, close }) => {
 
 <div className='relative  mt-[20px] '>
                         <input
-                            type="text"
-                            id="text"
-                            value={formData.text}
+                            type="textModal"
+                            id="textModal"
+                            value={formData.textModal}
                             onChange={handleInputChange}
                             className="border border-[#E4E4E4] block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent border-1 appearance-none dark:focus:border-titleDark focus:outline-none focus:ring-0 focus:border-titleDark peer 2xl:text-[20px]"
                             placeholder=" "
                         />
-                        <label htmlFor="text" className="absolute text-sm text-gray-500 dark:text-[#A0A0A0] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#A0A0A0] peer-focus:dark:text-[#A0A0A0] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1 2xl:text-[17px]">Текст сообщения *</label>
+                        <label htmlFor="textModal" className="absolute text-sm text-gray-500 dark:text-[#A0A0A0] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#A0A0A0] peer-focus:dark:text-[#A0A0A0] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1 2xl:text-[17px]">Текст сообщения *</label>
                     </div>
 
 
                     <div className='relative cursor-pointer '>
-                        <div ref={fileInputRef} onClick={handleFileUploadClick} className="mt-[20px] border border-[#E4E4E4] px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent border-1 appearance-none dark:text-titleDark dark:border-[#E4E4E4] dark:focus:border-white focus:outline-none focus:ring-0 focus:border-[#E4E4E4] peer flex flex-row items-center text-[15px]">
-                            {fileName ? (
-                                <span className='truncate 2xl:mt-[-3px]'>{fileName}</span>
-                            ) : (
-                                <>
-                                    <FiPlus className='text-[18px] mt-[3px] mr-[3px] 2xl:text-[20px] ' />
-                                    <p className='2xl:text-[18px]'>
-                                    Прикрепить файл
-
-                                    </p>
-                                </>
-                            )}
+                    <div className='relative mt-[20px]'>
+                        <div onClick={handleFileUploadClick} className="border border-[#E4E4E4] block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent border-1 appearance-none dark:focus:border-titleDark focus:outline-none focus:ring-0 focus:border-titleDark peer  items-center justify-between cursor-pointer">
+                            <p className='2xl:text-[20px]'>
+                                {fileName ? fileName : ' + Прикрепить файл'}
+                            </p>
                             {isLoading && (
                                 <Triangle
-                                    visible={true}
                                     height="20"
-                                    width="100%"
-                                    color="#4fa94d"
+                                    width="20"
+                                    color="grey"
                                     ariaLabel="triangle-loading"
-                                    wrapperStyle={{}}
-                                    wrapperClass=""
+                                    visible={true}
                                 />
                             )}
                         </div>
+                        <input
+                            ref={fileInputRef}
+                            type="file"
+                            className="hidden"
+                            onChange={handleFileChange}
+                        />
+                    </div>
                     </div>
                     <button
                         onClick={sendDataForm}

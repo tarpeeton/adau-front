@@ -6,6 +6,8 @@ import { IAboutBanner } from '@/interface/IAbout/about'
 import useLocale from '@/hooks/useLocale'
 
 import { IoIosPlay } from "react-icons/io"
+import QuestionModal from '../Modal/question-modal'
+import ContactUs from '../Modal/contacts-modal'
 
 
 const Video: FC = () => {
@@ -13,6 +15,20 @@ const Video: FC = () => {
   const [isClient, setIsClient] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
   const [bannerData, setBannerData] = useState<IAboutBanner[] | []>([])
+  const [questionModal , setQuestionModal] = useState(false)
+  const [partnerModal , setPartnerModal] = useState(false)
+
+
+
+
+  const handleQuestionModaSwitcher = () => setQuestionModal(!questionModal)
+  const handlePartnerModalSwitcher = () => setPartnerModal(!partnerModal)
+
+
+
+
+
+
   const locale = useLocale()
 
   useEffect(() => {
@@ -113,8 +129,10 @@ description
 
 
                 <div className='w-full 2xl:w-[100%] justify-between  mt-[25px] 2xl:mt-[30px]  flex flex-row flex-nowrap 2xl:justify-between 4xl:w-full'>
-                  <button className='buttonBlue     w-[54%]   2xl:w-[49%] '>Вступить в ассоциацию</button>
-                  <button className='borderedButton   w-[42%] 2xl:w-[49%] flex items-center justify-center'>Стать партнером</button>
+                  <button onClick={handleQuestionModaSwitcher} className='buttonBlue     w-[54%]   2xl:w-[49%] '>Вступить в ассоциацию</button>
+                  <QuestionModal visible={questionModal} close={handleQuestionModaSwitcher} />
+                  <button onClick={handlePartnerModalSwitcher} className='borderedButton   w-[42%] 2xl:w-[49%] flex items-center justify-center'>Стать партнером</button>
+                  <ContactUs  visible={partnerModal} close={handlePartnerModalSwitcher}/>
                 </div>
 
               </div>

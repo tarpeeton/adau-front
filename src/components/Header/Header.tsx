@@ -1,7 +1,6 @@
 "use client"
 import { FC, useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
-import Logo from '@/public/logo.svg'
 import { RxHamburgerMenu } from "react-icons/rx"
 
 import handleshake from '@/public/handeshake.png'
@@ -14,6 +13,10 @@ import { Link } from '@/i18n/routing'
 
 import LanguageSwitcher from './LanguageSwither'
 import { useTranslations } from 'next-intl'
+// images
+// import Logo from '@/public/logo.svg'
+import LogoOne from '@/public/logos/logoOne.png'
+
 
 
 const Header = ({ locale }: { locale: string }) => {
@@ -60,8 +63,8 @@ const Header = ({ locale }: { locale: string }) => {
   return (
     <div className='px-[16px] relative py-[12px] 2xl:px-[50px] 4xl:px-[240px] flex flex-row justify-between border border-b-[#E4E4E4]'>
       {/* LOGO */}
-      <Link href='/'>
-        <Image src={Logo} width={132} height={63} quality={100} alt='Logo' className='' />
+      <Link href='/' className='2xl:h-[63px] '>
+        <Image src={LogoOne} width={132} height={63} quality={100} alt='Logo' className='w-full h-full object-cover' />
       </Link>
       {/* LINKS */}
       <div className='hidden 2xl:flex  items-center gap-[55px]'>

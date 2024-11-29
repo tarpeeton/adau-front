@@ -8,10 +8,11 @@ import { FaTelegramPlane } from "react-icons/fa"
 import { FaWhatsapp } from "react-icons/fa"
 import { FaPhone } from "react-icons/fa6"
 // image
-import FooterLogo from '@/public/footerLOGO.png'
+// import FooterLogo from '@/public/footerLOGO.png'
 import ResultAgencyLogo from '@/public/result.png'
 import { Link } from '@/i18n/routing'
 import { sendButtonCount } from '@/lib/api'
+import LogoOne from '@/public/logos/LogoBottom.png'
 
 
 
@@ -27,7 +28,7 @@ const Footer: FC = () => {
             <div className='flex flex-col 2xl:flex-row 2xl:flex-nowrap py-[40px] px-[16px] 2xl:px-[50px] 4xl:px-[240px] border-b border-b-[#E3E7EF] 2xl:justify-between '>
                 <div>
                     <Link href='/'>
-                        <Image src={FooterLogo} width={163} height={63} quality={100} alt='footer logo' className='object-cover' />
+                        <Image src={LogoOne} width={163} height={63} quality={100} alt='footer logo' className='object-cover' />
                     </Link>
 
                 </div>

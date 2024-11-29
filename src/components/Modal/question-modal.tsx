@@ -79,8 +79,7 @@ const QuestionModal: FC<IReviewFull> = ({ visible, close }) => {
             >
                 <div className='flex flex-col'>
                     <p className='text-[22px] 2xl:text-[28px] text-titleDark font-medium'>
-                        Связаться с нами
-
+                        Задать вопрос
                     </p>
                     <div className='inputs flex flex-col mt-[30px] '>
                         <div className='relative  '>
