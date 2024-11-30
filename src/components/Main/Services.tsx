@@ -25,8 +25,8 @@ const Services: FC = () => {
                 <div>
                     <Swiper
                         spaceBetween={10}
-                        slidesPerView={1.1}
-                        speed={1000}
+                        slidesPerView={1}
+                        speed={920}
                         autoplay={{ delay: 1500, disableOnInteraction: false }}
                         modules={[Autoplay]}
                         loop={false}

@@ -63,7 +63,7 @@ const Header = ({ locale }: { locale: string }) => {
   return (
     <div className='px-[16px] relative py-[12px] 2xl:px-[50px] 4xl:px-[240px] flex flex-row justify-between border border-b-[#E4E4E4]'>
       {/* LOGO */}
-      <Link href='/' className='2xl:h-[63px] '>
+      <Link href='/' className='h-[55px] 2xl:h-[63px] '>
         <Image src={LogoOne} width={132} height={63} quality={100} alt='Logo' className='w-full h-full object-cover' />
       </Link>
       {/* LINKS */}
