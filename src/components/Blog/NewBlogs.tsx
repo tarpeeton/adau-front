@@ -146,10 +146,7 @@ const NewBlogs: FC = () => {
                         </button>
                     ))}
                 </div>
-
-
             </div>
-
             {/* MOBILE ACTIVE FILTERS */}
             <button onClick={handleActiveFilter} className='w-full mt-[20px] 2xl:hidden flex flex-row justify-between pb-[13px] border-b border-b-[#222E51]'>
                 <p className='text-[15px] font-medium font-jost text-[#222E51]'>
@@ -176,7 +173,6 @@ const NewBlogs: FC = () => {
                             {item.name[locale]}
                         </p>
                     ))}
-
                 </div>
             )}
 

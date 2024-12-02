@@ -69,7 +69,7 @@ useEffect(() => {
         <WhyInvite />
         <AddSeminarForm />
         <Speakers />
-        <UserTestimonials  isShow={true}/>
+        {/* <UserTestimonials  isShow={true}/> */}
         <FaqComponent />
         <SeminarForm />
         <Partners active={true} />

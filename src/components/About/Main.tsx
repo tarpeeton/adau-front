@@ -4,13 +4,13 @@ import { FC, useState , useEffect} from 'react';
 import Video from './Video';
 import Mission from './Mission'; // Note the corrected spelling
 import Team from './Team';
-import Partners from './Partners';
+// import Partners from './Partners';
 import Invite from './Invite'
 import Result from './Result'
 import SomeForm from './Form'
 
-const MobileTimeLine = dynamic(() => import('./MobileTimeLine'), { ssr: false });
-const Timeline = dynamic(() => import('./TimeLine'), { ssr: false });
+// const MobileTimeLine = dynamic(() => import('./MobileTimeLine'), { ssr: false });
+// const Timeline = dynamic(() => import('./TimeLine'), { ssr: false });
 
 import { client } from "@/sanity/lib/client";
 
@@ -40,13 +40,13 @@ const About: FC = () => {
       <Video />
       <Mission />
       <Team />
-      <Partners  active={false}/>
-      <div className='hidden 2xl:block'>
+      {/* <Partners  active={false}/> */}
+      {/* <div className='hidden 2xl:block'>
       <Timeline data={timeLineData} />
-      </div>
-      <div className=' 2xl:hidden'>
+      </div> */}
+      {/* <div className=' 2xl:hidden'>
         <MobileTimeLine  data={timeLineData}/>
-      </div>
+      </div> */}
       <Invite />
       <Result />
       <SomeForm isTextOpen={true} />
