@@ -5,7 +5,7 @@ import CotegoryBlog from './Cotegory'
 import SavedBlogs from './Save'
 import BlogActions from './BlogActions'
 import ExpertOpinions from './ExpertOpinions'
-import VideoAndMedia from './VideoMedia'
+// import VideoAndMedia from './VideoMedia'
 import PopularBlogs from './Popular'
 import FollowToBlog from './Follow'
 
@@ -19,7 +19,7 @@ const MainBlog: FC = () => {
       <SavedBlogs />
       <BlogActions />
       <ExpertOpinions />
-      <VideoAndMedia />
+      {/* <VideoAndMedia /> */}
       <PopularBlogs />
       <FollowToBlog />
     </div>

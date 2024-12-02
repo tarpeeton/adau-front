@@ -126,7 +126,10 @@ const Footer: FC = () => {
                 <div>
                     <p className='text-[14px] 2xl:text-[18px] font-jost text-[#222E51]'>© 2024 ADAU.<br className='2xl:hidden' /> Все права защищены</p>
                 </div>
-                <div><Image src={ResultAgencyLogo} alt='Result Agency' width={163} height={63} quality={100} className='object-cover' /></div>
+
+                <Link href={'https://result-me.uz/api/redirect?from=YWRhdQ=='} className='w-[100px]  mdl:w-[130px] mdl:h-[70px]' >
+                    <Image src={ResultAgencyLogo} alt='Result Agency' width={200} height={73} quality={100} className='object-cover w-full h-full' />
+                </Link>
             </div>
         </div>
     )

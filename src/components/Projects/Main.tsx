@@ -6,7 +6,7 @@ import TopCases from './Сase'
 import HowWeWork from '../About/HowWeWork'
 import WhyChooseUs from '../Services/WhyChooseUs'
 import FaqComponent from '../Services/Faq'
-import Partners from '../About/Partners'
+// import Partners from '../About/Partners'
 import Form from '../Main/Form'
 import ProjectQuestion from './ProjectQuestion'
 
@@ -32,7 +32,7 @@ const MainProjects: FC = () => {
       <WhyChooseUs title='Заказать проект' />
       <ProjectQuestion />
       <FaqComponent />
-      <Partners active={true} />
+      {/* <Partners active={true} /> */}
       <Form title='Готовы начать свой проект?' text='Свяжитесь с нами для консультации и начните работу над своим проектом уже сегодня' />
     </div>
   )
