@@ -1,8 +1,7 @@
 import Image from 'next/image'
 import { FC } from 'react'
 import AbourUsImage from '@/public/about.jpg'
-import Link from 'next/link'
-
+import { Link } from '@/i18n/routing'
 
 
 const About: FC = () => {

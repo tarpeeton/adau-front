@@ -39,7 +39,7 @@ const Projects: FC = () => {
     const [caseData, setCaseData] = useState<ICase[]>([])
     const [caseCategory, setCaseCategory] = useState<ICaseCategory[]>([])
     const locale = useLocale()
-    const { swiperRef, handlePrev, handleNext } = useSwiperNavigation()
+    const { swiperRef } = useSwiperNavigation()
 
     useEffect(() => {
         const fetchData = async () => {

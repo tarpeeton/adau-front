@@ -48,76 +48,68 @@ const SomeForm: FC<ISomeFormProps> = ({ isTextOpen }) => {
 
     const handleOpenSelect = () => setOpenSelect(!openSelect)
 
-    // Select Tipini Olish
     const handleMessageType = (msg: string) => {
         setSelectMessageType(msg)
         setOpenSelect(false)
     }
 
     const handleFileUploadClick = () => {
-        const input = document.createElement('input')
-        input.type = 'file'
-        input.style.display = 'none'
-        input.onchange = (e: Event) => {
-            const target = e.target as HTMLInputElement
-            if (target.files && target.files.length > 0) {
-                setIsLoading(true)
-                setFileName(target.files[0].name)
-                console.log(target.files[0])
-
-                // Simulate an upload process for demonstration
-                setTimeout(() => {
-                    setIsLoading(false)
-                }, 2000)
-            }
+        if (fileInputRef.current) {
+            fileInputRef.current.click() // Trigger file input click
         }
-        document.body.appendChild(input)
-        input.click()
-        document.body.removeChild(input)
+    }
+
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const files = e.target.files
+        if (files && files.length > 0) {
+            setIsLoading(true)
+            setFileName(files[0].name)
+
+            // You can perform any processing with the file here
+            setTimeout(() => {
+                setIsLoading(false) // Simulate an upload process
+            }, 2000)
+        }
     }
 
     const sendDataForm = async () => {
-        setLoadingDataPost(true) // Устанавливаем состояние загрузки в true перед началом отправки данных
+        setLoadingDataPost(true)
 
         try {
-            // Создаем объект FormData и добавляем данные из полей формы
+            // Creating FormData and adding form fields
             const formPayload = new FormData()
-            formPayload.append('name', formData.name) // Добавляем имя
-            formPayload.append('email', formData.email) // Добавляем email
-            formPayload.append('text', formData.text) // Добавляем email
-            formPayload.append('theme', selectedMessageType) // Добавляем тему сообщения
+            formPayload.append('name', formData.name)
+            formPayload.append('email', formData.email)
+            formPayload.append('text', formData.text)
+            formPayload.append('theme', selectedMessageType)
 
-            // Проверяем наличие файла в поле ввода и добавляем его в formData
+            // Add the file to FormData if it exists
             if (fileInputRef.current?.files && fileInputRef.current.files.length > 0) {
-                formPayload.append('file', fileInputRef.current.files[0]) // Добавляем файл
+                formPayload.append('file', fileInputRef.current.files[0])
             }
 
-            // Отправляем запрос с использованием axios, включая заголовок с API-Key
+            // Send the data via axios POST request
             const response = await axios.post('https://adau.result-me.uz/api/form/message', formPayload, {
                 headers: {
-                    'API-Key': 'VJs4krbxFMj78Q5IsUIkdZdi8A1MSItugxlHJiwRALyE7c8lCiGcLY6OsugGPzRmjSJ3nzdFh6iUZD9lmYeSzPpm7FTwcGttS0js', // API-ключ для аутентификации
-                    'Content-Type': 'multipart/form-data' // Указываем тип контента как form-data
+                    'API-Key': 'VJs4krbxFMj78Q5IsUIkdZdi8A1MSItugxlHJiwRALyE7c8lCiGcLY6OsugGPzRmjSJ3nzdFh6iUZD9lmYeSzPpm7FTwcGttS0js',
+                    'Content-Type': 'multipart/form-data'
                 }
             })
 
-            console.log('Form submitted successfully:', response.data) // Логируем успешную отправку
-
-            // Сбрасываем поля формы и состояние после успешной отправки
+            console.log('Form submitted successfully:', response.data)
             setFormData({
                 name: '',
                 email: '',
                 text: ''
             })
-            setFileName(null) // Очищаем имя файла
-            setSelectMessageType('Тема сообщения') // Сбрасываем выбранную тему
+            setFileName(null)
+            setSelectMessageType('Тема сообщения')
         } catch (error) {
-            console.error('Error submitting form:', error) // Логируем ошибку при отправке
+            console.error('Error submitting form:', error)
         } finally {
-            setLoadingDataPost(false) // Сбрасываем состояние загрузки
+            setLoadingDataPost(false)
         }
     }
-
-
 
     return (
         <div className='mt-[80px] 2xl:mt-[200px] py-[40px] 2xl:py-[100px] px-[16px] bg-[#222E51] 2xl:px-[50px] 4xl:px-[240px]'>
@@ -222,8 +214,8 @@ const SomeForm: FC<ISomeFormProps> = ({ isTextOpen }) => {
 
 
 
-                    <div className='relative 2xl:w-[60%]'>
-                        <div ref={fileInputRef} onClick={handleFileUploadClick} className="mt-[20px] border border-white px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent border-1 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer flex flex-row items-center text-[15px]">
+                    <div className='relative 2xl:w-[60%] cursor-pointer'>
+                        <div onClick={handleFileUploadClick} className="mt-[20px] border border-white px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent border-1 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer flex flex-row items-center text-[15px]">
                             {fileName ? (
                                 <span className='truncate'>{fileName}</span>
                             ) : (
@@ -244,6 +236,13 @@ const SomeForm: FC<ISomeFormProps> = ({ isTextOpen }) => {
                                 />
                             )}
                         </div>
+                        {/* Hidden file input */}
+                        <input
+                            ref={fileInputRef}
+                            type="file"
+                            onChange={handleFileChange}
+                            style={{ display: 'none' }}
+                        />
                     </div>
                     <button
                         onClick={sendDataForm}

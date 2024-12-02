@@ -72,7 +72,7 @@ const SeminarAndTrenings: FC = () => {
                     speed={1000}
                     autoplay={{ delay: 1500, disableOnInteraction: false }}
                     modules={[Autoplay]} 
-                    loop={false}
+                    loop={true}
                     breakpoints={{
                         1000: {
                             slidesPerView: 3,

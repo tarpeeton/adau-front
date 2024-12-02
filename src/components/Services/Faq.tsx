@@ -25,6 +25,8 @@ const FaqComponent: FC = () => {
 
 
   const handleChangeStatus = () => setOpen(!open)
+
+  
   return (
     <div className='mt-[80px] 2xl:mt-[200px] px-[16px] 2xl:px-[50px] 4xl:px-[240px]'>
           <p className='text-[26px]  uppercase leading-[32px] 2xl:text-[45px] 2xl:leading-[59px] text-[#000000] font-jost'>

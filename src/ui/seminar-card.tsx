@@ -22,20 +22,20 @@ interface ISeminarCardProps {
 
 
 
-const SeminarCard: FC<ISeminarCardProps> = ({item , inSwiper}) => {
+const SeminarCard: FC<ISeminarCardProps> = ({ item, inSwiper }) => {
   const locale = useLocale()
 
-  const [modal , setModal] = useState(false)
+  const [modal, setModal] = useState(false)
 
   const handleChangeModal = () => setModal(!modal)
 
   return (
-    <div  className={`p-[20px] relative 2xl:p-[30px] border border-[#E4E4E4] 2xl:mt-[20px] ${inSwiper ? '2xl:w-full' : '2xl:w-[32%]'} `} >
-      <div className='pb-[15px]  border-b border-b-[#E4E4E4]' style={{minHeight: '160px'}}>
+    <div className={`p-[20px] relative 2xl:p-[30px] border border-[#E4E4E4] 2xl:mt-[20px] ${inSwiper ? '2xl:w-full' : '2xl:w-[32%]'} `} >
+      <div className='pb-[15px]  border-b border-b-[#E4E4E4]' style={{ minHeight: '160px' }}>
         <p className='text-[20px] text-titleDark font-medium font-jost mb-[8px] 2xl:text-[30px]'>
           {item.title[locale]}
-          
-          </p>
+
+        </p>
         <p className='text-[15px] leading-[18px]  2xl:text-[18px] 2xl:leading-[22px] text-title80 font-jost'>
 
           {item.description[locale].length > 143 ? item.description[locale].slice(0, 143) + '....' : item.description[locale]}
@@ -53,9 +53,9 @@ const SeminarCard: FC<ISeminarCardProps> = ({item , inSwiper}) => {
           </div>
           <div className='flex flex-row items-center text-[15px] mt-[5px] leading-[18px] text-[#222E51] font-jost  2xl:text-[20px] break-words 2xl:min-h-[36px]'>
             <div className='w-[25px] flex items-center justify-center h-[25px] 2xl:w-[28px] 2xl:h-[28px]'>
-              <CiLocationOn className='h-[25px] 2xl:w-[28px] 2xl:h-[28px] ' />
+              <CiLocationOn className='w-[25px] h-[25px] 2xl:w-[28px] 2xl:h-[28px] ' />
             </div>
-            <div className='flex items-center ' style={{minHeight: '36px'}}>
+            <div className='flex items-center ' style={{ minHeight: '36px' }}>
               <p>{item.address[locale]}</p>
             </div>
           </div>
@@ -64,7 +64,7 @@ const SeminarCard: FC<ISeminarCardProps> = ({item , inSwiper}) => {
         <div className='mt-[25px]  flex flex-row gap-[11px] w-full'>
           <Link className='borderedButton w-[48%] flex items-center justify-center' href={`/seminar/${item.slug.current}`}>Подробнее</Link>
           <button onClick={handleChangeModal} className='buttonBlue w-[48%] flex items-center justify-center'>Записаться</button>
-          <SeminarModal  visible={modal} close={handleChangeModal}/>
+          <SeminarModal visible={modal} close={handleChangeModal} />
         </div>
       </div>
     </div>
