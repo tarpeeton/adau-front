@@ -8,13 +8,12 @@ import useLocale from '@/hooks/useLocale'
 import { client } from "@/sanity/lib/client"
 import { urlFor } from '@/sanity/lib/image'
 import { IBlogCategory, IBlog } from '@/interface/IBlogs/blog'
-import { useRouter } from 'next/navigation'
 // ICONS
 import { FaChevronDown } from "react-icons/fa6"
 import { GrLinkNext } from "react-icons/gr"
 import formatDate from '@/hooks/useFormatDate'
-import { useSearchParams } from 'next/navigation'
-
+import { useRouter } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 
 const fetchCategories = async (): Promise<IBlogCategory[]> => {
     return await client.fetch(`*[_type == "blogCategory"]{name,
@@ -50,6 +49,7 @@ const NewBlogs: FC = () => {
     const locale = useLocale()
     const router = useRouter()
     const searchParams = useSearchParams()
+    const pathname = usePathname() // Get the current pathname
 
     const { data: blogCategories = [], isLoading: isLoadingCategories } = useQuery<IBlogCategory[]>({
         queryKey: ['blogcategoriescomponnets'],
@@ -75,7 +75,18 @@ const NewBlogs: FC = () => {
     const handleMobileFilterSelect = (categoryId: string, categoryName: string) => {
         setActiveFilter({ id: categoryId, name: categoryName })
         setMobileActiveFilter(false)
-        router.push(`/blog?name=${encodeURIComponent(categoryName)}&_id=${categoryId}`)
+    
+        const queryParams = new URLSearchParams(window.location.search) // Get current query params
+    
+        // Update query parameters
+        queryParams.set('name', encodeURIComponent(categoryName))
+        queryParams.set('_id', categoryId)
+    
+        // Build the new URL with the current locale
+        const newUrl = `${pathname}?${queryParams.toString()}`
+    
+        // Push the new URL
+        router.push(newUrl)
     }
 
     const filteredBlogs = activeFilter.id === 'all-articles'
@@ -159,7 +170,7 @@ const NewBlogs: FC = () => {
                     {blogCategories.map((item, index) => (
                         <p
                             key={`${item._id}-${index}`}
-                            onClick={() => handleMobileFilterSelect(item._id, item.name[locale])}
+                            onClick={() => handleMobileFilterSelect(item._id, item.name.en)}
                             className='text-[15px] font-semibold font-jost text-[#222E51] w-full mt-[20px] flex flex-row justify-between pb-[13px] border-b border-b-[#222E51]'
                         >
                             {item.name[locale]}
