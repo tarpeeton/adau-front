@@ -1,10 +1,10 @@
 'use client'
-import { FC } from 'react'
+import { FC , useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
-
+import ContactUs from '../Modal/contacts-modal'
 
 
 import useSwiperNavigation from '@/hooks/useSwiperNavigation'
@@ -19,6 +19,9 @@ import ServiceBanner from '@/public/serviceBanner.jpg'
 
 const BannerService: FC = () => {
     const { swiperRef, handlePrev, handleNext } = useSwiperNavigation()
+    const [open , setOpen] = useState(false)
+
+    const handleModal = () => setOpen(!open)
 
     return (
         <div className='mt-[30px] 2xl:mt-[0]'>
@@ -30,11 +33,13 @@ const BannerService: FC = () => {
                         <p className='mt-[16px] text-[15px] leading-[18px] 2xl:w-full font-normal 2xl:text-[18px] 3xl:text-[20px] 2xl:leading-[20px] 2xl:mt-[20px]'>
                             ADAU помогает клиентам создавать уникальные проекты на стыке архитектуры, дизайна и маркетинга. Мы обеспечиваем комплексные решения, которые усиливают бренд и соответствуют современным требованиям.
                         </p>
-                        <button className='mt-[20px] buttonBlue w-[60%] 2xl:mt-[30px]'>
+                        <button onClick={handleModal} className='mt-[20px] buttonBlue w-[60%] 2xl:mt-[30px]'>
                             Связаться с нами
                         </button>
                     </div>
                 </div>
+                
+                <ContactUs visible={open} close={handleModal} />
 
                 {/* SLIDER */}
                 <div className='mt-[30px] w-full 2xl:w-[50%] relative h-[470px] 2xl:h-[738px] 2xl:mt-0'>

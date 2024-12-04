@@ -28,27 +28,27 @@ const MoreService: FC = () => {
                         <div className='py-[24px] px-[20px] border border-[#E4E4E4]'>
                             <p className='text-[22px] w-[50%] leading-[29px] text-titleDark uppercase font-jost'>Разработка архитектурных концепций</p>
                             <p className='text-[15px] leading-[18px] text-title80 mt-[10px]'>Lorem ipsum dolor sit amet consectetur. Dictumst non lacus consectetur curabitur malesuada laoreet est diam maecenas. Arcu convallis elit pellentesque imperdiet arcu. Lorem ipsum dolor sit amet consectetur.</p>
-                            <Link href='/project' className='buttonBlue w-[60%] mt-[45px]'>
+                            {/* <Link href='/project' className='buttonBlue w-[60%] mt-[45px]'>
                                 Посмотреть проекты
-                            </Link>
+                            </Link> */}
                         </div>
                     </SwiperSlide>
                     <SwiperSlide>
                         <div className='py-[24px] px-[20px] border border-[#E4E4E4]'>
                             <p className='text-[22px] w-[50%] leading-[29px] text-titleDark uppercase font-jost'>Разработка архитектурных концепций</p>
                             <p className='text-[15px] leading-[18px] text-title80 mt-[10px]'>Lorem ipsum dolor sit amet consectetur. Dictumst non lacus consectetur curabitur malesuada laoreet est diam maecenas. Arcu convallis elit pellentesque imperdiet arcu. Lorem ipsum dolor sit amet consectetur.</p>
-                            <Link href='/project' className='buttonBlue w-[60%] mt-[45px]'>
+                            {/* <Link href='/project' className='buttonBlue w-[60%] mt-[45px]'>
                                 Посмотреть проекты
-                            </Link>
+                            </Link> */}
                         </div>
                     </SwiperSlide>
                     <SwiperSlide>
                         <div className='py-[24px] px-[20px] border border-[#E4E4E4]'>
                             <p className='text-[22px] w-[50%] leading-[29px] text-titleDark uppercase font-jost'>Разработка архитектурных концепций</p>
                             <p className='text-[15px] leading-[18px] text-title80 mt-[10px]'>Lorem ipsum dolor sit amet consectetur. Dictumst non lacus consectetur curabitur malesuada laoreet est diam maecenas. Arcu convallis elit pellentesque imperdiet arcu. Lorem ipsum dolor sit amet consectetur.</p>
-                            <Link href='/project' className='buttonBlue w-[60%] mt-[45px]'>
+                            {/* <Link href='/project' className='buttonBlue w-[60%] mt-[45px]'>
                                 Посмотреть проекты
-                            </Link>
+                            </Link> */}
                         </div>
                     </SwiperSlide>
                 </Swiper>
@@ -65,9 +65,9 @@ const MoreService: FC = () => {
                         Lorem ipsum dolor sit amet consectetur. Dictumst non lacus consectetur curabitur malesuada laoreet est diam maecenas. Arcu convallis elit pellentesque imperdiet arcu. Lorem ipsum dolor sit amet consectetur.</p>
                     </div>
                     <div className='w-[25%] flex flex-row justify-end'>
-                    <Link href='/project' className='buttonBlue w-[60%] mt-[45px]'>
+                    {/* <Link href='/project' className='buttonBlue w-[60%] mt-[45px]'>
                                 Посмотреть проекты
-                            </Link>
+                            </Link> */}
                     </div>
                 </div>
                 <div className='border-t border-t-[#E4E4E4] py-[40px] flex flex-row flex-nowrap justify-between items-center'>
@@ -81,9 +81,9 @@ const MoreService: FC = () => {
                         Lorem ipsum dolor sit amet consectetur. Dictumst non lacus consectetur curabitur malesuada laoreet est diam maecenas. Arcu convallis elit pellentesque imperdiet arcu. Lorem ipsum dolor sit amet consectetur.</p>
                     </div>
                     <div className='w-[25%] flex flex-row justify-end'>
-                    <Link href='/project' className='buttonBlue w-[60%] mt-[45px]'>
+                    {/* <Link href='/project' className='buttonBlue w-[60%] mt-[45px]'>
                                 Посмотреть проекты
-                            </Link>
+                            </Link> */}
                     </div>
                 </div>
                 <div className='border-t border-t-[#E4E4E4] border-b border-b-[#E4E4E4] py-[40px] flex flex-row flex-nowrap justify-between items-center'>
@@ -97,9 +97,9 @@ const MoreService: FC = () => {
                         Lorem ipsum dolor sit amet consectetur. Dictumst non lacus consectetur curabitur malesuada laoreet est diam maecenas. Arcu convallis elit pellentesque imperdiet arcu. Lorem ipsum dolor sit amet consectetur.</p>
                     </div>
                     <div className='w-[25%] flex flex-row justify-end'>
-                    <Link href='/project' className='buttonBlue w-[60%] mt-[45px]'>
+                    {/* <Link href='/project' className='buttonBlue w-[60%] mt-[45px]'>
                                 Посмотреть проекты
-                            </Link>
+                            </Link> */}
                     </div>
                 </div>
             </div>

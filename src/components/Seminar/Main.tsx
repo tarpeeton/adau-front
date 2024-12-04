@@ -72,8 +72,8 @@ useEffect(() => {
         {/* <UserTestimonials  isShow={true}/> */}
         <FaqComponent />
         <SeminarForm />
-        <Partners active={true} />
-        <QuestionForm/>
+        {/* <Partners active={true} /> */}
+        {/* <QuestionForm/> */}
     </div>
   );
 };

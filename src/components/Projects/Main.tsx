@@ -29,7 +29,7 @@ const MainProjects: FC = () => {
       </div>
       <TopCases />
       <HowWeWork />
-      <WhyChooseUs title='Заказать проект' />
+      <WhyChooseUs title='Заказать проект' project={false} />
       <ProjectQuestion />
       <FaqComponent />
       {/* <Partners active={true} /> */}

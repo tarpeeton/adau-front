@@ -33,7 +33,7 @@ const Footer: FC = () => {
 
                 </div>
                 <div className='flex flex-row gap-[8px] mt-[20px] 2xl:order-[2]'>
-                    <Link href='/' className=''>
+                    <a href='https://www.instagram.com/adau.uz' className=''>
                         <button
                             onClick={(e) => {
                                 e.stopPropagation() // Prevents interfering with the link navigation
@@ -44,8 +44,8 @@ const Footer: FC = () => {
                             <FaInstagram className='w-[20px] h-[20px]' />
 
                         </button>
-                    </Link>
-                    <Link href='/' >
+                    </a>
+                    <a href='https://t.me/adau_uzbekistan' >
 
                         <button
                             onClick={(e) => {
@@ -58,8 +58,8 @@ const Footer: FC = () => {
 
 
                         </button>
-                    </Link>
-                    <Link href='/' >
+                    </a>
+                    {/* <Link href='/' >
 
                         <button
                             onClick={(e) => {
@@ -73,8 +73,8 @@ const Footer: FC = () => {
 
 
                         </button>
-                    </Link>
-                    <Link href='/' className='w-[40px] h-[40px] flex items-center justify-center rounded-full border border-[#222E51] text-[#222E51]'>
+                    </Link> */}
+                    <Link href="tel:+998773736999" className='w-[40px] h-[40px] flex items-center justify-center rounded-full border border-[#222E51] text-[#222E51]'>
                         <button
                             onClick={(e) => {
                                 e.stopPropagation() // Prevents interfering with the link navigation
@@ -99,13 +99,13 @@ const Footer: FC = () => {
                     <div className='w-[48%] flex flex-col'>
                         <p className='text-[18px]  2xl:text-[25px] font-medium font-jost text-titleDark'>Деятельность</p>
                         <Link href='/services' className='text-[15px] mt-[10px] 2xl:text-[20px] font-normal text-titleDark font-jost'>Услуги</Link>
-                        <Link href='/project' className='text-[15px] mt-[10px] 2xl:text-[20px] font-normal text-titleDark font-jost'>Проекты</Link>
+                        {/* <Link href='/project' className='text-[15px] mt-[10px] 2xl:text-[20px] font-normal text-titleDark font-jost'>Проекты</Link> */}
                         <Link href='/seminar' className='text-[15px] mt-[10px] 2xl:text-[20px] font-normal text-titleDark font-jost'>Семинары</Link>
                     </div>
                     <div className='w-[48%] mt-[30px] 2xl:mt-0 flex flex-col'>
                         <p className='text-[18px]  2xl:text-[25px] font-medium font-jost text-titleDark'>Контакты</p>
                         <p className='text-[15px] mt-[10px] 2xl:text-[20px] font-normal text-titleDark font-jost'>Физический адрес</p>
-                        <Link href="tel:+998909999999">
+                        <Link href="tel:+998773736999">
                             <button
                                 onClick={(e) => {
                                     e.stopPropagation() // Prevents interfering with the link navigation
@@ -113,7 +113,7 @@ const Footer: FC = () => {
                                 }}
                                 className='text-[15px] mt-[10px] 2xl:text-[20px] font-normal text-titleDark font-jost'
                             >
-                                +998 90 999 99 99
+                                +998 77 373 69 99
                             </button>
                         </Link>
                         <Link href="mailto:adau.uzbekistan@gmail.com?subject=Subject%20Here&body=Message%20Here" className='text-[15px] mt-[10px] 2xl:text-[20px] font-normal text-titleDark font-jost'>adau.uzbekistan@gmail.com</Link>

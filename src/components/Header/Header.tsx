@@ -106,9 +106,9 @@ const Header = ({ locale }: { locale: string }) => {
         <Link href='/services' className='text-[20px] leading-[28.9px] text-titleDark hover:text-[#222E51] transition ease-in-out duration-300'>
           {t('service')}
         </Link>
-        <Link href='/project' className='text-[20px] leading-[28.9px] text-titleDark hover:text-[#222E51] transition ease-in-out duration-300'>
+        {/* <Link href='/project' className='text-[20px] leading-[28.9px] text-titleDark hover:text-[#222E51] transition ease-in-out duration-300'>
           {t('project')}
-        </Link>
+        </Link> */}
         <Link href='/seminar' className='text-[20px] leading-[28.9px] text-titleDark hover:text-[#222E51] transition ease-in-out duration-300'>
           {t('seminar')}
         </Link>
@@ -148,9 +148,9 @@ const Header = ({ locale }: { locale: string }) => {
                 <Link onClick={handleClickMenu} href='/services' className='text-[20px] leading-[28.9px] text-titleDark hover:text-[#222E51] transition ease-in-out duration-300 p-[20px]'>
                   {t('service')}
                 </Link>
-                <Link onClick={handleClickMenu} href='/project' className='text-[20px] leading-[28.9px] text-titleDark hover:text-[#222E51] transition ease-in-out duration-300 p-[20px]'>
+                {/* <Link onClick={handleClickMenu} href='/project' className='text-[20px] leading-[28.9px] text-titleDark hover:text-[#222E51] transition ease-in-out duration-300 p-[20px]'>
                   {t('project')}
-                </Link>
+                </Link> */}
                 <Link onClick={handleClickMenu} href='/seminar' className='text-[20px] leading-[28.9px] text-titleDark hover:text-[#222E51] transition ease-in-out duration-300 p-[20px]'>
                   {t('seminar')}
                 </Link>

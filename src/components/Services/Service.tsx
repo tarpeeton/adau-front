@@ -23,14 +23,14 @@ const Service: FC = () => {
                                     <p className='text-[22px] leading-[29px] font-jost text-titleDark 2xl:text-[30px] 2xl:leading-[40px]'>
                                         Организация семинаров и тренингов
                                     </p>
-                                    <p className='text-[15px] leading-[18px] mt-[5px] font-jost 2xl:text-[20px] 2xl:leading-[24px] text-title80'>
+                                    {/* <p className='text-[15px] leading-[18px] mt-[5px] font-jost 2xl:text-[20px] 2xl:leading-[24px] text-title80'>
                                         Lorem ipsum dolor sit amet consectetur. Ut vitae sapien vitae
                                     </p>
                                     <div className='w-[60%] 2xl:absolute  bottom-0 mt-[20px] 2xl:mt-[25px]'>
                                         <Link href='/project' className='buttonBlue'>
                                             Узнать подробнее
                                         </Link>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
 
@@ -40,14 +40,14 @@ const Service: FC = () => {
                                     <p className='text-[22px] leading-[29px] font-jost text-titleDark 2xl:text-[30px] 2xl:leading-[40px]'>
                                         Консультации по дизайну
                                     </p>
-                                    <p className='text-[15px] leading-[18px] mt-[5px] font-jost 2xl:text-[20px] 2xl:leading-[24px] text-title80'>
+                                    {/* <p className='text-[15px] leading-[18px] mt-[5px] font-jost 2xl:text-[20px] 2xl:leading-[24px] text-title80'>
                                         Lorem ipsum dolor sit amet consectetur. Ut vitae sapien vitae
                                     </p>
                                     <div className='w-[60%] 2xl:absolute  bottom-0 mt-[20px] 2xl:mt-[25px]'>
                                         <Link href='/project' className='buttonBlue'>
                                             Узнать подробнее
                                         </Link>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
 
@@ -57,14 +57,14 @@ const Service: FC = () => {
                                     <p className='text-[22px] leading-[29px] font-jost text-titleDark 2xl:text-[30px] 2xl:leading-[40px]'>
                                         Разработка интерьеров
                                     </p>
-                                    <p className='text-[15px] leading-[18px] mt-[5px] font-jost 2xl:text-[20px] 2xl:leading-[24px] text-title80'>
+                                    {/* <p className='text-[15px] leading-[18px] mt-[5px] font-jost 2xl:text-[20px] 2xl:leading-[24px] text-title80'>
                                         Lorem ipsum dolor sit amet consectetur. Ut vitae sapien vitae
                                     </p>
                                     <div className='w-[60%] 2xl:absolute  bottom-0 mt-[20px] 2xl:mt-[25px]'>
                                         <Link href='/project' className='buttonBlue'>
                                             Узнать подробнее
                                         </Link>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                 </div>

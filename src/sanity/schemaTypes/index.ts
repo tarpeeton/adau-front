@@ -18,9 +18,10 @@ import Case from './create-case'
 import whyAddAdau from './whyAddAdau'
 import seminar from './seminar'
 import seminarCotegory from './seminar-cotegory'
+import whyChooseUs from './why-choose-us'
 
 
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [timeline , partners , blogCotegory , blog , team , cotegoryReview ,  reviews , spikers , blogComment , contacts , banner , aboutBanner , videomediaCotegory , videomedia , caseCategory , Case , whyAddAdau , seminar , seminarCotegory],
+  types: [timeline , partners , blogCotegory , blog , team , cotegoryReview ,  reviews , spikers , blogComment , contacts , banner , aboutBanner , videomediaCotegory , videomedia , caseCategory , Case , whyAddAdau , seminar , seminarCotegory , whyChooseUs],
 }
