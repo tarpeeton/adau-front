@@ -1,5 +1,5 @@
 "use client"
-import { FC, useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { RxHamburgerMenu } from "react-icons/rx"
 
@@ -7,7 +7,6 @@ import handleshake from '@/public/handeshake.png'
 import { FiPlus } from "react-icons/fi"
 import { IoIosArrowDown } from "react-icons/io"
 import ContactUs from '../Modal/contacts-modal'
-import QuestionModal from '../Modal/question-modal'
 import { IoMdClose } from "react-icons/io"
 import { Link } from '@/i18n/routing'
 
@@ -26,7 +25,6 @@ const Header = ({ locale }: { locale: string }) => {
   const [openDropdown, setOpenDropdown] = useState(false)
   const [openMenu, setIsOpen] = useState(false)
   const [visible, setVisible] = useState(false)
-  const [question, setQuestion] = useState(false)
   const dropdownRef = useRef<HTMLDivElement | null>(null)
 
 
@@ -45,7 +43,6 @@ const Header = ({ locale }: { locale: string }) => {
 
   const handleClickMenu = () => setIsOpen(!openMenu)
   const handleContacsSwitcher = () => setVisible(!visible)
-  const handleQuestionSwitcher = () => setQuestion(!question)
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -117,7 +114,6 @@ const Header = ({ locale }: { locale: string }) => {
 
 
       <ContactUs visible={visible} close={handleContacsSwitcher} />
-      <QuestionModal visible={question} close={handleQuestionSwitcher} />
 
       {openMenu && (
         <div className='fixed top-0 right-0 w-[330px] z-[999]'>
@@ -162,7 +158,7 @@ const Header = ({ locale }: { locale: string }) => {
                   {tButtons('partnerADD')}
                   <Image src={handleshake} width={21} height={15} quality={100} alt='Handle SHake' className=' object-contain w-[21px] h-[15px] mt-[3px]' />
                 </div>
-                <button onClick={handleQuestionSwitcher} className='buttonBlue'>
+                <button onClick={handleContacsSwitcher} className='buttonBlue'>
                   {tButtons('assatsionADD')}
                   <FiPlus size={19} className='mt-[3px]' />
                 </button>
@@ -184,7 +180,7 @@ const Header = ({ locale }: { locale: string }) => {
           </p>
           <Image src={handleshake} width={21} height={15} quality={100} alt='Handle SHake' className=' object-contain w-[21px] h-[15px] mt-[3px]' />
         </div>
-        <button onClick={handleQuestionSwitcher} className='buttonBlue '>
+        <button onClick={handleContacsSwitcher} className='buttonBlue '>
           <p className='text-[15px]'>
             {tButtons('assatsionADD')}
           </p>

@@ -1,5 +1,5 @@
 "use client"
-import { FC, useRef, useState, useEffect } from 'react'
+import { FC, useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import useSwiperNavigation from '@/hooks/useSwiperNavigation'
 
@@ -17,7 +17,6 @@ import { GrLinkNext } from "react-icons/gr"
 import { GrLinkPrevious } from "react-icons/gr"
 import useLocale from '@/hooks/useLocale'
 import ContactUs from '../Modal/contacts-modal'
-import QuestionModal from '../Modal/question-modal'
 
 
 interface IMainBanner {
@@ -47,7 +46,7 @@ const Banner: FC = () => {
     const { swiperRef, handlePrev, handleNext } = useSwiperNavigation()
     const [banner, setBanner] = useState<IMainBanner[] | []>([])
     const [open, setOpen] = useState(false)
-    const [partner, setPartner] = useState(false)
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -64,7 +63,6 @@ const Banner: FC = () => {
     }, [])
 
     const handleOpenModal = () => setOpen(!open)
-    const handlePartnerModal = () => setPartner(!partner)
 
     return (
         <div className="banner-container px-[20px] 4xl:px-[240px] 2xl:px-[50px] mt-[15px] 2xl:mt-[60px] relative">
@@ -90,7 +88,7 @@ const Banner: FC = () => {
                                         <button onClick={handleOpenModal} className='buttonBlue'>
                                             Вступить в ассоциацию
                                         </button>
-                                        <button onClick={handlePartnerModal} className='borderedButton'>
+                                        <button onClick={handleOpenModal} className='borderedButton'>
                                             Стать партнером
                                         </button>
                                     </div>
@@ -119,7 +117,7 @@ const Banner: FC = () => {
 
 
             <ContactUs visible={open} close={handleOpenModal} />
-            <QuestionModal visible={partner} close={handlePartnerModal} />
+            {/* <QuestionModal visible={partner} close={handlePartnerModal} /> */}
 
             <div className='absolute hidden bottom-[20px] 4xl:right-[260px] right-[30px] 2xl:right-[70px] z-[99] mdx:flex items-center gap-[15px]'>
                 <button onClick={handlePrev} className='flex items-center justify-center rounded-full w-[70px] h-[70px] border border-[#FFFFFF] backdrop-blur-[15px] bg-inherit'>

@@ -8,9 +8,7 @@ import axios from 'axios'
 
 // icons
 import { IoIosArrowDown } from "react-icons/io"
-import { FiPlus } from "react-icons/fi"
 import { Triangle } from 'react-loader-spinner'
-
 
 
 
@@ -38,7 +36,7 @@ const SomeForm: FC<ISomeFormProps> = ({ isTextOpen }) => {
         email: '',
         text: '',
         phone: "",
-        componyName: ""
+        companyName: ""
     })
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,6 +64,7 @@ const SomeForm: FC<ISomeFormProps> = ({ isTextOpen }) => {
             formPayload.append('phone', formData.phone)
             formPayload.append('email', formData.email)
             formPayload.append('text', formData.text)
+            formPayload.append('companyName', formData.companyName)
             formPayload.append('theme', selectedMessageType)
 
             // Add the file to FormData if it exists
@@ -87,7 +86,7 @@ const SomeForm: FC<ISomeFormProps> = ({ isTextOpen }) => {
                 email: '',
                 text: '',
                 phone: "",
-                componyName: ""
+                companyName: ""
             })
             setFileName(null)
             setSelectMessageType('Тема сообщения')
@@ -140,7 +139,7 @@ const SomeForm: FC<ISomeFormProps> = ({ isTextOpen }) => {
                             className="border border-white block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent border-1 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer"
                             placeholder=" "
                         />
-                        <label htmlFor="name" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-[#222E51] px-2 peer-focus:px-2 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">Имя *</label>
+                        <label htmlFor="name" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-[#222E51] px-2 peer-focus:px-2 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">Имя и фамилия *</label>
                     </div>
                     <div className='relative mt-[20px] 2xl:w-[60%] 2xl:mt-[30px] '>
                         <input
@@ -217,13 +216,13 @@ const SomeForm: FC<ISomeFormProps> = ({ isTextOpen }) => {
                         <div className='relative mt-[20px] 2xl:w-[60%] 2xl:mt-[30px]' >
                             <input
                                 type="text"
-                                id="componyName"
-                                value={formData.componyName}
+                                id="companyName"
+                                value={formData.companyName}
                                 onChange={handleInputChange}
                                 className="border border-white block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent border-1 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer"
                                 placeholder=" "
                             />
-                            <label htmlFor="componyName" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-[#222E51] px-2 peer-focus:px-2 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">Наименование компании/организации *</label>
+                            <label htmlFor="companyName" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-[#222E51] px-2 peer-focus:px-2 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">Наименование компании / организации *</label>
                         </div>
                     )}
 

@@ -13,8 +13,7 @@ import { urlFor } from '@/sanity/lib/image'
 
 import { ITeamMember } from '@/interface/ITeam/team'
 import useLocale from '@/hooks/useLocale'
-import QuestionModal from '../Modal/question-modal'
-
+import ContactUs from '@/components/Modal/contacts-modal'
 
 const Team: FC = () => {
     const [teamData, setTeamData] = useState<ITeamMember[] | []>([])
@@ -82,7 +81,7 @@ image}`)
                     ))}
                 </Swiper>
             </div>
-            <QuestionModal visible={openMenu} close={handleCloseModal} />
+            <ContactUs visible={openMenu} close={handleCloseModal} />
             <div className='w-full 2xl:hidden flex items-center justify-center mt-[40px]'>
                 <button onClick={handleOpenModal} className='buttonBlue 2xl:hidden w-[70%]'>Связаться с нами</button>
             </div>
