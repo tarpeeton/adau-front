@@ -19,15 +19,12 @@ import formatDate from '@/hooks/useFormatDate'
 
 
 
-
-
-
 interface IOldSeminarProps {
     cotegory: ISeminarCategory[]
     data: ISeminarData[]
 }
 
-const OldSeminar: FC<IOldSeminarProps> = ({cotegory , data}) => {
+const OldSeminar: FC<IOldSeminarProps> = ({ cotegory, data }) => {
     const locale = useLocale()
     const [sliceNumber, setSliceNumber] = useState(9)
 
@@ -87,14 +84,16 @@ const OldSeminar: FC<IOldSeminarProps> = ({cotegory , data}) => {
     return (
         <div className='mt-[50px] 2xl:mt-[200px] px-[16px] 2xl:px-[50px] 4xl:px-[240px]'>
 
+
+
             <p className=' uppercase text-[26px] 2xl:text-[45px] text-titleDark font-jost'>Записи прошедших семинаров</p>
             <div className='flex flex-col mt-[20px] 2xl:mt-[40px]'>
                 <div className='hidden slg:flex  slg:flex-row gap-[10px]'>
-                <button
+                    <button
                         className={`px-[15px] py-[13px] text-center text-[#121212] border ${!activeFilter ? 'bg-[#222E51] text-white' : ''}`}
                         onClick={() => setActiveFilter(null)}
                     >
-                        Все проекты
+                        Все 
                     </button>
                     {cotegory.map((item) => (
                         <button
@@ -108,8 +107,8 @@ const OldSeminar: FC<IOldSeminarProps> = ({cotegory , data}) => {
                 </div>
                 <div className='2xl:hidden'>
                     <button onClick={handleActiveFilter} className='w-full mt-[20px] 2xl:hidden flex flex-row justify-between pb-[13px] border-b border-b-[#222E51]'>
-                        <p className='text-[15px]  font-medium font-jost text-[#222E51]'>
-                            {activeFilter?.title[locale]}
+                        <p className='text-[15px] font-medium font-jost text-[#222E51]'>
+                            {activeFilter ? activeFilter.title[locale] : 'Все'}
                         </p>
                         <div>
                             <FaChevronDown className='text-[#222E51]' />
@@ -117,6 +116,13 @@ const OldSeminar: FC<IOldSeminarProps> = ({cotegory , data}) => {
                     </button>
                     {mobileActiveFilter && (
                         <div ref={filterRef}>
+                            <p
+                                onClick={() => handleMobileFilterSelect(null)}
+                                className='text-[15px] font-semibold font-jost text-[#222E51] w-full mt-[20px] flex flex-row justify-between pb-[13px] border-b border-b-[#222E51]'
+                            >
+                                Все
+                                <MdArchitecture />
+                            </p>
                             {cotegory.map((item, index) => (
                                 <p
                                     key={index}
@@ -134,34 +140,33 @@ const OldSeminar: FC<IOldSeminarProps> = ({cotegory , data}) => {
             <div className='mt-[20px] flex flex-col 2xl:flex-row 2xl:flex-wrap gap-[20px]'>
                 {FilteredActiveData.slice(0, sliceNumber).map((item, index) => (
                     <div key={index} className=' border border-[#E4E4E4] 2xl:w-[32%] 2xl:mt-[20px] '>
-                        <Image src={urlFor(item?.image?.asset._ref).url()} width={500} height={500} quality={100} alt='old_seminar_image' 
-                        className='object-cover h-[210px] 2xl:h-[300px]'/>
+                        <Image src={urlFor(item?.image?.asset._ref).url()} width={500} height={500} quality={100} alt='old_seminar_image'
+                            className='object-cover h-[210px] 2xl:h-[300px]' />
                         <div className='p-[20px] 2xl:p-[30px]'>
-                        <div className='pb-[15px]'>
-                            <p className='text-[20px] 2xl:min-h-[90px] text-titleDark font-medium font-jost mb-[8px] 2xl:text-[30px]'>
-                                {item.title[locale]}</p>
-                            <p className='text-[15px] leading-[18px]  2xl:text-[18px] 2xl:leading-[22px] text-title80 font-jost'>
-                            {item.description[locale].length > 143 ? item.description[locale].slice( 0 , 143) + '....' : item.description[locale]}
+                            <div className='pb-[15px]'>
+                                <p className='text-[20px] 2xl:min-h-[90px] text-titleDark font-medium font-jost mb-[8px] 2xl:text-[30px]'>
+                                    {item.title[locale]}</p>
+                                <p className='text-[15px] leading-[18px]  2xl:text-[18px] 2xl:leading-[22px] text-title80 font-jost'>
+                                    {item.description[locale].length > 143 ? item.description[locale].slice(0, 143) + '....' : item.description[locale]}
 
-                            </p>
-                        </div>
-                        <div className='mt-[15px]'>
-                            {/* adress info */}
-                            <div >
-                                <div className='flex flex-row items-center text-[15px] leading-[18px] text-[#222E51] font-jost  2xl:text-[20px]'>
-                                    <div>
-                                        <p>{formatDate(item.date)}</p>
+                                </p>
+                            </div>
+                            <div className='mt-[15px]'>
+                                {/* adress info */}
+                                <div >
+                                    <div className='flex flex-row items-center text-[15px] leading-[18px] text-[#222E51] font-jost  2xl:text-[20px]'>
+                                        <div>
+                                            <p>{formatDate(item.date)}</p>
+                                        </div>
                                     </div>
                                 </div>
-                              
-                            </div>
-                            {/* button for info */}
-                            <div className='mt-[25px] flex flex-row gap-[11px] w-full 2xl:mt-[30px]'>
-                                <Link className=' buttonBlue 2xl:w-[48%] flex items-center justify-center'  href={`/seminar/${item.slug.current}`}>Посмотреть запись</Link>
+                                {/* button for info */}
+                                <div className='mt-[25px] flex flex-row gap-[11px] w-full 2xl:mt-[30px]'>
+                                    <Link className=' buttonBlue 2xl:w-[48%] flex items-center justify-center' href={`/seminar/${item.slug.current}`}>Посмотреть запись</Link>
+                                </div>
                             </div>
                         </div>
-                            </div>
-                       
+
                     </div>
                 ))}
             </div>

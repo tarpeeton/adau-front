@@ -28,10 +28,11 @@ const ContactUs: FC<IReviewFull> = ({ visible, close }) => {
 
     const [formData, setFormData] = useState({
         name: '',
+        modalPhone: '',
         email: '',
         textModal: '',
         textModalCompany: '',
-        modalPhone: ""
+        
     })
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,6 +57,7 @@ const ContactUs: FC<IReviewFull> = ({ visible, close }) => {
             const formPayload = new FormData()
             formPayload.append('name', formData.name)
             formPayload.append('email', formData.email)
+            formPayload.append('modalPhone', formData.modalPhone)
             formPayload.append('theme', selectedMessageType)
             formPayload.append('text', formData.textModal)
             formPayload.append('companyName', formData.textModalCompany)

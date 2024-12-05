@@ -1,17 +1,18 @@
 "use client"
 import { Modal } from 'antd'
 import { IoClose } from "react-icons/io5"
-import { FC, useState, useRef } from 'react'
+import { FC, useState, useRef, useEffect } from 'react'
 import axios from 'axios'
-
-
+import { client } from '@/sanity/lib/client'
+import { ISeminarCategory } from '@/interface/ISeminar/seminar'
 
 // icons
 import { IoIosArrowDown } from "react-icons/io"
 import { Triangle } from 'react-loader-spinner'
+import useLocale from '@/hooks/useLocale'
 
 
-
+// interface
 interface IReviewFull {
     visible: boolean
     close: () => void
@@ -22,8 +23,10 @@ interface IReviewFull {
 const SeminarModal: FC<IReviewFull> = ({ visible, close }) => {
     const [openSelect, setOpenSelect] = useState(false)
     const [selectedMessageType, setSelectMessageType] = useState('Мероприятие')
-    const [fileName, setFileName] = useState<string | null>(null)
     const [loadingDataPost, setLoadingDataPost] = useState(false)
+    const [themes, setThemes] = useState<ISeminarCategory[]>([])
+    const [seminarData, setSeminarData] = useState(null)
+    const locale = useLocale()
 
     const [formData, setFormData] = useState({
         nameseminar: '',
@@ -44,7 +47,70 @@ const SeminarModal: FC<IReviewFull> = ({ visible, close }) => {
         setOpenSelect(false)
     }
 
-  
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await client.fetch(`
+                    *[_type == "seminarCategory"]{
+                        _type,
+                        _id,
+                        _rev,
+                        _createdAt,
+                        _updatedAt,
+                        title
+                    }
+                `)
+                if (data) {
+                    setThemes(data)
+                } else {
+                    console.warn('No data found')
+                }
+            } catch (error) {
+                console.error('Error fetching seminar data:', error)
+            }
+        }
+    
+        fetchData()
+    }, [])
+
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const data = await client.fetch(
+              `*[_type == "seminar"{
+                ...,
+                seminarProgram[]{
+                  ...,
+                  speaker-> {
+                    name,
+                    position,
+                    image,
+                    description
+                  }
+                },
+                speakers[]-> {
+                  name,
+                  position,
+                  image,
+                  description
+                }
+              }`,
+              
+            )
+    
+            if (data) {
+              setSeminarData(data)
+            } else {
+              console.warn('No data found for the provided slug')
+            }
+          } catch (error) {
+            console.debug('Error fetching seminar data:', error)
+          }
+        }
+    
+          fetchData()
+      }, [])
+
     const sendDataForm = async () => {
         setLoadingDataPost(true);
         try {
@@ -81,6 +147,7 @@ const SeminarModal: FC<IReviewFull> = ({ visible, close }) => {
     
 
   
+
 
 
 
@@ -148,15 +215,15 @@ const SeminarModal: FC<IReviewFull> = ({ visible, close }) => {
                     </div>
                     {openSelect && (
                         <div className='mt-[5px] flex flex-col gap-[5px] '>
-                            <button onClick={() => handleMessageType('Тема 1')} className='p-[5px] border border-gray-600 flex items-center justify-center text-titleDark font-jost text-[14px] '>
-                                Мероприятие
-                            </button>
-                            <button onClick={() => handleMessageType('Тема 2')} className='p-[5px] border border-gray-600 flex items-center justify-center text-titleDark font-jost text-[14px] '>
-                                Мероприятие
-                            </button>
-                            <button onClick={() => handleMessageType('Тема 3')} className='p-[5px] border border-gray-600 flex items-center justify-center text-titleDark font-jost text-[14px] '>
-                                Мероприятие
-                            </button>
+                            {themes.map((theme) => (
+                                <button
+                                    key={theme._id}
+                                    onClick={() => handleMessageType(theme.title[locale])}
+                                    className='p-[5px] border border-gray-600 flex items-center justify-center text-titleDark font-jost text-[14px] '
+                                >
+                                    {theme.title[locale]}
+                                </button>
+                            ))}
                         </div>
                     )}
 

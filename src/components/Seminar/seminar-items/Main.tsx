@@ -93,7 +93,7 @@ const MainSeminarItems: FC = () => {
         isFree={seminarData?.video?.isFree}
         price={seminarData?.video?.price} /> </div>)}
 
-      <UserTestimonials isShow={false} />
+      {/* <UserTestimonials isShow={false} /> */}
       <SeminarActions />
     </div>
   )

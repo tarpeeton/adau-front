@@ -12,12 +12,9 @@ import useLocale from '@/hooks/useLocale'
 // CARD
 import SeminarCard from '@/ui/seminar-card'
 
-
 // ICON
 import { FaChevronDown } from "react-icons/fa6"
 import { MdArchitecture } from "react-icons/md"
-
-
 
 
 
@@ -28,7 +25,7 @@ interface INewSeminarProps {
 }
 
 
-const NewSeminar: FC<INewSeminarProps> = ({cotegory , data}) => {
+const NewSeminar: FC<INewSeminarProps> = ({ cotegory, data }) => {
     const [sliceNumber, setSliceNumber] = useState(9)
     const [mobileActiveFilter, setMobileActiveFilter] = useState(false)
     const [activeFilter, setActiveFilter] = useState<ISeminarCategory | null>(null)
@@ -86,15 +83,14 @@ const NewSeminar: FC<INewSeminarProps> = ({cotegory , data}) => {
     }
     return (
         <div className='mt-[50px] 2xl:mt-[100px] px-[16px] 2xl:px-[50px] 4xl:px-[240px]'>
-
             <p className='uppercase text-[26px] 2xl:text-[45px] text-titleDark font-jost'>Ближайшие семинары и тренинги</p>
             <div className='flex flex-col mt-[20px] 2xl:mt-[40px]'>
                 <div className='hidden slg:flex  slg:flex-row gap-[10px]'>
-                <button
+                    <button
                         className={`px-[15px] py-[13px] text-center text-[#121212] border ${!activeFilter ? 'bg-[#222E51] text-white' : ''}`}
                         onClick={() => setActiveFilter(null)}
                     >
-                        Все проекты
+                        Все
                     </button>
                     {cotegory.map((item) => (
                         <button
@@ -109,7 +105,7 @@ const NewSeminar: FC<INewSeminarProps> = ({cotegory , data}) => {
                 <div className='2xl:hidden'>
                     <button onClick={handleActiveFilter} className='w-full mt-[20px] 2xl:hidden flex flex-row justify-between pb-[13px] border-b border-b-[#222E51]'>
                         <p className='text-[15px] font-medium font-jost text-[#222E51]'>
-                            {activeFilter?.title[locale]}
+                            {activeFilter ? activeFilter.title[locale] : 'Все'}
                         </p>
                         <div>
                             <FaChevronDown className='text-[#222E51]' />
@@ -117,9 +113,16 @@ const NewSeminar: FC<INewSeminarProps> = ({cotegory , data}) => {
                     </button>
                     {mobileActiveFilter && (
                         <div ref={filterRef}>
+                            <p
+                                onClick={() => handleMobileFilterSelect(null)}
+                                className='text-[15px] font-semibold font-jost text-[#222E51] w-full mt-[20px] flex flex-row justify-between pb-[13px] border-b border-b-[#222E51]'
+                            >
+                               Все
+                                <MdArchitecture />
+                            </p>
                             {cotegory.map((item, index) => (
                                 <p
-                                    key={index}
+                                    key={item._id}
                                     onClick={() => handleMobileFilterSelect(item)}
                                     className='text-[15px] font-semibold font-jost text-[#222E51] w-full mt-[20px] flex flex-row justify-between pb-[13px] border-b border-b-[#222E51]'
                                 >
@@ -132,8 +135,8 @@ const NewSeminar: FC<INewSeminarProps> = ({cotegory , data}) => {
                 </div>
             </div>
             <div className='mt-[20px] flex flex-col 2xl:flex-row 2xl:flex-wrap gap-[20px]'>
-                {filteredBlogData.slice(0 , sliceNumber).map((item, index) => (
-                   <SeminarCard inSwiper={false} key={index} item={item} />
+                {filteredBlogData.slice(0, sliceNumber).map((item, index) => (
+                    <SeminarCard inSwiper={false} key={index} item={item} />
                 ))}
             </div>
             {filteredBlogData.length > 9 && (

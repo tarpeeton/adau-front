@@ -32,7 +32,7 @@ const SeminarActions: FC = () => {
                         <button onClick={handleSwitchModalStatus} className='buttonWhite 2xl:w-[49%]'>Записаться на семинар
                         </button>
                         <SeminarModal visible={openSeminarModal} close={handleSwitchModalStatus} />
-                        <button className='borderedButtonWhite 2xl:w-[49%] flex items-center justify-center'>Посмотреть расписание</button>
+                        <button onClick={handleSwitchStatus} className='borderedButtonWhite 2xl:w-[49%] flex items-center justify-center'>Посмотреть расписание</button>
                         <ScheduleModal visible={open} close={handleSwitchStatus} />
                     </div>
                 </div>
