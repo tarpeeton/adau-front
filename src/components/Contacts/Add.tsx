@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { IoIosArrowDown } from "react-icons/io"
 // image
 import AddUserImage from '@/public/addUser.jpg'
-import QuestionModal from '../Modal/question-modal'
+import ContactUs from '@/components/Modal/contacts-modal'
 
 const AccardionData = [
     { id: '01', title: 'Совместные проекты', answer: 'Мы начинаем с детальной консультации, чтобы понять ваши цели и задачи. На этом этапе мы обсуждаем ключевые детали проекта, формируем общее видение и определяем путь реализации' },
@@ -62,7 +62,7 @@ const AddUser: FC = () => {
                     <button onClick={handleModalChangeStatus} className='buttonBlue w-[60%] 2xl:w-[30%] '>
                     Стать партнёром
                     </button>
-                    <QuestionModal visible={open} close={handleModalChangeStatus} />
+                    <ContactUs visible={open} close={handleModalChangeStatus} />
                 </div>
             </div>
         </div>

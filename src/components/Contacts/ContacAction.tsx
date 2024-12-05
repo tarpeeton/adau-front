@@ -32,13 +32,13 @@ const ContactAction: FC = () => {
                     </p>
                     <div className='flex flex-row flex-nowrap justify-between mt-[25px] 2xl:w-[45%] 2xl:mt-[50px]'>
                         <Link href='/telegram' className='buttonWhite w-[55%]'>Написать нам</Link>
-                        <Link href='tel:+998339394070' className='w-[43%]'>
+                        <Link href='tel:+998339394070' className='w-[42%]'>
               <button
                 onClick={(e) => {
                   e.stopPropagation() // Prevents interfering with the link navigation
                   handleButton('phone')
                 }}
-                className='borderedButtonWhite flex items-center justify-center'
+                className='borderedButtonWhite  w-full flex items-center justify-center'
               >
                 Позвонить
               </button>
