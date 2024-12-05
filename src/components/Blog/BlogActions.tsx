@@ -1,3 +1,4 @@
+"use client"
 import React, {FC} from 'react';
 import Image from 'next/image';
 
@@ -10,9 +11,11 @@ import U from '@/public/form/u.png'
 import Link from 'next/link'
 
 
+interface IBlogActionsProps {
+  onClick: () => void
+}
 
-
-const BlogActions: FC = () => {
+const BlogActions: FC<IBlogActionsProps> = ({onClick}) => {
   return (
     <div className='mt-[80px] 2xl:mt-[200px]'>
         <div className=' bg-[#222E51] py-[40px] px-[16px] 2xl:py-[100px] 2xl:px-[50px]  4xl:px-[240px] flex flex-col 2xl:flex-row'>
@@ -26,7 +29,8 @@ const BlogActions: FC = () => {
                     Подписывайтесь на наш блог, чтобы не пропустить новые статьи и тренды в дизайне и архитектуре
                     </p>
                     <div className='flex flex-col 2xl:flex-row flex-nowrap justify-between mt-[25px] 2xl:w-[55%] 2xl:mt-[50px]'>
-                        <button  className='buttonWhite 2xl:w-[50%]'>Подписаться на блог</button>
+                        <button onClick={onClick}  className='buttonWhite 2xl:w-[50%]'>
+                          Подписаться на блог</button>
                         <Link href='tel:+998339394070' className='borderedButtonWhite 2xl:w-[46%] mt-[12px] 2xl:mt-0 flex items-center justify-center'>Связаться с редакцией</Link>
                     </div>
             </div>

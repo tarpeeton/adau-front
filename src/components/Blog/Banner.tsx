@@ -11,11 +11,11 @@ const BannerBlog: FC = () => {
                 <p className='mt-[10px] text-[14px] leadoing-[18px] 2xl:text-[20px] 2xl:leading-[24px] text-title80 2xl:mt-[15px] 2xl:w-[60%]'>
                     Сборник актуальных статей, новостей, аналитики и экспертных мнений в сфере архитектуры и дизайна. Здесь вы найдете информацию о современных трендах, инновациях и лучших практиках
                 </p>
-                <div className='mt-[30px]'>
+                {/* <div className='mt-[30px]'>
                     <button className='buttonBlue'>
                         Подписаться на рассылку
                     </button>
-                </div>
+                </div> */}
 
             </div>
         </div>

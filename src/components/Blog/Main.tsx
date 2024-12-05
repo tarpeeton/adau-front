@@ -1,4 +1,5 @@
-import {FC} from 'react';
+"use client"
+import {FC , useRef} from 'react';
 import BannerBlog from './Banner'
 import NewBlogs from './NewBlogs'
 import CotegoryBlog from './Cotegory'
@@ -11,17 +12,25 @@ import FollowToBlog from './Follow'
 
 
 const MainBlog: FC = () => {
+  const followRef = useRef<HTMLDivElement>(null)
+
+  const scrollToFollow = () => {
+    followRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+  
   return (
     <div>
       <BannerBlog />
       <NewBlogs />
       <CotegoryBlog/>
       <SavedBlogs />
-      <BlogActions />
+      <BlogActions onClick={scrollToFollow} />
       <ExpertOpinions />
       {/* <VideoAndMedia /> */}
       <PopularBlogs />
-      <FollowToBlog />
+      <div ref={followRef}>
+        <FollowToBlog />
+      </div>
     </div>
   );
 };
