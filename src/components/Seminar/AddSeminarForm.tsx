@@ -10,9 +10,12 @@ import D from '@/public/form/d.png'
 import U from '@/public/form/u.png'
 
 
+interface IAddSeminarForm {
+    onClick: () => void;
+}
 
 
-const AddSeminarForm: FC = () => {
+const AddSeminarForm: FC<IAddSeminarForm> = ({onClick}) => {
     const [modal , setModal] = useState(false)
 
     const hadnleModalSwitcher = () => setModal(!modal)
@@ -32,8 +35,8 @@ const AddSeminarForm: FC = () => {
                         Запишитесь на семинар, чтобы узнать новейшие тренды и получить практические знания от ведущих экспертов
                     </p>
                     <div className='flex flex-row flex-nowrap justify-between mt-[25px] 2xl:w-[60%] 2xl:mt-[50px] 2xl:justify-normal 2xl:gap-[20px]'>
-                        <button className='buttonWhite w-[55%] 2xl:w-[45%]'>Записаться на семинар</button>
-                        <button onClick={hadnleModalSwitcher} className='borderedButtonWhite w-[43%] flex items-center justify-center 2xl:w-[45%]'>Посмотреть расписание</button>
+                        <button onClick={onClick} className='buttonWhite w-[48%] 2xl:w-[45%]'>Записаться</button>
+                        <button onClick={hadnleModalSwitcher} className='borderedButtonWhite w-[48%] flex items-center justify-center 2xl:w-[45%]'>Расписание</button>
                     </div>
                 </div>
 

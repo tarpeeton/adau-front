@@ -1,5 +1,5 @@
 "use client"
-import {FC , useState , useEffect} from 'react';
+import {FC , useState , useEffect, useRef} from 'react';
 import BannerSeminar from './Banner'
 import NewSeminar from './NewSeminar'
 import WhyInvite from './WhyInvite'
@@ -20,7 +20,8 @@ const MainSeminar: FC = () => {
   const [cotegory , setCotegory] = useState<ISeminarCategory[] | []>([])
   const [data , setData] = useState<ISeminarData[] | []>([])
   const [oldData , setOldData]= useState<ISeminarData[] | []>([])
-  
+  const formRef = useRef<HTMLDivElement>(null)
+
   const locale = useLocale()
 
 useEffect(() => {
@@ -59,7 +60,9 @@ useEffect(() => {
 }, [locale]);
 
 
-
+ const handleScrollToForm = () => {
+    formRef.current?.scrollIntoView({ behavior: 'smooth' });
+}
 
 
   return (
@@ -68,11 +71,13 @@ useEffect(() => {
         <NewSeminar cotegory={cotegory} data={data}/>
         <OldSeminar cotegory={cotegory} data={oldData}/>
         <WhyInvite />
-        <AddSeminarForm />
+        <AddSeminarForm onClick={handleScrollToForm} />
         <Speakers />
         {/* <UserTestimonials  isShow={true}/> */}
         <FaqComponent />
-        <SeminarForm data={data} />
+        <div ref={formRef}>
+          <SeminarForm data={data} />
+        </div>
         {/* <Partners active={true} /> */}
         {/* <QuestionForm/> */}
     </div>
