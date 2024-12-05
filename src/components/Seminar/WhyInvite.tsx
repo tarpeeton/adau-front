@@ -9,33 +9,53 @@ const WhyChooseData = [
     { number: '04', title: 'новые Деловые контакты', description: 'Расширение профессиональных контактов' },
 ];
 
-
-
 const WhyInvite: FC = () => {
     const cardRefs = useRef<HTMLDivElement[]>([]);
+    const textRefs = useRef<(HTMLParagraphElement | null)[][]>([]);
 
     useEffect(() => {
         cardRefs.current.forEach((card, index) => {
-            gsap.set(card, { backgroundColor: '#F7F8FA', color: '#414141' });
+            if (!textRefs.current[index]) {
+                textRefs.current[index] = [];
+            }
+
+            const textElements = card.querySelectorAll('p');
+            textElements.forEach((el, textIndex) => {
+                textRefs.current[index][textIndex] = el as HTMLParagraphElement;
+            });
+
+            const tl = gsap.timeline({ paused: true });
+            
+            tl.to(card, {
+                backgroundColor: '#222E51',
+                duration: 0.3,
+                ease: 'power2.inOut',
+            })
+            .to(textRefs.current[index], {
+                color: '#ffffff',
+                duration: 0.2,
+                stagger: 0.05,
+                ease: 'power2.inOut',
+            }, '-=0.2');
 
             card.addEventListener('mouseenter', () => {
-                gsap.to(card, {
-                    backgroundColor: '#222E51',
-                    color: '#ffffff',
-                    duration: 0.7,
-                    ease: 'power2.out',
-                });
+                tl.play();
             });
 
             card.addEventListener('mouseleave', () => {
-                gsap.to(card, {
-                    backgroundColor: '#F7F8FA',
-                    color: '#414141',
-                    duration: 0.6,
-                    ease: 'power2.out',
-                });
+                tl.reverse();
             });
+
+            gsap.set(card, { backgroundColor: '#F7F8FA' });
+            gsap.set(textRefs.current[index], { color: '#414141' });
         });
+
+        return () => {
+            cardRefs.current.forEach((card, index) => {
+                const tl = gsap.getTweensOf(card);
+                tl.forEach(tween => tween.kill());
+            });
+        };
     }, []);
 
     return (
@@ -75,11 +95,11 @@ const WhyInvite: FC = () => {
                     ))}
                 </div>
                 {/* button */}
-                <div className='mt-[20px] 2xl:mt-[40px]'>
+                {/* <div className='mt-[20px] 2xl:mt-[40px]'>
                     <button className='buttonBlue'>
                     Записаться на семинар
                     </button>
-                </div>
+                </div> */}
             </div>
         </div>
     );

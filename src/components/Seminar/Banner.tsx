@@ -28,11 +28,11 @@ const BannerSeminar: FC = () => {
             <div className='flex flex-col 2xl:flex-row 2xl:flex-wrap 2xl:justify-between'>
                 <div className='2xl:w-[30%]'>
                     <p className='uppercase text-[26px] 2xl:text-[50px] text-titleDark'>Семинары и <br className='2xl:hidden' /> тренинги ADAU</p>
-                    <div className='hidden 2xl:block'>
+                    {/* <div className='hidden 2xl:block'>
                         <button onClick={handleModalSwitcher} className=' buttonBlue w-[60%] mt-[25px] '>
                             Записаться на семинар
                         </button>
-                    </div>
+                    </div> */}
 
                 </div>
                 {/* MODAL */}
@@ -66,9 +66,9 @@ const BannerSeminar: FC = () => {
                     <p className='text-[15px] leading-[18px] font-jost 2xl:text-[20px] 2xl:leading-[28.9px] '>
                         ADAU регулярно проводит обучающие мероприятия, семинары и воркшопы, чтобы поддержать профессиональный рост дизайнеров и архитекторов. Участники получают возможность изучать новейшие тенденции, улучшать навыки и обмениваться опытом с коллегами. Наши мероприятия — это ценный ресурс для тех, кто стремится оставаться на передовой архитектуры и дизайна
                     </p>
-                    <button className='buttonBlue w-[60%] mt-[25px] 2xl:hidden'>
+                    {/* <button className='buttonBlue w-[60%] mt-[25px] 2xl:hidden'>
                         Записаться на семинар
-                    </button>
+                    </button> */}
                 </div>
 
             </div>

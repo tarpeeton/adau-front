@@ -61,6 +61,7 @@ useEffect(() => {
 
 
 
+
   return (
     <div>
         <BannerSeminar />
@@ -71,7 +72,7 @@ useEffect(() => {
         <Speakers />
         {/* <UserTestimonials  isShow={true}/> */}
         <FaqComponent />
-        <SeminarForm />
+        <SeminarForm data={data} />
         {/* <Partners active={true} /> */}
         {/* <QuestionForm/> */}
     </div>
