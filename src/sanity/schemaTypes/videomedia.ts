@@ -9,12 +9,12 @@ interface LanguageFields {
 export default defineType({
   name: 'mediaVideo',
   type: 'document',
-  title: 'Media Video',
+  title: 'Медиа Видео',
   fields: [
     {
       name: 'title',
       type: 'object',
-      title: 'Title',
+      title: 'Заголовок',
       fields: [
         { name: 'uz', type: 'string', title: 'Sarlavha (Uzbek)' },
         { name: 'ru', type: 'string', title: 'Название (Русский)' },
@@ -23,7 +23,7 @@ export default defineType({
       validation: (Rule) =>
         Rule.custom((fields: LanguageFields) => {
           if (!fields || !fields.uz || !fields.ru || !fields.en) {
-            return 'All language fields must be filled in';
+            return 'Все языковые поля должны быть заполнены';
           }
           return true;
         }),
@@ -31,30 +31,30 @@ export default defineType({
     {
       name: 'category',
       type: 'reference',
-      title: 'Category',
+      title: 'Категория',
       to: [{ type: 'videoCategory' }],
-      validation: (Rule) => Rule.required().error('Category must be selected'),
+      validation: (Rule) => Rule.required().error('Необходимо выбрать категорию'),
     },
     {
       name: 'mediaType',
       type: 'string',
-      title: 'Media Type',
+      title: 'Тип медиа',
       options: {
         list: [
-          { title: 'YouTube Link', value: 'url' },
+          { title: 'Ссылка на YouTube', value: 'url' },
         ],
         layout: 'radio',
       },
-      validation: (Rule) => Rule.required().error('Media type must be selected'),
+      validation: (Rule) => Rule.required().error('Необходимо выбрать тип медиа'),
     },
     {
       name: 'videoUrl',
       type: 'url',
-      title: 'YouTube Link',
-      description: 'Provide a YouTube link',
+      title: 'Ссылка на YouTube',
+      description: 'Укажите ссылку на YouTube',
       validation: (Rule) => Rule.uri({
         scheme: ['http', 'https'],
-      }).error('Must be a valid URL'),
+      }).error('Должна быть действительная ссылка'),
     },
   ],
 });

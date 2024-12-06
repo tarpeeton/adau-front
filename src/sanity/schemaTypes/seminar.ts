@@ -1,10 +1,6 @@
 import { defineType, SanityDocument } from 'sanity';
 
-interface LocaleString {
-  ru: string;
-  uz: string;
-  en: string;
-}
+
 
 export default defineType({
   name: 'seminar',

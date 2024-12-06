@@ -1,24 +1,31 @@
 import { defineType } from 'sanity';
 
+interface LanguageFields {
+  uz?: string;
+  ru?: string;
+  en?: string;
+}
+
 export default defineType({
   name: 'banner',
   type: 'document',
-  title: 'Баннер',
+  title: 'Главный баннер',
+  description: 'Настройка главного баннера на домашней странице',
   fields: [
     {
       name: 'title',
       type: 'object',
-      title: 'Заголовок',
+      title: 'Главный заголовок баннера',
       fields: [
         { name: 'uz', type: 'string', title: 'Sarlavha (Uzbek)' },
         { name: 'ru', type: 'string', title: 'Заголовок (Русский)' },
         { name: 'en', type: 'string', title: 'Title (English)' },
       ],
-      description: 'Введите заголовок на трёх языках',
+      description: 'Введите главный заголовок баннера на трёх языках. Этот текст будет отображаться крупным шрифтом на баннере',
       validation: (Rule) =>
-        Rule.custom((fields: { uz?: string; ru?: string; en?: string }) => {
+        Rule.custom((fields: LanguageFields) => {
           if (!fields || !fields.uz || !fields.ru || !fields.en) {
-            return 'Все поля заголовка должны быть заполнены';
+            return 'Необходимо заполнить заголовок на всех трёх языках';
           }
           return true;
         }),
@@ -26,27 +33,27 @@ export default defineType({
     {
       name: 'image',
       type: 'image',
-      title: 'Изображение',
-      description: 'Загрузите изображение для баннера',
+      title: 'Фоновое изображение',
+      description: 'Загрузите изображение для фона баннера. Рекомендуемое разрешение: минимум 1920x1080 пикселей',
       options: {
         hotspot: true,
       },
-      validation: (Rule) => Rule.required().error('Изображение должно быть загружено'),
+      validation: (Rule) => Rule.required().error('Необходимо загрузить фоновое изображение для баннера'),
     },
     {
       name: 'description',
       type: 'object',
-      title: 'Описание',
+      title: 'Подзаголовок баннера',
       fields: [
         { name: 'uz', type: 'text', title: 'Tavsif (Uzbek)' },
         { name: 'ru', type: 'text', title: 'Описание (Русский)' },
         { name: 'en', type: 'text', title: 'Description (English)' },
       ],
-      description: 'Введите описание на трёх языках',
+      description: 'Введите текст подзаголовка баннера на трёх языках. Этот текст будет отображаться под главным заголовком',
       validation: (Rule) =>
-        Rule.custom((fields: { uz?: string; ru?: string; en?: string }) => {
+        Rule.custom((fields: LanguageFields) => {
           if (!fields || !fields.uz || !fields.ru || !fields.en) {
-            return 'Все поля описания должны быть заполнены';
+            return 'Необходимо заполнить подзаголовок на всех трёх языках';
           }
           return true;
         }),

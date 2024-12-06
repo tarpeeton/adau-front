@@ -1,9 +1,15 @@
 import { defineType } from 'sanity';
 
+interface LanguageFields {
+  uz?: string;
+  ru?: string;
+  en?: string;
+}
+
 export default defineType({
   name: 'timeline',
   type: 'document',
-  title: 'Таймлайн',
+  title: 'Наш путь и планы на будущее',
   fields: [
     {
       name: 'year',
@@ -15,9 +21,9 @@ export default defineType({
         { name: 'en', type: 'string', title: 'Year (English)' },
       ],
       validation: (Rule) =>
-        Rule.custom((fields: { uz?: string; ru?: string; en?: string }) => {
+        Rule.custom((fields: LanguageFields) => {
           if (!fields || !fields.uz || !fields.ru || !fields.en) {
-            return 'Все поля года должны быть заполнены';
+            return 'Необходимо заполнить год на всех языках';
           }
           return true;
         }),
@@ -25,31 +31,43 @@ export default defineType({
     {
       name: 'plan',
       type: 'object',
-      title: 'План',
+      title: 'Заголовок события',
       fields: [
         { name: 'uz', type: 'string', title: 'Reja (Uzbek)' },
-        { name: 'ru', type: 'string', title: 'План (Русский)' },
+        { name: 'ru', type: 'string', title: 'Заголовок (Русский)' },
         { name: 'en', type: 'string', title: 'Plan (English)' },
       ],
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.custom((fields: LanguageFields) => {
+          if (!fields || !fields.uz || !fields.ru || !fields.en) {
+            return 'Необходимо заполнить заголовок на всех языках';
+          }
+          return true;
+        }),
     },
     {
       name: 'description',
       type: 'object',
-      title: 'Описание',
+      title: 'Описание события',
       fields: [
         { name: 'uz', type: 'text', title: 'Tavsif (Uzbek)' },
         { name: 'ru', type: 'text', title: 'Описание (Русский)' },
         { name: 'en', type: 'text', title: 'Description (English)' },
       ],
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.custom((fields: LanguageFields) => {
+          if (!fields || !fields.uz || !fields.ru || !fields.en) {
+            return 'Необходимо заполнить описание на всех языках';
+          }
+          return true;
+        }),
     },
     {
       name: 'position',
       type: 'boolean',
-      title: 'Расположение',
-      description: 'Укажите расположение: сверху или снизу > По умолчанию снизу',
-      initialValue: false, // Default is bottom
+      title: 'Расположение блока',
+      description: 'Выберите расположение блока: сверху или снизу (по умолчанию снизу)',
+      initialValue: false,
       options: {
         layout: 'checkbox',
       },

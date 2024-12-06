@@ -3,7 +3,7 @@ import { defineType } from 'sanity';
 export default defineType({
   name: 'review',
   type: 'document',
-  title: 'Отзыв',
+  title: 'Отзывы',
   fields: [
     {
       name: 'category',
