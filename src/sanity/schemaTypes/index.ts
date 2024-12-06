@@ -1,27 +1,73 @@
 import { type SchemaTypeDefinition } from 'sanity'
-import timeline from './timeline'
-import partners from './partners'
-import blogCotegory from './blogCotegory'
-import blog from './blog'
-import team from './team'
-import cotegoryReview from './cotegory-review'
-import reviews from './reviews'
-import spikers from './spikers'
-import blogComment from './blogComment'
-import contacts from './contacts'
+
+// Banners
 import banner from './banner'
 import aboutBanner from './about-banner'
-import videomediaCotegory from './videomedia-cotegory'
-import videomedia from './videomedia'
-import caseCategory from './case-category'
+
+// Blog related
+import blog from './blog'
+import blogCotegory from './blogCotegory'
+import blogComment from './blogComment'
+
+// Reviews and testimonials
+import reviews from './reviews'
+import cotegoryReview from './cotegory-review'
+
+// Cases
 import Case from './create-case'
-import whyAddAdau from './whyAddAdau'
+import caseCategory from './case-category'
+
+// Video content
+import videomedia from './videomedia'
+import videomediaCotegory from './videomedia-cotegory'
+
+// Seminars
 import seminar from './seminar'
 import seminarCotegory from './seminar-cotegory'
+import spikers from './spikers'
+
+// Company info
+import timeline from './timeline'
+import partners from './partners'
+import team from './team'
+import whyAddAdau from './whyAddAdau'
 import whyChooseUs from './why-choose-us'
-
-
+import contacts from './contacts'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [timeline , partners , blogCotegory , blog , team , cotegoryReview ,  reviews , spikers , blogComment , contacts , banner , aboutBanner , videomediaCotegory , videomedia , caseCategory , Case , whyAddAdau , seminar , seminarCotegory , whyChooseUs],
+  types: [
+    // Banners
+    banner,
+    aboutBanner,
+
+    // Blog related
+    blog,
+    blogCotegory,
+    blogComment,
+
+    // Reviews and testimonials
+    reviews,
+    cotegoryReview,
+
+    // Cases
+    Case,
+    caseCategory,
+
+    // Video content
+    videomedia,
+    videomediaCotegory,
+
+    // Seminars
+    seminar,
+    seminarCotegory,
+    spikers,
+
+    // Company info
+    timeline,
+    partners,
+    team,
+    whyAddAdau,
+    whyChooseUs,
+    contacts,
+  ],
 }
