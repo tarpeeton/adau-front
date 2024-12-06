@@ -6,18 +6,18 @@ import Image from 'next/image'
 import { FaInstagram } from "react-icons/fa"
 import { FaTelegramPlane } from "react-icons/fa"
 import { FaWhatsapp } from "react-icons/fa"
-import { FaPhone } from "react-icons/fa6"
+import { FaPhone } from "react-icons/fa"
 // image
 // import FooterLogo from '@/public/footerLOGO.png'
 import ResultAgencyLogo from '@/public/result.png'
 import { Link } from '@/i18n/routing'
 import { sendButtonCount } from '@/lib/api'
 import LogoOne from '@/public/logos/LogoBottom.png'
-
+import useLocale from '@/hooks/useLocale'
 
 
 const Footer: FC = () => {
-
+    const locale = useLocale()
 
     const handleButton = async (button: string) => {
         await sendButtonCount(button)
@@ -104,7 +104,11 @@ const Footer: FC = () => {
                     </div>
                     <div className='w-[48%] mt-[30px] 2xl:mt-0 flex flex-col'>
                         <p className='text-[18px]  2xl:text-[25px] font-medium font-jost text-titleDark'>Контакты</p>
-                        <p className='text-[15px] mt-[10px] 2xl:text-[20px] font-normal text-titleDark font-jost'>Физический адрес</p>
+                        <p className='text-[15px] mt-[10px] 2xl:text-[20px] font-normal text-titleDark font-jost'>
+                            {locale === 'ru' ? "г. Ташкент, Алмазарский район, улица Нурафшон, дом 50/7" : 
+                             locale === 'uz' ? "Toshkent shahri, Olmazor tumani, Nurafshon ko'chasi, 50/7 uy" : 
+                             "50/7 Nurafshon street, Almazar district, Tashkent city"}
+                        </p>
                         <Link href="tel:+998773736999">
                             <button
                                 onClick={(e) => {
@@ -124,7 +128,8 @@ const Footer: FC = () => {
             <div className='flex flex-row justify-between items-center px-[16px] 2xl:px-[50px] 4xl:px-[240px]'>
 
                 <div>
-                    <p className='text-[14px] 2xl:text-[18px] font-jost text-[#222E51]'>© 2024 ADAU.<br className='2xl:hidden' /> Все права защищены</p>
+                    <p className='text-[14px] 2xl:text-[18px] font-jost text-[#222E51]'> 2024 ADAU.<br className='2xl:hidden' /> </p>
+
                 </div>
 
                 <Link href={'https://result-me.uz/api/redirect?from=YWRhdQ=='} className='w-[100px]  mdl:w-[130px] mdl:h-[70px]' >
