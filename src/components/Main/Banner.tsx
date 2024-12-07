@@ -79,7 +79,7 @@ const Banner: FC = () => {
                     <SwiperSlide key={index}>
                         <div className='flex flex-col '>
                             <div className='flex flex-col 2xl:flex-row'>
-                                <div className='mb-[12px] 2xl:w-[60%]'>
+                                <div className='mb-[12px] 2xl:w-[60%] 2xl:pr-[20px]'>
                                     <p className='text-titleDark 2xl:text-[50px] 2xl:leading-[62px] font-jost text-[26px] leading-[32px]'>{item.title[locale]}</p>
                                 </div>
                                 <div className='flex flex-col mb-[25px] 2xl:mb-[40px] 2xl:w-[30%]'>

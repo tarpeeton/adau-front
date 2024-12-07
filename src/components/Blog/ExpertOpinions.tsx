@@ -90,11 +90,14 @@ const ExpertOpinions: FC = () => {
                             <div className='mt-[25px] border-t border-r-[#E4E4E4]'>
                                 <div className='flex flex-row gap-[10px] pt-[25px] items-center'>
                                     <div className='w-[40px] h-[40px] 2xl:w-[45px] 2xl:h-[45px] rounded-full  overflow-hidden '>
-                                        <Image src={urlFor(item.userImage.asset._ref).url()} alt='image-rustiimmm' width={319} height={480} quality={100} className='w-full h-full object-cover ' />
+                                        {item?.userImage?.asset._ref && (
+                                            <Image src={urlFor(item.userImage.asset._ref).url()} alt='image-rustiimmm' width={319} height={480} quality={100} className='w-full h-full object-cover ' />
+                                        )}
+                                        
                                     </div>
                                     <div>
-                                        <p className='text-[16px] 2xl:text-[20px] font-medium text-titleDark font-jost'>{item.userName[locale]}</p>
-                                        <p className='text-[14px] 2xl:text-[17px] mt-[-8px] font-medium 2xl:leading-[24.57px] text-[#A0A0A0] font-jost'>{item.userOccupation[locale]}</p>
+                                        <p className='text-[16px] 2xl:text-[20px] font-medium text-titleDark font-jost'>{item?.userName[locale]}</p>
+                                        <p className='text-[14px] 2xl:text-[17px] mt-[-8px] font-medium 2xl:leading-[24.57px] text-[#A0A0A0] font-jost'>{item?.userOccupation[locale]}</p>
                                     </div>
                                 </div>
                             </div>
@@ -103,7 +106,7 @@ const ExpertOpinions: FC = () => {
                 </div>
                 {expertOpinion.length > 9 && (
                     <div className='w-full items-center flex justify-center mt-[30px]'>
-                        {sliceNumber < expertOpinion.length ? (
+                        {sliceNumber < expertOpinion?.length ? (
                             <button onClick={handleAddMore} className='buttonBlue w-[60%] 2xl:w-[15%]'>
                                 Загрузить еще
                             </button>
