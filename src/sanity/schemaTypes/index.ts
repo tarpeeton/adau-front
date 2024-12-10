@@ -33,6 +33,7 @@ import team from './team'
 import whyAddAdau from './whyAddAdau'
 import whyChooseUs from './why-choose-us'
 import contacts from './contacts'
+import moreService from '@/sanity/schemaTypes/more-service'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -69,5 +70,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     whyAddAdau,
     whyChooseUs,
     contacts,
+    moreService
   ],
 }

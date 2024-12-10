@@ -1,17 +1,49 @@
 'use client'
-import { FC } from 'react'
+import { FC  , useEffect , useState} from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import { Link } from '@/i18n/routing'
+import useLocale from '@/hooks/useLocale'
+import { client } from "@/sanity/lib/client"
+
 
 
 const MoreService: FC = () => {
+    const locale = useLocale()
+    const [data , setData] = useState([])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const featuredBlogs = await client.fetch(`
+                    *[_type == "additionalService"] 
+                `)
+
+                    console.log(featuredBlogs , 'featuredBlogs  HUYSOSMISAN')
+                setData(featuredBlogs)
+                console.log(featuredBlogs, 'featuredBlogs')
+            } catch (error) {
+                console.debug(error)
+            }
+        }
+        fetchData()
+    }, [locale])
+
+    // additionalService
+
+
     return (
         <div className='mt-[80px] 2xl:mt-[200px] 2xl:px-[50px] px-[16px] 4xl:px-[240px]'>
             <p className='text-[26px] uppercase font-jost leading-[32px] 2xl:text-[45px] 2xl:leading-[59px]'>
-                Дополнительные <b className='2xl:hidden' /> услуги
+            {locale === 'ru' 
+        ? "Дополнительные услуги" 
+        : locale === 'uz' 
+        ? "Qo'shimcha xizmatlar" 
+        : "Additional Services"
+    }
+
             </p>
 
 {/* MOBILE */}
@@ -26,7 +58,9 @@ const MoreService: FC = () => {
                 >
                     <SwiperSlide>
                         <div className='py-[24px] px-[20px] border border-[#E4E4E4]'>
-                            <p className='text-[22px] w-[50%] leading-[29px] text-titleDark uppercase font-jost'>Разработка архитектурных концепций</p>
+                            <p className='text-[22px] w-[50%] leading-[29px] text-titleDark uppercase font-jost'>
+                                Разработка архитектурных концепций
+                                </p>
                             <p className='text-[15px] leading-[18px] text-title80 mt-[10px]'>Lorem ipsum dolor sit amet consectetur. Dictumst non lacus consectetur curabitur malesuada laoreet est diam maecenas. Arcu convallis elit pellentesque imperdiet arcu. Lorem ipsum dolor sit amet consectetur.</p>
                             {/* <Link href='/project' className='buttonBlue w-[60%] mt-[45px]'>
                                 Посмотреть проекты

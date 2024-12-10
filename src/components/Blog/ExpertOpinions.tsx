@@ -80,7 +80,7 @@ const ExpertOpinions: FC = () => {
                             <div>
                                 <p className='text-[20px] leading-[26px] 2xl:leading-[30px] 2xl:text-[24px] text-titleDark font-medium font-jost'>{item.title[locale]}</p>
                                 <p className='text-[15px] leading-[18px] 2xl:leading-[24.57px] 2xl:text-[17px] text-title80  font-jost mt-[12px]'>
-                                {item.description[locale].length > 101 ? item.description[locale].slice(0, 101) + "..." : item.description[locale]}
+                                {item?.description[locale].length > 101 ? item.description[locale].slice(0, 101) + "..." : item?.description[locale]}
                                 </p>
                                 <Link href={`/blog/${item.slug.current}`} className='text-[#222E51] text-[16px] flex flex-row flex-nowrap items-center mt-[20px]  font-medium gap-[8px]'>
                                     Читать статью
