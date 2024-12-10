@@ -21,6 +21,8 @@ const HowWeWork: FC = () => {
     const [activeId, setActiveId] = useState<string | null>(null);
     const [open ,setOpen] = useState(false)
     
+    // howWeWork
+
     const toggleAccordion = (id: string) => {
         setActiveId(activeId === id ? null : id);
     };
