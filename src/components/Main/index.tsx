@@ -20,7 +20,7 @@ const Main: FC = () => {
         {/* <Case /> */}
         {/* <SeminarAndTrenings /> */}
         <Blog />
-        <Form  title='Станьте частью сообщества  архитекторов будущего!' text='Присоединяйтесь к нам, чтобы вместе создавать проекты, которые вдохновляют и меняют города к лучшему'/>
+        <Form  title={{ru:'Станьте частью сообщества  архитекторов будущего!' , uz: "Kelajak me'morlari jamoasining bir qismiga aylaning!" , en: "Become part of the community of future architects!"}} text={{ru:'Присоединяйтесь к нам, чтобы вместе создавать проекты, которые вдохновляют и меняют города к лучшему' , uz: "Bizga qo‘shiling va shaharlarga ilhom baxsh etuvchi hamda ularni yaxshiroq qilishga yordam beruvchi loyihalarni birgalikda yarataylik" , en: "Join us to create projects that inspire and transform cities for the better"}}/>
     </div>
   );
 };

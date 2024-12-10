@@ -10,6 +10,7 @@ import axios from 'axios'
 import { IoIosArrowDown } from "react-icons/io"
 
 import { Triangle } from 'react-loader-spinner'
+import useLocale from '@/hooks/useLocale'
 
 
 
@@ -19,12 +20,23 @@ interface IReviewFull {
 
 }
 
+interface SelectedItem {
+    ru: string;
+    uz: string;
+    en: string;
+}
 
 const ContactUs: FC<IReviewFull> = ({ visible, close }) => {
     const fileInputRef = useRef<HTMLInputElement | null>(null)
     const [openSelect, setOpenSelect] = useState(false)
-    const [selectedMessageType, setSelectMessageType] = useState('Тема сообщения')
+    const [selectedMessageType, setSelectMessageType] = useState<SelectedItem>({
+        ru: 'Тема сообщения',
+        uz: 'Xabar mavzusi',
+        en: 'Message Topic',
+      });
     const [loadingDataPost, setLoadingDataPost] = useState(false)
+    const locale = useLocale()
+
 
     const [formData, setFormData] = useState({
         name: '',
@@ -32,7 +44,7 @@ const ContactUs: FC<IReviewFull> = ({ visible, close }) => {
         email: '',
         textModal: '',
         textModalCompany: '',
-        
+
     })
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,13 +54,13 @@ const ContactUs: FC<IReviewFull> = ({ visible, close }) => {
 
     const handleOpenSelect = () => setOpenSelect(!openSelect)
 
-    const handleMessageType = (msg: string) => {
+    const handleMessageType = (msg: SelectedItem) => {
         setSelectMessageType(msg)
         setOpenSelect(false)
     }
 
- 
-   
+
+
 
     const sendDataForm = async () => {
         setLoadingDataPost(true)
@@ -57,8 +69,8 @@ const ContactUs: FC<IReviewFull> = ({ visible, close }) => {
             const formPayload = new FormData()
             formPayload.append('name', formData.name)
             formPayload.append('email', formData.email)
-            formPayload.append('modalPhone', formData.modalPhone)
-            formPayload.append('theme', selectedMessageType)
+            formPayload.append('phone', formData.modalPhone)
+            formPayload.append('theme', selectedMessageType.ru)
             formPayload.append('text', formData.textModal)
             formPayload.append('companyName', formData.textModalCompany)
 
@@ -85,7 +97,11 @@ const ContactUs: FC<IReviewFull> = ({ visible, close }) => {
                 textModalCompany: "",
                 modalPhone: ""
             })
-            setSelectMessageType('Тема сообщения')
+            setSelectMessageType({
+                ru: 'Тема сообщения',
+                uz: 'Xabar mavzusi',
+                en: 'Message Topic',
+              })
         } catch (error) {
             console.error('Error submitting form:', error)
         } finally {
@@ -94,7 +110,7 @@ const ContactUs: FC<IReviewFull> = ({ visible, close }) => {
     }
 
 
-
+   
 
     return (
         <Modal
@@ -107,7 +123,12 @@ const ContactUs: FC<IReviewFull> = ({ visible, close }) => {
         >
             <div className='flex flex-col'>
                 <p className='text-[22px] 2xl:text-[28px] text-titleDark font-medium'>
-                    Связаться с нами
+                    {locale === 'ru'
+                        ? "Связаться с нами"
+                        : locale === 'uz'
+                            ? "Biz bilan bog'lanish"
+                            : "Contact Us"
+                    }
 
                 </p>
                 <div className='inputs flex flex-col mt-[30px] '>
@@ -120,7 +141,15 @@ const ContactUs: FC<IReviewFull> = ({ visible, close }) => {
                             className="border border-[#E4E4E4] block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent border-1 appearance-none dark:focus:border-titleDark focus:outline-none focus:ring-0 focus:border-titleDark peer 2xl:text-[20px]"
                             placeholder=" "
                         />
-                        <label htmlFor="name" className="absolute text-sm text-gray-500 dark:text-[#A0A0A0] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#A0A0A0] peer-focus:dark:text-[#A0A0A0] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1 2xl:text-[17px]">Имя и фамилия *</label>
+                        <label htmlFor="name" className="absolute text-sm text-gray-500 dark:text-[#A0A0A0] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#A0A0A0] peer-focus:dark:text-[#A0A0A0] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1 2xl:text-[17px]">
+
+                            {locale === 'ru'
+                                ? "Имя и фамилия *"
+                                : locale === 'uz'
+                                    ? "Ism va familiya *"
+                                    : "First and Last Name *"
+                            }
+                        </label>
                     </div>
                     <div className='relative mt-[20px]  2xl:mt-[30px]'>
                         <input
@@ -131,7 +160,12 @@ const ContactUs: FC<IReviewFull> = ({ visible, close }) => {
                             className="border border-[#E4E4E4] block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent border-1 appearance-none dark:focus:border-titleDark focus:outline-none focus:ring-0 focus:border-titleDark peer 2xl:text-[20px]"
                             placeholder=" "
                         />
-                        <label htmlFor="modalPhone" className="absolute text-sm text-gray-500 dark:text-[#A0A0A0] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#A0A0A0] peer-focus:dark:text-[#A0A0A0] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1 2xl:text-[17px]">Имя *</label>
+                        <label htmlFor="modalPhone" className="absolute text-sm text-gray-500 dark:text-[#A0A0A0] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#A0A0A0] peer-focus:dark:text-[#A0A0A0] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1 2xl:text-[17px]">{locale === 'ru'
+                            ? "Номер телефона *"
+                            : locale === 'uz'
+                                ? "Telefon raqam *"
+                                : "Phone Number *"
+                        }</label>
                     </div>
                     <div className='relative mt-[20px]  2xl:mt-[30px]'>
                         <input
@@ -147,26 +181,44 @@ const ContactUs: FC<IReviewFull> = ({ visible, close }) => {
                     <div className='relative mt-[20px] cursor-pointer 2xl:mt-[30px]'>
                         <div onClick={handleOpenSelect} id="floating_outlined_select" className="border border-[#E4E4E4]  px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent border-1 appearance-none dark:focus:border-titleDark focus:outline-none focus:ring-0 focus:border-titleDark peer flex items-center justify-between">
                             <p className='2xl:text-[20px]'>
-                                {selectedMessageType}
-
+                                {selectedMessageType[locale]}
                             </p>
                             <IoIosArrowDown
                                 className={`transform transition-transform ease-in-out duration-500 ${openSelect ? 'rotate-180' : 'rotate-0'}`}
                             />
                         </div>
-                        <p className="absolute text-sm text-gray-500 dark:text-[#A0A0A0] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#A0A0A0] peer-focus:dark:text-[#A0A0A0] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1 2xl:text-[20px]">Тема сообщения</p>
+                        <p className="absolute text-sm text-gray-500 dark:text-[#A0A0A0] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#A0A0A0] peer-focus:dark:text-[#A0A0A0] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1 2xl:text-[20px]"> {locale === 'ru'
+                            ? "Тема сообщения"
+                            : locale === 'uz'
+                                ? "Xabar mavzusi"
+                                : "Message Subject"
+                        } </p>
                     </div>
                     {openSelect && (
                         <div className='mt-[5px] flex flex-col gap-[5px] '>
-                            <button onClick={() => handleMessageType('Вступить в ассоциацию')} className='p-[5px] border border-gray-600 flex items-center justify-center text-titleDark font-jost text-[14px] '>
-                                Вступить в ассоциацию
-
+                            <button onClick={() => handleMessageType({ru:'Вступить в ассоциацию' , uz: "Assotsiatsiyaga qo'shilish" , en: "Join the Association"})} className='p-[5px] border border-gray-600 flex items-center justify-center text-titleDark font-jost text-[14px] '>
+                                {locale === 'ru'
+                                    ? "Вступить в ассоциацию"
+                                    : locale === 'uz'
+                                        ? "Assotsiatsiyaga qo'shilish"
+                                        : "Join the Association"
+                                }
                             </button>
-                            <button onClick={() => handleMessageType('Стать партнером')} className='p-[5px] border border-gray-600 flex items-center justify-center text-titleDark font-jost text-[14px] '>
-                                Стать партнером
+                            <button onClick={() => handleMessageType({ru:'Стать партнером' , uz: "Hamkor bo'lish" , en: "Become a Partner"})}  className='p-[5px] border border-gray-600 flex items-center justify-center text-titleDark font-jost text-[14px] '>
+                                {locale === 'ru'
+                                    ? "Стать партнером"
+                                    : locale === 'uz'
+                                        ? "Hamkor bo'lish"
+                                        : "Become a Partner"
+                                }
                             </button>
-                            <button onClick={() => handleMessageType('Получить информацию')} className='p-[5px] border border-gray-600 flex items-center justify-center text-titleDark font-jost text-[14px] '>
-                                Получить информацию
+                            <button onClick={() => handleMessageType({ru:'Получить информацию' , uz: "Ma'lumot olish" , en: "Get Information"})} className='p-[5px] border border-gray-600 flex items-center justify-center text-titleDark font-jost text-[14px] '>
+                                {locale === 'ru'
+                                    ? "Получить информацию"
+                                    : locale === 'uz'
+                                        ? "Ma'lumot olish"
+                                        : "Get Information"
+                                }
 
                             </button>
                         </div>
@@ -174,7 +226,7 @@ const ContactUs: FC<IReviewFull> = ({ visible, close }) => {
                     )}
 
 
-                    {selectedMessageType === 'Получить информацию' && (
+                    {selectedMessageType.ru === 'Получить информацию' && (
                         <div className='relative  mt-[20px] '>
                             <input
                                 type="textModal"
@@ -184,25 +236,37 @@ const ContactUs: FC<IReviewFull> = ({ visible, close }) => {
                                 className="border border-[#E4E4E4] block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent border-1 appearance-none dark:focus:border-titleDark focus:outline-none focus:ring-0 focus:border-titleDark peer 2xl:text-[20px]"
                                 placeholder=" "
                             />
-                            <label htmlFor="textModal" className="absolute text-sm text-gray-500 dark:text-[#A0A0A0] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#A0A0A0] peer-focus:dark:text-[#A0A0A0] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1 2xl:text-[17px]">Текст сообщения *</label>
+                            <label htmlFor="textModal" className="absolute text-sm text-gray-500 dark:text-[#A0A0A0] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#A0A0A0] peer-focus:dark:text-[#A0A0A0] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1 2xl:text-[17px]">
+                                {locale === 'ru'
+                                    ? "Текст сообщения *"
+                                    : locale === 'uz'
+                                        ? "Xabar matni *"
+                                        : "Message Text *"
+                                }
+
+                            </label>
                         </div>
                     )}
-                    {selectedMessageType === 'Стать партнером' && (
+                    {selectedMessageType.ru === 'Стать партнером' && (
                         <div className='relative  mt-[20px] '>
                             <input
                                 type="text"
                                 id="textModalCompany"
-                                value={formData.textModal}
+                                value={formData.textModalCompany}
                                 onChange={handleInputChange}
                                 className="border border-[#E4E4E4] block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent border-1 appearance-none dark:focus:border-titleDark focus:outline-none focus:ring-0 focus:border-titleDark peer 2xl:text-[20px]"
                                 placeholder=" "
                             />
                             <label htmlFor="textModalCompany" className="absolute text-sm text-gray-500 dark:text-[#A0A0A0] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#A0A0A0] peer-focus:dark:text-[#A0A0A0] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1 2xl:text-[17px]">
-                            Наименование компании / организации *
+                                {locale === 'ru'
+                                    ? "Наименование компании / организации *"
+                                    : locale === 'uz'
+                                        ? "Kompaniya / tashkilot nomi *"
+                                        : "Company / Organization Name *"
+                                }
                             </label>
                         </div>
                     )}
-
 
 
 
@@ -222,7 +286,12 @@ const ContactUs: FC<IReviewFull> = ({ visible, close }) => {
                                 wrapperClass=""
                             />
                         ) : (
-                            'Отправить'
+                            <>{locale === 'ru'
+                                ? "Отправить"
+                                : locale === 'uz'
+                                    ? "Yuborish"
+                                    : "Send"
+                            }</>
                         )}
                     </button>
 

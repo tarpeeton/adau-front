@@ -89,25 +89,76 @@ const Footer: FC = () => {
 
                     </Link>
                 </div>
-                <div className='mt-[30px] flex flex-row flex-wrap 2xl:w-[50%] 2xl:flex-nowrap 2xl:mt-0'>
+                <div className='mt-[30px] flex flex-row flex-wrap 2xl:w-[50%] 2xl:gap-[30px] 2xl:flex-nowrap 2xl:mt-0'>
                     <div className='w-[48%] 2xl:w-[33%] flex flex-col'>
-                        <Link href='/about' className='text-[18px]  2xl:text-[25px] font-medium font-jost text-titleDark'>О нас</Link>
-                        <Link href='/about' className='text-[15px] mt-[10px] 2xl:text-[20px] font-normal text-titleDark font-jost'>Об ассоциации</Link>
-                        <Link href='/contacts' className='text-[15px] mt-[10px] 2xl:text-[20px] font-normal text-titleDark font-jost'>Контакты</Link>
-                        <Link href='/blog' className='text-[15px] mt-[10px] 2xl:text-[20px] font-normal text-titleDark font-jost'>Блог</Link>
+                        <Link href='/about' className='text-[18px] text-wrap  2xl:text-[25px] font-medium font-jost text-titleDark'>
+
+                            {locale === 'ru'
+                                ? "О нас"
+                                : locale === 'uz'
+                                    ? "Biz haqimizda"
+                                    : "About us"
+                            }
+                        </Link>
+                        <Link href='/about' className='text-[15px] mt-[10px] 2xl:text-[20px] font-normal text-titleDark font-jost'>
+                            {locale === 'ru'
+                                ? "Об ассоциации"
+                                : locale === 'uz'
+                                    ? "Assotsiatsiya haqida"
+                                    : "About the Association"
+                            }
+
+                        </Link>
+                        <Link href='/contacts' className='text-[15px] mt-[10px] 2xl:text-[20px] font-normal text-titleDark font-jost'>
+                            {locale === 'ru'
+                                ? "Контакты"
+                                : locale === 'uz'
+                                    ? "Kontaktlar"
+                                    : "Contacts"
+                            }
+                        </Link>
+                        <Link href='/blog' className='text-[15px] mt-[10px] 2xl:text-[20px] font-normal text-titleDark font-jost'>
+                            {locale === 'ru'
+                                ? "Блог"
+                                : locale === 'uz'
+                                    ? "Blog"
+                                    : "Blog"
+                            }
+                        </Link>
                     </div>
                     <div className='w-[48%] flex flex-col'>
-                        <p className='text-[18px]  2xl:text-[25px] font-medium font-jost text-titleDark'>Деятельность</p>
-                        <Link href='/services' className='text-[15px] mt-[10px] 2xl:text-[20px] font-normal text-titleDark font-jost'>Услуги</Link>
+                        <p className='text-[18px]  2xl:text-[25px] font-medium font-jost text-titleDark'>
+                            {locale === 'ru'
+                                ? "Деятельность"
+                                : locale === 'uz'
+                                    ? "Faoliyat"
+                                    : "Activity"
+                            }
+                        </p>
+                        <Link href='/services' className='text-[15px] mt-[10px] 2xl:text-[20px] font-normal text-titleDark font-jost'>
+                            {locale === 'ru'
+                                ? "Услуги"
+                                : locale === 'uz'
+                                    ? "Xizmatlar"
+                                    : "Services"
+                            }
+                        </Link>
                         {/* <Link href='/project' className='text-[15px] mt-[10px] 2xl:text-[20px] font-normal text-titleDark font-jost'>Проекты</Link> */}
-                        <Link href='/seminar' className='text-[15px] mt-[10px] 2xl:text-[20px] font-normal text-titleDark font-jost'>Семинары</Link>
+                        {/* <Link href='/seminar' className='text-[15px] mt-[10px] 2xl:text-[20px] font-normal text-titleDark font-jost'>Семинары</Link> */}
                     </div>
                     <div className='w-[48%] mt-[30px] 2xl:mt-0 flex flex-col'>
-                        <p className='text-[18px]  2xl:text-[25px] font-medium font-jost text-titleDark'>Контакты</p>
+                        <p className='text-[18px]  2xl:text-[25px] font-medium font-jost text-titleDark'>
+                            {locale === 'ru'
+                                ? "Контакты"
+                                : locale === 'uz'
+                                    ? "Kontaktlar"
+                                    : "Contacts"
+                            }
+                        </p>
                         <p className='text-[15px] mt-[10px] 2xl:text-[20px] font-normal text-titleDark font-jost'>
-                            {locale === 'ru' ? "г. Ташкент, Алмазарский район, улица Нурафшон, дом 50/7" : 
-                             locale === 'uz' ? "Toshkent shahri, Olmazor tumani, Nurafshon ko'chasi, 50/7 uy" : 
-                             "50/7 Nurafshon street, Almazar district, Tashkent city"}
+                            {locale === 'ru' ? "г. Ташкент, Алмазарский район, улица Нурафшон, дом 50/7" :
+                                locale === 'uz' ? "Toshkent shahri, Olmazor tumani, Nurafshon ko'chasi, 50/7 uy" :
+                                    "50/7 Nurafshon street, Almazar district, Tashkent city"}
                         </p>
                         <Link href="tel:+998773736999">
                             <button

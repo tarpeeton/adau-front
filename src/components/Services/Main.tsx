@@ -16,10 +16,10 @@ const MainService: FC = () => {
       <Service />
       <MoreService />
       {/* <ServiceCase /> */}
-      <WhyChooseUs project={true}  title='Вступить в ассоциацию'/>
+      <WhyChooseUs project={true}  title={{ru:'Вступить в ассоциацию' , uz: "Assotsiatsiyaga qo'shilish" , en: "Join the association"}}/>
       <HowWeWork />
       <FaqComponent />
-      <Form  text='Поддержка на всех этапах проекта, гарантия высокого качества услуг' title='Готовы начать работать    с нами?'/>
+      <Form  text={{ru:'Поддержка на всех этапах проекта, гарантия высокого качества услуг' , uz: "Barcha etaplar bo'yicha qo'llanma, tez tez ko'chirilgan qo'shimcha xizmatlar" , en: "Support on all project stages, high-quality additional services"}} title={{ru:'Готовы начать работать   с нами ?' , uz: "Biz bilan ishlashga tayyormisiz ?" , en: "Ready to start working with us ?"}}/>
     </div>
   );
 };

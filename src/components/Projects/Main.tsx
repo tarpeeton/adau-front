@@ -29,11 +29,27 @@ const MainProjects: FC = () => {
       </div>
       <TopCases />
       <HowWeWork />
-      <WhyChooseUs title='Заказать проект' project={false} />
+      <WhyChooseUs  title={{ru:'Заказать проект' , uz: "Loyiha buyutma berish" , en: "Order a Project"}} project={false} />
       <ProjectQuestion />
       <FaqComponent />
       {/* <Partners active={true} /> */}
-      <Form title='Готовы начать свой проект?' text='Свяжитесь с нами для консультации и начните работу над своим проектом уже сегодня' />
+     
+
+      <Form 
+  title={{
+    ru: 'Готовы начать свой проект?', 
+    uz: "O'z Loyihangizni boshlashga tayyormisiz?", 
+    en: "Ready to start your project?"
+  }} 
+  text={{
+    ru: 'Свяжитесь с нами для консультации и начните работу над своим проектом уже сегодня', 
+    uz: "Biz bilan bog'laning va bugun loyihangiz ustida ishlashni boshlang", 
+    en: "Contact us for a consultation and start working on your project today"
+  }} 
+/>
+
+
+
     </div>
   )
 }

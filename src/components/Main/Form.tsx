@@ -7,17 +7,26 @@ import ContactUs from '../Modal/contacts-modal';
 import A from '@/public/form/a.png'
 import D from '@/public/form/d.png'
 import U from '@/public/form/u.png'
+import useLocale from '@/hooks/useLocale';
 
 interface IFormPropsText {
-  title: string,
-  text: string
+  title: {
+    ru: string
+    uz: string
+    en: string
+  },
+  text: {
+    ru: string
+    uz: string
+    en: string
+  }
 }
 
 
 const Form: FC<IFormPropsText> = ({ title, text }) => {
   const [invite, setInvite] = useState(false)
   const handleOpenAdd = () => setInvite(!invite)
-
+  const locale = useLocale()
 
   return (
     <div className='mt-[80px] 2xl:mt-[200px]'>
@@ -25,14 +34,29 @@ const Form: FC<IFormPropsText> = ({ title, text }) => {
         {/* TEXT AND BUTTON */}
         <div className='2xl:w-[60%]'>
           <p className='text-[26px] 2xl:w-[90%] 2xl:text-[50px] 2xl:leading-[62px]  uppercase text-titleWhite font-jost leading-[32px]'>
-            {title}
+            {title[locale]}
           </p>
 
 
-          <p className='mt-[10px] 2xl:mt-[20px] 2xl:w-[50%] text-[15px] leading-[18px] text-[#A0A0A0]'>{text}</p>
+          <p className='mt-[10px] 2xl:mt-[20px] 2xl:w-[50%] text-[15px] leading-[18px] text-[#A0A0A0]'>{text[locale]}</p>
           <div className='flex flex-row flex-nowrap justify-between mt-[25px] 2xl:w-[45%] 2xl:mt-[50px]'>
-            <button onClick={handleOpenAdd} className='buttonWhite w-[55%]'>Вступить в ассоциацию</button>
-            <button onClick={handleOpenAdd} className='borderedButtonWhite w-[43%] flex items-center justify-center'>Стать партнером</button>
+            <button onClick={handleOpenAdd} className='buttonWhite w-[55%]'>
+              {locale === 'ru'
+                ? "Вступить в ассоциацию"
+                : locale === 'uz'
+                  ? "Assotsiatsiyaga qo'shilish"
+                  : "Join the Association"
+              }
+
+            </button>
+            <button onClick={handleOpenAdd} className='borderedButtonWhite w-[43%] flex items-center justify-center'>
+              {locale === 'ru'
+                ? "Стать партнером"
+                : locale === 'uz'
+                  ? "Hamkor bo'lish"
+                  : "Become a Partner"
+              }
+            </button>
             <ContactUs visible={invite} close={handleOpenAdd} />
 
           </div>

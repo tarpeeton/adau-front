@@ -97,7 +97,12 @@ const Blog: FC = () => {
     return (
         <div className='mt-[80px] 2xl:mt-[200px]  px-[20px] 4xl:px-[240px] 2xl:px-[50px]'>
             <p className="text-[26px]  uppercase font-jost leading-[32px] 2xl:text-[45px] 2xl:leading-[59px]  ">
-                блог
+            {locale === 'ru' 
+        ? "Блог" 
+        : locale === 'uz' 
+        ? "Blog" 
+        : "Blog"
+    }
             </p>
 
             <div className='hidden 2xl:inline-block  border-b border-[#E4E4E4]  mt-[40px]'>
@@ -109,7 +114,14 @@ const Blog: FC = () => {
                             : ' text-[#000000]'
                             }`}
                     >
-                        <p className='text-[22px] font-medium'>Все статьи</p>
+                        <p className='text-[22px] font-medium'>
+                        {locale === 'ru' 
+        ? "Все статьи" 
+        : locale === 'uz' 
+        ? "Barcha maqolalar" 
+        : "All Articles"
+    }
+                        </p>
                     </button>
                 {blogCategories.map((item, index) => (
                     <button
@@ -168,7 +180,12 @@ const Blog: FC = () => {
                             </div>
 
                             <Link href={`/blog/${item.slug.current}`} className='text-[16px] mt-[8px] font-medium text-[#222E51] font-jost 2xl:text-[20px] flex flex-row items-center'>
-                                Читать статью
+                                {locale === 'ru'
+                                ? "Читать статью"
+                                : locale === 'uz'
+                                  ? "Maqolani o'qish"
+                                  : "Read the article"
+                              }
                                 <GrLinkNext className='ml-[8px]' />
                             </Link>
                         </div>
@@ -179,7 +196,12 @@ const Blog: FC = () => {
 
             <div className='w-full flex items-center justify-center mt-[40px] 2xl:mt-[60px]'>
                 <Link href='/blog' className='buttonBlue w-[60%] 2xl:w-[15%]'>
-                    Все статьи
+                    {locale === 'ru'
+                    ? "Все статьи"
+                    : locale === 'uz'
+                      ? "Barcha maqolalar"
+                      : "All Articles"
+                  }
                 </Link>
             </div>
         </div>

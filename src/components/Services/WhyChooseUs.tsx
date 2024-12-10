@@ -20,7 +20,11 @@ interface WhyChooseItem {
 }
 
 interface IWhyChooseUs {
-    title: string,
+    title: {
+        ru: string
+        uz: string
+        en: string
+    }
     project: boolean
 }
 
@@ -56,10 +60,22 @@ const WhyChooseUs: FC<IWhyChooseUs> = ({ title, project }) => {
                 {/* title and description */}
                 <div>
                     <p className='text-[26px] uppercase leading-[32px] 2xl:text-[45px] 2xl:leading-[59px] text-[#000000] font-jost'>
-                        Почему клиенты <br className='2xl:hidden' /> выбирают нас
+                        {locale === 'ru'
+                            ? <>Почему клиенты <br className='2xl:hidden' /> выбирают нас</>
+                            : locale === 'uz'
+                                ? <>Nega mijozlar <br className='2xl:hidden' /> bizni tanlashadi</>
+                                : <>Why Clients <br className='2xl:hidden' /> Choose Us</>
+                        }
+
+
                     </p>
                     <p className='text-[15px] leading-[18px] 2xl:text-[20px] 2xl:leading-[24px] mt-[12px] text-[#414141] font-jost 2xl:mt-[15px]'>
-                        Мы объединяем опыт и креативные решения. Наши клиенты выбирают нас за качество, надежность и внимание к их уникальным потребностям.
+                        {locale === 'ru'
+                            ? "Мы объединяем опыт и креативные решения. Наши клиенты выбирают нас за качество, надежность и внимание к их уникальным потребностям."
+                            : locale === 'uz'
+                                ? "Biz tajriba va ijodiy yechimlarni birlashtiramiz. Mijozlarimiz bizni sifat, ishonchlilik va ularning o‘ziga xos ehtiyojlariga bo‘lgan eʼtibor uchun tanlaydilar."
+                                : "We combine experience and creative solutions. Our clients choose us for quality, reliability, and attention to their unique needs."
+                        }
                     </p>
                 </div>
                 {/* CARD */}
@@ -89,7 +105,7 @@ const WhyChooseUs: FC<IWhyChooseUs> = ({ title, project }) => {
                 {project && (
                     <div className='mt-[20px] 2xl:mt-[40px]'>
                         <button onClick={handleChangeStatus} className='buttonBlue'>
-                            {title}
+                            {title[locale]}
                         </button>
                         <ContactUs visible={open} close={handleChangeStatus} />
                     </div>

@@ -86,10 +86,20 @@ const Banner: FC = () => {
                                     <p className='mb-[20px] 2xl:mb-[30px] text-[15px] 2xl:text-[20px] leading-[18px] 2xl:leading-[28.9px] font-jost'>{item.description[locale]}</p>
                                     <div className='flex flex-row gap-[10px]'>
                                         <button onClick={handleOpenModal} className='buttonBlue'>
-                                            Вступить в ассоциацию
+                                            {locale === 'ru'
+                                                ? "Вступить в ассоциацию"
+                                                : locale === 'uz'
+                                                    ? "Assotsiatsiyaga qo'shilish"
+                                                    : "Join the Association"
+                                            }
                                         </button>
                                         <button onClick={handleOpenModal} className='borderedButton'>
-                                            Стать партнером
+                                            {locale === 'ru'
+                                                ? "Стать партнером"
+                                                : locale === 'uz'
+                                                    ? "Hamkor bo'lish"
+                                                    : "Become a Partner"
+                                            }
                                         </button>
                                     </div>
                                 </div>
