@@ -45,9 +45,28 @@ image}`)
     return (
         <div className='mt-[80px] 2xl:mt-[100px] px-[16px] 2xl:px-[50px] 4xl:px-[240px]'>
             <div className='flex flex-row justify-between'>
-                <p className='text-[26px] leading-[32px] 2xl:text-[45px] 2xl:leading-[59px] text-[#000000] font-jost'>Наша команда</p>
+                <p className='text-[26px] leading-[32px] 2xl:text-[45px] 2xl:leading-[59px] text-[#000000] font-jost'>
+
+                    {
+                        locale === 'ru'
+                            ? "Наша команда"
+                            : locale === 'uz'
+                                ? "Bizning jamoamiz"
+                                : "Our team"
+                    }
+
+                </p>
                 <div className='hidden 2xl:block'>
-                    <button onClick={handleOpenModal} className='buttonBlue '>Связаться с нами</button>
+                    <button onClick={handleOpenModal} className='buttonBlue '>
+                        {
+                            locale === 'ru'
+                                ? "Связаться с нами"
+                                : locale === 'uz'
+                                    ? "Biz bilan bog‘lanish"
+                                    : "Contact us"
+                        }
+
+                    </button>
                 </div>
             </div>
             {/* SLIDER */}
@@ -83,7 +102,15 @@ image}`)
             </div>
             <ContactUs visible={openMenu} close={handleCloseModal} />
             <div className='w-full 2xl:hidden flex items-center justify-center mt-[40px]'>
-                <button onClick={handleOpenModal} className='buttonBlue 2xl:hidden w-[70%]'>Связаться с нами</button>
+                <button onClick={handleOpenModal} className='buttonBlue 2xl:hidden w-[70%]'>
+                    {
+                        locale === 'ru'
+                            ? "Связаться с нами"
+                            : locale === 'uz'
+                                ? "Biz bilan bog‘lanish"
+                                : "Contact us"
+                    }
+                </button>
             </div>
         </div>
     )

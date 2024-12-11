@@ -18,7 +18,6 @@ const Video: FC = () => {
 
 
 
-
   const handlePartnerModalSwitcher = () => setPartnerModal(!partnerModal)
 
 
@@ -126,8 +125,23 @@ description
 
 
                 <div className='w-full 2xl:w-[100%] justify-between  mt-[25px] 2xl:mt-[30px]  flex flex-row flex-nowrap 2xl:justify-between 4xl:w-full'>
-                  <button onClick={handlePartnerModalSwitcher} className='buttonBlue     w-[54%]   2xl:w-[49%] '>Вступить в ассоциацию</button>
-                  <button onClick={handlePartnerModalSwitcher} className='borderedButton   w-[42%] 2xl:w-[49%] flex items-center justify-center'>Стать партнером</button>
+                  <button onClick={handlePartnerModalSwitcher} className='buttonBlue     w-[54%]   2xl:w-[49%] '>
+                    {locale === 'ru'
+                      ? "Вступить в ассоциацию"
+                      : locale === 'uz'
+                        ? "Assotsiatsiyaga qo'shilish"
+                        : "Join the Association"
+                    }
+                  </button>
+                  <button onClick={handlePartnerModalSwitcher} className='borderedButton   w-[42%] 2xl:w-[49%] flex items-center justify-center'>
+                    {locale === 'ru'
+                      ? "Стать партнером"
+                      : locale === 'uz'
+                        ? "Hamkor bo'lish"
+                        : "Become a Partner"
+                    }
+
+                  </button>
                   <ContactUs visible={partnerModal} close={handlePartnerModalSwitcher} />
                 </div>
 
