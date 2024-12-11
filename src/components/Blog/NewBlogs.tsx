@@ -38,15 +38,34 @@ additionalContent
     }`)
 }
 
+interface IActiveFilter {
+    id?: string;
+    name: {
+        ru: string;
+        uz: string;
+        en: string;
+    };
+}
 
 
 
 const NewBlogs: FC = () => {
     const [mobileActiveFilter, setMobileActiveFilter] = useState(false)
-    const [activeFilter, setActiveFilter] = useState({ name: 'Все статьи', id: 'all-articles' })
+    const locale = useLocale()
+
+    const [activeFilter, setActiveFilter] = useState<IActiveFilter>({
+        id: 'all-articles',
+        name: {
+            ru: 'Все статьи',
+            uz: 'Barcha maqolalar',
+            en: 'All Articles',
+        },
+    });
+
+
+
     const blogContainerRef = useRef<HTMLDivElement | null>(null)
     const filterRef = useRef<HTMLDivElement | null>(null)
-    const locale = useLocale()
     const router = useRouter()
     const searchParams = useSearchParams()
     const pathname = usePathname() // Get the current pathname
@@ -62,32 +81,59 @@ const NewBlogs: FC = () => {
     })
 
     useEffect(() => {
-        const name = searchParams.get('name')
-        const id = searchParams.get('_id')
+        const id = searchParams.get('_id');
+        const nameEn = searchParams.get('name');
 
-        if (name && id) {
-            setActiveFilter({ name: decodeURIComponent(name), id })
+        // Получаем значения для всех языков, если они есть в URL
+        const nameRu = searchParams.get('name_ru') || 'Все статьи';
+        const nameUz = searchParams.get('name_uz') || 'Barcha maqolalar';
+
+        if (nameEn && id) {
+            setActiveFilter({
+                id,
+                name: {
+                    ru: decodeURIComponent(nameRu),
+                    uz: decodeURIComponent(nameUz),
+                    en: decodeURIComponent(nameEn),
+                },
+            });
         }
-    }, [searchParams])
+    }, [searchParams]);
+
+
 
     const handleActiveFilter = () => setMobileActiveFilter(!mobileActiveFilter)
 
-    const handleMobileFilterSelect = (categoryId: string, categoryName: string) => {
-        setActiveFilter({ id: categoryId, name: categoryName })
-        setMobileActiveFilter(false)
-    
-        const queryParams = new URLSearchParams(window.location.search) // Get current query params
-    
-        // Update query parameters
-        queryParams.set('name', encodeURIComponent(categoryName))
-        queryParams.set('_id', categoryId)
-    
-        // Build the new URL with the current locale
-        const newUrl = `${pathname}?${queryParams.toString()}`
-    
-        // Push the new URL
-        router.push(newUrl)
-    }
+    const handleMobileFilterSelect = (
+        categoryId: string,
+        categoryName: { ru: string; uz: string; en: string }
+    ) => {
+        // Update the active filter with all language names
+        setActiveFilter({
+            id: categoryId,
+            name: {
+                ru: categoryName.ru,
+                uz: categoryName.uz,
+                en: categoryName.en,
+            },
+        });
+        setMobileActiveFilter(false);
+
+        const queryParams = new URLSearchParams(window.location.search);
+
+        // Add only the English name and category ID to query params
+        queryParams.set('name_en', encodeURIComponent(categoryName.en)); // Adding `name_en` for English name
+        queryParams.set('name_ru', encodeURIComponent(categoryName.ru)); // Adding `name_ru` for Russian name
+        queryParams.set('name_uz', encodeURIComponent(categoryName.uz)); // Adding `name_uz` for Uzbek name
+        queryParams.set('_id', categoryId);
+
+        // Generate the new URL
+        const newUrl = `${pathname}?${queryParams.toString()}`;
+
+        // Navigate to the new URL
+        router.push(newUrl);
+    };
+
 
     const filteredBlogs = activeFilter.id === 'all-articles'
         ? allBlogs
@@ -118,23 +164,49 @@ const NewBlogs: FC = () => {
     return (
         <div className='mt-[80px] 2xl:mt-[200px]  px-[20px] 4xl:px-[240px] 2xl:px-[50px]'>
             <p className="text-[26px]  uppercase font-jost leading-[32px] 2xl:text-[45px] 2xl:leading-[59px]  ">
-                Последние статьи
+                {
+                    locale === 'ru'
+                        ? "Последние статьи"
+                        : locale === 'uz'
+                            ? "So‘nggi maqolalar"
+                            : "Latest articles"
+                }
+
             </p>
 
             <div className='hidden 2xl:inline-block  mt-[40px] '>
                 <div className='flex flex-row gap-[30px] border-b border-b-[#E4E4E4]'>
                     <button
-                        onClick={() => setActiveFilter({ name: 'Все статьи', id: 'all-articles' })}
+                        onClick={() =>
+                            setActiveFilter({
+                                id: 'all-articles',
+                                name: {
+                                    ru: 'Все статьи',
+                                    uz: 'Barcha maqolalar',
+                                    en: 'All Articles',
+                                },
+                            })
+                        }
+
                         className={`pb-[12px] ${activeFilter.id === 'all-articles'
                             ? 'border-b-2 border-[#222E51] text-[#222E51]'
                             : ' text-[#000000]'
                             }`}
                     >
-                        <p className='text-[22px] font-medium'>Все статьи</p>
+                        <p className='text-[22px] font-medium'>
+                            {
+                                locale === 'ru'
+                                    ? "Все статьи"
+                                    : locale === 'uz'
+                                        ? "Barcha maqolalar"
+                                        : "All articles"
+                            }
+
+                        </p>
                     </button>
                     {blogCategories.map((item, index) => (
                         <button
-                            onClick={() => setActiveFilter({ name: item.name[locale], id: item._id })}
+                            onClick={() => setActiveFilter({ name: { ru: item.name.ru, uz: item.name.uz, en: item.name.en }, id: item._id })}
                             key={`${item._id}-${index}`}
                             className={`${index !== 0 ? 'px-[30px] pt-0 pb-[12px] ' : 'pb-[12px]'
                                 }  ${activeFilter.id === item._id
@@ -150,7 +222,7 @@ const NewBlogs: FC = () => {
             {/* MOBILE ACTIVE FILTERS */}
             <button onClick={handleActiveFilter} className='w-full mt-[20px] 2xl:hidden flex flex-row justify-between pb-[13px] border-b border-b-[#222E51]'>
                 <p className='text-[15px] font-medium font-jost text-[#222E51]'>
-                    {activeFilter.name}
+                    {activeFilter.name[locale]}
                 </p>
                 <div>
                     <FaChevronDown className='text-[#222E51]' />
@@ -159,15 +231,32 @@ const NewBlogs: FC = () => {
             {mobileActiveFilter && (
                 <div ref={filterRef}>
                     <p
-                        onClick={() => handleMobileFilterSelect('all-articles', 'Все статьи')}
+                        onClick={() =>
+                            setActiveFilter({
+                                id: 'all-articles',
+                                name: {
+                                    ru: 'Все статьи',
+                                    uz: 'Barcha maqolalar',
+                                    en: 'All Articles',
+                                },
+                            })
+                        }
+
                         className='text-[15px] font-semibold font-jost text-[#222E51] w-full mt-[20px] flex flex-row justify-between pb-[13px] border-b border-b-[#222E51]'
                     >
-                        Все статьи
+                        {
+                            locale === 'ru'
+                                ? "Все статьи"
+                                : locale === 'uz'
+                                    ? "Barcha maqolalar"
+                                    : "All articles"
+                        }
+
                     </p>
                     {blogCategories.map((item, index) => (
                         <p
                             key={`${item._id}-${index}`}
-                            onClick={() => handleMobileFilterSelect(item._id, item.name.en)}
+                            onClick={() => handleMobileFilterSelect(item._id, { ru: item.name.ru, uz: item.name.uz, en: item.name.en })}
                             className='text-[15px] font-semibold font-jost text-[#222E51] w-full mt-[20px] flex flex-row justify-between pb-[13px] border-b border-b-[#222E51]'
                         >
                             {item.name[locale]}
@@ -189,7 +278,14 @@ const NewBlogs: FC = () => {
                             </div>
 
                             <Link href={`/blog/${item.slug.current}`} className='text-[16px] mt-[8px] font-medium text-[#222E51] font-jost 2xl:text-[20px] flex flex-row items-center'>
-                                Читать статью
+                                {
+                                    locale === 'ru'
+                                        ? "Читать статью"
+                                        : locale === 'uz'
+                                            ? "Maqolani o‘qish"
+                                            : "Read article"
+                                }
+
                                 <GrLinkNext className='ml-[8px]' />
                             </Link>
                         </div>

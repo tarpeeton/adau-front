@@ -1,6 +1,6 @@
 "use client"
 
-import { FC  , useState , useEffect } from 'react'
+import { FC, useState, useEffect } from 'react'
 import { client } from "@/sanity/lib/client";
 
 import Image from 'next/image'
@@ -20,35 +20,42 @@ import { Autoplay } from 'swiper/modules'
 
 const Speakers: FC = () => {
     const locale = useLocale()
-    const [data , setData] = useState<ISpeakersData[] | []>([])
+    const [data, setData] = useState<ISpeakersData[] | []>([])
 
 
 
     useEffect(() => {
         const fetchData = async () => {
-          try {
-            const Data = await client.fetch(
-              `*[_type == "speaker"]`
-            );
-            setData(Data)
-          } catch (error) {
-            console.debug(error);
-          }
+            try {
+                const Data = await client.fetch(
+                    `*[_type == "speaker"]`
+                );
+                setData(Data)
+            } catch (error) {
+                console.debug(error);
+            }
         };
         fetchData();
-      }, []);
-      
+    }, []);
+
     return (
         <div className='mt-[80px] 2xl:mt-[200px] px-[16px] 2xl:px-[50px] 4xl:px-[240px]'>
             <p className='text-[26px] 2xl:text-[45px]  uppercase text-titleDark font-jost'>
-                Наши спикеры
+                {
+                    locale === 'ru'
+                        ? "Наши спикеры"
+                        : locale === 'uz'
+                            ? "Bizning spikerlarimiz"
+                            : "Our speakers"
+                }
+
             </p>
             <div className='mt-[30px]'>
                 <Swiper
                     spaceBetween={10}
                     slidesPerView={1}
                     speed={800}
-                    autoplay={{ delay:900, disableOnInteraction: false }}
+                    autoplay={{ delay: 900, disableOnInteraction: false }}
                     modules={[Autoplay]}
                     loop={false}
                     breakpoints={{
@@ -69,8 +76,15 @@ const Speakers: FC = () => {
                                         {item.description[locale]}
                                     </p>
                                     <div className='mt-[20px] text-[20px] font-medium text-[#222E51] flex flex-row items-center gap-[5px]'>
-                                        Мероприятия спикера
-                                        <GrFormNextLink  className='2xl:w-[20px] 2xl:h-[30px] mt-[4px]'/>
+                                        {
+                                            locale === 'ru'
+                                                ? "Мероприятия спикера"
+                                                : locale === 'uz'
+                                                    ? "Spikerning tadbirlari"
+                                                    : "Speaker's events"
+                                        }
+
+                                        <GrFormNextLink className='2xl:w-[20px] 2xl:h-[30px] mt-[4px]' />
                                     </div>
                                 </div>
                             </div>

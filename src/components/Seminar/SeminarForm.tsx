@@ -12,12 +12,14 @@ import { Triangle } from 'react-loader-spinner'
 import A from '@/public/form/a.png'
 import D from '@/public/form/d.png'
 import U from '@/public/form/u.png'
+import useLocale from '@/hooks/useLocale'
 
 
 interface ISeminarData {
     title: {
         ru: string;
         en: string;
+        uz: string
     };
     status: string;
 }
@@ -26,9 +28,26 @@ interface ISeminarForm {
     data: ISeminarData[];
 }
 
+
+interface ISelectedMessage {
+    ru: string;
+    uz: string;
+    en: string;
+}
+
+
 const SeminarForm: FC<ISeminarForm> = ({ data }) => {
+    const locale = useLocale()
+
     const [openSelect, setOpenSelect] = useState(false)
-    const [selectedMessageType, setSelectMessageType] = useState('Выберите мероприятие')
+    const [selectedMessageType, setSelectMessageType] = useState<ISelectedMessage>({
+        ru: 'Выберите мероприятие',
+        uz: "Tadbirni tanlang",
+        en: "Select an event",
+    });
+
+
+
     const [loadingDataPost, setLoadingDataPost] = useState(false)
 
     const [formData, setFormData] = useState({
@@ -45,7 +64,7 @@ const SeminarForm: FC<ISeminarForm> = ({ data }) => {
     const handleOpenSelect = () => setOpenSelect(!openSelect)
 
     // Select Tipini Olish
-    const handleMessageType = (msg: string) => {
+    const handleMessageType = (msg: ISelectedMessage) => {
         setSelectMessageType(msg)
         setOpenSelect(false)
     }
@@ -60,7 +79,7 @@ const SeminarForm: FC<ISeminarForm> = ({ data }) => {
             formPayload.append('name', formData.name);
             formPayload.append('email', formData.email);
             formPayload.append('phone', formData.phone);
-            formPayload.append('event', selectedMessageType);
+            formPayload.append('event', selectedMessageType.ru);
 
             // Отправляем данные с использованием axios и добавлением API-Key в заголовок
             const response = await axios.post('https://adau.result-me.uz/api/form/seminar', formPayload, {
@@ -76,9 +95,14 @@ const SeminarForm: FC<ISeminarForm> = ({ data }) => {
             setFormData({
                 name: '',
                 email: '',
-                phone: ''
+                phone: '',
             });
-            setSelectMessageType('Выберите мероприятие');
+            setSelectMessageType({
+                ru: 'Выберите мероприятие',
+                uz: "Tadbirni tanlang",
+                en: "Select an event",
+            });
+
         } catch (error) {
             console.error('Error submitting form:', error);
         } finally {
@@ -92,10 +116,23 @@ const SeminarForm: FC<ISeminarForm> = ({ data }) => {
             <div className='flex flex-col 2xl:flex-row 2xl:justify-between 2xl:items-center'>
                 <div className='2xl:flex 2xl:flex-col  2xl:w-[40%]' >
                     <p className='text-[26px] 2xl:text-[50px] uppercase leading-[32px] 2xl:leading-[62px] font-jost text-titleWhite'>
-                    Записаться на <b />  семинар 
+                        {
+                            locale === 'ru'
+                                ? <>Записаться на <b /> семинар</>
+                                : locale === 'uz'
+                                    ? <>Seminarga <b /> yozilish</>
+                                    : <>Register for a <b /> seminar</>
+                        }
+
                     </p>
                     <p className='mt-[10px] hidden text-[20px] text-white font-jost 2xl:block opacity-[80%]' >
-                    Присоединяйтесь к нашим семинарам и расширьте свои профессиональные горизонты! Узнайте о новейших трендах и подходах в архитектуре и дизайне
+                        {
+                            locale === 'ru'
+                                ? "Присоединяйтесь к нашим семинарам и расширьте свои профессиональные горизонты! Узнайте о новейших трендах и подходах в архитектуре и дизайне"
+                                : locale === 'uz'
+                                    ? "Bizning seminarlarimizga qo‘shiling va professional ufqlaringizni kengaytiring! Arxitektura va dizayndagi eng yangi tendensiyalar va yondashuvlar haqida bilib oling"
+                                    : "Join our seminars and expand your professional horizons! Learn about the latest trends and approaches in architecture and design"
+                        }
                     </p>
                     <div className=' hidden 2xl:block mt-[30px] relative 2xl:mt-0'>
 
@@ -112,7 +149,14 @@ const SeminarForm: FC<ISeminarForm> = ({ data }) => {
                 </div>
 
                 <p className='mt-[10px] text-[15px] text-white font-jost 2xl:hidden opacity-[80%]' >
-                Присоединяйтесь к нашим семинарам и расширьте свои профессиональные горизонты! Узнайте о новейших трендах и подходах в архитектуре и дизайне
+                    {
+                        locale === 'ru'
+                            ? "Присоединяйтесь к нашим семинарам и расширьте свои профессиональные горизонты! Узнайте о новейших трендах и подходах в архитектуре и дизайне"
+                            : locale === 'uz'
+                                ? "Bizning seminarlarimizga qo‘shiling va professional ufqlaringizni kengaytiring! Arxitektura va dizayndagi eng yangi tendensiyalar va yondashuvlar haqida bilib oling"
+                                : "Join our seminars and expand your professional horizons! Learn about the latest trends and approaches in architecture and design"
+                    }
+
                 </p>
                 <div className='inputs flex flex-col mt-[30px] 2xl:w-[50%] 4xl:w-[50%] 2xl:items-center'>
                     <div className='relative 2xl:w-[60%] '>
@@ -150,22 +194,30 @@ const SeminarForm: FC<ISeminarForm> = ({ data }) => {
                     </div>
                     <div className='relative mt-[20px] cursor-pointer 2xl:w-[60%] 2xl:mt-[30px]'>
                         <div onClick={handleOpenSelect} id="floating_outlined_select" className="border border-white px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent border-1 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer flex flex-row justify-between items-center">
-                            {selectedMessageType}
+                            {selectedMessageType[locale]}
                             <IoIosArrowDown
                                 className={`transform transition-transform ease-in-out duration-500 ${openSelect ? 'rotate-180' : 'rotate-0'}`}
                             />
                         </div>
-                        <p className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-[#222E51] px-2 peer-focus:px-2 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">Выберите мероприятие</p>
+                        <p className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-[#222E51] px-2 peer-focus:px-2 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
+                            {
+                                locale === 'ru'
+                                    ? "Выберите мероприятие"
+                                    : locale === 'uz'
+                                        ? "Tadbirni tanlang"
+                                        : "Choose an event"
+                            }
+                        </p>
                     </div>
                     {openSelect && (
                         <div className='mt-[5px] flex flex-col gap-[5px] 2xl:w-[60%]'>
                             {data.map((seminar, index) => (
                                 <button
                                     key={index}
-                                    onClick={() => handleMessageType(seminar.title.ru)}
+                                    onClick={() => handleMessageType({ ru: seminar.title.ru, uz: seminar.title.uz, en: seminar.title.en })}
                                     className='p-[5px] border border-gray-600 flex items-center justify-center text-white font-jost text-[14px]'
                                 >
-                                    {seminar.title.ru}
+                                    {seminar.title[locale]}
                                 </button>
                             ))}
                         </div>
@@ -187,7 +239,16 @@ const SeminarForm: FC<ISeminarForm> = ({ data }) => {
                                     wrapperClass=""
                                 />
                             ) : (
-                                'Записаться'
+                                <>
+                                    {
+                                        locale === 'ru'
+                                            ? "Записаться"
+                                            : locale === 'uz'
+                                                ? "Ro‘yxatdan o‘tish"
+                                                : "Register"
+                                    }
+                                </>
+
                             )}
                         </button>
                     </div>

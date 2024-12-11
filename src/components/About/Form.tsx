@@ -15,6 +15,7 @@ import { Triangle } from 'react-loader-spinner'
 import A from '@/public/form/a.png'
 import D from '@/public/form/d.png'
 import U from '@/public/form/u.png'
+import useLocale from '@/hooks/useLocale'
 
 
 
@@ -22,14 +23,22 @@ import U from '@/public/form/u.png'
 interface ISomeFormProps {
     isTextOpen: boolean
 }
+interface SelectedItem {
+    ru: string;
+    uz: string;
+    en: string;
+}
 
 const SomeForm: FC<ISomeFormProps> = ({ isTextOpen }) => {
     const fileInputRef = useRef<HTMLInputElement | null>(null)
     const [openSelect, setOpenSelect] = useState(false)
-    const [selectedMessageType, setSelectMessageType] = useState('Тема сообщения')
-    const [fileName, setFileName] = useState<string | null>(null)
-    const [isLoading, setIsLoading] = useState(false)
+    const [selectedMessageType, setSelectMessageType] = useState<SelectedItem>({
+        ru: 'Тема сообщения',
+        uz: 'Xabar mavzusi',
+        en: 'Message Topic',
+      });
     const [loadingDataPost, setLoadingDataPost] = useState(false)
+    const locale = useLocale()
 
     const [formData, setFormData] = useState({
         name: '',
@@ -46,10 +55,12 @@ const SomeForm: FC<ISomeFormProps> = ({ isTextOpen }) => {
 
     const handleOpenSelect = () => setOpenSelect(!openSelect)
 
-    const handleMessageType = (msg: string) => {
+    const handleMessageType = (msg: SelectedItem) => {
         setSelectMessageType(msg)
         setOpenSelect(false)
     }
+
+
 
 
 
@@ -65,7 +76,7 @@ const SomeForm: FC<ISomeFormProps> = ({ isTextOpen }) => {
             formPayload.append('email', formData.email)
             formPayload.append('text', formData.text)
             formPayload.append('companyName', formData.companyName)
-            formPayload.append('theme', selectedMessageType)
+            formPayload.append('theme', selectedMessageType.ru)
 
             // Add the file to FormData if it exists
             if (fileInputRef.current?.files && fileInputRef.current.files.length > 0) {
@@ -88,8 +99,11 @@ const SomeForm: FC<ISomeFormProps> = ({ isTextOpen }) => {
                 phone: "",
                 companyName: ""
             })
-            setFileName(null)
-            setSelectMessageType('Тема сообщения')
+            setSelectMessageType({
+                ru: 'Тема сообщения',
+                uz: 'Xabar mavzusi',
+                en: 'Message Topic',
+              })
         } catch (error) {
             console.error('Error submitting form:', error)
         } finally {
@@ -102,10 +116,24 @@ const SomeForm: FC<ISomeFormProps> = ({ isTextOpen }) => {
             <div className='flex flex-col 2xl:flex-row 2xl:justify-between 2xl:items-center'>
                 <div className='2xl:flex 2xl:flex-col  2xl:w-[40%]' >
                     <p className='text-[26px] 2xl:text-[50px] uppercase leading-[32px] 2xl:leading-[62px] font-jost text-titleWhite'>
-                        Отправить нам <b /> сообщение
+                        {
+                            locale === 'ru'
+                                ? <>Отправить нам <b /> сообщение</>
+                                : locale === 'uz'
+                                    ? <>Bizga  xabar <b /> yuborish</>
+                                    : <>Send us a <b /> message</>
+                        }
+
                     </p>
                     <p className='mt-[10px] hidden text-[20px] text-white font-jost 2xl:block opacity-[80%]' >
-                        Напишите нам, и мы ответим в кратчайшие сроки!
+                        {
+                            locale === 'ru'
+                                ? "Напишите нам, и мы ответим в кратчайшие сроки!"
+                                : locale === 'uz'
+                                    ? "Bizga yozing, biz  qisqa vaqt ichida javob beramiz!"
+                                    : "Write to us, and we will respond as soon as possible!"
+                        }
+
                     </p>
                     <div className=' hidden 2xl:block mt-[30px] relative border-t border-t-[#636F93]' >
                         <div className='absolute top-[40px]  z-50'>
@@ -113,7 +141,16 @@ const SomeForm: FC<ISomeFormProps> = ({ isTextOpen }) => {
                                 +998 77 373 69 99
                             </p>
                             <p className='text-[25px] text-white font-jost mt-[4px]'>adau.uzbekistan@gmail.com</p>
-                            <p className='text-[25px] text-white font-jost mt-[4px]'>Город Ташкент, Алмазарский район, улица Нурафшон, дом 50/7.</p>
+                            <p className='text-[25px] text-white font-jost mt-[4px]'>
+                                {
+                                    locale === 'ru'
+                                        ? "Город Ташкент, Алмазарский район, улица Нурафшон, дом 50/7."
+                                        : locale === 'uz'
+                                            ? "Toshkent shahri, Olmazor tumani, Nurafshon ko‘chasi, 50/7-uy."
+                                            : "City of Tashkent, Almazar district, Nurafshon street, house 50/7."
+                                }
+
+                            </p>
                         </div>
                         <div className=' mt-[40px] flex items-center gap-[8px] justify-center 2xl:items-end 2xl:mt-[210px] '>
                             <Image src={A} width={73} height={73} alt='A' quality={100} className='opacity-[20%] w-[73px] h-[73px] 2xl:w-[163px] 2xl:h-[163px]' />
@@ -126,7 +163,15 @@ const SomeForm: FC<ISomeFormProps> = ({ isTextOpen }) => {
                 </div>
 
                 <p className='mt-[10px] text-[15px] text-white font-jost 2xl:hidden opacity-[80%]' >
-                    Напишите нам, и мы ответим в кратчайшие <b className='mdl:hidden' /> сроки!
+
+                    {
+                        locale === 'ru'
+                            ? <>Напишите нам, и мы ответим в кратчайшие <b className='mdl:hidden' /> сроки!</>
+                            : locale === 'uz'
+                                ? <>Bizga yozing, biz  qisqa <b className='mdl:hidden' /> vaqt ichida javob beramiz!</>
+                                : <>Write to us, and we will respond as soon as possible <b className='mdl:hidden' />!</>
+                    }
+
                 </p>
                 <div className='inputs flex flex-col mt-[30px] 2xl:w-[50%] 4xl:w-[30%] 2xl:items-center'>
                     <div className='relative 2xl:w-[60%] '>
@@ -139,7 +184,15 @@ const SomeForm: FC<ISomeFormProps> = ({ isTextOpen }) => {
                             className="border border-white block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent border-1 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer"
                             placeholder=" "
                         />
-                        <label htmlFor="name" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-[#222E51] px-2 peer-focus:px-2 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">Имя и фамилия *</label>
+                        <label htmlFor="name" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-[#222E51] px-2 peer-focus:px-2 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
+                            {
+                                locale === 'ru'
+                                    ? "Имя и фамилия *"
+                                    : locale === 'uz'
+                                        ? "Ism va familiya *"
+                                        : "First and Last Name *"
+                            }
+                        </label>
                     </div>
                     <div className='relative mt-[20px] 2xl:w-[60%] 2xl:mt-[30px] '>
                         <input
@@ -162,7 +215,14 @@ const SomeForm: FC<ISomeFormProps> = ({ isTextOpen }) => {
                             className="border border-white block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent border-1 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer"
                             placeholder=" "
                         />
-                        <label htmlFor="phone" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-[#222E51] px-2 peer-focus:px-2 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">Номер телефона *</label>
+                        <label htmlFor="phone" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-[#222E51] px-2 peer-focus:px-2 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">{
+                            locale === 'ru'
+                                ? "Номер телефона *"
+                                : locale === 'uz'
+                                    ? "Telefon raqami *"
+                                    : "Phone number *"
+                        }
+                        </label>
                     </div>
                     <div className='relative mt-[20px] 2xl:w-[60%] 2xl:mt-[30px]' >
                         <input
@@ -178,28 +238,50 @@ const SomeForm: FC<ISomeFormProps> = ({ isTextOpen }) => {
                     </div>
                     <div className='relative mt-[20px] cursor-pointer 2xl:w-[60%] 2xl:mt-[30px]' >
                         <div onClick={handleOpenSelect} id="floating_outlined_select" className="border border-white px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent border-1 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer flex flex-row justify-between items-center">
-                            {selectedMessageType}
+                            {selectedMessageType[locale]}
                             <IoIosArrowDown
                                 className={`transform transition-transform ease-in-out duration-500 ${openSelect ? 'rotate-180' : 'rotate-0'}`}
                             />
                         </div>
-                        <p className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-[#222E51] px-2 peer-focus:px-2 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">Тема сообщения</p>
+                        <p className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-[#222E51] px-2 peer-focus:px-2 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
+                        {locale === 'ru'
+                            ? "Тема сообщения"
+                            : locale === 'uz'
+                                ? "Xabar mavzusi"
+                                : "Message Subject"
+                        }
+                        </p>
                     </div>
                     {openSelect && (
                         <div className='mt-[5px] flex flex-col gap-[5px] 2xl:w-[60%]' >
-                            <button onClick={() => handleMessageType('Вступить в ассоциацию')} className='p-[5px] border border-gray-600 flex items-center justify-center text-white font-jost text-[14px]' >
-                                Вступить в ассоциацию
+                            <button onClick={() => handleMessageType({ru:'Вступить в ассоциацию' , uz: "Assotsiatsiyaga qo'shilish" , en: "Join the Association"})} className='p-[5px] border border-gray-600 flex items-center justify-center text-white font-jost text-[14px]' >
+                            {locale === 'ru'
+                                    ? "Вступить в ассоциацию"
+                                    : locale === 'uz'
+                                        ? "Assotsiatsiyaga qo'shilish"
+                                        : "Join the Association"
+                                }
                             </button>
-                            <button onClick={() => handleMessageType('Стать партнером')} className='p-[5px] border border-gray-600 flex items-center justify-center text-white font-jost text-[14px]' >
-                                Стать партнером
+                            <button onClick={() => handleMessageType({ru:'Стать партнером' , uz: "Hamkor bo'lish" , en: "Become a Partner"})}   className='p-[5px] border border-gray-600 flex items-center justify-center text-white font-jost text-[14px]' >
+                            {locale === 'ru'
+                                    ? "Стать партнером"
+                                    : locale === 'uz'
+                                        ? "Hamkor bo'lish"
+                                        : "Become a Partner"
+                                }
                             </button>
-                            <button onClick={() => handleMessageType('Получить информацию')} className='p-[5px] border border-gray-600 flex items-center justify-center text-white font-jost text-[14px]' >
-                            Получить информацию
+                            <button onClick={() => handleMessageType({ru:'Получить информацию' , uz: "Ma'lumot olish" , en: "Get Information"})} className='p-[5px] border border-gray-600 flex items-center justify-center text-white font-jost text-[14px]' >
+                            {locale === 'ru'
+                                    ? "Получить информацию"
+                                    : locale === 'uz'
+                                        ? "Ma'lumot olish"
+                                        : "Get Information"
+                                }
                             </button>
                         </div>
                     )}
 
-                    {selectedMessageType === 'Получить информацию' && (
+                    {selectedMessageType.ru === 'Получить информацию' && (
                         <div className='relative mt-[20px] 2xl:w-[60%] 2xl:mt-[30px]' >
                             <input
                                 type="text"
@@ -209,10 +291,16 @@ const SomeForm: FC<ISomeFormProps> = ({ isTextOpen }) => {
                                 className="border border-white block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent border-1 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer"
                                 placeholder=" "
                             />
-                            <label htmlFor="text" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-[#222E51] px-2 peer-focus:px-2 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">Текст сообщения *</label>
+                            <label htmlFor="text" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-[#222E51] px-2 peer-focus:px-2 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
+                            {locale === 'ru'
+                                    ? "Текст сообщения *"
+                                    : locale === 'uz'
+                                        ? "Xabar matni *"
+                                        : "Message Text *"
+                                }</label>
                         </div>
                     )}
-                    {selectedMessageType === 'Стать партнером' && (
+                    {selectedMessageType.ru === 'Стать партнером' && (
                         <div className='relative mt-[20px] 2xl:w-[60%] 2xl:mt-[30px]' >
                             <input
                                 type="text"
@@ -222,7 +310,14 @@ const SomeForm: FC<ISomeFormProps> = ({ isTextOpen }) => {
                                 className="border border-white block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent border-1 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer"
                                 placeholder=" "
                             />
-                            <label htmlFor="companyName" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-[#222E51] px-2 peer-focus:px-2 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">Наименование компании / организации *</label>
+                            <label htmlFor="companyName" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-[#222E51] px-2 peer-focus:px-2 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
+                            {locale === 'ru'
+                                    ? "Наименование компании / организации *"
+                                    : locale === 'uz'
+                                        ? "Kompaniya / tashkilot nomi *"
+                                        : "Company / Organization Name *"
+                                }
+                            </label>
                         </div>
                     )}
 
@@ -243,7 +338,12 @@ const SomeForm: FC<ISomeFormProps> = ({ isTextOpen }) => {
                                 wrapperClass=""
                             />
                         ) : (
-                            'Отправить'
+                            <>{locale === 'ru'
+                                ? "Отправить"
+                                : locale === 'uz'
+                                    ? "Yuborish"
+                                    : "Send"
+                            }</>
                         )}
                     </button>
 
@@ -254,7 +354,13 @@ const SomeForm: FC<ISomeFormProps> = ({ isTextOpen }) => {
                                 +998 77 373 69 99</p>
                             <p className='text-[15px] text-white font-jost mt-[4px]'>adau.uzbekistan@gmail.com</p>
                             <p className='text-[15px] text-white font-jost mt-[4px]'>
-                                Город Ташкент, Алмазарский район, улица Нурафшон, дом 50/7.
+                            {
+                                    locale === 'ru'
+                                        ? "Город Ташкент, Алмазарский район, улица Нурафшон, дом 50/7."
+                                        : locale === 'uz'
+                                            ? "Toshkent shahri, Olmazor tumani, Nurafshon ko‘chasi, 50/7-uy."
+                                            : "City of Tashkent, Almazar district, Nurafshon street, house 50/7."
+                                }
                             </p>
                         </div>
                         <div className=' mt-[40px] flex items-center gap-[8px] justify-center 2xl:w-[40%] 2xl:items-end 2xl:mt-[220px] 2xl:ml-[-80px]' >

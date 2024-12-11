@@ -83,14 +83,30 @@ const NewSeminar: FC<INewSeminarProps> = ({ cotegory, data }) => {
     }
     return (
         <div className='mt-[50px] 2xl:mt-[100px] px-[16px] 2xl:px-[50px] 4xl:px-[240px]'>
-            <p className='uppercase text-[26px] 2xl:text-[45px] text-titleDark font-jost'>Ближайшие семинары и тренинги</p>
+            <p className='uppercase text-[26px] 2xl:text-[45px] text-titleDark font-jost'>
+                {
+                    locale === 'ru'
+                        ? "Ближайшие семинары и тренинги"
+                        : locale === 'uz'
+                            ? "Yaqinlashib kelayotgan seminar va treninglar"
+                            : "Upcoming seminars and trainings"
+                }
+
+            </p>
             <div className='flex flex-col mt-[20px] 2xl:mt-[40px]'>
                 <div className='hidden slg:flex  slg:flex-row gap-[10px]'>
                     <button
                         className={`px-[15px] py-[13px] text-center text-[#121212] border ${!activeFilter ? 'bg-[#222E51] text-white' : ''}`}
                         onClick={() => setActiveFilter(null)}
                     >
-                        Все
+                        {
+                            locale === 'ru'
+                                ? "Все"
+                                : locale === 'uz'
+                                    ? "Barchasi"
+                                    : "All"
+                        }
+
                     </button>
                     {cotegory.map((item) => (
                         <button
@@ -105,7 +121,16 @@ const NewSeminar: FC<INewSeminarProps> = ({ cotegory, data }) => {
                 <div className='2xl:hidden'>
                     <button onClick={handleActiveFilter} className='w-full mt-[20px] 2xl:hidden flex flex-row justify-between pb-[13px] border-b border-b-[#222E51]'>
                         <p className='text-[15px] font-medium font-jost text-[#222E51]'>
-                            {activeFilter ? activeFilter.title[locale] : 'Все'}
+                            {
+                                activeFilter
+                                    ? activeFilter.title[locale]
+                                    : (locale === 'ru'
+                                        ? "Все"
+                                        : locale === 'uz'
+                                            ? "Barchasi"
+                                            : "All")
+                            }
+
                         </p>
                         <div>
                             <FaChevronDown className='text-[#222E51]' />
@@ -117,7 +142,13 @@ const NewSeminar: FC<INewSeminarProps> = ({ cotegory, data }) => {
                                 onClick={() => handleMobileFilterSelect(null)}
                                 className='text-[15px] font-semibold font-jost text-[#222E51] w-full mt-[20px] flex flex-row justify-between pb-[13px] border-b border-b-[#222E51]'
                             >
-                               Все
+                                {
+                                    locale === 'ru'
+                                        ? "Все"
+                                        : locale === 'uz'
+                                            ? "Barchasi"
+                                            : "All"
+                                }
                                 <MdArchitecture />
                             </p>
                             {cotegory.map((item, index) => (
@@ -142,7 +173,12 @@ const NewSeminar: FC<INewSeminarProps> = ({ cotegory, data }) => {
             {filteredBlogData.length > 9 && (
                 <div className='w-full flex items-center justify-center mt-[40px] 2xl:mt-[60px]'>
                     <button onClick={handleToggle} className='buttonBlue w-[60%] 2xl:w-[15%]'>
-                        {isAllDataLoaded ? 'Скрыть' : 'Показать еще'}
+                        {
+                            isAllDataLoaded
+                                ? (locale === 'ru' ? "Скрыть" : locale === 'uz' ? "Yashirish" : "Hide")
+                                : (locale === 'ru' ? "Показать еще" : locale === 'uz' ? "Ko`proq ko‘rsatish" : "Show more")
+                        }
+
                     </button>
                 </div>
             )}

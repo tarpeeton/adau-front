@@ -26,7 +26,7 @@ import ContactUs from '../Modal/contacts-modal'
 const Invite: FC = () => {
     const { swiperRef, handlePrev, handleNext } = useSwiperNavigation()
     const [WhyData, setWhyData] = useState<IWhyJoinAdau[] | []>([])
-    const [open ,setOpen] = useState(false)
+    const [open, setOpen] = useState(false)
 
     const handleChangeOpen = () => setOpen(!open)
 
@@ -53,7 +53,17 @@ options}`
         <div className='mt-[80px] 2xl:mt-[100px] px-[16px] 2xl:px-[50px] 4xl:px-[240px]'>
 
             <div className='block 2xl:hidden'>
-                <p className='text-[26px] font-jost text-titleDark uppercase'>Почему стоит стать членом ADAU?</p>
+                <p className='text-[26px] font-jost text-titleDark uppercase'>
+                    {
+                        locale === 'ru'
+                            ? <>Почему стоит стать членом ADAU?</>
+                            : locale === 'uz'
+                                ? "Nega ADAU a’zosi bo‘lish kerak?"
+                                : "Why should you become a member of ADAU?"
+                    }
+
+
+                </p>
             </div>
             <div className='mt-[30px]'>
                 <div className='flex flex-col'>
@@ -69,23 +79,42 @@ options}`
                             {WhyData.map((item, index) => (
                                 <SwiperSlide key={index}>
                                     <div className='relative 2xl:flex 2xl:flex-row 2xl:justify-between'>
-                                        <div className='h-[230px] 2xl:h-[703px] 2xl:w-[48%]'>
+                                        <div className='h-[230px] 2xl:h-[920px] 2xl:w-[48%]'>
                                             <Image src={ScrollImage} alt='seminar photo' width={800} height={703} className='object-cover w-full h-full' quality={100} />
                                         </div>
                                         <div className='mt-[30px] flex flex-col gap-[20px] 2xl:w-[48%] 2xl:gap-[40px]'>
                                             <p className='hidden 2xl:block text-[45px] uppercase font-jost'>
-                                                Почему стоит стать <br /> членом ADAU?
+
+                                                {
+                                                    locale === 'ru'
+                                                        ? (
+                                                            <>
+                                                                Почему стоит стать <br /> членом ADAU?
+                                                            </>
+                                                        )
+                                                        : locale === 'uz'
+                                                            ? <>Nega ADAU a’zosi <br /> bo‘lish   kerak?</>
+                                                            : <>Why should you become <br /> a member of ADAU?</>
+                                                }
+
                                             </p>
                                             {item.options.map((item, index) => (
                                                 <p key={index} className='pb-[20px] 2xl:mt-[20px] border-b border-b-[#E4E4E4] text-[18px] font-bold text-[#414141] leading-[22px] 2xl:pb-[20px] 2xl:text-[25px] 2xl:text-titleDark'>
-                                                   {item.name[locale]}
+                                                    {item.name[locale]}
                                                 </p>
                                             ))}
 
 
                                             <div className='mt-[10px] w-[70%]  flex items-center 2xl:w-[40%] '>
                                                 <button onClick={handleChangeOpen} className='buttonBlue'>
-                                                    Вступить в ассоциацию
+                                                    {
+                                                        locale === 'ru'
+                                                            ? "Вступить в ассоциацию"
+                                                            : locale === 'uz'
+                                                                ? "Assotsiatsiyaga qo‘shilish"
+                                                                : "Join the association"
+                                                    }
+
 
                                                 </button>
                                             </div>
@@ -94,7 +123,7 @@ options}`
                                 </SwiperSlide>
                             ))}
 
-    <ContactUs  visible={open} close={handleChangeOpen}/>
+                            <ContactUs visible={open} close={handleChangeOpen} />
 
                         </Swiper>
                         <div className='absolute top-[150px] 4xl:right-[260px] right-[20px] ] z-[99] flex items-center gap-[15px] 2xl:right-auto 2xl:left-[450px] 2xl:top-auto 2xl:bottom-[20px]'>
