@@ -15,36 +15,28 @@ const About: FC = () => {
             <div className='flex flex-col '>
                 <div className='2xl:flex 2xl:justify-end'>
                     <h1 className='text-[26px] font-normal  2xl:text-[50px] 2xl:leading-[62px]  font-jost leading-[32px]'>
-
-
-
-
-
-
-
-
-
-
-                        {locale === 'ru'
-                            ? <> <span className='text-[#222E51] font-medium'>ADAU</span>
-                                – Ассоциация Дизайнеров и Архитекторов  Узбекистана</>
-                            : locale === 'uz'
-                                ? <> <span className='text-[#222E51] font-medium'>ADAU</span>
-                                    – O‘zbekiston Dizaynerlari   va Arxitektorlari Assotsiatsiyasi</>
-                                : <> <span className='text-[#222E51] font-medium'>ADAU</span>
-                                    – Association of Designers and Architects of Uzbekistan</>
-                        }
-
-
-
-
-
-
-
-
-
-
-
+                        {locale === 'ru' ? (
+                            <> 
+                                <span className='text-[#222E51] font-medium'>ADAU</span>
+                                – Ассоциация Дизайнеров <span className='2xl:hidden'>
+                                    и Архитекторов  Узбекистана
+                                </span>
+                            </>
+                        ) : locale === 'uz' ? (
+                            <> 
+                                <span className='text-[#222E51] font-medium'>ADAU</span>
+                                – O'zbekiston Dizaynerlari <span className='2xl:hidden'>
+                                    va Arxitektorlari Assotsiatsiyasi
+                                </span>
+                            </>
+                        ) : (
+                            <> 
+                                <span className='text-[#222E51] font-medium'>ADAU</span>
+                                – Association of Designers <span className='2xl:hidden'>
+                                    and Architects of Uzbekistan
+                                </span>
+                            </>
+                        )}
                     </h1>
                 </div>
                 <p className=' hidden 2xl:block  2xl:text-[50px] 2xl:leading-[62px]'>

@@ -13,6 +13,7 @@ import formatDate from '@/hooks/useFormatDate'
 const SimilarBlogs: FC = () => {
     const [similarNews, setSimilarNews] = useState<IBlog[] | []>([])
     const locale = useLocale()
+
     useEffect(() => {
 
         const fetchBlogs = async () => {
@@ -50,7 +51,14 @@ additionalContent
             {similarNews && similarNews.length > 0 && (
                 <div className='px-[16px] 2xl:px-[50px] 4xl:px-[240px] mt-[80px] 2xl:mt-[200px]'>
                     <p className="text-[26px]  uppercase font-jost leading-[32px] 2xl:text-[40px] 2xl:leading-[59px]  ">
-                        Похожие статьи
+                    {
+  locale === 'ru'
+    ? "Похожие статьи"
+    : locale === 'uz'
+      ? "O‘xshash maqolalar"
+      : "Related articles"
+}
+
                     </p>
 
                     <div className='mt-[20px] 2xl:mt-[41px] flex flex-col gap-[30px] 2xl:flex-row 2xl:flex-wrap 2xl:gap-[20px]'>
@@ -74,7 +82,14 @@ additionalContent
 
                                     {item?.slug?.current && (
                                         <Link href={`/blog/${item.slug.current}`} className='text-[16px] mt-[8px] font-medium text-[#222E51] font-jost 2xl:text-[20px] flex flex-row items-center'>
-                                            Читать статью
+                                            {
+  locale === 'ru'
+    ? "Читать статью"
+    : locale === 'uz'
+      ? "Maqolani o‘qish"
+      : "Read article"
+}
+
                                             <GrLinkNext className='ml-[8px]' />
                                         </Link>
                                     )}
@@ -85,7 +100,13 @@ additionalContent
                     </div>
                     <div className='w-full items-center flex justify-center mt-[30px]'>
                         <Link href='/blog' className='buttonBlue w-[60%] 2xl:w-[15%]'>
-                            Все статьи
+                            {
+                                locale === 'ru'
+                                    ? "Все статьи"
+                                    : locale === 'uz'
+                                        ? "Barcha maqolalar"
+                                        : "All articles"
+                            }
                         </Link>
 
                     </div>

@@ -7,6 +7,7 @@ import formatDate from '@/hooks/useFormatDate'
 import { client } from "@/sanity/lib/client"
 import toastr from 'toastr'
 import 'toastr/build/toastr.min.css'
+import useLocale from '@/hooks/useLocale'
 
 
 interface IBlogCommentProps {
@@ -19,6 +20,8 @@ const BlogComments: FC<IBlogCommentProps> = ({ comments, blogID, refetchComments
     const [comment, setComment] = useState('')
     const [allComments, setAllComments] = useState<IComment[]>(comments)
     const [sliceNumber, setSliceNumber] = useState(3)
+    const locale = useLocale()
+
 
     const handleAddMore = () => {
         if (sliceNumber < allComments.length) {
@@ -60,7 +63,15 @@ const BlogComments: FC<IBlogCommentProps> = ({ comments, blogID, refetchComments
     return (
         <div className='mt-[80px] 2xl:mt-[200px] px-[16px] 2xl:px-[50px] 4xl:px-[240px]'>
             <div>
-                <h1 className='text-[24px] 2xl:text-[45px] uppercase text-titleDark'>Комментарии ({comments.length})</h1>
+                <h1 className='text-[24px] 2xl:text-[45px] uppercase text-titleDark'>
+                    {
+                        locale === 'ru'
+                            ? "Комментарии"
+                            : locale === 'uz'
+                                ? "Izohlar"
+                                : "Comments"
+                    }
+                    ({comments.length})</h1>
             </div>
             <div className='flex flex-col gap-[15px] 2xl:gap-[20px] mt-[25px] 2xl:mt-[20px]'>
                 <div className='relative 2xl:w-full '>
@@ -72,12 +83,26 @@ const BlogComments: FC<IBlogCommentProps> = ({ comments, blogID, refetchComments
                         placeholder=" "
                     />
                     <label htmlFor="name" className="absolute text-sm text-gray-500 dark:text-[#A0A0A0] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-titleWhite px-2 peer-focus:px-2 peer-focus:text-[#A0A0A0] peer-focus:dark:text-[#A0A0A0] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] peer-focus:text-[17px] peer-focus:font-medium rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
-                        Ваш комментарий
+                        {
+                            locale === 'ru'
+                                ? "Ваш комментарий"
+                                : locale === 'uz'
+                                    ? "Sizning izohingiz"
+                                    : "Your comment"
+                        }
+
                     </label>
                 </div>
                 <div>
                     <button onClick={createCommentInSanity} className='buttonBlue w-[50%] 2xl:w-[15%]'>
-                        Опубликовать
+                        {
+                            locale === 'ru'
+                                ? "Опубликовать"
+                                : locale === 'uz'
+                                    ? "Nashr qilish"
+                                    : "Publish"
+                        }
+
                     </button>
                 </div>
             </div>
@@ -91,7 +116,16 @@ const BlogComments: FC<IBlogCommentProps> = ({ comments, blogID, refetchComments
                                 <Image src={DefaultIMage} alt='user-image' quality={100} width={400} height={400} className='w-full h-full object-cover rounded-full' />
                             </div>
                             <div>
-                                <p className='text-[14px] font-medium text-titleDark 2xl:text-[20px]'>Гость</p>
+                                <p className='text-[14px] font-medium text-titleDark 2xl:text-[20px]'>
+                                {
+  locale === 'ru'
+    ? "Гость"
+    : locale === 'uz'
+      ? "Mehmon"
+      : "Guest"
+}
+
+                                </p>
                                 <p className='text-[12px] mt-[-5px] font-medium text-[#A0A0A0] 2xl:text-[17px]'>
                                     {formatDate(item._createdAt)}
                                 </p>
@@ -109,12 +143,26 @@ const BlogComments: FC<IBlogCommentProps> = ({ comments, blogID, refetchComments
             <div className='w-full items-center flex justify-center mt-[30px]'>
                 {comments.length > 6 && sliceNumber < comments.length ? (
                     <button onClick={handleAddMore} className='buttonBlue w-[60%] 2xl:w-[15%]'>
-                        Загрузить еще
+                        {
+                            locale === 'ru'
+                                ? "Загрузить еще"
+                                : locale === 'uz'
+                                    ? "Yana yuklash"
+                                    : "Load more"
+                        }
+
                     </button>
                 ) : (
                     sliceNumber > 6 && (
                         <button onClick={handleShowLess} className='buttonBlue w-[60%] 2xl:w-[15%]'>
-                            Скрыть
+                            {
+                                locale === 'ru'
+                                    ? "Скрыть"
+                                    : locale === 'uz'
+                                        ? "Yashirish"
+                                        : "Hide"
+                            }
+
                         </button>
                     )
                 )}
