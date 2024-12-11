@@ -16,11 +16,27 @@ import { Link } from '@/i18n/routing'
 import formatDate from '@/hooks/useFormatDate'
 
 
+interface IActiveFilter {
+    id?: string;
+    name: {
+        ru: string;
+        uz: string;
+        en: string;
+    };
+}
 
 
 const PopularBlogs: FC = () => {
     const [mobileActiveFilter, setMobileActiveFilter] = useState(false)
-    const [activeFilter, setActiveFilter] = useState<{ name: string, id: string }>({ name: 'Все статьи', id: 'all-articles' })
+    const [activeFilter, setActiveFilter] = useState<IActiveFilter>({
+        id: 'all-articles',
+        name: {
+            ru: 'Все статьи',
+            uz: 'Barcha maqolalar',
+            en: 'All Articles',
+        },
+    });
+
     const blogContainerRef = useRef<HTMLDivElement | null>(null)
     const filterRef = useRef<HTMLDivElement | null>(null)
     const [categories, setCategories] = useState<IBlogCategory[]>([])
@@ -70,8 +86,8 @@ additionalContent
 
     const handleActiveFilter = () => setMobileActiveFilter(!mobileActiveFilter)
 
-    const handleFilterSelect = (categoryId: string, categoryName: string) => {
-        setActiveFilter({ id: categoryId, name: categoryName })
+    const handleFilterSelect = (categoryId: string, categoryName: { ru: string, uz: string, en: string }) => {
+        setActiveFilter({ id: categoryId, name: { ru: categoryName.ru, uz: categoryName.uz, en: categoryName.en } })
         setMobileActiveFilter(false)
     }
 
@@ -119,20 +135,39 @@ additionalContent
     return (
         <div className='mt-[80px] 2xl:mt-[200px]  px-[20px] 4xl:px-[240px] 2xl:px-[50px]'>
             <p className="text-[26px]  uppercase font-jost leading-[32px] 2xl:text-[45px] 2xl:leading-[59px]  ">
-                Популярные статьи
+                {
+                    locale === 'ru'
+                        ? "Популярные статьи"
+                        : locale === 'uz'
+                            ? "Ommabop maqolalar"
+                            : "Popular articles"
+                }
+
             </p>
 
             <div className='hidden 2xl:inline-block   mt-[40px] border-b border-[#E4E4E4]'>
                 <div className='flex flex-row gap-[40px]'>
                     <button
-                        onClick={() => handleFilterSelect('all-articles', 'Все статьи')}
+                        onClick={() => handleFilterSelect('all-articles', { ru: 'Все статьи', uz: 'Barcha maqolalar', en: 'All Articles' })}
+
                         className={`pb-[12px] mr-[10px] ${activeFilter.id === 'all-articles' ? 'border-b-2 border-[#222E51] text-[#222E51]' : ' text-[#000000]'}`}
                     >
-                        <p className='text-[22px] font-medium'>Все статьи</p>
+                        <p className='text-[22px] font-medium'>
+                        {
+  locale === 'ru'
+    ? "Все статьи"
+    : locale === 'uz'
+      ? "Barcha maqolalar"
+      : "All articles"
+}
+
+                        </p>
                     </button>
                     {categories.map((item) => (
                         <button
-                            onClick={() => handleFilterSelect(item._id, item.name[locale])}
+                            onClick={() => handleFilterSelect(item._id, { ru: item.name.ru, uz: item.name.uz, en: item.name.en })}
+
+
                             key={item._id}
                             className={`pb-[12px] px-[30px] ${activeFilter.id === item._id ? 'border-b-2 border-[#222E51] text-[#222E51]' : ' text-[#000000]'}`}
                         >
@@ -147,7 +182,7 @@ additionalContent
             {/* MOBILE ACTIVE FILTERS */}
             <button onClick={handleActiveFilter} className='w-full mt-[20px] 2xl:hidden flex flex-row justify-between pb-[13px] border-b border-b-[#222E51]'>
                 <p className='text-[15px] font-medium font-jost text-[#222E51]'>
-                    {activeFilter.name}
+                    {activeFilter.name[locale]}
                 </p>
                 <div>
                     <FaChevronDown className='text-[#222E51]' />
@@ -155,11 +190,25 @@ additionalContent
             </button>
             {mobileActiveFilter && (
                 <div ref={filterRef}>
-                    <p onClick={() => handleFilterSelect('all-articles', 'Все статьи')} className='text-[15px] font-semibold font-jost text-[#222E51] w-full mt-[20px] pb-[13px] border-b border-[#222E51] cursor-pointer'>Все статьи</p>
+                    <p
+                        onClick={() => handleFilterSelect('all-articles', { ru: 'Все статьи', uz: 'Barcha maqolalar', en: 'All Articles' })}
+
+
+                        className='text-[15px] font-semibold font-jost text-[#222E51] w-full mt-[20px] pb-[13px] border-b border-[#222E51] cursor-pointer'>
+                            {
+  locale === 'ru'
+    ? "Все статьи"
+    : locale === 'uz'
+      ? "Barcha maqolalar"
+      : "All articles"
+}
+
+                        </p>
                     {categories.map((item) => (
                         <p
                             key={item._id}
-                            onClick={() => handleFilterSelect(item._id, item.name[locale])}
+                            onClick={() => handleFilterSelect(item._id, { ru: item.name.ru, uz: item.name.uz, en: item.name.en })}
+
                             className='text-[15px] font-semibold font-jost text-[#222E51] w-full mt-[20px] pb-[13px] border-b border-[#222E51] cursor-pointer'
                         >
                             {item.name[locale]}
@@ -179,7 +228,14 @@ additionalContent
                             </div>
 
                             <Link href={`/blog/${item.slug.current}`} className='text-[16px] mt-[8px] font-medium text-[#222E51] font-jost 2xl:text-[20px] flex flex-row items-center'>
-                                Читать статью
+                                {
+                                    locale === 'ru'
+                                        ? "Читать статьи"
+                                        : locale === 'uz'
+                                            ? "Maqolalarni o‘qish"
+                                            : "Read articles"
+                                }
+
                                 <GrLinkNext className='ml-[8px]' />
                             </Link>
                         </div>
@@ -190,12 +246,24 @@ additionalContent
             <div className='w-full items-center flex justify-center mt-[30px]'>
                 {filteredBlogData.length > 6 && sliceNumber < filteredBlogData.length ? (
                     <button onClick={handleAddMore} className='buttonBlue w-[60%] 2xl:w-[15%]'>
-                        Загрузить еще
+                        {
+                            locale === 'ru'
+                                ? "Загрузить еще"
+                                : locale === 'uz'
+                                    ? "Ko'proq korsatish"
+                                    : "Load more"
+                        }
                     </button>
                 ) : (
                     sliceNumber > 6 && (
                         <button onClick={handleShowLess} className='buttonBlue w-[60%] 2xl:w-[15%]'>
-                            Скрыть
+                            {
+                                locale === 'ru'
+                                    ? "Скрыть"
+                                    : locale === 'uz'
+                                        ? "Yashirish"
+                                        : "Hide"
+                            }
                         </button>
                     )
                 )}

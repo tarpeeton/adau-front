@@ -71,7 +71,14 @@ const SavedBlogs: FC = () => {
     return (
         <div className="mt-[80px] 2xl:mt-[200px] py-[40px] 2xl:py-[100px] px-[20px] 4xl:pl-[240px] 2xl:px-[50px]">
             <p className="text-[26px] uppercase text-[#222E51] flex flex-row items-center gap-[10px] font-jost leading-[32px] 2xl:text-[45px] 2xl:leading-[59px] mb-[20px] 2xl:mb-[30px]">
-                <FaHeart /> Избранные статьи
+                <FaHeart /> {
+  locale === 'ru'
+    ? "Избранные статьи"
+    : locale === 'uz'
+      ? "Tanlangan maqolalar"
+      : "Featured articles"
+}
+
             </p>
             <div className="mt-[20px] mdl:mt-[30px] 2xl:mt-[40px]">
                 <div className='mt-[20px] 2xl:mt-[40px]'>
@@ -100,7 +107,8 @@ const SavedBlogs: FC = () => {
                                         <p className='text-[18px] text-titleWhite font-medium 2xl:text-[35px]'>
                                             {item.title[locale]}
                                         </p>
-                                        <p className='text-[15px] 2xl:text-[20px] 2xl:leading-[24px] 2xl:mt-[12px] text-titleWhite'>{item.description[locale]}</p>
+                                        <p className='text-[15px] 2xl:text-[20px] 2xl:leading-[24px] 2xl:mt-[12px] text-titleWhite'>
+                                            {item.description[locale].slice(0 , 120) + '...'}</p>
                                         <Link href={`/blog/${item.slug.current}`} className='mt-[10px] flex flex-row items-center gap-[5px] 2xl:mt-[15px] text-[15px] 2xl:text-[20px] font-medium text-titleWhite'> Подробнее <GrLinkNext /></Link>
                                     </div>
                                 </div>

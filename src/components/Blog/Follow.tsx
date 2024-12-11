@@ -8,12 +8,14 @@ import Image from 'next/image'
 import A from '@/public/form/a.png'
 import D from '@/public/form/d.png'
 import U from '@/public/form/u.png'
+import useLocale from '@/hooks/useLocale'
 
 
 
 
 const FollowToBlog: FC = () => {
     const [email, setEmail] = useState('')
+    const locale = useLocale()
 
     const handleSubscribe = () => {
         if (email) {
@@ -41,11 +43,25 @@ const FollowToBlog: FC = () => {
                 {/* TEXT AND BUTTON */}
                 <div className='2xl:w-[60%]'>
                     <p className='text-[26px] 2xl:w-[90%] 2xl:text-[50px] 2xl:leading-[62px]  uppercase text-titleWhite font-jost leading-[32px]'>
-                        Следите за новыми трендами в архитектуре!
+                        {
+                            locale === 'ru'
+                                ? "Следите за новыми трендами в архитектуре!"
+                                : locale === 'uz'
+                                    ? "Arxitekturadagi yangi tendensiyalarni kuzatib boring!"
+                                    : "Stay updated with new trends in architecture!"
+                        }
+
                     </p>
 
                     <p className='mt-[10px] 2xl:mt-[20px] 2xl:w-[50%] text-[15px] leading-[18px] text-white opacity-[80%]'>
-                        Подписывайтесь на наш блог, чтобы не пропустить новые статьи и тренды в дизайне и архитектуре
+                        {
+                            locale === 'ru'
+                                ? "Подписывайтесь на наш блог, чтобы не пропустить новые статьи и тренды в дизайне и архитектуре"
+                                : locale === 'uz'
+                                    ? "Dizayn va arxitektura bo‘yicha yangi maqolalar va tendensiyalarni o‘tkazib yubormaslik uchun blogimizga obuna bo‘ling"
+                                    : "Subscribe to our blog to stay updated with new articles and trends in design and architecture"
+                        }
+
                     </p>
                 </div>
 
@@ -65,7 +81,14 @@ const FollowToBlog: FC = () => {
                     </div>
                     <div className='2xl:mt-[20px] mt-[15px] 2xl:w-[60%] w-full'>
                         <button onClick={handleSubscribe} className='buttonWhite w-full relative 2xl:w-[50%] z-[999]'>
-                            Подписаться
+                            {
+                                locale === 'ru'
+                                    ? "Подписаться"
+                                    : locale === 'uz'
+                                        ? "Obuna bo‘lish"
+                                        : "Subscribe"
+                            }
+
                         </button>
                     </div>
                     <div className='flex flex-row mt-[20px]  2xl:mt-[-20px]'>

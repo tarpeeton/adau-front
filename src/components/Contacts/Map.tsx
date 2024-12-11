@@ -1,10 +1,12 @@
 "use client"
+import useLocale from '@/hooks/useLocale'
 import Link from 'next/link'
 import { FC, useState, useEffect } from 'react'
 
 const Map: FC = () => {
     const [mapLoaded, setMapLoaded] = useState(false) // State to ensure the map is loaded once
     const [mapInstance, setMapInstance] = useState<any>(null) // Store the map instance
+    const locale = useLocale()
 
     useEffect(() => {
         const loadYandexMap = () => {
@@ -37,16 +39,16 @@ const Map: FC = () => {
             // Check if Yandex Maps API is loaded and ready
             if (window.ymaps) {
                 const map = new window.ymaps.Map('map', {
-                    center: [41.351469, 69.289004],
+                    center: [41.341282, 69.247683],
                     zoom: 17,
                     controls: [],
                 })
 
                 const placemark = new window.ymaps.Placemark(
-                    [41.351469, 69.289004],
+                    [41.341282, 69.247683],
                     {
                         hintContent: 'Ташкент',
-                        balloonContent: 'Чинобод 2, метро Шахристан',
+                        balloonContent: 'махаллинский сход граждан Ханчарбог, Алмазарский район, Ташкент',
                     },
                     {
                         iconColor: '#222E51',
@@ -70,11 +72,24 @@ const Map: FC = () => {
         <div className='px-[16px] 2xl:px-[50px] 4xl:px-[240px] mt-[80px] 2xl:mt-[200px]'>
             <div className='flex flex-col 2xl:flex-row justify-between 2xl:items-center'>
                 <p className='text-[24px] 2xl:text-[45px] text-titleDark font-jost uppercase'>
-                    Найдите нас на карте
+                {
+  locale === 'ru'
+    ? "Найдите нас на карте"
+    : locale === 'uz'
+      ? "Bizni xaritada toping"
+      : "Find us on the map"
+}
+
                 </p>
                 <div className='hidden mdl:block' >
                     <Link href='https://www.google.com/maps?q=41.351469,69.289004' className='buttonBlue ' target='_blank' rel='noopener noreferrer'>
-                        Открыть в Google Maps
+                    {
+  locale === 'ru'
+    ? "Открыть в Google Maps"
+    : locale === 'uz'
+      ? "Google Xaritalarda Korish"
+      : "Open in Google Maps"
+}
                     </Link>
                 </div>
             </div>
@@ -87,7 +102,14 @@ const Map: FC = () => {
             </div>
             <div className='block mdl:hidden w-[60%]'>
                 <Link href='https://www.google.com/maps?q=41.351469,69.289004' className='buttonBlue mt-[20px] ' target='_blank' rel='noopener noreferrer'>
-                    Открыть в Google Maps
+                {
+  locale === 'ru'
+    ? "Открыть в Google Maps"
+    : locale === 'uz'
+      ? "Google Xaritalarda Korish"
+      : "Open in Google Maps"
+}
+
                 </Link>
             </div>
 

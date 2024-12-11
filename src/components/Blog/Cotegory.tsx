@@ -35,7 +35,16 @@ const CotegoryBlog: FC = () => {
 
     return (
         <div className='mt-[80px] 2xl:mt-[200px] px-[16px] 2xl:px-[50px] 4xl:px-[240px]'>
-            <p className='text-[24px] text-titleDark font-jost 2xl:text-[40px] uppercase'>Категории блога</p>
+            <p className='text-[24px] text-titleDark font-jost 2xl:text-[40px] uppercase'>
+                {
+                    locale === 'ru'
+                        ? "Категории блога"
+                        : locale === 'uz'
+                            ? "Blog kategoriyalari"
+                            : "Blog Categories"
+                }
+
+            </p>
             <div className='mt-[20px] 2xl:mt-[30px] flex flex-col 2xl:flex-row 2xl:flex-wrap gap-[20px] overflow-hidden'>
                 {cotegory.map((item, index) => (
                     <div key={index} className='relative h-[200px] w-full 2xl:w-[32%] bg-[#F7F8FA] 2xl:h-[320px] overflow-hidden'>
@@ -45,7 +54,14 @@ const CotegoryBlog: FC = () => {
                                 href={`/blog?name=${encodeURIComponent(item.name[locale])}&_id=${item._id}`}
                                 className='2xl:text-[20px] font-medium text-[#222E51] font-jost mt-1 flex flex-row items-center'
                             >
-                                Читать статьи <GrLinkNext className='ml-[5px]' />
+                                {
+                                    locale === 'ru'
+                                        ? "Читать статьи"
+                                        : locale === 'uz'
+                                            ? "Maqolalarni o‘qish"
+                                            : "Read articles"
+                                }
+                                <GrLinkNext className='ml-[5px]' />
                             </Link>
                         </div>
                         <div className='absolute bottom-[-20px] w-[200px] h-[200px] right-[0] 2xl:w-[257px] 2xl:h-[250px] '>

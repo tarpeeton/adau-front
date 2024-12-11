@@ -61,28 +61,37 @@ const About: FC = () => {
                         <p className='  mt-[20px] 2xl:mt-0 text-[15px] leading-[18px] 2xl:text-[20px] 2xl:leading-[28.9px] font-jost'>
 
                             {locale === 'ru'
-                                ? "Элитное объединение самых развивающихся и талантливых представителей индустрии"
+                                ? "Где начинающий дизайнер ищет знания? Очевидно — в дизайн-школе."
                                 : locale === 'uz'
-                                    ? "Sanoatning eng rivojlanayotgan va iqtidorli vakillarining elita birlashmasi"
-                                    : "An elite association of the most progressive and talented industry representatives"
+                                    ? "Yangi boshlovchi dizayner bilimni qayerdan izlaydi? Aniqki — dizayn maktabidan.  "
+                                    : "Where does a beginner designer seek knowledge? Obviously — in a design school.  "
                             }
                         </p>
                         <p className=' mt-[20px] 2xl:mt-[40px] text-[15px] leading-[18px] 2xl:text-[20px] 2xl:leading-[28.9px] font-jost'>
 
                             {locale === 'ru'
-                                ? "Куда идти начинающему дизайнеру за знаниями? «В дизайн-школу», - ответ очевиден. А вот вопрос: «Куда идти опытному дизайнеру или владельцу студии?» – многих поставит в ступор"
+                                ? "Но куда обратиться опытному дизайнеру или владельцу студии в поисках новых возможностей, поддержки и роста?"
                                 : locale === 'uz'
-                                    ? "Boshlovchi dizayner bilim olish uchun qayerga boradi? «Dizayn maktabiga», - bu aniq javob. Lekin, tajribali dizayner yoki studiya egasi qayerga borishi kerak? Bu savol ko'pchilikni hayratda qoldiradi."
-                                    : "Where should a beginner designer go to gain knowledge? 'To design school,' is the obvious answer. But the question: 'Where should an experienced designer or studio owner go?' leaves many puzzled."
+                                    ? "Lekin yangi imkoniyatlar, qo‘llab-quvvatlash va o‘sish uchun tajribali dizayner yoki studiya egasi qayerga murojaat qilishi mumkin?  "
+                                    : "But where can an experienced designer or a studio owner turn to find new opportunities, support, and growth?  "
                             }
                         </p>
                         <p className=' mt-[20px] 2xl:mt-[40px] text-[15px] leading-[18px] 2xl:text-[20px] 2xl:leading-[28.9px] font-jost'>
 
                             {locale === 'ru'
-                                ? "Именно поэтому мы взяли на себя ответственность по объединению самых активных участников индустрии дизайна интерьера и архитектуры, и создали экспертное объединение профессионалов, которые способны дать ответы на самые сложные вопросы"
+                                ? "Ответ — Ассоциация дизайнеров и архитекторов Узбекистана."
                                 : locale === 'uz'
-                                    ? "Aynan shu sababdan biz interyer dizayni va arxitektura industriyasining eng faol ishtirokchilarini birlashtirish mas'uliyatini o‘z zimmamizga oldik va eng murakkab savollarga javob bera oladigan mutaxassislar jamiyatini yaratdik."
-                                    : "That is why we took on the responsibility of bringing together the most active participants in the interior design and architecture industry and created an expert community of professionals capable of answering the most complex questions."
+                                    ? "Javob — O‘zbekiston Dizaynerlar va Arxitektorlar Assotsiatsiyasi.  "
+                                    : "The answer is — The Association of Designers and Architects of Uzbekistan.  "
+                            }
+                        </p>
+                        <p className=' mt-[20px] 2xl:mt-[40px] text-[15px] leading-[18px] 2xl:text-[20px] 2xl:leading-[28.9px] font-jost'>
+
+                            {locale === 'ru'
+                                ? "Мы объединяем самых активных и амбициозных профессионалов индустрии, чтобы вместе решать самые сложные задачи, обмениваться опытом и прокладывать путь к новым достижениям. Присоединившись к нашему сообществу, вы станете частью круга экспертов, которые формируют будущее дизайна и архитектуры."
+                                : locale === 'uz'
+                                    ? "Biz sohaning eng faol va intiluvchan mutaxassislarini birlashtiramiz, shunda birgalikda eng murakkab vazifalarni hal qilish, tajriba almashish va yangi yutuqlarga yo‘l ochish imkoniyatiga ega bo‘lamiz. Bizning hamjamiyatimizga qo‘shilishingiz orqali, siz dizayn va arxitektura kelajagini shakllantirayotgan ekspertlar doirasining bir qismiga aylanasiz.  "
+                                    : "We unite the most active and ambitious professionals in the industry to solve the most complex challenges together, exchange experience, and pave the way for new achievements. By joining our community, you become part of a circle of experts shaping the future of design and architecture. "
                             }
                         </p>
 
