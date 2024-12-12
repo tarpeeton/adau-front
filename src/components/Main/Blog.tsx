@@ -97,17 +97,17 @@ const Blog: FC = () => {
     return (
         <div className='mt-[80px] 2xl:mt-[200px]  px-[20px] 4xl:px-[240px] 2xl:px-[50px]'>
             <p className="text-[26px]  uppercase font-jost leading-[32px] 2xl:text-[45px] 2xl:leading-[59px]  ">
-            {locale === 'ru' 
-        ? "Блог" 
-        : locale === 'uz' 
-        ? "Blog" 
-        : "Blog"
-    }
+                {locale === 'ru'
+                    ? "Блог"
+                    : locale === 'uz'
+                        ? "Blog"
+                        : "Blog"
+                }
             </p>
 
             <div className='hidden 2xl:inline-block  border-b border-[#E4E4E4]  mt-[40px]'>
                 <div className='flex flex-row gap-[40px]'>
-                <button
+                    <button
                         onClick={() => setActiveFilter({ name: 'Все статьи', id: 'all-articles' })}
                         className={`pb-[12px] ${activeFilter.id === 'all-articles'
                             ? 'border-b-2 border-[#222E51] text-[#222E51]'
@@ -115,27 +115,27 @@ const Blog: FC = () => {
                             }`}
                     >
                         <p className='text-[22px] font-medium'>
-                        {locale === 'ru' 
-        ? "Все статьи" 
-        : locale === 'uz' 
-        ? "Barcha maqolalar" 
-        : "All Articles"
-    }
+                            {locale === 'ru'
+                                ? "Все статьи"
+                                : locale === 'uz'
+                                    ? "Barcha maqolalar"
+                                    : "All Articles"
+                            }
                         </p>
                     </button>
-                {blogCategories.map((item, index) => (
-                    <button
-                    onClick={() => setActiveFilter({ name: item.name[locale], id: item._id })}
-                    key={index}
-                    className={`${index !== 0 ? 'px-[30px] pt-0 pb-[12px] ' : 'pb-[12px]'
-                        }  ${activeFilter.id === item._id
-                            ? 'border-b-2 border-[#222E51] text-[#222E51]'
-                            : ' text-[#000000]'
-                        }`}
-                >
-                    <p className='text-[22px] font-medium'>{item.name[locale]}</p>
-                </button>
-                ))}
+                    {blogCategories.map((item, index) => (
+                        <button
+                            onClick={() => setActiveFilter({ name: item.name[locale], id: item._id })}
+                            key={index}
+                            className={`${index !== 0 ? 'px-[30px] pt-0 pb-[12px] ' : 'pb-[12px]'
+                                }  ${activeFilter.id === item._id
+                                    ? 'border-b-2 border-[#222E51] text-[#222E51]'
+                                    : ' text-[#000000]'
+                                }`}
+                        >
+                            <p className='text-[22px] font-medium'>{item.name[locale]}</p>
+                        </button>
+                    ))}
                 </div>
             </div>
 
@@ -149,24 +149,24 @@ const Blog: FC = () => {
                 </div>
             </button>
             {mobileActiveFilter && (
-              <div ref={filterRef}>
-              <p
-                  onClick={() => handleMobileFilterSelect('all-articles', 'Все статьи')}
-                  className='text-[15px] font-semibold font-jost text-[#222E51] w-full mt-[20px] flex flex-row justify-between pb-[13px] border-b border-b-[#222E51]'
-              >
-                  Все статьи
-              </p>
-              {blogCategories.map((item) => (
-                  <p
-                      key={item._id}
-                      onClick={() => handleMobileFilterSelect(item._id, item.name[locale])}
-                      className='text-[15px] font-semibold font-jost text-[#222E51] w-full mt-[20px] flex flex-row justify-between pb-[13px] border-b border-b-[#222E51]'
-                  >
-                      {item.name[locale]}
-                  </p>
-              ))}
+                <div ref={filterRef}>
+                    <p
+                        onClick={() => handleMobileFilterSelect('all-articles', 'Все статьи')}
+                        className='text-[15px] font-semibold font-jost text-[#222E51] w-full mt-[20px] flex flex-row justify-between pb-[13px] border-b border-b-[#222E51]'
+                    >
+                        Все статьи
+                    </p>
+                    {blogCategories.map((item) => (
+                        <p
+                            key={item._id}
+                            onClick={() => handleMobileFilterSelect(item._id, item.name[locale])}
+                            className='text-[15px] font-semibold font-jost text-[#222E51] w-full mt-[20px] flex flex-row justify-between pb-[13px] border-b border-b-[#222E51]'
+                        >
+                            {item.name[locale]}
+                        </p>
+                    ))}
 
-          </div>
+                </div>
             )}
 
             <div ref={blogContainerRef} className='mt-[20px] 2xl:mt-[41px] flex flex-col gap-[30px] 2xl:flex-row 2xl:gap-[20px]'>
@@ -181,11 +181,11 @@ const Blog: FC = () => {
 
                             <Link href={`/blog/${item.slug.current}`} className='text-[16px] mt-[8px] font-medium text-[#222E51] font-jost 2xl:text-[20px] flex flex-row items-center'>
                                 {locale === 'ru'
-                                ? "Читать статью"
-                                : locale === 'uz'
-                                  ? "Maqolani o'qish"
-                                  : "Read the article"
-                              }
+                                    ? "Читать статью"
+                                    : locale === 'uz'
+                                        ? "Maqolani o'qish"
+                                        : "Read the article"
+                                }
                                 <GrLinkNext className='ml-[8px]' />
                             </Link>
                         </div>
@@ -197,11 +197,11 @@ const Blog: FC = () => {
             <div className='w-full flex items-center justify-center mt-[40px] 2xl:mt-[60px]'>
                 <Link href='/blog' className='buttonBlue w-[60%] 2xl:w-[15%]'>
                     {locale === 'ru'
-                    ? "Все статьи"
-                    : locale === 'uz'
-                      ? "Barcha maqolalar"
-                      : "All Articles"
-                  }
+                        ? "Все статьи"
+                        : locale === 'uz'
+                            ? "Barcha maqolalar"
+                            : "All Articles"
+                    }
                 </Link>
             </div>
         </div>

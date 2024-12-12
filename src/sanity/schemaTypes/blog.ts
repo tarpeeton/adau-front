@@ -149,13 +149,7 @@ export default defineType({
                 { name: 'ru', type: 'string', title: 'Заголовок (Русский)' },
                 { name: 'en', type: 'string', title: 'Title (English)' },
               ],
-              validation: (Rule) =>
-                Rule.custom((fields: LanguageFields) => {
-                  if (!fields || !fields.uz || !fields.ru || !fields.en) {
-                    return 'Необходимо заполнить подзаголовок раздела на всех трёх языках';
-                  }
-                  return true;
-                }),
+              
             },
             {
               name: 'description',
@@ -167,13 +161,7 @@ export default defineType({
                 { name: 'ru', type: 'text', title: 'Описание (Русский)' },
                 { name: 'en', type: 'text', title: 'Description (English)' },
               ],
-              validation: (Rule) =>
-                Rule.custom((fields: LanguageFields) => {
-                  if (!fields || !fields.uz || !fields.ru || !fields.en) {
-                    return 'Необходимо заполнить содержание раздела на всех трёх языках';
-                  }
-                  return true;
-                }),
+              
             },
             {
               name: 'youtubeLink',

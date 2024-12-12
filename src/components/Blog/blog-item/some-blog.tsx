@@ -75,49 +75,49 @@ const SomeBlog: FC<IBlogItemProps> = ({ blog }) => {
                 </div>
                 <div className='2xl:mt-[20px] mt-[10px]'>
                     <p className='text-titleDark text-[22px] leading-[29px] 2xl:text-[40px] uppercase 2xl:leading-[57.8px]'>
-                        {blog.title[locale]}
+                        {blog?.title[locale]}
                     </p>
                     <p className='text-title80 mt-[10px] 2xl:mt-[8px] text-[14px] 2xl:text-[20px] 2xl:leading-[24px] '>
                         {formatDate(blog._createdAt)}
                     </p>
                 </div>
                 <div className='mt-[25px] 2xl:mt-[40px] h-[220px] 2xl:h-[500px]'>
-                    {blog?.mainImage.asset._ref && (
+                    {blog?.mainImage?.asset?._ref && (
                         <Image src={urlFor(blog?.mainImage.asset._ref).url()} alt='image-blog' width={700} height={600} quality={100} className='w-full h-full object-cover' />
                     )}
 
                 </div>
                 <div className='2xl:mt-[40px] mt-[25px]'>
                     <p className='2xl:text-[20px] text-[14px] leading-[18px] 2xl:leading-[24px] text-[#333333]'>
-                        {blog.description[locale]}
+                        {blog?.description[locale]}
                     </p>
                 </div>
                 <div className='mt-[20px] 2xl:mt-[60px] flex flex-col gap-[40px] 2xl:gap-[60px] '>
 
 
-                    {blog.additionalContent &&
-                        blog.additionalContent.length > 0 &&
-                        blog.additionalContent.map((item, index) => {
+                    {blog?.additionalContent &&
+                        blog?.additionalContent.length > 0 &&
+                        blog?.additionalContent.map((item, index) => {
                             // Проверяем, есть ли данные для отображения
-                            if (!item || (!item.title && !item.description && !item.youtubeLink)) {
+                            if (!item || (!item?.title && !item?.description && !item?.youtubeLink)) {
                                 return null; // Если пустой объект или все значения null, ничего не рендерим
                             }
 
                             return (
                                 <div key={index}>
                                     <div className="flex flex-col 2xl:gap-[15px]">
-                                        {item.title && (
+                                        {item?.title && (
                                             <p className="text-[18px] 2xl:text-[25px] 2xl:leading-[30px] font-[454] text-[#333333]">
-                                                {item.title[locale]}
+                                                {item?.title[locale]}
                                             </p>
                                         )}
-                                        {item.description && (
+                                        {item?.description && (
                                             <p className="mt-[5px] text-[15px] leading-[18px] 2xl:text-[20px] 2xl:leading-[25px] font-medium text-[#333333]">
-                                                {item.description[locale]}
+                                                {item?.description[locale]}
                                             </p>
                                         )}
                                     </div>
-                                    {item.youtubeLink && (
+                                    {item?.youtubeLink && (
                                         <div className="2xl:h-[550px] h-[200px] mt-[25px] 2xl:mt-[60px]">
                                             {isClient && (
                                                 <ReactPlayer
