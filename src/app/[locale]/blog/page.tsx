@@ -2,7 +2,7 @@ import BlogConatiner from '@/components/Blog/Main';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Blog', 
+  title: 'Blogs', 
   description: '',
   keywords: '', 
 };

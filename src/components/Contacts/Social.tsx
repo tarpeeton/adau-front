@@ -18,10 +18,10 @@ import useLocale from '@/hooks/useLocale'
 
 
 const DataSocialsLinks = [
-    { id: 1, title: 'Instagram', forCounter: 'instagram', name: 'adau_uz', link: 'https://www.instagram.com/adau_uz', img: Instagram },
+    { id: 1, title: 'Instagram', forCounter: 'instagram', name: 'adau_uz', link: 'https://www.instagram.com/adau.uz?igsh=MTQyY25lZzd2aTQybA%3D%3D&utm_source=qr', img: Instagram },
     { id: 2, title: 'Facebook', forCounter: '', name: 'adau_uz', link: 'https://www.facebook.com/adau_uz', img: Facebook },
     // { id: 3, title: 'LinkedIn',  forCounter: '', name: 'adau_uz', link: 'https://www.linkedin.com/in/adau_uz', img: LinkedIn },
-    { id: 4, title: 'Telegram', forCounter: 'telegram', name: 'adau_uz', link: 'https://t.me/adau_uz', img: Telegram },
+    { id: 4, title: 'Telegram', forCounter: 'telegram', name: 'adau_uz', link: 'https://t.me/ADAUdizaynArxitektura', img: Telegram },
 ]
 
 

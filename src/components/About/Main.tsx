@@ -15,23 +15,23 @@ import SomeForm from './Form'
 import { client } from "@/sanity/lib/client";
 
 const About: FC = () => {
-    const [timeLineData , setTimeLineData] = useState([])
+    // const [timeLineData , setTimeLineData] = useState([])
     
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const banner =  await client.fetch(
-            `*[_type == "timeline"]{
-            year,description,plan ,position,_rev
-            }`
-          )
-          setTimeLineData(banner);
-        } catch (error) {
-          console.debug(error)
-        }
-      }
-      fetchData()
-    } , [])
+    // useEffect(() => {
+    //   const fetchData = async () => {
+    //     try {
+    //       const banner =  await client.fetch(
+    //         `*[_type == "timeline"]{
+    //         year,description,plan ,position,_rev
+    //         }`
+    //       )
+    //       setTimeLineData(banner);
+    //     } catch (error) {
+    //       console.debug(error)
+    //     }
+    //   }
+    //   fetchData()
+    // } , [])
 
 
 
