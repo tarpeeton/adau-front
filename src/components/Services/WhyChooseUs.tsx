@@ -59,7 +59,7 @@ const WhyChooseUs: FC<IWhyChooseUs> = ({ title, project }) => {
             <div className='flex flex-col'>
                 {/* title and description */}
                 <div>
-                    <p className='text-[26px] uppercase leading-[32px] 2xl:text-[45px] 2xl:leading-[59px] text-[#000000] font-jost'>
+                    <p className='text-[26px] uppercase leading-[32px] 2xl:text-[45px] 2xl:leading-[59px] text-[#000000] '>
                         {locale === 'ru'
                             ? <>Почему клиенты <br className='2xl:hidden' /> выбирают нас</>
                             : locale === 'uz'
@@ -69,7 +69,7 @@ const WhyChooseUs: FC<IWhyChooseUs> = ({ title, project }) => {
 
 
                     </p>
-                    <p className='text-[15px] leading-[18px] 2xl:text-[20px] 2xl:leading-[24px] mt-[12px] text-[#414141] font-jost 2xl:mt-[15px]'>
+                    <p className='text-[15px] leading-[18px] 2xl:text-[20px] 2xl:leading-[24px] mt-[12px] text-[#414141]  2xl:mt-[15px]'>
                         {locale === 'ru'
                             ? "Мы объединяем опыт и креативные решения. Наши клиенты выбирают нас за качество, надежность и внимание к их уникальным потребностям."
                             : locale === 'uz'
@@ -79,7 +79,7 @@ const WhyChooseUs: FC<IWhyChooseUs> = ({ title, project }) => {
                     </p>
                 </div>
                 {/* CARD */}
-                <div className='flex flex-col 2xl:flex-row mt-[20px] 2xl:mt-[50px] gap-[20px]'>
+                <div className=' 2xl:mt-[50px]  grid grid-cols-1 slg:grid-cols-2 2xl:grid-cols-4 mt-[20px] gap-4'>
                     {data.map((item, index) => (
                         <div
                             key={index}
@@ -87,14 +87,14 @@ const WhyChooseUs: FC<IWhyChooseUs> = ({ title, project }) => {
                         >
                             {/* NUMBER */}
                             <div>
-                                <p className='text-[26px] leading-[32px] 2xl:text-[45px] 2xl:leading-[59px] font-jost'>{item.number}</p>
+                                <p className='text-[26px] leading-[32px] 2xl:text-[45px] 2xl:leading-[59px] '>{item.number}</p>
                             </div>
                             {/* INFO */}
                             <div className='mt-[40px] 2xl:mt-0 2xl:h-[140px]'>
-                                <p className="text-[22px] leading-[29px] uppercase 2xl:text-[30px] 2xl:leading-[40px] font-jost">
+                                <p className="text-[22px] leading-[29px] uppercase 2xl:text-[30px] 2xl:leading-[40px] ">
                                     {getTitle(item)}
                                 </p>
-                                <p className='text-[15px] leading-[18px] 2xl:text-[20px] 2xl:leading-[24px] font-jost mt-[8px] 2xl:mt-[10px]'>
+                                <p className='text-[15px] leading-[18px] 2xl:text-[20px] 2xl:leading-[24px]  mt-[8px] 2xl:mt-[10px]'>
                                     {getDescription(item)}
                                 </p>
                             </div>

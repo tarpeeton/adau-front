@@ -1,5 +1,5 @@
 'use client'
-import { FC , useState } from 'react'
+import { FC, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/navigation'
@@ -10,9 +10,7 @@ import ContactUs from '../Modal/contacts-modal'
 import useSwiperNavigation from '@/hooks/useSwiperNavigation'
 import Image from 'next/image'
 
-// ICON
-import { GrLinkNext } from "react-icons/gr"
-import { GrLinkPrevious } from "react-icons/gr"
+
 
 // Image
 import ServiceBanner from '@/public/serviceBanner.jpg'
@@ -38,15 +36,15 @@ const localizedText = {
       "ADAU" strives to create open and trusting dialogue with its Clients and Partners, resulting in successful and effective implementation of the set goals in practice.\n
       We firmly believe that success in business is equally based on professionalism and moral principles of management and employees. Each employee of the Company fully appreciates their personal responsibility for the quality of implementation of each project. We are not striving for short-term profit; our goal is the long-term successful development of the Company and Partnership. Our resources are your opportunities for promotion within our country.
     `,
-  };
-  
-  
-  
+};
+
+
+
 
 
 const BannerService: FC = () => {
-    const { swiperRef, handlePrev, handleNext } = useSwiperNavigation()
-    const [open , setOpen] = useState(false)
+    const { swiperRef } = useSwiperNavigation()
+    const [open, setOpen] = useState(false)
     const locale = useLocale()
     const content = localizedText[locale] || localizedText.en; // Agar til topilmasa, ingliz tilini qo'llaymiz
 
@@ -59,24 +57,24 @@ const BannerService: FC = () => {
                 <div className='px-[16px] 2xl:px-0 2xl:w-[45%] 2xl:flex 2xl:flex-col 2xl:justify-center 2xl:items-center'>
                     <div className='2xl:w-[70%]'>
                         <p className='text-[26px] font-jost uppercase 2xl:text-[40px] 3xl:text-[50px]'>
-                        {locale === 'ru' ? "Наша деятельность" : locale === 'uz' ? "Bizning faoliyatimiz" : "Our Activities"}
+                            {locale === 'ru' ? "Наша деятельность" : locale === 'uz' ? "Bizning faoliyatimiz" : "Our Activities"}
 
                         </p>
-                        <p className='mt-[16px] text-[15px] leading-[18px] 2xl:w-full font-normal 2xl:text-[18px] 3xl:text-[20px] 2xl:leading-[20px] 2xl:mt-[20px]'>
-                        {content.split("\n").map((paragraph, index) => (
-                <p key={index} className="mb-[10px]">
-                  {paragraph.trim()}
-                </p>
-              ))}
+                        <div className='mt-[16px] text-[15px] leading-[18px] 2xl:w-full font-normal 2xl:text-[18px] 3xl:text-[20px] 2xl:leading-[20px] 2xl:mt-[20px]'>
+                            {content.split("\n").map((paragraph, index) => (
+                                <div key={index} className="mb-[10px]">
+                                    {paragraph.trim()}
+                                </div>
+                            ))}
+                        </div>
 
-                        </p>
                         <button onClick={handleModal} className='mt-[20px] buttonBlue w-[60%] 2xl:mt-[30px]'>
-                            
+
                             {locale === 'ru' ? "Связаться с нами" : locale === 'uz' ? "Biz bilan bog'lanish" : "Contact us"}
                         </button>
                     </div>
                 </div>
-                
+
                 <ContactUs visible={open} close={handleModal} />
 
                 {/* SLIDER */}
@@ -102,7 +100,7 @@ const BannerService: FC = () => {
                                     <p className='text-[20px] 2xl:text-[30px] text-titleWhite font-jost'>Семинар <br />«Архитекторы будущего»</p>
                                     <p className='text-[15px] 2xl:text-[20px] 2xl:leading-[20px] w-[90%] text-[#D9D9D9] leading-[15px] mt-[8px] font-jost'>Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit consectetur.</p>
                                 </div> */}
-                              
+
                                 <Image src={ServiceBanner} width={800} height={850} quality={100} alt='Image banner Slider' className='w-full h-full object-cover' />
                             </div>
                         </SwiperSlide>

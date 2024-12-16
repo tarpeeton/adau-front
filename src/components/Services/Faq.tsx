@@ -15,7 +15,7 @@ interface FaqDataInterface {
 }
 
 const FaqComponent: FC = () => {
-    const [activeId, setActiveId] = useState<number | null>(0);
+    const [activeId, setActiveId] = useState<number | null>(null);
     const [data, setData] = useState<FaqDataInterface[] | []>([])
     const locale = useLocale()
 
@@ -51,7 +51,7 @@ const FaqComponent: FC = () => {
 
     return (
         <div className='mt-[80px] 2xl:mt-[200px] px-[16px] 2xl:px-[50px] 4xl:px-[240px]'>
-            <p className='text-[26px]  uppercase leading-[32px] 2xl:text-[45px] 2xl:leading-[59px] text-[#000000] font-jost'>
+            <p className='text-[26px]  uppercase leading-[32px] 2xl:text-[45px] 2xl:leading-[59px] text-[#000000] '>
             {locale === 'ru' 
         ? "Часто задаваемые вопросы" 
         : locale === 'uz' 
@@ -68,7 +68,7 @@ const FaqComponent: FC = () => {
                         >
 
                             <div className='w-[82%] text-left'>
-                                <p className='text-[18px] text-[#414141] 2xl:text-[#121212] font-jost leading-[22px] font-medium  2xl:text-[25px] 2xl:leading-[30px] '>{item.question[locale]}</p>
+                                <p className='text-[18px] text-[#414141] 2xl:text-[#121212]  leading-[22px] font-medium  2xl:text-[25px] 2xl:leading-[30px] '>{item.question[locale]}</p>
                             </div>
                             <div>
                                 <IoIosArrowDown
@@ -77,7 +77,7 @@ const FaqComponent: FC = () => {
                             </div>
                         </button>
                         {activeId === index && (
-                            <div className='mt-[10px] font-jost  2xl:text-[20px] mx-auto text-[15px] text-[#414141] leading-[20px]'>
+                            <div className='mt-[10px]   2xl:text-[20px] mx-auto text-[15px] text-[#414141] leading-[20px]'>
                                 {item.answer[locale]}
                             </div>
                         )}

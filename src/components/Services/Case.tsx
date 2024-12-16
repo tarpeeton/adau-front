@@ -49,7 +49,7 @@ const ServiceCase: FC = () => {
 
   return (
     <div className='mt-[80px] 2xl:mt-[200px]  px-[20px] 4xl:px-[240px] 2xl:px-[50px]'>
-      <p className="text-[26px] font-jost leading-[32px] 2xl:text-[45px] 2xl:leading-[59px]  ">
+      <p className="text-[26px]  leading-[32px] 2xl:text-[45px] 2xl:leading-[59px]  ">
         Наши <br className='2xl:hidden' /> успешные кейсы
       </p>
 
@@ -96,12 +96,12 @@ const ServiceCase: FC = () => {
               </div>
               <div className='mt-[20px] 2xl:mt-[25px]'>
 
-                <p className='text-[20px] leading-[28.9px] font-jost font-medium 2xl:text-[35px] 2xl:leading-[]'>{item.title[locale]}</p>
-                <p className='text-[15px] text-[#414141] font-jost leading-[18px] 2xl:text-[20px] 2xl:leading-[24px] 2xl:w-[90%] 2xl:mt-[8px]'>
+                <p className='text-[20px] leading-[28.9px]  font-medium 2xl:text-[35px] 2xl:leading-[]'>{item.title[locale]}</p>
+                <p className='text-[15px] text-[#414141]  leading-[18px] 2xl:text-[20px] 2xl:leading-[24px] 2xl:w-[90%] 2xl:mt-[8px]'>
                   {item.description[locale].length > 73 ? item.description[locale].slice(0, 73) + '...' : item.description[locale]}
                 </p>
 
-                <Link  href={`/cases/${item.slug.current}`} className='mt-[10px] 2xl:mt-[20px] flex items-center gap-[5px] text-[16px] leading-6 font-medium font-jost text-[#222E51] 2xl:text-[20px] 2xl:leading-6'>
+                <Link  href={`/cases/${item.slug.current}`} className='mt-[10px] 2xl:mt-[20px] flex items-center gap-[5px] text-[16px] leading-6 font-medium  text-[#222E51] 2xl:text-[20px] 2xl:leading-6'>
                   Подробнее
                   <GrLinkNext />
                 </Link>

@@ -45,7 +45,7 @@ const MoreService: FC = () => {
 
     return (
         <div className='mt-[80px] 2xl:mt-[200px] 2xl:px-[50px] px-[16px] 4xl:px-[240px]'>
-            <p className='text-[26px] uppercase font-jost leading-[32px] 2xl:text-[45px] 2xl:leading-[59px]'>
+            <p className='text-[26px] uppercase  leading-[32px] 2xl:text-[45px] 2xl:leading-[59px]'>
                 {locale === 'ru'
                     ? "Дополнительные услуги"
                     : locale === 'uz'
@@ -71,7 +71,7 @@ const MoreService: FC = () => {
                     {data.map((item, index) => (
                         <SwiperSlide key={index}>
                             <div className="py-[24px] px-[20px] border border-[#E4E4E4]">
-                                <p className="text-[22px] w-[50%] leading-[29px] text-titleDark uppercase font-jost">
+                                <p className="text-[22px] w-[50%] leading-[29px] text-titleDark uppercase ">
                                     {item.title[locale]}
                                 </p>
                                 <p className="text-[15px] leading-[18px] text-title80 mt-[10px]">
@@ -90,12 +90,12 @@ const MoreService: FC = () => {
                 {data.map((item, index) => (
                     <div key={index} className='border-t border-t-[#E4E4E4] py-[40px] flex flex-row flex-nowrap justify-between items-center'>
                         <div className='w-[25%]'>
-                            <p className='w-[80%] uppercase text-[30px] leading-[40px] font-jost'>
+                            <p className='w-[80%] uppercase text-[30px] leading-[40px] '>
                                 {item.title[locale]}
                             </p>
                         </div>
                         <div className='w-[33%]'>
-                            <p className=' text-[20px] leading-[24px] text-title80 font-jost'>
+                            <p className=' text-[20px] leading-[24px] text-title80 '>
                                 {item.description[locale]}</p>
                         </div>
                         <div className='w-[25%] flex flex-row justify-end'>
