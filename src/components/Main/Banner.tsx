@@ -85,7 +85,7 @@ const Banner: FC = () => {
                                 <div className='flex flex-col mb-[25px] 2xl:mb-[40px] 2xl:w-[30%]'>
                                     <p className='mb-[20px] 2xl:mb-[30px] text-[15px] 2xl:text-[20px] leading-[18px] 2xl:leading-[28.9px] font-jost'>{item.description[locale]}</p>
                                     <div className='flex flex-row gap-[10px]'>
-                                        <button onClick={handleOpenModal} className='buttonBlue'>
+                                        <button onClick={handleOpenModal} className='buttonBlue font-bold'>
                                             {locale === 'ru'
                                                 ? "Вступить в ассоциацию"
                                                 : locale === 'uz'
@@ -93,7 +93,7 @@ const Banner: FC = () => {
                                                     : "Join the Association"
                                             }
                                         </button>
-                                        <button onClick={handleOpenModal} className='borderedButton'>
+                                        <button onClick={handleOpenModal} className='borderedButton font-bold'>
                                             {locale === 'ru'
                                                 ? "Стать партнером"
                                                 : locale === 'uz'
