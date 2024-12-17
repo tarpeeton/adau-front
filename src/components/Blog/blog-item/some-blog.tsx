@@ -92,7 +92,7 @@ const SomeBlog: FC<IBlogItemProps> = ({ blog }) => {
                         {blog?.description[locale]}
                     </p>
                 </div>
-                <div className='mt-[20px] 2xl:mt-[60px] flex flex-col gap-[40px] 2xl:gap-[60px] '>
+                <div className='mt-[10px] 2xl:mt-[30px] flex flex-col gap-[10px] 2xl:gap-[20px] '>
 
 
                     {blog?.additionalContent &&
@@ -112,7 +112,7 @@ const SomeBlog: FC<IBlogItemProps> = ({ blog }) => {
                                             </p>
                                         )}
                                         {item?.description && (
-                                            <p className="mt-[5px] text-[15px] leading-[18px] 2xl:text-[20px] 2xl:leading-[25px] font-medium text-[#333333]">
+                                            <p className="mt-[5px] text-[15px] leading-[18px] 2xl:text-[20px] 2xl:leading-[25px] text-[#333333]">
                                                 {item?.description[locale]}
                                             </p>
                                         )}
