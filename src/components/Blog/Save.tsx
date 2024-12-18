@@ -67,6 +67,7 @@ const SavedBlogs: FC = () => {
 
 
 
+    if (!savedBlogs || savedBlogs.length === 0) return null;
 
     return (
         <div className="mt-[80px] 2xl:mt-[200px] py-[40px] 2xl:py-[100px] px-[20px] 4xl:pl-[240px] 2xl:px-[50px]">

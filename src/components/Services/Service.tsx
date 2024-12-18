@@ -26,7 +26,7 @@ const Service: FC = () => {
                 <div className='flex flex-col gap-[40px] 2xl:flex-row 2xl:flex-wrap 2xl:gap-[2%]'>
                     <div className='2xl:w-[32%]'>
                         <Image src={One} alt='service image' width={467} height={450} quality={100} className='object-cover h-[220px] 2xl:h-[400px] ' />
-                        <div className='2xl:h-[210px] mt-[20px] 2xl:mt-[25px] 2xl:relative 2xl:pb-[80px]'>
+                        <div className=' mt-[20px] 2xl:mt-[25px] 2xl:relative '>
                             <p className='text-[22px] leading-[29px]  text-titleDark 2xl:text-[30px] 2xl:leading-[40px]'>
                                 {locale === 'ru'
                                     ? "Организация семинаров и тренингов"
@@ -48,7 +48,7 @@ const Service: FC = () => {
 
                     <div className='2xl:w-[32%]'>
                         <Image src={Two} alt='service image' width={467} height={450} quality={100} className='object-cover h-[220px] 2xl:h-[400px]' />
-                        <div className='2xl:h-[210px] mt-[20px] 2xl:mt-[25px] 2xl:relative 2xl:pb-[80px]'>
+                        <div className=' mt-[20px] 2xl:mt-[25px] 2xl:relative '>
                             <p className='text-[22px] leading-[29px]  text-titleDark 2xl:text-[30px] 2xl:leading-[40px]'>
                                 {locale === 'ru'
                                     ? "Консультации по дизайну"
@@ -70,7 +70,7 @@ const Service: FC = () => {
 
                     <div className='2xl:w-[32%]'>
                         <Image src={Three} alt='service image' width={467} height={450} quality={100} className='object-cover h-[220px] 2xl:h-[400px]' />
-                        <div className='2xl:h-[210px] mt-[20px] 2xl:mt-[25px] 2xl:relative 2xl:pb-[80px]'>
+                        <div className=' mt-[20px] 2xl:mt-[25px] 2xl:relative '>
                             <p className='text-[22px] leading-[29px]  text-titleDark 2xl:text-[30px] 2xl:leading-[40px]'>
                                 {locale === 'ru'
                                     ? "Разработка интерьеров"

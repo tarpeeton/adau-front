@@ -3,11 +3,12 @@
 import { FC, useEffect, useState } from 'react'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import {Autoplay} from "swiper/modules"
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
-// ADMIN
+// ADMIN`
 import { client } from "@/sanity/lib/client"
 import { urlFor } from '@/sanity/lib/image'
 
@@ -75,8 +76,12 @@ image}`)
                     spaceBetween={10}
                     slidesPerView={1}
                     speed={1000}
-                    autoplay={{ delay: 2000, disableOnInteraction: false }}
-                    loop={false}
+                    autoplay={{
+                        delay: 4500,
+                        disableOnInteraction: false,
+                    }}
+                    modules={[Autoplay]}
+                    loop={true}
                     breakpoints={{
                         1000: {
                             slidesPerView: 3,
@@ -91,7 +96,7 @@ image}`)
                                 <div className='mt-[30px]'>
                                     <p className='text-[15px] 2xl:text-[20px] font-jost text-[#222E51]'>{item.occupation[locale]}</p>
                                     <p className='text-[22px] 2xl:text-[30px] font-jost text-[#222E51] font-medium'>{item.name[locale]}</p>
-                                    <p className='text-[15px] 2xl:text-[20px] font-jost leading-[18px] text-[#414141] mt-[8px] 2xl:mt-[10px]'>
+                                    <p className='text-[15px] 2xl:text-[20px] font-jost leading-[18px]  2xl:leading-[25px] text-[#414141] mt-[8px] 2xl:mt-[10px]'>
                                         {item.description[locale]}
                                     </p>
                                 </div>

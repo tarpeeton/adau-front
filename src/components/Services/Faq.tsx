@@ -77,7 +77,7 @@ const FaqComponent: FC = () => {
                             </div>
                         </button>
                         {activeId === index && (
-                            <div className='mt-[10px]   2xl:text-[20px] mx-auto text-[15px] text-[#414141] leading-[20px]'>
+                            <div className='mt-[10px]   2xl:text-[20px] mx-auto text-[15px] text-[#414141] leading-[20px] 2xl:leading-[25px]'>
                                 {item.answer[locale]}
                             </div>
                         )}

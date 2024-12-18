@@ -77,12 +77,12 @@ const Header = ({ locale }: { locale: string }) => {
           <Link href='/about' className='text-[20px] leading-[28.9px] text-titleDark flex items-center gap-[5px] hover:text-[#222E51] transition ease-in-out duration-300'>
             {t('about')}
 
-            <IoIosArrowDown
+            {/* <IoIosArrowDown
               size={20}
               className={`text-[#222E51] mt-[3px] transition-transform duration-300 ${openDropdown ? 'rotate-180' : ''}`}
-            />
+            /> */}
           </Link>
-          {openDropdown && (
+          {/* {openDropdown && (
             <div className='absolute top-full left-[-15px] mt-2 bg-white shadow-lg rounded-lg z-10 w-[200px]'>
               <ul>
                 <li>
@@ -97,18 +97,24 @@ const Header = ({ locale }: { locale: string }) => {
                 </li>
               </ul>
             </div>
-          )}
+          )} */}
         </div>
 
         <Link href='/services' className='text-[20px] leading-[28.9px] text-titleDark hover:text-[#222E51] transition ease-in-out duration-300'>
           {t('service')}
         </Link>
+        <Link href='/blog' className='text-[20px] leading-[28.9px] text-titleDark hover:text-[#222E51] transition ease-in-out duration-300'>
+          {t('blog')}
+        </Link>
+        <Link href='/contacts' className='text-[20px] leading-[28.9px] text-titleDark hover:text-[#222E51] transition ease-in-out duration-300'>
+        {t('contact')}
+        </Link>
         {/* <Link href='/project' className='text-[20px] leading-[28.9px] text-titleDark hover:text-[#222E51] transition ease-in-out duration-300'>
           {t('project')}
         </Link> */}
-        <Link href='/seminar' className='text-[20px] leading-[28.9px] text-titleDark hover:text-[#222E51] transition ease-in-out duration-300'>
+        {/* <Link href='/seminar' className='text-[20px] leading-[28.9px] text-titleDark hover:text-[#222E51] transition ease-in-out duration-300'>
           {t('seminar')}
-        </Link>
+        </Link> */}
 
       </div>
 
@@ -147,13 +153,13 @@ const Header = ({ locale }: { locale: string }) => {
                 {/* <Link onClick={handleClickMenu} href='/project' className='text-[20px] leading-[28.9px] text-titleDark hover:text-[#222E51] transition ease-in-out duration-300 p-[20px]'>
                   {t('project')}
                 </Link> */}
-                <Link onClick={handleClickMenu} href='/seminar' className='text-[20px] leading-[28.9px] text-titleDark hover:text-[#222E51] transition ease-in-out duration-300 p-[20px]'>
+                {/* <Link onClick={handleClickMenu} href='/seminar' className='text-[20px] leading-[28.9px] text-titleDark hover:text-[#222E51] transition ease-in-out duration-300 p-[20px]'>
                   {t('seminar')}
-                </Link>
+                </Link> */}
               </div>
 
 
-              <div className='flex flex-col gap-[10px] px-[20px] absolute bottom-[20px]'>
+              <div className='flex flex-col gap-[10px] px-[20px] absolute bottom-[40px]'>
                 <div onClick={handleContacsSwitcher} className='borderedButton cursor-pointer text-center flex items-center justify-center'>
                   {tButtons('partnerADD')}
                   <Image src={handleshake} width={21} height={15} quality={100} alt='Handle SHake' className=' object-contain w-[21px] h-[15px] mt-[3px]' />

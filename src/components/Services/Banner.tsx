@@ -60,7 +60,7 @@ const BannerService: FC = () => {
                             {locale === 'ru' ? "Наша деятельность" : locale === 'uz' ? "Bizning faoliyatimiz" : "Our Activities"}
 
                         </p>
-                        <div className='mt-[16px] text-[15px] leading-[18px] 2xl:w-full font-normal 2xl:text-[18px] 3xl:text-[20px] 2xl:leading-[20px] 2xl:mt-[20px]'>
+                        <div className='mt-[16px] text-[15px] leading-[18px] 2xl:w-full font-normal 2xl:text-[16px] 3xl:text-[18px] 2xl:leading-[25px] 2xl:mt-[20px]'>
                             {content.split("\n").map((paragraph, index) => (
                                 <div key={index} className="mb-[10px]">
                                     {paragraph.trim()}

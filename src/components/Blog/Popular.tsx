@@ -130,7 +130,7 @@ additionalContent
     }
 
 
-    console.log(filteredBlogData, 'filteredBlogData')
+    if (!filteredBlogData || filteredBlogData.length === 0) return null;
 
     return (
         <div className='mt-[80px] 2xl:mt-[200px]  px-[20px] 4xl:px-[240px] 2xl:px-[50px]'>

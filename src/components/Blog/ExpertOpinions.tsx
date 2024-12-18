@@ -67,6 +67,8 @@ const ExpertOpinions: FC = () => {
     const handleShowLess = () => {
         setSliceNumber(9);
     };
+
+    if (!expertOpinion || expertOpinion.length === 0) return null;
     // expert
     return (
         <div className='mt-[80px] 2xl:mt-[200px] px-[16px] 2xl:px-[50px] 4xl:px-[240px]'>
