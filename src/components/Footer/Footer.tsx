@@ -179,7 +179,7 @@ const Footer: FC = () => {
             <div className='flex flex-row justify-between items-center px-[16px] 2xl:px-[50px] 4xl:px-[240px]'>
 
                 <div>
-                    <p className='text-[14px] 2xl:text-[18px] font-jost text-[#222E51]'> 2024 ADAU.<br className='2xl:hidden' /> </p>
+                    <p className='text-[14px] 2xl:text-[18px] font-jost text-[#222E51]'> 2024 ADAU<br className='2xl:hidden' /> </p>
 
                 </div>
 

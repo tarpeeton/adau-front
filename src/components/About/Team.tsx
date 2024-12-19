@@ -16,6 +16,11 @@ import { ITeamMember } from '@/interface/ITeam/team'
 import useLocale from '@/hooks/useLocale'
 import ContactUs from '@/components/Modal/contacts-modal'
 
+import SwiperCore from 'swiper'; // Импортируем SwiperCore
+
+SwiperCore.use([Autoplay]);
+
+
 const Team: FC = () => {
     const [teamData, setTeamData] = useState<ITeamMember[] | []>([])
     const locale = useLocale()
@@ -79,9 +84,10 @@ image}`)
                     autoplay={{
                         delay: 4500,
                         disableOnInteraction: false,
+                        waitForTransition: false, // Обеспечивает запуск без ожидания взаимодействия
                     }}
                     modules={[Autoplay]}
-                    loop={true}
+                    loop={false}
                     breakpoints={{
                         1000: {
                             slidesPerView: 3,
