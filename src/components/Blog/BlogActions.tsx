@@ -55,7 +55,7 @@ const BlogActions: FC<IBlogActionsProps> = ({ onClick }) => {
                     : "Subscribe to the blog"
               }
             </button>
-            <Link href='tel:+998339394070' className='borderedButtonWhite 2xl:w-[46%] mt-[12px] 2xl:mt-0 flex items-center justify-center'>
+            <Link href='tel:+998781136071' className='borderedButtonWhite 2xl:w-[46%] mt-[12px] 2xl:mt-0 flex items-center justify-center'>
               {
                 locale === 'ru'
                   ? "Связаться с редакцией"

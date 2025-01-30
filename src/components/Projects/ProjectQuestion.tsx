@@ -124,7 +124,7 @@ const ProjectQuestion: FC = () => {
                     </p>
                     <div className=' hidden 2xl:block mt-[30px] relative border-t border-t-[#636F93]'>
                         <div className='absolute top-[40px]  z-50'>
-                            <p className='text-[25px] text-white font-jost'>+998 90 999 99 99</p>
+                            <p className='text-[25px] text-white font-jost'>+998 78 113 60 71</p>
                             <p className='text-[25px] text-white font-jost mt-[4px]'>adauassatsion@gmai.com</p>
                             <p className='text-[25px] text-white font-jost mt-[4px]'>tashkent , ul , chilan</p>
                         </div>

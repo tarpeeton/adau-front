@@ -74,7 +74,7 @@ const Footer: FC = () => {
 
                         </button>
                     </Link> */}
-                    <Link href="tel:+998773736999" className='w-[40px] h-[40px] flex items-center justify-center rounded-full border border-[#222E51] text-[#222E51]'>
+                    <Link href="tel:+998781136071" className='w-[40px] h-[40px] flex items-center justify-center rounded-full border border-[#222E51] text-[#222E51]'>
                         <button
                             onClick={(e) => {
                                 e.stopPropagation() // Prevents interfering with the link navigation
@@ -160,7 +160,7 @@ const Footer: FC = () => {
                                 locale === 'uz' ? "Toshkent shahri, Olmazor tumani, Nurafshon ko'chasi, 50/7 uy" :
                                     "50/7 Nurafshon street, Almazar district, Tashkent city"}
                         </p>
-                        <Link href="tel:+998773736999">
+                        <Link href="tel:+998781136071">
                             <button
                                 onClick={(e) => {
                                     e.stopPropagation() // Prevents interfering with the link navigation
@@ -168,7 +168,7 @@ const Footer: FC = () => {
                                 }}
                                 className='text-[15px] mt-[10px] 2xl:text-[20px] font-normal text-titleDark font-jost'
                             >
-                                +998 77 373 69 99
+                              +998 78 113 60 71
                             </button>
                         </Link>
                         <Link href="mailto:adau.uzbekistan@gmail.com?subject=Subject%20Here&body=Message%20Here" className='text-[15px] mt-[10px] 2xl:text-[20px] font-normal text-titleDark font-jost'>adau.uzbekistan@gmail.com</Link>

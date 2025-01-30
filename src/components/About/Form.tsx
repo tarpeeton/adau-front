@@ -138,7 +138,7 @@ const SomeForm: FC<ISomeFormProps> = ({ isTextOpen }) => {
                     <div className=' hidden 2xl:block mt-[30px] relative border-t border-t-[#636F93]' >
                         <div className='absolute top-[40px]  z-50'>
                             <p className='text-[25px] text-white font-jost'>
-                                +998 77 373 69 99
+                            +998 78 113 60 71
                             </p>
                             <p className='text-[25px] text-white font-jost mt-[4px]'>adau.uzbekistan@gmail.com</p>
                             <p className='text-[25px] text-white font-jost mt-[4px]'>
@@ -351,7 +351,7 @@ const SomeForm: FC<ISomeFormProps> = ({ isTextOpen }) => {
                     <div className='mt-[30px] relative border-t border-t-[#636F93] 2xl:hidden'>
                         <div className='absolute top-[20px]  z-50'>
                             <p className='text-[15px] text-white font-jost'>
-                                +998 77 373 69 99</p>
+                            +998 78 113 60 71</p>
                             <p className='text-[15px] text-white font-jost mt-[4px]'>adau.uzbekistan@gmail.com</p>
                             <p className='text-[15px] text-white font-jost mt-[4px]'>
                             {
