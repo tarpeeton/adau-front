@@ -52,6 +52,7 @@ interface IActiveFilter {
 const NewBlogs: FC = () => {
     const [mobileActiveFilter, setMobileActiveFilter] = useState(false)
     const locale = useLocale()
+    console.log("SALOM ERROR FIXED XSS ATTACK")
 
     const [activeFilter, setActiveFilter] = useState<IActiveFilter>({
         id: 'all-articles',
