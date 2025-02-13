@@ -72,27 +72,38 @@ const Blog: FC = () => {
         ? allBlogs
         : allBlogs.filter(blog => blog.category?._ref === activeFilter.id);
 
-    useEffect(() => {
-        if (mobileActiveFilter && filterRef.current) {
-            gsap.fromTo(
-                filterRef.current.children,
-                { opacity: 0, y: -20 },
-                { opacity: 1, y: 0, duration: 0.3, stagger: 0.1, ease: "power2.out" }
-            )
-        } else if (filterRef.current) {
-            gsap.to(filterRef.current.children, { opacity: 0, y: -20, duration: 0.2, stagger: 0.1 })
-        }
-    }, [mobileActiveFilter])
+        useEffect(() => {
+            if (mobileActiveFilter && filterRef.current) {
+                gsap.fromTo(
+                    filterRef.current.children,
+                    { opacity: 0, y: -20 }, 
+                    { opacity: 1, y: 0, duration: 0.3, stagger: 0.1, ease: "power2.out" } 
+                )
+            } else if (filterRef.current) {
+                gsap.to(filterRef.current.children, { opacity: 0, y: -20, duration: 0.2, stagger: 0.1 })
+            }
+        }, [mobileActiveFilter])
+        
 
     useEffect(() => {
-        if (blogContainerRef.current) {
-            gsap.fromTo(
-                blogContainerRef.current.children,
-                { opacity: 0, y: 20 },
-                { opacity: 1, y: 0, duration: 0.4, stagger: 0.2, ease: "power.out" }
-            )
+        let animation: gsap.core.Tween | null = null;
+        
+        if (blogContainerRef.current && blogContainerRef.current.children.length > 0) {
+          const childrenArray = Array.from(blogContainerRef.current.children);
+          animation = gsap.fromTo(
+            childrenArray,
+            { opacity: 0, y: 20 },
+            { opacity: 1, y: 0, duration: 0.4, stagger: 0.2, ease: "power.out" }
+          );
         }
-    }, [activeFilter])
+        
+        return () => {
+          if (animation) {
+            animation.kill();
+          }
+        };
+      }, [activeFilter]);
+      
 
     return (
         <div className='mt-[80px] 2xl:mt-[200px]  px-[20px] 4xl:px-[240px] 2xl:px-[50px]'>
