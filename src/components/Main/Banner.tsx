@@ -65,7 +65,7 @@ const Banner: FC = () => {
     const handleOpenModal = () => setOpen(!open)
 
     return (
-        <div className="banner-container px-[20px] 4xl:px-[240px] 2xl:px-[50px] mt-[15px] 2xl:mt-[60px] relative">
+        <section className="banner-container px-[20px] 4xl:px-[240px] 2xl:px-[50px] mt-[15px] 2xl:mt-[60px] relative">
             <Swiper
                 onSwiper={(swiper) => (swiperRef.current = swiper)}
                 spaceBetween={10}
@@ -112,6 +112,7 @@ const Banner: FC = () => {
                                         width={1440}
                                         height={444}
                                         quality={100}
+                                        priority
                                         className='2xl:h-[444px] h-[370px] rounded-[10px]'
                                     />
 
@@ -137,7 +138,7 @@ const Banner: FC = () => {
                     <GrLinkNext className='w-[30px] h-[30px] text-titleWhite' />
                 </button>
             </div>
-        </div>
+        </section>
     )
 }
 

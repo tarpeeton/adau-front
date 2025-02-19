@@ -44,7 +44,7 @@ const SeminarAndTrenings: FC = () => {
 
 
     return (
-        <div className='mt-[80px] 2xl:mt-[200px]  px-[20px] 4xl:pl-[240px] 2xl:pl-[50px]'>
+        <section className='mt-[80px] 2xl:mt-[200px]  px-[20px] 4xl:pl-[240px] 2xl:pl-[50px]'>
             <div className='2xl:flex 2xl:flex-row justify-between items-center'>
                 <p className="text-[26px] font-jost leading-[32px] 2xl:text-[45px] 2xl:leading-[59px]  ">
                     Семинары и <br className='block 2xl:hidden' /> треннинги
@@ -106,7 +106,7 @@ const SeminarAndTrenings: FC = () => {
                     Смотреть все
                 </Link>
             </div>
-        </div>
+        </section>
     )
 }
 

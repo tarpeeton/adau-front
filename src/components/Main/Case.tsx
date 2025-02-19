@@ -60,17 +60,14 @@ const Case: FC = () => {
 
 
   return (
-    <div className='mt-[80px] 2xl:mt-[200px]  px-[20px] 4xl:px-[240px] 2xl:px-[50px]'>
+    <section className='mt-[80px] 2xl:mt-[200px]  px-[20px] 4xl:px-[240px] 2xl:px-[50px]'>
       <p className="text-[26px] font-jost leading-[32px] 2xl:text-[45px] 2xl:leading-[59px]  ">
         Кейсы
       </p>
 
       <div className='flex flex-col'>
         <div className='flex flex-col 2xl:flex-row 2xl:flex-wrap 2xl:gap-[20px]'>
-          {/* IMAGE AND SLIDer */}
           {caseData.map((item, index) => {
-
-
 
             return (<div key={index} className='mt-[30px] 2xl:mt-[30px] 2xl:w-[48%]'>
               <div className='relative '>
@@ -133,7 +130,7 @@ const Case: FC = () => {
           Узнать больше о нашем опыте
         </Link>
       </div>
-    </div>
+    </section>
   )
 }
 

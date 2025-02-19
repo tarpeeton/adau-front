@@ -8,7 +8,6 @@ import useLocale from '@/hooks/useLocale'
 import { client } from "@/sanity/lib/client"
 import { urlFor } from '@/sanity/lib/image'
 import { IBlogCategory, IBlog } from '@/interface/IBlogs/blog'
-// ICONS
 import { FaChevronDown } from "react-icons/fa6"
 import { GrLinkNext } from "react-icons/gr"
 import formatDate from '@/hooks/useFormatDate'
@@ -52,7 +51,6 @@ interface IActiveFilter {
 const NewBlogs: FC = () => {
     const [mobileActiveFilter, setMobileActiveFilter] = useState(false)
     const locale = useLocale()
-    console.log("SALOM ERROR FIXED XSS ATTACK")
 
     const [activeFilter, setActiveFilter] = useState<IActiveFilter>({
         id: 'all-articles',
@@ -69,7 +67,7 @@ const NewBlogs: FC = () => {
     const filterRef = useRef<HTMLDivElement | null>(null)
     const router = useRouter()
     const searchParams = useSearchParams()
-    const pathname = usePathname() // Get the current pathname
+    const pathname = usePathname() 
 
     const { data: blogCategories = [], isLoading: isLoadingCategories } = useQuery<IBlogCategory[]>({
         queryKey: ['blogcategoriescomponnets'],

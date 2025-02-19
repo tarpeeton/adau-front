@@ -29,7 +29,7 @@ const Form: FC<IFormPropsText> = ({ title, text }) => {
   const locale = useLocale()
 
   return (
-    <div className='mt-[80px] 2xl:mt-[200px]'>
+    <section className='mt-[80px] 2xl:mt-[200px]'>
       <div className=' bg-[#222E51] py-[40px] px-[16px] 2xl:py-[100px] 2xl:px-[50px]  4xl:px-[240px] flex flex-col 2xl:flex-row'>
         {/* TEXT AND BUTTON */}
         <div className='2xl:w-[65%]'>
@@ -69,7 +69,7 @@ const Form: FC<IFormPropsText> = ({ title, text }) => {
 
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -3,7 +3,7 @@ import { Modal } from 'antd'
 import { IoClose } from "react-icons/io5"
 import { FC, useState, useRef } from 'react'
 import axios from 'axios'
-
+import {ErrorModal} from './ErrorModal'
 
 
 // icons
@@ -11,6 +11,7 @@ import { IoIosArrowDown } from "react-icons/io"
 
 import { Triangle } from 'react-loader-spinner'
 import useLocale from '@/hooks/useLocale'
+import SuccessModal from './SuccessModal'
 
 
 
@@ -28,6 +29,9 @@ interface SelectedItem {
 
 const ContactUs: FC<IReviewFull> = ({ visible, close }) => {
     const fileInputRef = useRef<HTMLInputElement | null>(null)
+    const [success , setSucces] = useState(false)
+    const [error , setError] = useState(false)
+
     const [openSelect, setOpenSelect] = useState(false)
     const [selectedMessageType, setSelectMessageType] = useState<SelectedItem>({
         ru: 'Тема сообщения',
@@ -65,7 +69,6 @@ const ContactUs: FC<IReviewFull> = ({ visible, close }) => {
     const sendDataForm = async () => {
         setLoadingDataPost(true)
         try {
-            // Create FormData and append fields
             const formPayload = new FormData()
             formPayload.append('name', formData.name)
             formPayload.append('email', formData.email)
@@ -74,22 +77,16 @@ const ContactUs: FC<IReviewFull> = ({ visible, close }) => {
             formPayload.append('text', formData.textModal)
             formPayload.append('companyName', formData.textModalCompany)
 
-            // Append file if exists
             if (fileInputRef.current?.files && fileInputRef.current.files[0]) {
                 formPayload.append('file', fileInputRef.current.files[0])
-            }
-
-            // Send data using axios
-            const response = await axios.post('https://adau.result-me.uz/api/form/message', formPayload, {
+            }           
+          await axios.post('https://adau.result-me.uz/api/form/message', formPayload, {
                 headers: {
                     'API-Key': 'VJs4krbxFMj78Q5IsUIkdZdi8A1MSItugxlHJiwRALyE7c8lCiGcLY6OsugGPzRmjSJ3nzdFh6iUZD9lmYeSzPpm7FTwcGttS0js',
-                    'Content-Type': 'multipart/form-data' // Important for file upload
+                    'Content-Type': 'multipart/form-data' 
                 }
             })
-
-            console.log('Form submitted successfully:', response.data)
-
-            // Clear form after successful submission
+            setSucces(true)
             setFormData({
                 name: '',
                 email: '',
@@ -104,23 +101,51 @@ const ContactUs: FC<IReviewFull> = ({ visible, close }) => {
               })
         } catch (error) {
             console.error('Error submitting form:', error)
+            setSucces(false)
+            setError(true)
         } finally {
             setLoadingDataPost(false)
         }
     }
 
 
-   
+   const handleCloseSuccessModal = () => {
+    setSucces(false)
+    close()
+}
+
+   if (success) {
+    return <SuccessModal visible={success} onClose={handleCloseSuccessModal} />;
+  }
+   if (error) {
+    return <ErrorModal visible={error} onClose={() => setError(false)} />;
+  }
+
+
+
+  const handlePhoneInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value;
+
+    value = value.replace(/[^\d+]/g, "");
+
+    if (value.includes("+") && value.indexOf("+") !== 0) {
+        value = value.replace(/\+/g, "");
+    }
+
+    setFormData({ ...formData, modalPhone: value });
+};
+
 
     return (
         <Modal
             open={visible}
             footer={null}
-            onCancel={close} // Using the close function
+            onCancel={close} 
             centered
             closeIcon={<IoClose size={25} />}
             width={400}
         >
+
             <div className='flex flex-col'>
                 <p className='text-[22px] 2xl:text-[28px] text-titleDark font-medium'>
                     {locale === 'ru'
@@ -139,10 +164,8 @@ const ContactUs: FC<IReviewFull> = ({ visible, close }) => {
                             value={formData.name}
                             onChange={handleInputChange}
                             className="border border-[#E4E4E4] block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent border-1 appearance-none dark:focus:border-titleDark focus:outline-none focus:ring-0 focus:border-titleDark peer 2xl:text-[20px]"
-                            placeholder=" "
                         />
                         <label htmlFor="name" className="absolute text-sm text-gray-500 dark:text-[#A0A0A0] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#A0A0A0] peer-focus:dark:text-[#A0A0A0] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1 2xl:text-[17px]">
-
                             {locale === 'ru'
                                 ? "Имя и фамилия *"
                                 : locale === 'uz'
@@ -156,9 +179,8 @@ const ContactUs: FC<IReviewFull> = ({ visible, close }) => {
                             type="text"
                             id="modalPhone"
                             value={formData.modalPhone}
-                            onChange={handleInputChange}
+                            onChange={handlePhoneInputChange}
                             className="border border-[#E4E4E4] block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent border-1 appearance-none dark:focus:border-titleDark focus:outline-none focus:ring-0 focus:border-titleDark peer 2xl:text-[20px]"
-                            placeholder=" "
                         />
                         <label htmlFor="modalPhone" className="absolute text-sm text-gray-500 dark:text-[#A0A0A0] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#A0A0A0] peer-focus:dark:text-[#A0A0A0] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1 2xl:text-[17px]">{locale === 'ru'
                             ? "Номер телефона *"
@@ -169,12 +191,11 @@ const ContactUs: FC<IReviewFull> = ({ visible, close }) => {
                     </div>
                     <div className='relative mt-[20px]  2xl:mt-[30px]'>
                         <input
-                            type="text"
+                            type="email"
                             id="email"
                             value={formData.email}
                             onChange={handleInputChange}
                             className="border border-[#E4E4E4] block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent border-1 appearance-none dark:focus:border-titleDark focus:outline-none focus:ring-0 focus:border-titleDark peer 2xl:text-[20px]"
-                            placeholder=" "
                         />
                         <label htmlFor="email" className="absolute text-sm text-gray-500 dark:text-[#A0A0A0] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#A0A0A0] peer-focus:dark:text-[#A0A0A0] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1 2xl:text-[17px]">E-mail *</label>
                     </div>
@@ -234,7 +255,6 @@ const ContactUs: FC<IReviewFull> = ({ visible, close }) => {
                                 value={formData.textModal}
                                 onChange={handleInputChange}
                                 className="border border-[#E4E4E4] block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent border-1 appearance-none dark:focus:border-titleDark focus:outline-none focus:ring-0 focus:border-titleDark peer 2xl:text-[20px]"
-                                placeholder=" "
                             />
                             <label htmlFor="textModal" className="absolute text-sm text-gray-500 dark:text-[#A0A0A0] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#A0A0A0] peer-focus:dark:text-[#A0A0A0] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1 2xl:text-[17px]">
                                 {locale === 'ru'
@@ -255,7 +275,6 @@ const ContactUs: FC<IReviewFull> = ({ visible, close }) => {
                                 value={formData.textModalCompany}
                                 onChange={handleInputChange}
                                 className="border border-[#E4E4E4] block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent border-1 appearance-none dark:focus:border-titleDark focus:outline-none focus:ring-0 focus:border-titleDark peer 2xl:text-[20px]"
-                                placeholder=" "
                             />
                             <label htmlFor="textModalCompany" className="absolute text-sm text-gray-500 dark:text-[#A0A0A0] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#A0A0A0] peer-focus:dark:text-[#A0A0A0] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 text-[14px] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1 2xl:text-[17px]">
                                 {locale === 'ru'
@@ -273,7 +292,7 @@ const ContactUs: FC<IReviewFull> = ({ visible, close }) => {
                     <button
                         onClick={sendDataForm}
                         className='py-[15px] px-[20px] text-[15px] font-medium font-jost mt-[30px]  flex justify-center items-center buttonBlue '
-                        disabled={loadingDataPost} // Disable button while loading
+                        disabled={loadingDataPost}
                     >
                         {loadingDataPost ? (
                             <Triangle

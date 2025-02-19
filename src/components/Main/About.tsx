@@ -11,7 +11,7 @@ const About: FC = () => {
 
 
     return (
-        <div className='mt-[60px] 2xl:mt-[100px] px-[20px] 4xl:px-[240px] 2xl:px-[50px]'>
+        <section className='mt-[60px] 2xl:mt-[100px] px-[20px] 4xl:px-[240px] 2xl:px-[50px]'>
             <div className='flex flex-col '>
                 <div className='2xl:flex 2xl:justify-end'>
                     <h1 className='text-[26px] font-normal  2xl:text-[50px] 2xl:leading-[62px]  font-jost leading-[32px]'>
@@ -103,7 +103,7 @@ const About: FC = () => {
 
                 </div>
             </div>
-        </div>
+        </section>
     )
 }
 

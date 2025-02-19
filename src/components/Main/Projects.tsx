@@ -76,7 +76,7 @@ const Projects: FC = () => {
 
 
     return (
-        <div className='mt-[80px] 2xl:mt-[200px] px-[20px] 4xl:px-[240px] 2xl:px-[50px]'>
+        <section className='mt-[80px] 2xl:mt-[200px] px-[20px] 4xl:px-[240px] 2xl:px-[50px]'>
 
             <div>
                 <p className='text-[26px] font-jost leading-[32px] 2xl:text-[50px] 2xl:leading-[59px] '>
@@ -153,7 +153,7 @@ const Projects: FC = () => {
                     Смотреть все
                 </Link>
             </div>
-        </div>
+        </section>
     )
 }
 

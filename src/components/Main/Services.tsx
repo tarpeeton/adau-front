@@ -19,7 +19,7 @@ const Services: FC = () => {
     const locale = useLocale()
 
     return (
-        <div className='mt-[80px] 2xl:mt-[200px] px-[20px] 4xl:px-[240px] 2xl:px-[50px]'>
+        <section className='mt-[80px] 2xl:mt-[200px] px-[20px] 4xl:px-[240px] 2xl:px-[50px]'>
             <div className='flex flex-col'>
                 <p className='text-[26px] font-jost leading-[32px] 2xl:text-[45px] 2xl:leading-[59px] mb-[20px] 2xl:mb-[30px]'>
                     {locale === 'ru'
@@ -119,7 +119,7 @@ const Services: FC = () => {
                     </Swiper>
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
 
