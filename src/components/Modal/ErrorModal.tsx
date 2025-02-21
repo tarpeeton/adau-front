@@ -27,10 +27,10 @@ export const ErrorModal: React.FC<ErrorModalProps> = ({ visible, onClose }) => {
 
         <h2 className="text-lg text-red-500  2xl:text-[20px] font-semibold  mt-4">
           {locale === "ru"
-            ? "Не получилось отправить заявку"
+            ? "Не удалось отправить"
             : locale === "uz"
-            ? "Ariza yuborishda xatolik yuz berdi"
-            : "Failed to submit the application"}
+            ? "Jo'natib bo'lmadi"
+            : "Failed to send"}
         </h2>
 
         <button
@@ -38,10 +38,10 @@ export const ErrorModal: React.FC<ErrorModalProps> = ({ visible, onClose }) => {
           className="mt-6 px-6 py-2 bg-gray-300  font-semibold rounded-lg hover:bg-gray-400 transition"
         >
           {locale === "ru"
-            ? "Оставить новую заявку"
+            ? "Вернуться к анкете"
             : locale === "uz"
-            ? "Yangi ariza yuborish"
-            : "Submit a new application"}
+            ? "Anketaga qaytish"
+            : "Return to the questionnaire"}
         </button>
       </div>
     </Modal>

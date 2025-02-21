@@ -1,7 +1,6 @@
 "use client"
 
 import { FC   , useState , useEffect} from 'react'
-import { StaticImageData } from 'next/image'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'

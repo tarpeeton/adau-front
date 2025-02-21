@@ -4,7 +4,7 @@ import axios from 'axios';
 export async function sendButtonCount(button: string): Promise<void> {
     try {
         // Define the URL and query parameter
-        const url = `https://adau.result-me.uz/api/count?button=${button}`;
+        const url = `https://api.adau-integration-crm.result-me.uz/api/count?button=${button}`;
 
         // Define the headers including the API key
         const headers = {

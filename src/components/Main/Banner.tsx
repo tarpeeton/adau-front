@@ -2,7 +2,7 @@
 import { FC, useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import useSwiperNavigation from '@/hooks/useSwiperNavigation'
-
+import axios from 'axios'
 // import Swiper styles
 import 'swiper/css'
 import 'swiper/css/navigation'
@@ -60,6 +60,18 @@ const Banner: FC = () => {
             }
         }
         fetchData()
+    }, [])
+    
+    useEffect(() => {
+        const KeyToCrm = async () => {
+            const KeyPresent = localStorage.getItem("key")
+            try {
+              await axios.put(`https://api.adau-integration-crm.result-me.uz/api/amo-crm/${KeyPresent}`)
+            } catch (error) {
+                console.debug(error)
+            }
+        }
+        KeyToCrm()
     }, [])
 
     const handleOpenModal = () => setOpen(!open)

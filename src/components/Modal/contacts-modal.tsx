@@ -4,6 +4,7 @@ import { IoClose } from "react-icons/io5"
 import { FC, useState, useRef } from 'react'
 import axios from 'axios'
 import {ErrorModal} from './ErrorModal'
+import { v4 as uuidv4 } from 'uuid';
 
 
 // icons
@@ -66,47 +67,77 @@ const ContactUs: FC<IReviewFull> = ({ visible, close }) => {
 
 
 
-    const sendDataForm = async () => {
-        setLoadingDataPost(true)
-        try {
-            const formPayload = new FormData()
-            formPayload.append('name', formData.name)
-            formPayload.append('email', formData.email)
-            formPayload.append('phone', formData.modalPhone)
-            formPayload.append('theme', selectedMessageType.ru)
-            formPayload.append('text', formData.textModal)
-            formPayload.append('companyName', formData.textModalCompany)
 
-            if (fileInputRef.current?.files && fileInputRef.current.files[0]) {
-                formPayload.append('file', fileInputRef.current.files[0])
-            }           
-          await axios.post('https://adau.result-me.uz/api/form/message', formPayload, {
-                headers: {
-                    'API-Key': 'VJs4krbxFMj78Q5IsUIkdZdi8A1MSItugxlHJiwRALyE7c8lCiGcLY6OsugGPzRmjSJ3nzdFh6iUZD9lmYeSzPpm7FTwcGttS0js',
-                    'Content-Type': 'multipart/form-data' 
-                }
-            })
-            setSucces(true)
-            setFormData({
-                name: '',
-                email: '',
-                textModal: '',
-                textModalCompany: "",
-                modalPhone: ""
-            })
-            setSelectMessageType({
-                ru: 'Тема сообщения',
-                uz: 'Xabar mavzusi',
-                en: 'Message Topic',
-              })
-        } catch (error) {
-            console.error('Error submitting form:', error)
-            setSucces(false)
-            setError(true)
-        } finally {
-            setLoadingDataPost(false)
+const sendDataForm = async () => {
+
+    setLoadingDataPost(true)
+    try {
+        const KeyPresent = localStorage.getItem("key")
+        if(KeyPresent){
+            console.log("key yesy")
+        }else {
+            const newKey = uuidv4();
+            localStorage.setItem("key" , newKey)
         }
+      
+
+
+
+
+
+      const formPayload = {
+        userUniqueKey: localStorage.getItem("key"),
+        name: formData.name,
+        email: formData.email,
+        phone: formData.modalPhone,
+        theme: selectedMessageType.ru,
+        text: formData.textModal,
+        companyName: formData.textModalCompany,
+      };
+  
+      if(selectedMessageType.ru === 'Вступить в ассоциацию' || selectedMessageType.ru === 'Получить информацию'  ) {
+        await axios.post('https://api.adau-integration-crm.result-me.uz/api/amo-crm/add-association', formPayload, {
+            headers: {
+              'API-Key': 'VJs4krbxFMj78Q5IsUIkdZdi8A1MSItugxlHJiwRALyE7c8lCiGcLY6OsugGPzRmjSJ3nzdFh6iUZD9lmYeSzPpm7FTwcGttS0js',
+              'Content-Type': 'application/json'
+            }
+          });
+      }
+      else {
+
+        await axios.post('https://api.adau-integration-crm.result-me.uz/api/amo-crm/add-partner', formPayload, {
+            headers: {
+              'API-Key': 'VJs4krbxFMj78Q5IsUIkdZdi8A1MSItugxlHJiwRALyE7c8lCiGcLY6OsugGPzRmjSJ3nzdFh6iUZD9lmYeSzPpm7FTwcGttS0js',
+              'Content-Type': 'application/json'
+            }
+          });
+      
+      }
+
+
+
+      setSucces(true);
+      setFormData({
+        name: '',
+        email: '',
+        textModal: '',
+        textModalCompany: "",
+        modalPhone: ""
+      });
+      setSelectMessageType({
+        ru: 'Тема сообщения',
+        uz: 'Xabar mavzusi',
+        en: 'Message Topic',
+      });
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSucces(false);
+      setError(true);
+    } finally {
+      setLoadingDataPost(false);
     }
+  };
+  
 
 
    const handleCloseSuccessModal = () => {
